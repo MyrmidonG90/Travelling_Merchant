@@ -29,7 +29,7 @@ namespace test2
             // TODO: Add your initialization logic here
 
             base.Initialize();
-            Window.Title = "test";
+            Window.Title = "test2";
         }
 
         /// <summary>
