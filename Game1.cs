@@ -13,7 +13,7 @@ namespace Active
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        TextureManager textureManager;
+        static TextureManager textureManager;
         WorldModule worldModule;
 
 
@@ -36,7 +36,7 @@ namespace Active
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
             textureManager = new TextureManager(Content);
-            worldModule = new WorldModule(textureManager);
+            worldModule = new WorldModule(TextureManager.texMap);
         }
 
         protected override void Update(GameTime gameTime)
