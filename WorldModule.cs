@@ -13,9 +13,9 @@ namespace Active
     {
         Texture2D texMap;
 
-        public WorldModule(TextureManager tm)
+        public WorldModule(Texture2D tex)
         {
-            texMap = tm.texMap;
+            texMap = tex;
         }
 
         public void Update(GameTime gameTime)
