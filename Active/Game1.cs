@@ -29,7 +29,7 @@ namespace Active
             graphics.PreferredBackBufferWidth = 1920;
             graphics.PreferredBackBufferHeight = 1080;
             graphics.IsFullScreen = true;
-            graphics.ApplyChanges();
+            graphics.ApplyChanges(); //Här är en kommentar
         }
 
         protected override void LoadContent()
