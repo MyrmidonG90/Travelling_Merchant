@@ -13,7 +13,6 @@ namespace Active
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        static TextureManager textureManager;
         WorldModule worldModule;
 
 
@@ -35,8 +34,8 @@ namespace Active
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            textureManager = new TextureManager(Content);
-            worldModule = new WorldModule(TextureManager.texMap);
+            TextureManager.LoadContent(Content);
+            worldModule = new WorldModule();
         }
 
         protected override void Update(GameTime gameTime)

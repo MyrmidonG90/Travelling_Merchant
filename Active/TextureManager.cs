@@ -10,13 +10,13 @@ using Microsoft.Xna.Framework.Input;
 
 namespace Active
 {
-    class TextureManager
+    static class TextureManager
     {
         static public Texture2D texMap;
-
-        public TextureManager(ContentManager Content)
+        static public void LoadContent(ContentManager content)
         {
-            texMap = Content.Load<Texture2D>("merchant_map_with_nothing");
-        }
+            texMap = content.Load<Texture2D>("merchant_map_with_nothing");
+        } 
+      
     }
 }
