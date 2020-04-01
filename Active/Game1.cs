@@ -14,6 +14,12 @@ namespace Active
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         WorldModule worldModule;
+        //Button Proof-of-Concept (kan tas bort utan risk)
+        Button test;
+        int temp;
+        //===============
+        MouseState oldMouseState;
+        MouseState newMouseState;
 
 
         public Game1()
@@ -27,9 +33,10 @@ namespace Active
             base.Initialize();
             graphics.PreferredBackBufferWidth = 1920;
             graphics.PreferredBackBufferHeight = 1080;
-            graphics.IsFullScreen = true;
-            graphics.ApplyChanges(); //Här är en kommentar
-            //här är en skitkommentar för att prova
+            //graphics.IsFullScreen = true;
+            //väldigt svårt att debugga i fullscreen så rekomenderar att lämna det av förutom när det behövs /My
+            graphics.ApplyChanges();
+            IsMouseVisible = true;
         }
 
         protected override void LoadContent()
@@ -37,6 +44,7 @@ namespace Active
             spriteBatch = new SpriteBatch(GraphicsDevice);
             TextureManager.LoadContent(Content);
             worldModule = new WorldModule();
+            test = new Button(100, 100, 100, 100);
         }
 
         protected override void Update(GameTime gameTime)
@@ -44,7 +52,17 @@ namespace Active
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
+            oldMouseState = newMouseState;
+            newMouseState = Mouse.GetState();
+
             worldModule.Update(gameTime);
+
+            //Kan tas bort
+            if (test.Click(newMouseState, oldMouseState))
+            {
+                temp++;
+            }
+            //==================
 
             base.Update(gameTime);
         }
@@ -56,6 +74,8 @@ namespace Active
             spriteBatch.Begin();
 
             worldModule.Draw(spriteBatch);
+            test.Draw(spriteBatch);
+            Window.Title = temp.ToString();
 
             spriteBatch.End();
 
