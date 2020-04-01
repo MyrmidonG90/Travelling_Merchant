@@ -15,6 +15,13 @@ namespace Active
         SpriteBatch spriteBatch;
         WorldModule worldModule;
 
+        //Button Proof-of-Concept (kan tas bort utan risk)
+        City city;
+        City[] cities = new City[2];
+        Button[] buttons = new Button[2];
+
+        string temp;
+
 
         public Game1()
         {
@@ -37,17 +44,48 @@ namespace Active
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
             TextureManager.LoadContent(Content);
-            worldModule = new WorldModule();     
+
+            worldModule = new WorldModule();
+            City city = new City("test", "hej", new Vector2(2,2));
+
+
+            buttons[0] = new Button((int)city.carrotTownCords.X, (int)city.carrotTownCords.Y, 100, 100, "Carrot Town");
+            buttons[1] = new Button((int)city.steelVilleCords.X, (int)city.steelVilleCords.Y, 100, 100, "Steelville");
+
+
+            cities[0] = new City("Carrot Town", city.carrotTownInfo, city.carrotTownCords);
+            cities[1] = new City("Steelville", city.steelVilleInfo, city.steelVilleCords);
+
         }
 
         protected override void Update(GameTime gameTime)
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
-            KMReader.Update();
+
+            
+            oldMouseState = newMouseState;
+            newMouseState = Mouse.GetState();
+            
             worldModule.Update(gameTime);
+            
+            KMReader.Update();
 
             base.Update(gameTime);
+            
+
+            foreach (City city in cities)
+            {
+                foreach (Button button in buttons)
+                {
+                    if (button.Click(newMouseState, oldMouseState) && button.name == city.name)
+                    {
+                        temp = city.name;
+                    }
+                }
+            }
+            
+
         }
 
         protected override void Draw(GameTime gameTime)
@@ -57,6 +95,14 @@ namespace Active
             spriteBatch.Begin();
 
             worldModule.Draw(spriteBatch);
+
+
+            foreach (Button button in buttons)
+            {
+                button.Draw(spriteBatch);
+            }
+
+            Window.Title = temp;
 
             spriteBatch.End();
 
