@@ -17,7 +17,9 @@ namespace Active
         SpriteBatch spriteBatch;
         public SpriteFont font;
         WorldModule worldModule;
+
         //Button Proof-of-Concept (kan tas bort utan risk)
+
         Button test;
         Button InventoryButton;
         Button Trade;
@@ -25,6 +27,12 @@ namespace Active
         int temp;
         //===============
 
+        City city;
+        City[] cities = new City[2];
+        Button[] buttons = new Button[2];
+
+
+        string temp;
 
 
         public Game1()
@@ -48,19 +56,43 @@ namespace Active
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
             TextureManager.LoadContent(Content);
+
             worldModule = new WorldModule();
+
             InventoryButton = new Button(70, 920, 230, 120);
             Trade = new Button(420, 920, 230, 120);
             Map = new Button(1620, 920, 230, 120);
             font = Content.Load<SpriteFont>("File");
+
+            City city = new City("test", "hej", new Vector2(2,2));
+
+
+            buttons[0] = new Button((int)city.carrotTownCords.X, (int)city.carrotTownCords.Y, 100, 100, "Carrot Town");
+            buttons[1] = new Button((int)city.steelVilleCords.X, (int)city.steelVilleCords.Y, 100, 100, "Steelville");
+
+
+            cities[0] = new City("Carrot Town", city.carrotTownInfo, city.carrotTownCords);
+            cities[1] = new City("Steelville", city.steelVilleInfo, city.steelVilleCords);
+
+
         }
 
         protected override void Update(GameTime gameTime)
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
-            KMReader.Update();
+
+            
+            oldMouseState = newMouseState;
+            newMouseState = Mouse.GetState();
+            
             worldModule.Update(gameTime);
+            
+            KMReader.Update();
+
+            base.Update(gameTime);
+            
+
 
             if (InventoryButton.Click())
             {
@@ -73,10 +105,21 @@ namespace Active
             }
             base.Update(gameTime);
             if (Map.Click())
+
+            foreach (City city in cities)
+
             {
-                temp++;
+                foreach (Button button in buttons)
+                {
+                    if (button.Click(newMouseState, oldMouseState) && button.name == city.name)
+                    {
+                        temp = city.name;
+                    }
+                }
             }
+
             base.Update(gameTime);
+
         }
 
         protected override void Draw(GameTime gameTime)
@@ -89,6 +132,15 @@ namespace Active
             Trade.Draw(spriteBatch);
             Map.Draw(spriteBatch);
             Window.Title = temp.ToString();
+
+
+            foreach (Button button in buttons)
+            {
+                button.Draw(spriteBatch);
+            }
+
+            Window.Title = temp;
+
 
             spriteBatch.DrawString(font, "CITY NAME: ", new Vector2(30, 50), Color.Black, 0, Vector2.Zero, 4, SpriteEffects.None, 1);
             spriteBatch.DrawString(font, "City Type: ", new Vector2(40, 120), Color.Black, 0, Vector2.Zero, 2, SpriteEffects.None, 1);
