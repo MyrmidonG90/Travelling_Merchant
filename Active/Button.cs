@@ -13,22 +13,27 @@ namespace Active
     {
         private Rectangle hitBox;
         private Texture2D tex;
+
         public string name;
 
-        public Button(int x, int y, int xLength, int yLength, string name)
+        public Button(int x, int y, int xLength, int yLength, string name, Texture2D tex)
         {
             hitBox = new Rectangle(x, y, xLength, yLength);
-            tex = TextureManager.texMap;
+            this.tex = tex;
             this.name = name;
+
         }
 
-        public bool Click(MouseState newMouseState, MouseState oldMouseState)
+        public bool Click()
         {
-            if (newMouseState.LeftButton == ButtonState.Pressed && oldMouseState.LeftButton == ButtonState.Released) //för att "hitta" exakt när kanppen trycks på
+            if (KMReader.mouseState.LeftButton == ButtonState.Pressed && KMReader.prevMouseState.LeftButton == ButtonState.Released) //för att "hitta" exakt när kanppen trycks på
             {
-                if (hitBox.Contains(newMouseState.Position))
+                if (KMReader.MouseClick())
                 {
-                    return true;
+                    if (hitBox.Contains(KMReader.GetMousePoint()))
+                    {
+                        return true;
+                    }
                 }
             }
             return false;

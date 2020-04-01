@@ -14,15 +14,13 @@ namespace Active
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         WorldModule worldModule;
+
         //Button Proof-of-Concept (kan tas bort utan risk)
         City city;
         City[] cities = new City[2];
         Button[] buttons = new Button[2];
 
         string temp;
-        //===============
-        MouseState oldMouseState;
-        MouseState newMouseState;
 
 
         public Game1()
@@ -46,6 +44,7 @@ namespace Active
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
             TextureManager.LoadContent(Content);
+
             worldModule = new WorldModule();
             City city = new City("test", "hej", new Vector2(2,2));
 
@@ -56,21 +55,24 @@ namespace Active
 
             cities[0] = new City("Carrot Town", city.carrotTownInfo, city.carrotTownCords);
             cities[1] = new City("Steelville", city.steelVilleInfo, city.steelVilleCords);
+
         }
 
         protected override void Update(GameTime gameTime)
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
+
             
             oldMouseState = newMouseState;
             newMouseState = Mouse.GetState();
-
+            
             worldModule.Update(gameTime);
+            
+            KMReader.Update();
 
-            //Kan tas bort
-
-
+            base.Update(gameTime);
+            
 
             foreach (City city in cities)
             {
@@ -82,9 +84,8 @@ namespace Active
                     }
                 }
             }
-            //==================
+            
 
-            base.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)
@@ -94,6 +95,7 @@ namespace Active
             spriteBatch.Begin();
 
             worldModule.Draw(spriteBatch);
+
 
             foreach (Button button in buttons)
             {
