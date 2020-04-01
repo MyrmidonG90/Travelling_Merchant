@@ -34,7 +34,7 @@ namespace Active
 
         }
 
-        public void Draw(SpriteBatch spriteBatch, Vector2 pos)
+        public void Draw(SpriteBatch spriteBatch, Rectangle pos)
         {
             spriteBatch.Draw(tex, pos, Color.White);
         }

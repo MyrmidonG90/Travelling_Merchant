@@ -22,8 +22,6 @@ namespace Active
 
             this.tex = tex;
             this.name = name;
-
-
         }
         public Button(int x, int y, int xLength, int yLength, Texture2D tex)
         {

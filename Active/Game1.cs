@@ -17,9 +17,12 @@ namespace Active
         SpriteBatch spriteBatch;
         public SpriteFont font;
         WorldModule worldModule;
+        PlayerInventoryModule playerInventoryModule;
 
         //Button Proof-of-Concept (kan tas bort utan risk)
+
         CityMeny cityMeny;
+
         Button test;
         public Button InventoryButton;
         public Button TradeButton;
@@ -33,6 +36,7 @@ namespace Active
 
 
         string temp;
+
 
 
         public Game1()
@@ -59,9 +63,18 @@ namespace Active
 
             worldModule = new WorldModule();
 
+
             InventoryButton = new Button(70, 920, 230, 120, TextureManager.WhiteTex);
             TradeButton = new Button(420, 920, 230, 120, TextureManager.WhiteTex);
             MapButton = new Button(1620, 920, 230, 120, TextureManager.WhiteTex);
+
+            Inventory newInventory = new Inventory(100, new List<Item>());
+            playerInventoryModule = new PlayerInventoryModule(newInventory);
+
+
+            worldModule = new WorldModule();
+
+
             font = Content.Load<SpriteFont>("File");
 
             City city = new City("test", "hej", new Vector2(2,2));
@@ -73,6 +86,7 @@ namespace Active
 
             cities[0] = new City("Carrot Town", city.carrotTownInfo, city.carrotTownCords);
             cities[1] = new City("Steelville", city.steelVilleInfo, city.steelVilleCords);
+
 
 
         }
