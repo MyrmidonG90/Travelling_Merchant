@@ -30,6 +30,13 @@ namespace Active
 
         }
 
+        public Button(int x, int y, int xLength, int yLength, Texture2D tex)
+        {
+            hitBox = new Rectangle(x, y, xLength, yLength);
+            this.tex = tex;
+
+        }
+
         public bool Click()
         {
             if (KMReader.mouseState.LeftButton == ButtonState.Pressed && KMReader.prevMouseState.LeftButton == ButtonState.Released) //för att "hitta" exakt när kanppen trycks på
