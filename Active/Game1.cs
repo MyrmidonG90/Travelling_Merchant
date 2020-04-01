@@ -1,9 +1,11 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.IO;
@@ -14,7 +16,9 @@ namespace Active
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        public SpriteFont font;
         WorldModule worldModule;
+
         
         MouseState newMouseState;
         MouseState oldMouseState;
@@ -23,7 +27,27 @@ namespace Active
         City[] cities = new City[3];
         Button[] buttons = new Button[3];
 
+        PlayerInventoryModule playerInventoryModule;
+
+        //Button Proof-of-Concept (kan tas bort utan risk)
+
+        CityMeny cityMeny;
+
+        Button test;
+        public Button InventoryButton;
+        public Button TradeButton;
+        public Button MapButton;
+        int temp;
+        //===============
+
+        City city;
+        City[] cities = new City[2];
+        Button[] buttons = new Button[2];
+
+
+
         string temp;
+
 
 
         public Game1()
@@ -50,6 +74,24 @@ namespace Active
 
             worldModule = new WorldModule();
 
+
+
+            InventoryButton = new Button(70, 920, 230, 120, TextureManager.WhiteTex);
+            TradeButton = new Button(420, 920, 230, 120, TextureManager.WhiteTex);
+            MapButton = new Button(1620, 920, 230, 120, TextureManager.WhiteTex);
+
+            Inventory newInventory = new Inventory(100, new List<Item>());
+            playerInventoryModule = new PlayerInventoryModule(newInventory);
+
+
+            worldModule = new WorldModule();
+
+
+            font = Content.Load<SpriteFont>("File");
+
+            City city = new City("test", "hej", new Vector2(2,2));
+
+
             StreamReader sr = new StreamReader("cityNames.txt");
             int counter = 0;
             while (!sr.EndOfStream)
@@ -73,6 +115,8 @@ namespace Active
 
             
 
+
+
         }
 
         protected override void Update(GameTime gameTime)
@@ -88,8 +132,10 @@ namespace Active
             
             KMReader.Update();
 
+            
 
             foreach (City city in cities)
+
             {
                 foreach (Button button in buttons)
                 {
@@ -110,8 +156,11 @@ namespace Active
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             spriteBatch.Begin();
-
             worldModule.Draw(spriteBatch);
+            InventoryButton.Draw(spriteBatch);
+            TradeButton.Draw(spriteBatch);
+            MapButton.Draw(spriteBatch);
+            Window.Title = temp.ToString();
 
 
             foreach (Button button in buttons)
@@ -120,6 +169,9 @@ namespace Active
             }
 
             Window.Title = temp;
+
+
+            cityMeny.Draw(spriteBatch);
 
             spriteBatch.End();
 
