@@ -22,8 +22,6 @@ namespace Active
 
             this.tex = tex;
             this.name = name;
-
-
         }
 
         public bool Click()
