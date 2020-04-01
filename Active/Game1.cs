@@ -18,8 +18,7 @@ namespace Active
         Button test;
         int temp;
         //===============
-        MouseState oldMouseState;
-        MouseState newMouseState;
+
 
 
         public Game1()
@@ -51,14 +50,11 @@ namespace Active
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
-
-            oldMouseState = newMouseState;
-            newMouseState = Mouse.GetState();
-
+            KMReader.Update();
             worldModule.Update(gameTime);
 
             //Kan tas bort
-            if (test.Click(newMouseState, oldMouseState))
+            if (test.Click())
             {
                 temp++;
             }
