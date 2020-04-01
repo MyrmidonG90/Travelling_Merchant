@@ -19,8 +19,10 @@ namespace Active
         public Button(int x, int y, int xLength, int yLength, string name, Texture2D tex)
         {
             hitBox = new Rectangle(x, y, xLength, yLength);
+
             this.tex = tex;
             this.name = name;
+
 
         }
 
@@ -46,7 +48,7 @@ namespace Active
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(tex, hitBox, Color.Red);
+            spriteBatch.Draw(tex, hitBox, Color.White);
         }
     }
 }
