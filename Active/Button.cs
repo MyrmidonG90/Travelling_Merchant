@@ -17,7 +17,7 @@ namespace Active
         public Button(int x, int y, int xLength, int yLength)
         {
             hitBox = new Rectangle(x, y, xLength, yLength);
-            tex = TextureManager.texMap;
+            tex = TextureManager.WhiteTex;
         }
 
         public bool Click()
@@ -42,7 +42,7 @@ namespace Active
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(tex, hitBox, Color.Red);
+            spriteBatch.Draw(tex, hitBox, Color.White);
         }
     }
 }

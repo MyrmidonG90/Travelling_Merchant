@@ -13,9 +13,11 @@ namespace Active
     static class TextureManager
     {
         static public Texture2D texMap;
+        static public Texture2D WhiteTex;
         static public void LoadContent(ContentManager content)
         {
             texMap = content.Load<Texture2D>("merchant_map_with_nothing");
+            WhiteTex = content.Load<Texture2D>("White");
         } 
       
     }
