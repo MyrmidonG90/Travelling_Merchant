@@ -13,11 +13,10 @@ namespace Active
     {
         private Rectangle hitBox;
         private Texture2D tex;
-
-        public Button(int x, int y, int xLength, int yLength)
+        public Button(int x, int y, int xLength, int yLength, Texture2D tex)
         {
             hitBox = new Rectangle(x, y, xLength, yLength);
-            tex = TextureManager.texMap;
+            this.tex = tex;
         }
 
         public bool Click()
@@ -30,7 +29,7 @@ namespace Active
                     {
                         return true;
                     }
-                }                
+                }
             }
             return false;
         }

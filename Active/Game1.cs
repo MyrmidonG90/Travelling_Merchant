@@ -43,7 +43,7 @@ namespace Active
             spriteBatch = new SpriteBatch(GraphicsDevice);
             TextureManager.LoadContent(Content);
             worldModule = new WorldModule();
-            test = new Button(100, 100, 100, 100);
+            test = new Button(100, 100, 100, 100,TextureManager.texMap);
         }
 
         protected override void Update(GameTime gameTime)
