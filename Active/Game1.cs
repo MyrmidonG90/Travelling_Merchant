@@ -15,8 +15,11 @@ namespace Active
         SpriteBatch spriteBatch;
         WorldModule worldModule;
         //Button Proof-of-Concept (kan tas bort utan risk)
-        Button test;
-        int temp;
+        City city;
+        City[] cities = new City[2];
+        Button[] buttons = new Button[2];
+
+        string temp;
         //===============
         MouseState oldMouseState;
         MouseState newMouseState;
@@ -44,23 +47,40 @@ namespace Active
             spriteBatch = new SpriteBatch(GraphicsDevice);
             TextureManager.LoadContent(Content);
             worldModule = new WorldModule();
-            test = new Button(100, 100, 100, 100);
+            City city = new City("test", "hej", new Vector2(2,2));
+
+
+            buttons[0] = new Button((int)city.carrotTownCords.X, (int)city.carrotTownCords.Y, 100, 100, "Carrot Town");
+            buttons[1] = new Button((int)city.steelVilleCords.X, (int)city.steelVilleCords.Y, 100, 100, "Steelville");
+
+
+            cities[0] = new City("Carrot Town", city.carrotTownInfo, city.carrotTownCords);
+            cities[1] = new City("Steelville", city.steelVilleInfo, city.steelVilleCords);
         }
 
         protected override void Update(GameTime gameTime)
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
-
+            
             oldMouseState = newMouseState;
             newMouseState = Mouse.GetState();
 
             worldModule.Update(gameTime);
 
             //Kan tas bort
-            if (test.Click(newMouseState, oldMouseState))
+
+
+
+            foreach (City city in cities)
             {
-                temp++;
+                foreach (Button button in buttons)
+                {
+                    if (button.Click(newMouseState, oldMouseState) && button.name == city.name)
+                    {
+                        temp = city.name;
+                    }
+                }
             }
             //==================
 
@@ -74,8 +94,13 @@ namespace Active
             spriteBatch.Begin();
 
             worldModule.Draw(spriteBatch);
-            test.Draw(spriteBatch);
-            Window.Title = temp.ToString();
+
+            foreach (Button button in buttons)
+            {
+                button.Draw(spriteBatch);
+            }
+
+            Window.Title = temp;
 
             spriteBatch.End();
 
