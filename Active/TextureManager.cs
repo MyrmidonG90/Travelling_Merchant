@@ -6,6 +6,8 @@ namespace Active
     static class TextureManager
     {
 
+       static public SpriteFont font;
+
         static public Texture2D texMap;
         static public Texture2D WhiteTex;
         static public Texture2D texCarrot;
@@ -14,6 +16,8 @@ namespace Active
         static public Texture2D texBox;
         static public void LoadContent(ContentManager content)
         {
+            font = content.Load<SpriteFont>("File");
+
             texBox = content.Load<Texture2D>("box");
             texMap = content.Load<Texture2D>("merchant_map_with_nothing");
             WhiteTex = content.Load<Texture2D>("White");
