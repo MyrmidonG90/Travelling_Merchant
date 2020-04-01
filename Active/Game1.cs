@@ -19,11 +19,11 @@ namespace Active
         WorldModule worldModule;
 
         //Button Proof-of-Concept (kan tas bort utan risk)
-
+        CityMeny cityMeny;
         Button test;
-        Button InventoryButton;
-        Button Trade;
-        Button Map;
+        public Button InventoryButton;
+        public Button TradeButton;
+        public Button MapButton;
         int temp;
         //===============
 
@@ -59,9 +59,9 @@ namespace Active
 
             worldModule = new WorldModule();
 
-            InventoryButton = new Button(70, 920, 230, 120);
-            Trade = new Button(420, 920, 230, 120);
-            Map = new Button(1620, 920, 230, 120);
+            InventoryButton = new Button(70, 920, 230, 120, TextureManager.WhiteTex);
+            TradeButton = new Button(420, 920, 230, 120, TextureManager.WhiteTex);
+            MapButton = new Button(1620, 920, 230, 120, TextureManager.WhiteTex);
             font = Content.Load<SpriteFont>("File");
 
             City city = new City("test", "hej", new Vector2(2,2));
@@ -92,20 +92,6 @@ namespace Active
 
             base.Update(gameTime);
             
-
-
-            if (InventoryButton.Click())
-            {
-                temp++;
-            }
-            base.Update(gameTime);
-            if (Trade.Click())
-            {
-                temp++;
-            }
-            base.Update(gameTime);
-            if (Map.Click())
-
             foreach (City city in cities)
 
             {
@@ -129,8 +115,8 @@ namespace Active
             spriteBatch.Begin();
             worldModule.Draw(spriteBatch);
             InventoryButton.Draw(spriteBatch);
-            Trade.Draw(spriteBatch);
-            Map.Draw(spriteBatch);
+            TradeButton.Draw(spriteBatch);
+            MapButton.Draw(spriteBatch);
             Window.Title = temp.ToString();
 
 
@@ -142,15 +128,8 @@ namespace Active
             Window.Title = temp;
 
 
-            spriteBatch.DrawString(font, "CITY NAME: ", new Vector2(30, 50), Color.Black, 0, Vector2.Zero, 4, SpriteEffects.None, 1);
-            spriteBatch.DrawString(font, "City Type: ", new Vector2(40, 120), Color.Black, 0, Vector2.Zero, 2, SpriteEffects.None, 1);
-            spriteBatch.DrawString(font, "Population: ", new Vector2(40, 160), Color.Black, 0, Vector2.Zero, 2, SpriteEffects.None, 1);
-            spriteBatch.DrawString(font, "Races: ", new Vector2(40, 200), Color.Black, 0, Vector2.Zero, 2, SpriteEffects.None, 1);
-            spriteBatch.DrawString(font, "Kingdom: ", new Vector2(40, 240), Color.Black, 0, Vector2.Zero, 2, SpriteEffects.None, 1);
-            spriteBatch.DrawString(font, "Resources: ", new Vector2(40, 280), Color.Black, 0, Vector2.Zero, 2, SpriteEffects.None, 1);
-            spriteBatch.DrawString(font, "Inventory ", new Vector2(120, 962), Color.Black, 0, Vector2.Zero, 2, SpriteEffects.None, 1);
-            spriteBatch.DrawString(font, "Trade ", new Vector2(495, 962), Color.Black, 0, Vector2.Zero, 2, SpriteEffects.None, 1);
-            spriteBatch.DrawString(font, "Map ", new Vector2(1700, 962), Color.Black, 0, Vector2.Zero, 2, SpriteEffects.None, 1);
+            cityMeny.Draw(spriteBatch);
+
             spriteBatch.End();
 
             base.Draw(gameTime);
