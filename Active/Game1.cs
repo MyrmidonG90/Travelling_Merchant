@@ -40,13 +40,13 @@ namespace Active
         int temp;
         //===============
 
-        City city;
-        City[] cities = new City[2];
-        Button[] buttons = new Button[2];
+        //City city;
+        //City[] cities = new City[2];
+        //Button[] buttons = new Button[2];
 
 
 
-        string temp;
+        //string temp;
 
 
 
@@ -92,24 +92,24 @@ namespace Active
             City city = new City("test", "hej", new Vector2(2,2));
 
 
-            StreamReader sr = new StreamReader("cityNames.txt");
-            int counter = 0;
-            while (!sr.EndOfStream)
-            {
+            //StreamReader sr = new StreamReader("cityNames.txt");
+            //int counter = 0;
+            //while (!sr.EndOfStream)
+            //{
 
-                string tempName = sr.ReadLine();
-                string tempInfo = sr.ReadLine();
-                string tempCord = sr.ReadLine();
+            //    string tempName = sr.ReadLine();
+            //    string tempInfo = sr.ReadLine();
+            //    string tempCord = sr.ReadLine();
 
-                string[] tempCord2 = tempCord.Split(',');
+            //    string[] tempCord2 = tempCord.Split(',');
 
-                Vector2 cord = new Vector2(int.Parse(tempCord2[0]), int.Parse(tempCord2[1]));
+            //    Vector2 cord = new Vector2(int.Parse(tempCord2[0]), int.Parse(tempCord2[1]));
 
-                cities[counter] = new City(tempName, tempInfo, cord);
-                buttons[counter] = new Button((int)cord.X, (int)cord.Y, 100, 100, tempName, TextureManager.texBox);
-                counter++;
+            //    //cities[counter] = new City(tempName, tempInfo, cord);
+            //    //buttons[counter] = new Button((int)cord.X, (int)cord.Y, 100, 100, tempName, TextureManager.texBox);
+            //    counter++;
 
-            }
+            //}
             
             
 
@@ -134,17 +134,17 @@ namespace Active
 
             
 
-            foreach (City city in cities)
+            //foreach (City city in cities)
 
-            {
-                foreach (Button button in buttons)
-                {
-                    if (button.Click() && button.name == city.name)
-                    {
-                        temp = city.name;
-                    }
-                }
-            }
+            //{
+            //    foreach (Button button in buttons)
+            //    {
+            //        if (button.Click() && button.name == city.name)
+            //        {
+            //            temp = city.name;
+            //        }
+            //    }
+            //}
 
             base.Update(gameTime);
 
@@ -157,21 +157,21 @@ namespace Active
 
             spriteBatch.Begin();
             worldModule.Draw(spriteBatch);
-            InventoryButton.Draw(spriteBatch);
-            TradeButton.Draw(spriteBatch);
-            MapButton.Draw(spriteBatch);
-            Window.Title = temp.ToString();
+            //InventoryButton.Draw(spriteBatch);
+            //TradeButton.Draw(spriteBatch);
+            //MapButton.Draw(spriteBatch);
+            //Window.Title = temp.ToString();
 
 
-            foreach (Button button in buttons)
-            {
-                button.Draw(spriteBatch);
-            }
+            //foreach (Button button in buttons)
+            //{
+            //    button.Draw(spriteBatch);
+            //}
 
-            Window.Title = temp;
+            //Window.Title = temp;
 
-
-            cityMeny.Draw(spriteBatch);
+            playerInventoryModule.Draw(spriteBatch);
+            //cityMeny.Draw(spriteBatch);
 
             spriteBatch.End();
 
