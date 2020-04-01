@@ -21,7 +21,6 @@ namespace Active
             hitBox = new Rectangle(x, y, xLength, yLength);
             this.tex = tex;
             this.name = name;
-
         }
 
         public bool Click()

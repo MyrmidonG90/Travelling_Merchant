@@ -10,10 +10,10 @@ namespace Active
         static public Texture2D texCarrot;
         static public Texture2D texPotato;
         static public Texture2D texIronIngot;
-        static public Texture2D texMap, texBox;
+        static public Texture2D texBox;
         static public void LoadContent(ContentManager content)
         {
-            box = content.Load<Texture2D>("box");
+            texBox = content.Load<Texture2D>("box");
             texMap = content.Load<Texture2D>("merchant_map_with_nothing");
             texCarrot = content.Load<Texture2D>("carrot");
             texPotato = content.Load<Texture2D>("potato");

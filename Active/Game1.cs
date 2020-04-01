@@ -14,7 +14,7 @@ namespace Active
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         WorldModule worldModule;
-
+        PlayerInventoryModule playerInventoryModule;
 
         public Game1()
         {
@@ -37,7 +37,10 @@ namespace Active
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
             TextureManager.LoadContent(Content);
-            worldModule = new WorldModule();     
+            worldModule = new WorldModule();
+
+            Inventory newInventory = new Inventory(100, new List<Item>());
+            playerInventoryModule = new PlayerInventoryModule(newInventory);
         }
 
         protected override void Update(GameTime gameTime)
