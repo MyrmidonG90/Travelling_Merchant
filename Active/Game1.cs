@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System.IO;
 
 namespace Active
 {
@@ -14,11 +15,13 @@ namespace Active
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         WorldModule worldModule;
+        
+        MouseState newMouseState;
+        MouseState oldMouseState;
 
         //Button Proof-of-Concept (kan tas bort utan risk)
-        City city;
-        City[] cities = new City[2];
-        Button[] buttons = new Button[2];
+        City[] cities = new City[3];
+        Button[] buttons = new Button[3];
 
         string temp;
 
@@ -46,15 +49,29 @@ namespace Active
             TextureManager.LoadContent(Content);
 
             worldModule = new WorldModule();
-            City city = new City("test", "hej", new Vector2(2,2));
 
+            StreamReader sr = new StreamReader("cityNames.txt");
+            int counter = 0;
+            while (!sr.EndOfStream)
+            {
 
-            buttons[0] = new Button((int)city.carrotTownCords.X, (int)city.carrotTownCords.Y, 100, 100, "Carrot Town");
-            buttons[1] = new Button((int)city.steelVilleCords.X, (int)city.steelVilleCords.Y, 100, 100, "Steelville");
+                string tempName = sr.ReadLine();
+                string tempInfo = sr.ReadLine();
+                string tempCord = sr.ReadLine();
 
+                string[] tempCord2 = tempCord.Split(',');
 
-            cities[0] = new City("Carrot Town", city.carrotTownInfo, city.carrotTownCords);
-            cities[1] = new City("Steelville", city.steelVilleInfo, city.steelVilleCords);
+                Vector2 cord = new Vector2(int.Parse(tempCord2[0]), int.Parse(tempCord2[1]));
+
+                cities[counter] = new City(tempName, tempInfo, cord);
+                buttons[counter] = new Button((int)cord.X, (int)cord.Y, 100, 100, tempName, TextureManager.texBox);
+                counter++;
+
+            }
+            
+            
+
+            
 
         }
 
@@ -71,20 +88,20 @@ namespace Active
             
             KMReader.Update();
 
-            base.Update(gameTime);
-            
 
             foreach (City city in cities)
             {
                 foreach (Button button in buttons)
                 {
-                    if (button.Click(newMouseState, oldMouseState) && button.name == city.name)
+                    if (button.Click() && button.name == city.name)
                     {
                         temp = city.name;
                     }
                 }
             }
-            
+
+            base.Update(gameTime);
+
 
         }
 

@@ -29,9 +29,9 @@ namespace Active
              this.entLeft = left;
              this.entRight = right;
              */
-            accept = new Button(5,5,100,100,TextureManager.box);
-            enter = new Button(5, 5, 100, 100, TextureManager.box);
-            cancel = new Button(5, 5, 100, 100, TextureManager.box);
+            accept = new Button(5,5,100,100,TextureManager.texBox);
+            enter = new Button(5, 5, 100, 100, TextureManager.texBox);
+            cancel = new Button(5, 5, 100, 100, TextureManager.texBox);
         }
         
         bool Update()
