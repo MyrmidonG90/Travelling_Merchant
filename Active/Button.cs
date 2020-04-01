@@ -13,11 +13,13 @@ namespace Active
     {
         private Rectangle hitBox;
         private Texture2D tex;
+        public string name;
 
-        public Button(int x, int y, int xLength, int yLength)
+        public Button(int x, int y, int xLength, int yLength, string name)
         {
             hitBox = new Rectangle(x, y, xLength, yLength);
             tex = TextureManager.texMap;
+            this.name = name;
         }
 
         public bool Click(MouseState newMouseState, MouseState oldMouseState)
