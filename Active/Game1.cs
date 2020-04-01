@@ -18,8 +18,7 @@ namespace Active
         Button test;
         int temp;
         //===============
-        MouseState oldMouseState;
-        MouseState newMouseState;
+
 
 
         public Game1()
@@ -44,21 +43,18 @@ namespace Active
             spriteBatch = new SpriteBatch(GraphicsDevice);
             TextureManager.LoadContent(Content);
             worldModule = new WorldModule();
-            test = new Button(100, 100, 100, 100);
+            test = new Button(100, 100, 100, 100,TextureManager.texMap);
         }
 
         protected override void Update(GameTime gameTime)
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
-
-            oldMouseState = newMouseState;
-            newMouseState = Mouse.GetState();
-
+            KMReader.Update();
             worldModule.Update(gameTime);
 
             //Kan tas bort
-            if (test.Click(newMouseState, oldMouseState))
+            if (test.Click())
             {
                 temp++;
             }
