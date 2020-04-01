@@ -14,11 +14,6 @@ namespace Active
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         WorldModule worldModule;
-        //Button Proof-of-Concept (kan tas bort utan risk)
-        Button test;
-        int temp;
-        //===============
-
 
 
         public Game1()
@@ -42,8 +37,7 @@ namespace Active
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
             TextureManager.LoadContent(Content);
-            worldModule = new WorldModule();
-            test = new Button(100, 100, 100, 100);
+            worldModule = new WorldModule();     
         }
 
         protected override void Update(GameTime gameTime)
@@ -52,13 +46,6 @@ namespace Active
                 Exit();
             KMReader.Update();
             worldModule.Update(gameTime);
-
-            //Kan tas bort
-            if (test.Click())
-            {
-                temp++;
-            }
-            //==================
 
             base.Update(gameTime);
         }
@@ -70,8 +57,6 @@ namespace Active
             spriteBatch.Begin();
 
             worldModule.Draw(spriteBatch);
-            test.Draw(spriteBatch);
-            Window.Title = temp.ToString();
 
             spriteBatch.End();
 
