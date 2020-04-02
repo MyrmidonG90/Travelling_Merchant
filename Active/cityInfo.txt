@@ -1,0 +1,9 @@
+CarrotTown
+Info
+250,500
+SteelVille
+Info
+500,750
+TowerTown
+Info
+1500,600

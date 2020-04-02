@@ -17,13 +17,10 @@ namespace Active
         SpriteBatch spriteBatch;
 
         PlayerInventoryModule playerInventoryModule;
-        
-        CityMeny cityMeny;
 
-        #region pending removal to mapModule
-        City[] cities = new City[3];
-        Button[] buttons = new Button[3];
-        #endregion
+        WorldMapMeny worldMapMeny;
+
+        CityMeny cityMeny;
 
         #region pending removal to CityMeny
         public Button InventoryButton;
@@ -63,37 +60,18 @@ namespace Active
             spriteBatch = new SpriteBatch(GraphicsDevice);
             TextureManager.LoadContent(Content);
 
-            gameState = GameState.InventoryMenu;
+            gameState = GameState.MapMenu;
 
             cityMeny = new CityMeny();
+            worldMapMeny = new WorldMapMeny();
+            worldMapMeny.LoadCities();
 
             playerInventoryModule = new PlayerInventoryModule(new Inventory(100, new List<Item>()));
 
             InventoryButton = new Button(70, 920, 230, 120, TextureManager.WhiteTex);
             TradeButton = new Button(420, 920, 230, 120, TextureManager.WhiteTex);
             MapButton = new Button(1620, 920, 230, 120, TextureManager.WhiteTex);
-
-            #region detta ska flyttas in i en egen manager (mapModule förslagsvis)
-            //funkar inte då data filen inte har följt med i commiten
-
-            //StreamReader sr = new StreamReader("cityNames.txt");
-            //int counter = 0;
-            //while (!sr.EndOfStream)
-            //{
-
-            //    string tempName = sr.ReadLine();
-            //    string tempInfo = sr.ReadLine();
-            //    string tempCord = sr.ReadLine();
-
-            //    string[] tempCord2 = tempCord.Split(',');
-
-            //    Vector2 cord = new Vector2(int.Parse(tempCord2[0]), int.Parse(tempCord2[1]));
-
-            //    cities[counter] = new City(tempName, tempInfo, cord);
-            //    buttons[counter] = new Button((int)cord.X, (int)cord.Y, 100, 100, tempName, TextureManager.texBox);
-            //    counter++;
-            //}
-            #endregion
+           
         }
 
         protected override void Update(GameTime gameTime)
@@ -109,7 +87,7 @@ namespace Active
             }
             else if (gameState == GameState.MapMenu)
             {
-
+                worldMapMeny.Update(gameTime);
             }
             else if (gameState == GameState.TradeMenu)
             {
@@ -139,10 +117,7 @@ namespace Active
             }
             else if (gameState == GameState.MapMenu)
             {
-                foreach (Button button in buttons)
-                {
-                    button.Draw(spriteBatch);
-                }
+                worldMapMeny.Draw(spriteBatch);
             }
             else if (gameState == GameState.TradeMenu)
             {
