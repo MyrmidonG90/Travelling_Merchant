@@ -11,6 +11,7 @@ namespace Active
 {
     class Item
     {
+        private string name;
         private int basePrice;
         private Texture2D tex;
         private int id;
@@ -18,8 +19,9 @@ namespace Active
         private int amount;
         private string description;
 
-        public Item(int bp, Texture2D tex, int id, int c, int a, string d)
+        public Item(string n, int bp, Texture2D tex, int id, int c, int a, string d)
         {
+            name = n;
             basePrice = bp;
             this.tex = tex;
             this.id = id;
@@ -38,6 +40,13 @@ namespace Active
             spriteBatch.Draw(tex, pos, Color.White);
         }
 
+        public string Name
+        {
+            get
+            {
+                return name;
+            }
+        }
         public int BasePrice
         {
             get

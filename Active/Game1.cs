@@ -28,7 +28,6 @@ namespace Active
         #endregion
 
         #region pending removal to CityMeny
-
         public Button InventoryButton;
         public Button TradeButton;
         public Button MapButton;
@@ -109,38 +108,33 @@ namespace Active
 
             KMReader.Update();
 
-
-            base.Update(gameTime);
-
-            foreach (City city in cities)
-
-                if (gameState == GameState.CityMenu)
+            if (gameState == GameState.CityMenu)
+            {
+                if (cityMeny.CheckInvButton())
                 {
-                    if (cityMeny.CheckInvButton())
-                    {
-                        gameState = GameState.InventoryMenu;
-                    }
-                    if (cityMeny.CheckTradeButton())
-                    {
-                        gameState = GameState.TradeMenu;
-                    }
-                    if (cityMeny.CheckMapButton())
-                    {
-                        gameState = GameState.MapMenu;
-                    }
+                    gameState = GameState.InventoryMenu;
                 }
-                else if (gameState == GameState.MapMenu)
+                if (cityMeny.CheckTradeButton())
                 {
+                    gameState = GameState.TradeMenu;
+                }
+                if (cityMeny.CheckMapButton())
+                {
+                    gameState = GameState.MapMenu;
+                }
+            }
+            else if (gameState == GameState.MapMenu)
+            {
 
-                }
-                else if (gameState == GameState.TradeMenu)
-                {
+            }
+            else if (gameState == GameState.TradeMenu)
+            {
 
-                }
-                else if (gameState == GameState.InventoryMenu)
-                {
-                    playerInventoryModule.Update(gameTime);
-                }
+            }
+            else if (gameState == GameState.InventoryMenu)
+            {
+                playerInventoryModule.Update(gameTime, itemCreator);
+            }
 
             base.Update(gameTime);
         }
@@ -150,11 +144,6 @@ namespace Active
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             spriteBatch.Begin();
-
-
-            foreach (Button button in buttons)
-
-
 
             if (gameState == GameState.CityMenu)
             {
