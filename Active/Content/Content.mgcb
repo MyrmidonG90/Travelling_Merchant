@@ -13,7 +13,6 @@
 
 #---------------------------------- Content ---------------------------------#
 
-
 #begin File.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
@@ -33,7 +32,6 @@
 /processorParam:TextureFormat=Color
 /build:box.png
 
-
 #begin merchant_map_with_nothing.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -45,9 +43,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:merchant_map_with_nothing.png
-
-
-
 
 #begin White.png
 /importer:TextureImporter
@@ -97,4 +92,17 @@
 /processorParam:TextureFormat=Color
 /build:potato.png
 
+#begin fontInventory.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:fontInventory.spritefont
+
+#begin fontHeader.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:fontHeader.spritefont
 
