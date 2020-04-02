@@ -23,6 +23,7 @@ namespace Active
 
         CityMeny cityMeny;
 
+<<<<<<< Updated upstream
         Button test;
         public Button InventoryButton;
         public Button TradeButton;
@@ -38,6 +39,21 @@ namespace Active
         string temp;
 
 
+=======
+        #region pending removal to CityMeny
+
+        #endregion
+
+        public enum GameState
+        {
+            CityMenu,
+            MapMenu,
+            TradeMenu,
+            InventoryMenu,
+        }
+
+       public GameState gameState;
+>>>>>>> Stashed changes
 
         public Game1()
         {
@@ -61,12 +77,16 @@ namespace Active
             spriteBatch = new SpriteBatch(GraphicsDevice);
             TextureManager.LoadContent(Content);
 
+<<<<<<< Updated upstream
             worldModule = new WorldModule();
+=======
+            gameState = GameState.CityMenu;
+>>>>>>> Stashed changes
 
 
-            InventoryButton = new Button(70, 920, 230, 120, TextureManager.WhiteTex);
-            TradeButton = new Button(420, 920, 230, 120, TextureManager.WhiteTex);
-            MapButton = new Button(1620, 920, 230, 120, TextureManager.WhiteTex);
+            cityMeny.InventoryButton = new Button(70, 920, 230, 120, TextureManager.WhiteTex);
+            cityMeny.TradeButton = new Button(420, 920, 230, 120, TextureManager.WhiteTex);
+            cityMeny.MapButton = new Button(1620, 920, 230, 120, TextureManager.WhiteTex);
 
             Inventory newInventory = new Inventory(100, new List<Item>());
             playerInventoryModule = new PlayerInventoryModule(newInventory);
@@ -104,9 +124,33 @@ namespace Active
             
             KMReader.Update();
 
+<<<<<<< Updated upstream
             base.Update(gameTime);
             
             foreach (City city in cities)
+=======
+            if (gameState == GameState.CityMenu)
+            {
+                if (cityMeny.CheckInvButton())
+                {
+                    gameState = GameState.InventoryMenu;
+                }
+                if (cityMeny.CheckTradeButton())
+                {
+                    gameState = GameState.TradeMenu;
+                }
+                if (cityMeny.CheckMapButton())
+                {
+                    gameState = GameState.MapMenu;
+                }
+            }
+            else if (gameState == GameState.MapMenu)
+            {
+
+            }
+            else if (gameState == GameState.TradeMenu)
+            {
+>>>>>>> Stashed changes
 
             {
                 foreach (Button button in buttons)
@@ -133,8 +177,16 @@ namespace Active
             MapButton.Draw(spriteBatch);
             Window.Title = temp.ToString();
 
+<<<<<<< Updated upstream
 
             foreach (Button button in buttons)
+=======
+            if (gameState == GameState.CityMenu)
+            {
+                cityMeny.Draw(spriteBatch);
+            }
+            else if (gameState == GameState.MapMenu)
+>>>>>>> Stashed changes
             {
                 button.Draw(spriteBatch);
             }
