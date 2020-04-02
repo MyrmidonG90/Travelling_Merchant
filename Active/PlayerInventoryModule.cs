@@ -19,14 +19,14 @@ namespace Active
         Rectangle disposeBox;
         Rectangle[] inventoryGrid;
 
-        public PlayerInventoryModule(Inventory inv)
+        public PlayerInventoryModule(Inventory inv, ItemCreator itemCreator)
         {
             inventory = inv;
             Item temp;
 
             for (int i = 0; i < 12; i++)
             {
-                temp = new Item(2, TextureManager.texCarrot, 1, 1, 60, "The Carrot has no natural \npredators");
+                temp = new Item(2, TextureManager.texCarrot, 1, 1, 60, itemCreator.itemData[0,3]);
                 inventory.AddItem(temp);
             }
 
@@ -118,6 +118,14 @@ namespace Active
                 }
                 spriteBatch.Draw(TextureManager.texBox, disposeBox, Color.Red);
                 spriteBatch.DrawString(TextureManager.fontInventory, "D", new Vector2(1580, 930), Color.White);
+            }
+        }
+
+        public Inventory Inventory
+        {
+            get
+            {
+                return inventory;
             }
         }
     }

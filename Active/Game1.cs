@@ -19,7 +19,7 @@ namespace Active
         PlayerInventoryModule playerInventoryModule;
         
         CityMeny cityMeny;
-
+        ItemCreator itemCreator;
         Button test;
 
         #region pending removal to mapModule
@@ -67,13 +67,13 @@ namespace Active
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
             TextureManager.LoadContent(Content);
-
+            itemCreator = new ItemCreator();
 
             gameState = GameState.InventoryMenu;
 
             cityMeny = new CityMeny();
 
-            playerInventoryModule = new PlayerInventoryModule(new Inventory(100, new List<Item>()));
+            playerInventoryModule = new PlayerInventoryModule(new Inventory(100, new List<Item>()), itemCreator);
 
             cityMeny.InventoryButton = new Button(70, 920, 230, 120, TextureManager.WhiteTex);
             cityMeny.TradeButton = new Button(420, 920, 230, 120, TextureManager.WhiteTex);
@@ -154,11 +154,7 @@ namespace Active
 
             foreach (Button button in buttons)
 
-            if (gameState == GameState.CityMenu)
-            {
-                cityMeny.Draw(spriteBatch);
-            }
-            else if (gameState == GameState.MapMenu)
+
 
             if (gameState == GameState.CityMenu)
             {

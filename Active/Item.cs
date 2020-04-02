@@ -14,7 +14,6 @@ namespace Active
         private int basePrice;
         private Texture2D tex;
         private int id;
-        private int itemID;
         private int category;
         private int amount;
         private string description;
@@ -51,17 +50,6 @@ namespace Active
             get
             {
                 return id;
-            }
-        }
-        public int ItemID
-        {
-            get
-            {
-                return itemID;
-            }
-            set
-            {
-                itemID = value;
             }
         }
         public int Category

@@ -21,7 +21,6 @@ namespace Active
         {
             if (itemList.Count <= 24)
             {
-                newItem.ItemID = itemList.Count;
                 itemList.Add(newItem);
                 return true;
             }
