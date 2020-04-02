@@ -36,6 +36,7 @@ namespace Active
 
         enum GameState
         {
+            Debug,
             CityMenu,
             MapMenu,
             TradeMenu,
@@ -68,7 +69,7 @@ namespace Active
             TextureManager.LoadContent(Content);
             itemCreator = new ItemCreator();
 
-            gameState = GameState.InventoryMenu;
+            gameState = GameState.Debug;
 
             cityMeny = new CityMeny();
 
@@ -135,6 +136,25 @@ namespace Active
             {
                 playerInventoryModule.Update(gameTime, itemCreator);
             }
+            else if (gameState == GameState.Debug)
+            {
+                if (KMReader.prevKeyState.IsKeyUp(Keys.F1) && KMReader.keyState.IsKeyDown(Keys.F1))
+                {
+                    gameState = GameState.CityMenu;
+                }
+                if (KMReader.prevKeyState.IsKeyUp(Keys.F2) && KMReader.keyState.IsKeyDown(Keys.F2))
+                {
+                    gameState = GameState.MapMenu;
+                }
+                if (KMReader.prevKeyState.IsKeyUp(Keys.F3) && KMReader.keyState.IsKeyDown(Keys.F3))
+                {
+                    gameState = GameState.InventoryMenu;
+                }
+                if (KMReader.prevKeyState.IsKeyUp(Keys.F4) && KMReader.keyState.IsKeyDown(Keys.F4))
+                {
+                    gameState = GameState.TradeMenu;
+                }
+            }
 
             base.Update(gameTime);
         }
@@ -164,6 +184,10 @@ namespace Active
             else if (gameState == GameState.InventoryMenu)
             {
                 playerInventoryModule.Draw(spriteBatch);
+            }
+            else if (gameState == GameState.Debug)
+            {
+                spriteBatch.DrawString(TextureManager.fontInventory, "Press F1 for City Menu, F2 for Travel/Map Menu,\nF3 for Inv. Menu or F4 for Trading Menu", new Vector2(200, 200), Color.White);
             }
 
             spriteBatch.End();
