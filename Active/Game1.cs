@@ -63,7 +63,7 @@ namespace Active
             spriteBatch = new SpriteBatch(GraphicsDevice);
             TextureManager.LoadContent(Content);
 
-            gameState = GameState.CityMenu;
+            gameState = GameState.InventoryMenu;
 
             cityMeny = new CityMeny();
 
@@ -117,7 +117,7 @@ namespace Active
             }
             else if (gameState == GameState.InventoryMenu)
             {
-
+                playerInventoryModule.Update(gameTime);
             }
 
             base.Update(gameTime);
