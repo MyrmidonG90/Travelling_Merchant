@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
@@ -19,27 +20,9 @@ namespace Active
         Rectangle disposeBox;
         Rectangle[] inventoryGrid;
 
-        public PlayerInventoryModule(Inventory inv)
+        public PlayerInventoryModule(Inventory inv, ItemCreator itemCreator)
         {
             inventory = inv;
-            Item temp;
-
-            for (int i = 0; i < 12; i++)
-            {
-                temp = new Item(2, TextureManager.texCarrot, 1, 1, 60, "The Carrot has no natural \npredators");
-                inventory.AddItem(temp);
-            }
-
-            temp = new Item(10, TextureManager.texIronIngot, 3, 2, 50, "An iron ingot what did you \nexpect?");
-            inventory.AddItem(temp);
-
-
-            
-            for (int i = 0; i < 12; i++)
-            {
-                temp = new Item(6, TextureManager.texPotato, 2, 1, 90, "Potatoes are apex hunters");
-                inventory.AddItem(temp);
-            }
 
             mainBox = new Rectangle(260, 140, 1400, 880);
             inventoryBox = new Rectangle(300, 180, 720, 720);
@@ -59,7 +42,7 @@ namespace Active
             }
         }
 
-        public void Update(GameTime gameTime)
+        public void Update(GameTime gameTime, ItemCreator itemCreator)
         {
             if (KMReader.MouseClick())
             {
@@ -68,12 +51,14 @@ namespace Active
                 {
                     if (tempRectangle.Contains(KMReader.GetMousePoint()))
                     {
-                        //Item tempItem = inventory.ItemList[counter];
-                        //inventory.ItemList.RemoveAt(counter);
-                        //tempItem.Amount += 10;
-                        //inventory.AddItem(tempItem);
-                        //inventory.ItemList.RemoveAt(counter);
-                        selected = inventory.ItemList[counter];
+                        try
+                        {
+                            selected = inventory.ItemList[counter];
+                        }
+                        catch
+                        {
+
+                        }
                     }
                     counter++;
                 }
@@ -84,6 +69,19 @@ namespace Active
                 inventory.ItemList.Remove(selected);
                 selected = null;
             }
+
+            if (KMReader.prevKeyState.IsKeyUp(Keys.A) && KMReader.keyState.IsKeyDown(Keys.A))
+            {
+                inventory.AddItem(itemCreator.createItem(1, 20));
+            }
+            if (KMReader.prevKeyState.IsKeyUp(Keys.B) && KMReader.keyState.IsKeyDown(Keys.B))
+            {
+                inventory.AddItem(itemCreator.createItem(2, 30));
+            }
+            if (KMReader.prevKeyState.IsKeyUp(Keys.C) && KMReader.keyState.IsKeyDown(Keys.C))
+            {
+                inventory.AddItem(itemCreator.createItem(3, 10));
+            }
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -91,6 +89,7 @@ namespace Active
             spriteBatch.Draw(TextureManager.texBox, mainBox, Color.Black);
             spriteBatch.DrawString(TextureManager.fontInventory, "Currency: " + inventory.Money.ToString(), new Vector2(300, 920), Color.White);
             spriteBatch.Draw(TextureManager.texBox, inventoryBox, Color.DarkGray);
+
             int counter = 0;
             foreach (Item tempItem in inventory.ItemList)
             {
@@ -99,6 +98,7 @@ namespace Active
                 spriteBatch.DrawString(TextureManager.fontInventory, tempItem.Amount.ToString(), temp, Color.White);
                 counter++;
             }
+
             if (selected != null)
             {
                 Vector2 posCategoryString = new Vector2(1110, 785);
@@ -118,6 +118,14 @@ namespace Active
                 }
                 spriteBatch.Draw(TextureManager.texBox, disposeBox, Color.Red);
                 spriteBatch.DrawString(TextureManager.fontInventory, "D", new Vector2(1580, 930), Color.White);
+            }
+        }
+
+        public Inventory Inventory
+        {
+            get
+            {
+                return inventory;
             }
         }
     }
