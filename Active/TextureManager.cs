@@ -8,6 +8,8 @@ namespace Active
 
         static public SpriteFont font;
         static public SpriteFont fontInventory;
+        static public SpriteFont fontHeader;
+
 
         static public Texture2D texMap;
         static public Texture2D WhiteTex;
@@ -19,6 +21,7 @@ namespace Active
         {
             font = content.Load<SpriteFont>("File");
             fontInventory = content.Load<SpriteFont>("fontInventory");
+            fontHeader = content.Load<SpriteFont>("fontHeader");
 
             texBox = content.Load<Texture2D>("box");
             texMap = content.Load<Texture2D>("merchant_map_with_nothing");

@@ -99,3 +99,10 @@
 /processorParam:TextureFormat=Compressed
 /build:fontInventory.spritefont
 
+#begin fontHeader.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:fontHeader.spritefont
+
