@@ -15,31 +15,34 @@ namespace Active
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        public SpriteFont font;
-        WorldModule worldModule;
+
         PlayerInventoryModule playerInventoryModule;
-
-        //Button Proof-of-Concept (kan tas bort utan risk)
-
+        
         CityMeny cityMeny;
 
-<<<<<<< Updated upstream
         Button test;
+
+        #region pending removal to mapModule
+        City[] cities = new City[3];
+        Button[] buttons = new Button[3];
+        #endregion
+
+        #region pending removal to CityMeny
+
         public Button InventoryButton;
         public Button TradeButton;
         public Button MapButton;
-        int temp;
-        //===============
+        #endregion
 
-        City city;
-        City[] cities = new City[2];
-        Button[] buttons = new Button[2];
+        enum GameState
+        {
+            CityMenu,
+            MapMenu,
+            TradeMenu,
+            InventoryMenu,
+        }
 
 
-        string temp;
-
-
-=======
         #region pending removal to CityMeny
 
         #endregion
@@ -53,7 +56,10 @@ namespace Active
         }
 
        public GameState gameState;
->>>>>>> Stashed changes
+
+
+        GameState gameState;
+
 
         public Game1()
         {
@@ -77,38 +83,40 @@ namespace Active
             spriteBatch = new SpriteBatch(GraphicsDevice);
             TextureManager.LoadContent(Content);
 
-<<<<<<< Updated upstream
-            worldModule = new WorldModule();
-=======
-            gameState = GameState.CityMenu;
->>>>>>> Stashed changes
 
+            worldModule = new WorldModule();
+
+            gameState = GameState.InventoryMenu;
+
+            cityMeny = new CityMeny();
+
+            playerInventoryModule = new PlayerInventoryModule(new Inventory(100, new List<Item>()));
 
             cityMeny.InventoryButton = new Button(70, 920, 230, 120, TextureManager.WhiteTex);
             cityMeny.TradeButton = new Button(420, 920, 230, 120, TextureManager.WhiteTex);
             cityMeny.MapButton = new Button(1620, 920, 230, 120, TextureManager.WhiteTex);
 
-            Inventory newInventory = new Inventory(100, new List<Item>());
-            playerInventoryModule = new PlayerInventoryModule(newInventory);
+            #region detta ska flyttas in i en egen manager (mapModule förslagsvis)
+            //funkar inte då data filen inte har följt med i commiten
 
+            //StreamReader sr = new StreamReader("cityNames.txt");
+            //int counter = 0;
+            //while (!sr.EndOfStream)
+            //{
 
-            worldModule = new WorldModule();
+            //    string tempName = sr.ReadLine();
+            //    string tempInfo = sr.ReadLine();
+            //    string tempCord = sr.ReadLine();
 
+            //    string[] tempCord2 = tempCord.Split(',');
 
-            font = Content.Load<SpriteFont>("File");
+            //    Vector2 cord = new Vector2(int.Parse(tempCord2[0]), int.Parse(tempCord2[1]));
 
-            City city = new City("test", "hej", new Vector2(2,2));
-
-
-            buttons[0] = new Button((int)city.carrotTownCords.X, (int)city.carrotTownCords.Y, 100, 100, "Carrot Town");
-            buttons[1] = new Button((int)city.steelVilleCords.X, (int)city.steelVilleCords.Y, 100, 100, "Steelville");
-
-
-            cities[0] = new City("Carrot Town", city.carrotTownInfo, city.carrotTownCords);
-            cities[1] = new City("Steelville", city.steelVilleInfo, city.steelVilleCords);
-
-
-
+            //    cities[counter] = new City(tempName, tempInfo, cord);
+            //    buttons[counter] = new Button((int)cord.X, (int)cord.Y, 100, 100, tempName, TextureManager.texBox);
+            //    counter++;
+            //}
+            #endregion
         }
 
         protected override void Update(GameTime gameTime)
@@ -116,19 +124,13 @@ namespace Active
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            
-            oldMouseState = newMouseState;
-            newMouseState = Mouse.GetState();
-            
-            worldModule.Update(gameTime);
-            
             KMReader.Update();
 
-<<<<<<< Updated upstream
+
             base.Update(gameTime);
             
             foreach (City city in cities)
-=======
+
             if (gameState == GameState.CityMenu)
             {
                 if (cityMeny.CheckInvButton())
@@ -150,20 +152,21 @@ namespace Active
             }
             else if (gameState == GameState.TradeMenu)
             {
->>>>>>> Stashed changes
 
+            else if (gameState == GameState.MapMenu)
             {
-                foreach (Button button in buttons)
-                {
-                    if (button.Click(newMouseState, oldMouseState) && button.name == city.name)
-                    {
-                        temp = city.name;
-                    }
-                }
+
+            }
+            else if (gameState == GameState.TradeMenu)
+            {
+
+            }
+            else if (gameState == GameState.InventoryMenu)
+            {
+                playerInventoryModule.Update(gameTime);
             }
 
             base.Update(gameTime);
-
         }
 
         protected override void Draw(GameTime gameTime)
@@ -171,30 +174,39 @@ namespace Active
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             spriteBatch.Begin();
-            worldModule.Draw(spriteBatch);
-            InventoryButton.Draw(spriteBatch);
-            TradeButton.Draw(spriteBatch);
-            MapButton.Draw(spriteBatch);
-            Window.Title = temp.ToString();
 
-<<<<<<< Updated upstream
 
             foreach (Button button in buttons)
-=======
+
             if (gameState == GameState.CityMenu)
             {
                 cityMeny.Draw(spriteBatch);
             }
             else if (gameState == GameState.MapMenu)
->>>>>>> Stashed changes
+
+            if (gameState == GameState.CityMenu)
             {
-                button.Draw(spriteBatch);
+                InventoryButton.Draw(spriteBatch);
+                TradeButton.Draw(spriteBatch);
+                MapButton.Draw(spriteBatch);
+
+                cityMeny.Draw(spriteBatch);
             }
-
-            Window.Title = temp;
-
-
-            cityMeny.Draw(spriteBatch);
+            else if (gameState == GameState.MapMenu)
+            {
+                foreach (Button button in buttons)
+                {
+                    button.Draw(spriteBatch);
+                }
+            }
+            else if (gameState == GameState.TradeMenu)
+            {
+                
+            }
+            else if (gameState == GameState.InventoryMenu)
+            {
+                playerInventoryModule.Draw(spriteBatch);
+            }
 
             spriteBatch.End();
 
