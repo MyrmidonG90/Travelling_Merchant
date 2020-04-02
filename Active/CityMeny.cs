@@ -13,28 +13,44 @@ namespace Active
 {
     public class CityMeny
     {
-        Game1 game1;
-
+        public Button InventoryButton;
+        public Button TradeButton;
+        public Button MapButton;
 
         public void Update(GameTime gameTime)
         {
-            if (game1.InventoryButton.Click())
+
+        }
+        public bool CheckInvButton()
+        {
+            if (InventoryButton.Click())
             {
-
+                return true;
             }
-
-            if (game1.TradeButton.Click())
+            return false;
+        }
+        public bool CheckTradeButton()
+        {
+            if (TradeButton.Click())
             {
-
+                return true;
             }
-
-            if (game1.MapButton.Click())
+            return false;
+        }
+        public bool CheckMapButton()
+        {
+            if (MapButton.Click())
             {
-
+                return true;
             }
+            return false;
         }
         public void Draw(SpriteBatch spriteBatch)
         {
+
+            InventoryButton.Draw(spriteBatch);
+            TradeButton.Draw(spriteBatch);
+            MapButton.Draw(spriteBatch);
             spriteBatch.DrawString(TextureManager.font, "CITY NAME: ", new Vector2(30, 50), Color.Black, 0, Vector2.Zero, 4, SpriteEffects.None, 1);
             spriteBatch.DrawString(TextureManager.font, "City Type: ", new Vector2(40, 120), Color.Black, 0, Vector2.Zero, 2, SpriteEffects.None, 1);
             spriteBatch.DrawString(TextureManager.font, "Population: ", new Vector2(40, 160), Color.Black, 0, Vector2.Zero, 2, SpriteEffects.None, 1);

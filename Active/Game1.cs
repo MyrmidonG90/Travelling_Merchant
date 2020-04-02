@@ -20,12 +20,15 @@ namespace Active
         
         CityMeny cityMeny;
 
+        Button test;
+
         #region pending removal to mapModule
         City[] cities = new City[3];
         Button[] buttons = new Button[3];
         #endregion
 
         #region pending removal to CityMeny
+
         public Button InventoryButton;
         public Button TradeButton;
         public Button MapButton;
@@ -39,7 +42,24 @@ namespace Active
             InventoryMenu,
         }
 
+
+        #region pending removal to CityMeny
+
+        #endregion
+
+        public enum GameState
+        {
+            CityMenu,
+            MapMenu,
+            TradeMenu,
+            InventoryMenu,
+        }
+
+       public GameState gameState;
+
+
         GameState gameState;
+
 
         public Game1()
         {
@@ -63,15 +83,18 @@ namespace Active
             spriteBatch = new SpriteBatch(GraphicsDevice);
             TextureManager.LoadContent(Content);
 
+
+            worldModule = new WorldModule();
+
             gameState = GameState.InventoryMenu;
 
             cityMeny = new CityMeny();
 
             playerInventoryModule = new PlayerInventoryModule(new Inventory(100, new List<Item>()));
 
-            InventoryButton = new Button(70, 920, 230, 120, TextureManager.WhiteTex);
-            TradeButton = new Button(420, 920, 230, 120, TextureManager.WhiteTex);
-            MapButton = new Button(1620, 920, 230, 120, TextureManager.WhiteTex);
+            cityMeny.InventoryButton = new Button(70, 920, 230, 120, TextureManager.WhiteTex);
+            cityMeny.TradeButton = new Button(420, 920, 230, 120, TextureManager.WhiteTex);
+            cityMeny.MapButton = new Button(1620, 920, 230, 120, TextureManager.WhiteTex);
 
             #region detta ska flyttas in i en egen manager (mapModule förslagsvis)
             //funkar inte då data filen inte har följt med i commiten
@@ -103,10 +126,33 @@ namespace Active
 
             KMReader.Update();
 
+
+            base.Update(gameTime);
+            
+            foreach (City city in cities)
+
             if (gameState == GameState.CityMenu)
+            {
+                if (cityMeny.CheckInvButton())
+                {
+                    gameState = GameState.InventoryMenu;
+                }
+                if (cityMeny.CheckTradeButton())
+                {
+                    gameState = GameState.TradeMenu;
+                }
+                if (cityMeny.CheckMapButton())
+                {
+                    gameState = GameState.MapMenu;
+                }
+            }
+            else if (gameState == GameState.MapMenu)
             {
 
             }
+            else if (gameState == GameState.TradeMenu)
+            {
+
             else if (gameState == GameState.MapMenu)
             {
 
@@ -128,6 +174,15 @@ namespace Active
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             spriteBatch.Begin();
+
+
+            foreach (Button button in buttons)
+
+            if (gameState == GameState.CityMenu)
+            {
+                cityMeny.Draw(spriteBatch);
+            }
+            else if (gameState == GameState.MapMenu)
 
             if (gameState == GameState.CityMenu)
             {
