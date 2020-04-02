@@ -34,6 +34,7 @@ namespace Active
         public Button MapButton;
         #endregion
 
+
         enum GameState
         {
             CityMenu,
@@ -41,22 +42,6 @@ namespace Active
             TradeMenu,
             InventoryMenu,
         }
-
-
-        #region pending removal to CityMeny
-
-        #endregion
-
-        public enum GameState
-        {
-            CityMenu,
-            MapMenu,
-            TradeMenu,
-            InventoryMenu,
-        }
-
-       public GameState gameState;
-
 
         GameState gameState;
 
@@ -83,8 +68,6 @@ namespace Active
             spriteBatch = new SpriteBatch(GraphicsDevice);
             TextureManager.LoadContent(Content);
 
-
-            worldModule = new WorldModule();
 
             gameState = GameState.InventoryMenu;
 
@@ -128,43 +111,36 @@ namespace Active
 
 
             base.Update(gameTime);
-            
+
             foreach (City city in cities)
 
-            if (gameState == GameState.CityMenu)
-            {
-                if (cityMeny.CheckInvButton())
+                if (gameState == GameState.CityMenu)
                 {
-                    gameState = GameState.InventoryMenu;
+                    if (cityMeny.CheckInvButton())
+                    {
+                        gameState = GameState.InventoryMenu;
+                    }
+                    if (cityMeny.CheckTradeButton())
+                    {
+                        gameState = GameState.TradeMenu;
+                    }
+                    if (cityMeny.CheckMapButton())
+                    {
+                        gameState = GameState.MapMenu;
+                    }
                 }
-                if (cityMeny.CheckTradeButton())
+                else if (gameState == GameState.MapMenu)
                 {
-                    gameState = GameState.TradeMenu;
+
                 }
-                if (cityMeny.CheckMapButton())
+                else if (gameState == GameState.TradeMenu)
                 {
-                    gameState = GameState.MapMenu;
+
                 }
-            }
-            else if (gameState == GameState.MapMenu)
-            {
-
-            }
-            else if (gameState == GameState.TradeMenu)
-            {
-
-            else if (gameState == GameState.MapMenu)
-            {
-
-            }
-            else if (gameState == GameState.TradeMenu)
-            {
-
-            }
-            else if (gameState == GameState.InventoryMenu)
-            {
-                playerInventoryModule.Update(gameTime);
-            }
+                else if (gameState == GameState.InventoryMenu)
+                {
+                    playerInventoryModule.Update(gameTime);
+                }
 
             base.Update(gameTime);
         }
@@ -194,10 +170,7 @@ namespace Active
             }
             else if (gameState == GameState.MapMenu)
             {
-                foreach (Button button in buttons)
-                {
-                    button.Draw(spriteBatch);
-                }
+
             }
             else if (gameState == GameState.TradeMenu)
             {
