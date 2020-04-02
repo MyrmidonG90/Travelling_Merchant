@@ -19,13 +19,14 @@ namespace Active
 
         public bool AddItem(Item newItem)
         {
-            if (itemList.Count <= 25)
+            if (itemList.Count <= 24)
             {
                 newItem.ItemID = itemList.Count;
                 itemList.Add(newItem);
                 return true;
             }
             return false;
+            //här ska det läggas till någon prompt att det inte går att lägga till pga plats
         }
 
         public int Money
