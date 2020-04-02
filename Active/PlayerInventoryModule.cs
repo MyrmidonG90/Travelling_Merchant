@@ -16,6 +16,7 @@ namespace Active
         Rectangle mainBox;
         Rectangle inventoryBox;
         Rectangle categoryBox;
+        Rectangle disposeBox;
         Rectangle[] inventoryGrid;
 
         public PlayerInventoryModule(Inventory inv)
@@ -43,6 +44,7 @@ namespace Active
             mainBox = new Rectangle(260, 140, 1400, 800);
             inventoryBox = new Rectangle(300, 180, 720, 720);
             categoryBox = new Rectangle(1100, 650, 120, 120);
+            disposeBox = new Rectangle(1100, 800, 280, 95);
 
             StreamReader streamReader = new StreamReader("InventoryGrid.txt");
             inventoryGrid = new Rectangle[25];
@@ -103,8 +105,10 @@ namespace Active
                 }
                 else if (selected.Category == 2)
                 {
-
+                    spriteBatch.Draw(TextureManager.texBox, categoryBox, Color.DarkSlateGray);
+                    spriteBatch.DrawString(TextureManager.fontInventory, "Metal", new Vector2(1110, 685), Color.White);
                 }
+                spriteBatch.Draw(TextureManager.texBox, disposeBox, Color.Red);
             }
         }
     }
