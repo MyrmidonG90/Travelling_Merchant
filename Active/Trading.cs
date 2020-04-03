@@ -16,7 +16,7 @@ namespace Active
 
              
              */
-        Slot[,] invLeft, invRight,tradeLeft,tradeRight;
+        Slot[,] slotsLeft, slotsRight,tradeSlotsLeft,tradeSlotsRight;
         
         Button accept, reset,back;
         enum Participant
@@ -40,10 +40,10 @@ namespace Active
 
         void CreateButtons()
         {
-            invLeft = new Slot[5, 5];
-            invRight = new Slot[5, 5];
-            tradeLeft = new Slot[3, 3];
-            tradeRight = new Slot[3, 3];
+            slotsLeft = new Slot[5, 5];
+            slotsRight = new Slot[5, 5];
+            tradeSlotsLeft = new Slot[3, 3];
+            tradeSlotsRight = new Slot[3, 3];
             for (int i = 0; i < 5; i++)
             {
                 for (int j = 0; j < 5; j++)
@@ -102,13 +102,13 @@ namespace Active
             counterCol = 0;
             counterRow = 0;
             // Tittar om vänstra inventory:n har blivit klickat
-            while (counterCol < 5 && invLeft[counterCol, counterRow].Clicked())
+            while (counterCol < 5 && slotsLeft[counterCol, counterRow].Clicked())
             {
-                while (counterRow < 5 && invLeft[counterCol, counterRow].Clicked())
+                while (counterRow < 5 && slotsLeft[counterCol, counterRow].Clicked())
                 {
                     ++counterRow;
                 }
-                if (invLeft[counterCol, counterRow].Clicked())
+                if (slotsLeft[counterCol, counterRow].Clicked())
                 {
                     //Add item to the trade inventory on the left
                     AddItem(Participant.Left,/*itemId,*/ counterRow, counterCol);
@@ -120,13 +120,13 @@ namespace Active
             counterCol = 0;
             counterRow = 0;
             // Tittar om högra inventory:n har blivit klickat
-            while (counterCol < 5 && invLeft[counterCol, counterRow].Clicked())
+            while (counterCol < 5 && slotsLeft[counterCol, counterRow].Clicked())
             {
-                while (counterRow < 5 && invLeft[counterCol, counterRow].Clicked())
+                while (counterRow < 5 && slotsLeft[counterCol, counterRow].Clicked())
                 {
                     ++counterRow;
                 }
-                if (invLeft[counterCol, counterRow].Clicked())
+                if (slotsLeft[counterCol, counterRow].Clicked())
                 {
                     // Add item to the trade inventory on the right
                     AddItem(Participant.Right,/*itemId,*/ counterRow,counterCol);
@@ -176,17 +176,20 @@ namespace Active
         }
         bool AcceptTrade()
         {
-            //If player has enough coin and merchant has enough gold Advance
-            
-            //Else return false with a popup error
+            //If player has enough coin and merchant has enough gold Advance.
+            //Else prompt that you do not have enough gold
+            //If player has enough space in inventory Advance.
+            //Else prompt that the player doesn't have enough space
             // Update both player and merchant's inventory
             // Return true;
             return false;
         }
 
-        void UpdateInventories()
+        void UpdateInventories(/*ref entityLeft, ref entityRight*/)
         {
-
+            
+            //entityLeft.inventory = invLeft;
+            // enittyRight.inventory = invRight;
         }
 
         // Cleans the trade table of items
@@ -204,7 +207,7 @@ namespace Active
                     {
                         while (tmpCounter <= inventory.ItemList.Count && counterRow < 5)
                         {
-                            invLeft[counterCol, counterRow].AddItem(inventory.ItemList[tmpCounter],inventory.ItemList[tmpCounter].Amount);
+                            slotsLeft[counterCol, counterRow].AddItem(inventory.ItemList[tmpCounter],inventory.ItemList[tmpCounter].Amount);
                             ++tmpCounter;
                             ++counterRow;
                         }
@@ -234,7 +237,7 @@ namespace Active
                     {
                         while (tmpCounter <= inventory.ItemList.Count && counterRow < 5)
                         {
-                            invRight[counterCol, counterRow].AddItem(inventory.ItemList[tmpCounter], inventory.ItemList[tmpCounter].Amount);
+                            slotsRight[counterCol, counterRow].AddItem(inventory.ItemList[tmpCounter], inventory.ItemList[tmpCounter].Amount);
                             ++tmpCounter;
                             ++counterRow;
                         }
@@ -255,11 +258,11 @@ namespace Active
         }
         void ResetTrade()
         {
-            foreach (var item in tradeLeft)
+            foreach (var item in tradeSlotsLeft)
             {
                 item.Reset();
             }
-            foreach (var item in tradeRight)
+            foreach (var item in tradeSlotsRight)
             {
                 item.Reset();
             }
@@ -269,19 +272,19 @@ namespace Active
         }
         void Draw(SpriteBatch sb)
         {
-            foreach (var item in invLeft)
+            foreach (var item in slotsLeft)
             {
                 item.Draw(sb);
             }
-            foreach (var item in invRight)
+            foreach (var item in slotsRight)
             {
                 item.Draw(sb);
             }
-            foreach (var item in tradeLeft)
+            foreach (var item in tradeSlotsLeft)
             {
                 item.Draw(sb);
             }
-            foreach (var item in tradeRight)
+            foreach (var item in tradeSlotsRight)
             {
                 item.Draw(sb);
             }
