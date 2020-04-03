@@ -27,12 +27,14 @@ namespace Active
         }
         int counterCol, counterRow,tmpCounter,leftPrice,rightPrice,totalPrice;
 
-
+        // Oklart
         void Initialize(Inventory left, Inventory right)
         {
             this.invLeft = left;
             this.invRight = right;            
         }
+
+        // Behöver lite arbete till
         void CreateSlots()
         {
             slotsLeft = new Slot[5, 5];
@@ -58,6 +60,8 @@ namespace Active
                 }
             }
         }
+
+        // Justera värderna
         void CreateButtons()
         {
             
@@ -67,6 +71,7 @@ namespace Active
         }
         
         // Håller processen trading igång. När den returnerar false betyder det att transaktionen är ej över och vice versa när man returnerar true
+        // Behöver mycket arbete!!!
         bool Update()
         {
             //När ett mussklick händer
@@ -104,7 +109,7 @@ namespace Active
             return false;
         }
 
-
+        //Mycket arbete kvar!!!
         bool CheckInvClick()
         {
             counterCol = 0;
@@ -137,7 +142,7 @@ namespace Active
                 if (slotsLeft[counterCol, counterRow].Clicked())
                 {
                     // Add item to the trade inventory on the right
-                    AddItem(Participant.Right,/*itemId,*/ counterRow,counterCol);
+                    AddItem(Participant.Right,/*itemId,*/ counterRow, counterCol);
                     return true;
                 }
                 ++counterCol;
@@ -145,7 +150,9 @@ namespace Active
 
             return false;
         }
-        void AddItem(Participant participant, /*, int itemId*/int posRow, int posCol)
+
+        // Mycket Arbete kvar!!!
+        void AddItem(Participant participant, Item item,int posRow, int posCol)
         {
             bool finding = false;
             counterCol = 0;
@@ -182,7 +189,9 @@ namespace Active
 
             
         }
-        bool AcceptTrade(ref Inventory invLeft, ref Inventory invRight)
+
+        //Medium Arbete Kvar!!
+        bool AcceptTrade(ref Inventory participantLeft, ref Inventory participantRight)
         {
             //If nothing is presented
             if (tradeLeft.ItemList.Count == 0 && tradeRight.ItemList.Count==0)
@@ -191,7 +200,7 @@ namespace Active
             }
             //If player and Merchant doesn't enough space in inventory Advance.
             //Else prompt that the player doesn't have enough space
-            if (false)
+            if (invLeft.ItemList.Count < 24 && invRight.ItemList.Count < 24)
             {
                 return false;
             }
@@ -202,29 +211,28 @@ namespace Active
             {
                 return false;
             }
-            
+
             // Update both player and merchant's inventory
-            UpdateInventories(/*enitityLeft,entityRight*/);
+            participantLeft = invLeft;
+            participantRight = invRight;
             // Return true;
             return true;
         }
 
+        // Snart klart
         int CheckValue(Inventory inv)
         {
             int sum = 0;
             for (int i = 0; i < inv.ItemList.Count; i++)
             {
-
+                // sum += inv[i].price * inv[i].Amount;
             }
             return sum;
         }
-        void UpdateInventories(/*ref entityLeft, ref entityRight*/)
-        {            
-            //entityLeft.inventory = invLeft;
-            // enittyRight.inventory = invRight;
-        }
 
         
+
+        // Oklart
         void ConstructInventory(Participant participant, Inventory inventory)
         {
             if (participant == Participant.Left)
@@ -289,6 +297,9 @@ namespace Active
             }
         }
         // Cleans slots of items 
+
+
+        // Lite Arbete kvar!
         void ResetTrade()
         {
             foreach (var item in tradeSlotsLeft)
@@ -303,6 +314,8 @@ namespace Active
             //invRight = entity.inventory
 
         }
+
+        // Oklart
         void Draw(SpriteBatch sb)
         {
             foreach (var item in slotsLeft)
