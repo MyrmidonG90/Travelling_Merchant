@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Active
 {
-    class WorldMapMeny
+    class WorldMapMenu
     {
         
         City[] cities = new City[3];
@@ -37,10 +37,10 @@ namespace Active
                         cityCords = city.Coordinates;
                     }
 
-                    //if (!button.Click() && KMReader.MouseClick()) // Den här koden fungerar bara för den sista staden i listan.
-                    //{                                                  // Jag har ingen aning om varför. Feel free to help.
-                    //    showText = false;
-                    //}
+                    if (!button.Click() && KMReader.MouseClick()) // Den här koden fungerar bara för den sista staden i listan.
+                    {                                                  // Jag har ingen aning om varför. Feel free to help.
+                        showText = false;
+                    }
                 }
             }
 
