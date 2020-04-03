@@ -14,7 +14,7 @@ namespace Active
 
         public ItemCreator()
         {
-            StreamReader streamReader = new StreamReader("Items.txt");
+            StreamReader streamReader = new StreamReader("./Data/Items.txt");
 
 
             itemData = new string[int.Parse(streamReader.ReadLine()), 4];
