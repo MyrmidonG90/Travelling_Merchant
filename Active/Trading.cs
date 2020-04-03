@@ -177,15 +177,18 @@ namespace Active
         bool AcceptTrade()
         {
             //If player has enough coin and merchant has enough gold Advance
+            
             //Else return false with a popup error
             // Update both player and merchant's inventory
             // Return true;
             return false;
         }
+
         void UpdateInventories()
         {
 
         }
+
         // Cleans the trade table of items
         void ConstructInventory(Participant participant, Inventory inventory)
         {
@@ -252,14 +255,19 @@ namespace Active
         }
         void ResetTrade()
         {
+            foreach (var item in tradeLeft)
+            {
+                item.Reset();
+            }
+            foreach (var item in tradeRight)
+            {
+                item.Reset();
+            }
+            //invLeft = entity.inventory
+            //invRight = entity.inventory
 
         }
         void Draw(SpriteBatch sb)
-        {
-            DrawBoxes(sb);
-            DrawItems(sb);
-        }
-        void DrawBoxes(SpriteBatch sb)
         {
             foreach (var item in invLeft)
             {
@@ -281,9 +289,5 @@ namespace Active
             reset.Draw(sb);
             back.Draw(sb);
         }
-        void DrawItems(SpriteBatch sb)
-        {
-            // Draw both inventories in a 5x5 grid
-        }
-    }
+    }     
 }
