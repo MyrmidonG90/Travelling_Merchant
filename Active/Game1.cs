@@ -22,7 +22,9 @@ namespace Active
         ItemCreator itemCreator;
 
 
+
         WorldMapMenu worldMapMenu;
+
 
         #region pending removal to CityMeny
         public Button InventoryButton;
@@ -71,8 +73,10 @@ namespace Active
 
 
             cityMeny = new CityMeny();
+
             worldMapMenu = new WorldMapMenu();
             worldMapMenu.LoadCities();
+
 
             playerInventoryModule = new PlayerInventoryModule(new Inventory(100, new List<Item>()), itemCreator);
 

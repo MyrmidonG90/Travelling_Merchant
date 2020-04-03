@@ -11,13 +11,15 @@ namespace Active
     {
 
         public string[,] itemData;
+        int length;
 
         public ItemCreator()
         {
             StreamReader streamReader = new StreamReader("./Data/Items.txt");
 
 
-            itemData = new string[int.Parse(streamReader.ReadLine()), 4];
+            length = int.Parse(streamReader.ReadLine());
+            itemData = new string[length, 4];
             int counter = 0;
             while (!streamReader.EndOfStream)
             {
@@ -29,9 +31,10 @@ namespace Active
                 }
                 counter++;
             }
-            itemData[0, 3] = "The Carrot has no natural \npredators";
-            itemData[1, 3] = "Potatoes are apex hunters";
-            itemData[2, 3] = "An iron ingot what did you \nexpect?";
+            for (int i = 0; i < length; i++)
+            {
+                itemData[i, 3] = itemData[i, 3].Replace(";", "\n");
+            }
         }
 
         public Item createItem(int id, int amount)

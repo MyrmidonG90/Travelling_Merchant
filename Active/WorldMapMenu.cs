@@ -16,7 +16,7 @@ namespace Active
         Button[] cityButtons = new Button[3];
         Button[] travelButtons = new Button[3];
         bool showText;
-        
+      
         string cityName;
         string cityInfo;
         Vector2 cityCords;
@@ -26,6 +26,7 @@ namespace Active
 
         public void Update(GameTime gameTime)
         {
+
             bool temp = false;
             foreach (Button button in cityButtons)
             {
@@ -43,6 +44,7 @@ namespace Active
                 }
             }
 
+
             foreach (Button button in cityButtons)
             {
                 foreach (City city in cities)
@@ -52,7 +54,9 @@ namespace Active
                         showText = true;
                         cityName = city.name;
                         cityInfo = city.information;
+
                         cityCords = city.coordinates;
+
                     }
                 }
             }
@@ -62,7 +66,9 @@ namespace Active
                 if (button.Click())
                 {
 
+
                     //INSERT TRAVEL TO CITY HERE
+
                     
                 }
             }
@@ -107,7 +113,9 @@ namespace Active
         public void LoadCities()
         {
 
-            StreamReader sr = new StreamReader("cityInfo.txt");
+
+            StreamReader sr = new StreamReader("./Data/cityInfo.txt");
+
 
             int counter = 0;
             while (!sr.EndOfStream)
