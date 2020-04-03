@@ -36,10 +36,10 @@ namespace Active
                         cityInfo = city.information;
                         cityCords = city.Coordinates;
                     }
-                    //else if (!button.Click() && KMReader.MouseClick()) // Den här koden fungerar bara för en av städerna.
+
+                    //if (!button.Click() && KMReader.MouseClick()) // Den här koden fungerar bara för den sista staden i listan.
                     //{                                                  // Jag har ingen aning om varför. Feel free to help.
                     //    showText = false;
-                    //    cityName = null;
                     //}
                 }
             }
