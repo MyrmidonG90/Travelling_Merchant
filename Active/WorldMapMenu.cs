@@ -16,6 +16,7 @@ namespace Active
         Button[] cityButtons = new Button[3];
         Button[] travelButtons = new Button[3];
         bool showText;
+      
         string cityName;
         string cityInfo;
         Vector2 cityCords;
@@ -25,6 +26,25 @@ namespace Active
 
         public void Update(GameTime gameTime)
         {
+
+            bool temp = false;
+            foreach (Button button in cityButtons)
+            {
+                if (button.Click())
+                {
+                    temp = true;
+                }
+            }
+
+            if (!temp)
+            {
+                if (KMReader.MouseClick())
+                {
+                    showText = false;
+                }
+            }
+
+
             foreach (Button button in cityButtons)
             {
                 foreach (City city in cities)
@@ -34,12 +54,9 @@ namespace Active
                         showText = true;
                         cityName = city.name;
                         cityInfo = city.information;
-                        cityCords = city.Coordinates;
-                    }
 
-                    if (!button.Click() && KMReader.MouseClick()) // Den här koden fungerar bara för den sista staden i listan.
-                    {                                                  // Jag har ingen aning om varför. Feel free to help.
-                        showText = false;
+                        cityCords = city.coordinates;
+
                     }
                 }
             }
@@ -49,6 +66,8 @@ namespace Active
                 if (button.Click())
                 {
 
+
+                    //INSERT TRAVEL TO CITY HERE
 
                     
                 }
@@ -94,7 +113,9 @@ namespace Active
         public void LoadCities()
         {
 
+
             StreamReader sr = new StreamReader("./Data/cityInfo.txt");
+
 
             int counter = 0;
             while (!sr.EndOfStream)
