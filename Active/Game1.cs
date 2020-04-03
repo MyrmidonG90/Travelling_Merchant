@@ -25,7 +25,6 @@ namespace Active
 
         WorldMapMeny worldMapMeny;
 
-        CityMeny cityMeny;
 
         #region pending removal to CityMeny
         public Button InventoryButton;

@@ -94,7 +94,7 @@ namespace Active
         public void LoadCities()
         {
 
-            StreamReader sr = new StreamReader("cityInfo.txt");
+            StreamReader sr = new StreamReader("./Data/cityInfo.txt");
 
             int counter = 0;
             while (!sr.EndOfStream)
