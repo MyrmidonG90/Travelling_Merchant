@@ -23,7 +23,7 @@ namespace Active
         Button test;
 
 
-        WorldMapMeny worldMapMeny;
+        WorldMapMenu worldMapMeny;
 
 
         #region pending removal to CityMeny
@@ -73,7 +73,7 @@ namespace Active
 
 
             cityMeny = new CityMeny();
-            worldMapMeny = new WorldMapMeny();
+            worldMapMeny = new WorldMapMenu();
             worldMapMeny.LoadCities();
 
             playerInventoryModule = new PlayerInventoryModule(new Inventory(100, new List<Item>()), itemCreator);
