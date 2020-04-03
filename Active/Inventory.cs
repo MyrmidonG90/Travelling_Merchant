@@ -18,22 +18,32 @@ namespace Active
 
         public bool AddItem(Item newItem)
         {
-            if (itemList.Count <= 24)
+            if (FindIndexOf(newItem.ID) != -1) // Om den redan finns i listan
             {
-                if (FindIndexOf(newItem.ID) != -1)
-                {
-                    itemList[FindIndexOf(newItem.ID)].Amount += newItem.Amount;
-                }
-                else
-                {
-                    itemList.Add(newItem);
-                }
+                itemList[FindIndexOf(newItem.ID)].Amount += newItem.Amount; // Ändrar summan av totala antalet av den item:et
                 return true;
             }
+            else
+            {
+                if (itemList.Count <= 24) // Om det finns plats i listan för en ny item
+                {
+                    itemList.Add(newItem);
+                    return true;
+                }
+            }
+            
             return false;
             //här ska det läggas till någon prompt att det inte går att lägga till pga plats
         }
-        
+
+        public void ReduceAmountOfItems(Item reduceItem)
+        {
+            itemList[FindIndexOf(reduceItem.ID)].Amount -= reduceItem.Amount; // Reducerar antalet man har sålt.
+            if (itemList[FindIndexOf(reduceItem.ID)].Amount == 0) // Har ej tillgång till item:et längre
+            {
+                itemList.RemoveAt(FindIndexOf(reduceItem.ID));
+            }
+        }
         private int FindIndexOf(int itemID)
         {
             bool found = false;
