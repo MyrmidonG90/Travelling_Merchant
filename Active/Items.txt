@@ -1,0 +1,4 @@
+3
+Carrot,2,1,The Carrot has no natural \npredators
+Potato,4,1,Potatoes are apex hunters
+Iron Ingot,10,2,An iron ingot what did you \nexpect?

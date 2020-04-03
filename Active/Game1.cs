@@ -19,6 +19,8 @@ namespace Active
         PlayerInventoryModule playerInventoryModule;
         
         CityMeny cityMeny;
+        ItemCreator itemCreator;
+        Button test;
 
         #region pending removal to mapModule
         City[] cities = new City[3];
@@ -31,8 +33,10 @@ namespace Active
         public Button MapButton;
         #endregion
 
+
         enum GameState
         {
+            Debug,
             CityMenu,
             MapMenu,
             TradeMenu,
@@ -40,6 +44,7 @@ namespace Active
         }
 
         GameState gameState;
+
 
         public Game1()
         {
@@ -62,16 +67,17 @@ namespace Active
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
             TextureManager.LoadContent(Content);
+            itemCreator = new ItemCreator();
 
-            gameState = GameState.InventoryMenu;
+            gameState = GameState.Debug;
 
             cityMeny = new CityMeny();
 
-            playerInventoryModule = new PlayerInventoryModule(new Inventory(100, new List<Item>()));
+            playerInventoryModule = new PlayerInventoryModule(new Inventory(100, new List<Item>()), itemCreator);
 
-            InventoryButton = new Button(70, 920, 230, 120, TextureManager.WhiteTex);
-            TradeButton = new Button(420, 920, 230, 120, TextureManager.WhiteTex);
-            MapButton = new Button(1620, 920, 230, 120, TextureManager.WhiteTex);
+            cityMeny.InventoryButton = new Button(70, 920, 230, 120, TextureManager.WhiteTex);
+            cityMeny.TradeButton = new Button(420, 920, 230, 120, TextureManager.WhiteTex);
+            cityMeny.MapButton = new Button(1620, 920, 230, 120, TextureManager.WhiteTex);
 
             #region detta ska flyttas in i en egen manager (mapModule förslagsvis)
             //funkar inte då data filen inte har följt med i commiten
@@ -105,7 +111,18 @@ namespace Active
 
             if (gameState == GameState.CityMenu)
             {
-
+                if (cityMeny.CheckInvButton())
+                {
+                    gameState = GameState.InventoryMenu;
+                }
+                if (cityMeny.CheckTradeButton())
+                {
+                    gameState = GameState.TradeMenu;
+                }
+                if (cityMeny.CheckMapButton())
+                {
+                    gameState = GameState.MapMenu;
+                }
             }
             else if (gameState == GameState.MapMenu)
             {
@@ -117,7 +134,26 @@ namespace Active
             }
             else if (gameState == GameState.InventoryMenu)
             {
-                playerInventoryModule.Update(gameTime);
+                playerInventoryModule.Update(gameTime, itemCreator);
+            }
+            else if (gameState == GameState.Debug)
+            {
+                if (KMReader.prevKeyState.IsKeyUp(Keys.F1) && KMReader.keyState.IsKeyDown(Keys.F1))
+                {
+                    gameState = GameState.CityMenu;
+                }
+                if (KMReader.prevKeyState.IsKeyUp(Keys.F2) && KMReader.keyState.IsKeyDown(Keys.F2))
+                {
+                    gameState = GameState.MapMenu;
+                }
+                if (KMReader.prevKeyState.IsKeyUp(Keys.F3) && KMReader.keyState.IsKeyDown(Keys.F3))
+                {
+                    gameState = GameState.InventoryMenu;
+                }
+                if (KMReader.prevKeyState.IsKeyUp(Keys.F4) && KMReader.keyState.IsKeyDown(Keys.F4))
+                {
+                    gameState = GameState.TradeMenu;
+                }
             }
 
             base.Update(gameTime);
@@ -139,10 +175,7 @@ namespace Active
             }
             else if (gameState == GameState.MapMenu)
             {
-                foreach (Button button in buttons)
-                {
-                    button.Draw(spriteBatch);
-                }
+
             }
             else if (gameState == GameState.TradeMenu)
             {
@@ -151,6 +184,10 @@ namespace Active
             else if (gameState == GameState.InventoryMenu)
             {
                 playerInventoryModule.Draw(spriteBatch);
+            }
+            else if (gameState == GameState.Debug)
+            {
+                spriteBatch.DrawString(TextureManager.fontInventory, "Press F1 for City Menu, F2 for Travel/Map Menu,\nF3 for Inv. Menu or F4 for Trading Menu", new Vector2(200, 200), Color.White);
             }
 
             spriteBatch.End();
