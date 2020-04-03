@@ -20,12 +20,9 @@ namespace Active
 
         CityMeny cityMeny;
         ItemCreator itemCreator;
-        Button test;
 
 
-        WorldMapMeny worldMapMeny;
-
-        CityMeny cityMeny;
+        WorldMapMenu worldMapMenu;
 
         #region pending removal to CityMeny
         public Button InventoryButton;
@@ -74,8 +71,8 @@ namespace Active
 
 
             cityMeny = new CityMeny();
-            worldMapMeny = new WorldMapMeny();
-            worldMapMeny.LoadCities();
+            worldMapMenu = new WorldMapMenu();
+            worldMapMenu.LoadCities();
 
             playerInventoryModule = new PlayerInventoryModule(new Inventory(100, new List<Item>()), itemCreator);
 
@@ -111,7 +108,7 @@ namespace Active
             }
             else if (gameState == GameState.MapMenu)
             {
-                worldMapMeny.Update(gameTime);
+                worldMapMenu.Update(gameTime);
             }
             else if (gameState == GameState.TradeMenu)
             {
@@ -161,7 +158,7 @@ namespace Active
             else if (gameState == GameState.MapMenu)
             {
 
-                worldMapMeny.Draw(spriteBatch);
+                worldMapMenu.Draw(spriteBatch);
 
             }
             else if (gameState == GameState.TradeMenu)

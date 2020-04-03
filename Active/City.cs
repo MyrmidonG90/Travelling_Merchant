@@ -12,13 +12,13 @@ namespace Active
 
         public string name;
         public string information;
-        public Vector2 Coordinates;
+        public Vector2 coordinates;
 
-        public City(string name, string information, Vector2 Coordinates)
+        public City(string name, string information, Vector2 coordinates)
         {
             this.name = name;
             this.information = information;
-            this.Coordinates = Coordinates;
+            this.coordinates = coordinates;
 
         }
 
