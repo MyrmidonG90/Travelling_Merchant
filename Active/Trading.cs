@@ -30,10 +30,8 @@ namespace Active
 
         void Initialize(Inventory left, Inventory right)
         {
-
             this.invLeft = left;
-            this.invRight = right;
-            
+            this.invRight = right;            
         }
         void CreateSlots()
         {
@@ -77,7 +75,7 @@ namespace Active
                 // Om knappen accept klickas
                 if (accept.Click())
                 {
-                    if (AcceptTrade())
+                    /*if (AcceptTrade())
                     {
                         return true;
                     }
@@ -85,7 +83,7 @@ namespace Active
                     {
 
                     }
-                    
+                    */
                 }
                 // Om knappen reset klickas
                 else if (reset.Click())
@@ -213,8 +211,12 @@ namespace Active
 
         int CheckValue(Inventory inv)
         {
-            
-            return 0;
+            int sum = 0;
+            for (int i = 0; i < inv.ItemList.Count; i++)
+            {
+
+            }
+            return sum;
         }
         void UpdateInventories(/*ref entityLeft, ref entityRight*/)
         {            
