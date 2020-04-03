@@ -11,11 +11,11 @@ namespace Active
     class Trading
     {
         /*
-         Enitity entLeft,entRight;
-         Inventory left, right,tradeLeft,tradeRight;
+         Enitity entLeft,entRight;*/
+         Inventory invLeft, invRight,tradeLeft,tradeRight;
 
              
-             */
+             
         Slot[,] slotsLeft, slotsRight,tradeSlotsLeft,tradeSlotsRight;
         
         Button accept, reset,back;
@@ -28,17 +28,14 @@ namespace Active
         int counterCol, counterRow,tmpCounter,leftPrice,rightPrice,totalPrice;
 
 
-        void Initialize(/*ref Entity left, ref Entity Right*/)
+        void Initialize(Inventory left, Inventory right)
         {
-            
-            /*
-             this.entLeft = left;
-             this.entRight = right;
-             */
+
+            this.invLeft = left;
+            this.invRight = right;
             
         }
-
-        void CreateButtons()
+        void CreateSlots()
         {
             slotsLeft = new Slot[5, 5];
             slotsRight = new Slot[5, 5];
@@ -49,10 +46,23 @@ namespace Active
                 for (int j = 0; j < 5; j++)
                 {
                     // Placera ut dem på rätt plats
-                    //invLeft[i, j] = new Button();
-                    //invRight[i, j] = new Button();
+                    //slotsLeft[i, j] = new Slot();
+                    //slotsRight[i, j] = new Slot();
                 }
             }
+            for (int i = 0; i < 3; i++)
+            {
+                for (int j = 0; j < 3; j++)
+                {
+                    // Placera ut dem på rätt plats
+                    //tradeSlotsLeft[i,j] = new Slot();
+                    //tradeSlotsRight[i, j] = new Slot();
+                }
+            }
+        }
+        void CreateButtons()
+        {
+            
             accept = new Button(5, 5, 100, 100, TextureManager.texBox);
             reset = new Button(5, 5, 100, 100, TextureManager.texBox);
             back = new Button(5, 5, 100, 100, TextureManager.texBox);
@@ -174,25 +184,45 @@ namespace Active
 
             
         }
-        bool AcceptTrade()
+        bool AcceptTrade(ref Inventory invLeft, ref Inventory invRight)
         {
-            //If player has enough coin and merchant has enough gold Advance.
-            //Else prompt that you do not have enough gold
-            //If player has enough space in inventory Advance.
+            //If nothing is presented
+            if (tradeLeft.ItemList.Count == 0 && tradeRight.ItemList.Count==0)
+            {
+                return false;
+            }
+            //If player and Merchant doesn't enough space in inventory Advance.
             //Else prompt that the player doesn't have enough space
+            if (false)
+            {
+                return false;
+            }
+            
+            //If player doesn't have enough coin and merchant neither.
+            //Else prompt that you do not have enough gold
+            if (false)
+            {
+                return false;
+            }
+            
             // Update both player and merchant's inventory
+            UpdateInventories(/*enitityLeft,entityRight*/);
             // Return true;
-            return false;
+            return true;
         }
 
-        void UpdateInventories(/*ref entityLeft, ref entityRight*/)
+        int CheckValue(Inventory inv)
         {
             
+            return 0;
+        }
+        void UpdateInventories(/*ref entityLeft, ref entityRight*/)
+        {            
             //entityLeft.inventory = invLeft;
             // enittyRight.inventory = invRight;
         }
 
-        // Cleans the trade table of items
+        
         void ConstructInventory(Participant participant, Inventory inventory)
         {
             if (participant == Participant.Left)
@@ -256,6 +286,7 @@ namespace Active
                 }
             }
         }
+        // Cleans slots of items 
         void ResetTrade()
         {
             foreach (var item in tradeSlotsLeft)
