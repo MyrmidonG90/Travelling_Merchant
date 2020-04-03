@@ -29,6 +29,7 @@ namespace Active
                 item.Draw(sb, hitbox);
             }
         }
+
         public void Update()
         {
             
@@ -52,7 +53,7 @@ namespace Active
         }
         public int GetItemId()
         {
-            return item.ItemID;
+            return item.id;
         }
 
 
