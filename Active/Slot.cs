@@ -53,6 +53,7 @@ namespace Active
         }
         public int GetItemId()
         {
+            return 0;
             //return item.id;
         }
 
