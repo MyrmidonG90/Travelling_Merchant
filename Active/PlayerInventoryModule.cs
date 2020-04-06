@@ -29,7 +29,7 @@ namespace Active
             categoryBox = new Rectangle(1100, 750, 120, 120);
             disposeBox = new Rectangle(1560, 920, 70, 70);
 
-            StreamReader streamReader = new StreamReader("InventoryGrid.txt");
+            StreamReader streamReader = new StreamReader("./Data/InventoryGrid.txt");
             inventoryGrid = new Rectangle[25];
             int counter = 0;
             while (!streamReader.EndOfStream)

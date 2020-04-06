@@ -12,12 +12,8 @@ namespace Active
     {
         /*
          Enitity entLeft,entRight;*/
-         Inventory invLeft, invRight,tradeLeft,tradeRight;
-
-             
-             
-        Slot[,] slotsLeft, slotsRight,tradeSlotsLeft,tradeSlotsRight;
-        
+        Inventory invLeft, invRight,tradeLeft,tradeRight;             
+        Slot[,] slotsLeft, slotsRight,tradeSlotsLeft,tradeSlotsRight;        
         Button accept, reset,back;
         enum Participant
         {
@@ -32,7 +28,6 @@ namespace Active
         {
             this.invLeft = left;
             this.invRight = right;
-
         }
 
         // Behöver lite arbete till

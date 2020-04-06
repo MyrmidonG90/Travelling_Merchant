@@ -29,7 +29,7 @@ namespace Active
                 Item.Draw(sb, hitbox);
                 sb.DrawString(TextureManager.font,item.Amount.ToString(), textPos, Color.White);
             }
-        }        
+        }
 
         public bool Clicked()
         {
@@ -42,6 +42,7 @@ namespace Active
             }
             return false;
         }
+
         public void AddItem(Item item, int amountOfItem)
         {
             this.Item = item;
