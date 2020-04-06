@@ -10,15 +10,15 @@ namespace Active
 {
     class Slot
     {
-        bool empty;
         Item item;
-        int amountOfItem;
+        
         Rectangle hitbox;
-
-        public Slot(bool empty, int posX, int posY,int width, int height)
+        Vector2 textPos;
+        public Slot(int posX, int posY,int width, int height)
         {
             hitbox = new Rectangle(posX,posY,width,height);
-            this.empty = empty;
+            textPos = new Vector2(posX+width/2,posY+height/2);
+            item = null;
         }
 
         public void Draw(SpriteBatch sb)
@@ -27,13 +27,9 @@ namespace Active
             if (Item != null)
             {
                 Item.Draw(sb, hitbox);
+                sb.DrawString(TextureManager.font,item.Amount.ToString(), textPos, Color.White);
             }
-        }
-
-        public void Update()
-        {
-            
-        }
+        }        
 
         public bool Clicked()
         {
@@ -49,25 +45,18 @@ namespace Active
         public void AddItem(Item item, int amountOfItem)
         {
             this.Item = item;
-            this.amountOfItem = amountOfItem;
+            this.item.Amount += amountOfItem;
         }
+
         public int GetItemId()
         {
-            return 0;
-            //return item.id;
+            return item.ID;
         }
-
-
-
-        public bool Empty { get => empty; set => empty = value; }
-        public int AmountOfItem { get => amountOfItem; set => amountOfItem = value; }
         internal Item Item { get => item; set => item = value; }
 
         public void Reset()
         {
             Item = null;
-            empty = true;
-            amountOfItem = 0;
         }
         
     }

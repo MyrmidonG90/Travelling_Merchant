@@ -25,13 +25,14 @@ namespace Active
             Right,
             None
         }
-        int counterCol, counterRow,tmpCounter,leftPrice,rightPrice,totalPrice;
+        int counterCol, counterRow,tmpCounter,leftPrice,rightPrice,priceDifference;
 
         // Oklart
         void Initialize(Inventory left, Inventory right)
         {
             this.invLeft = left;
             this.invRight = right;
+
         }
 
         // Behöver lite arbete till
@@ -46,8 +47,8 @@ namespace Active
                 for (int j = 0; j < 5; j++)
                 {
                     // Placera ut dem på rätt plats
-                    //slotsLeft[i, j] = new Slot();
-                    //slotsRight[i, j] = new Slot();
+                    slotsLeft[i, j] = new Slot(50+60*j,100+60*i,50,50);
+                    slotsRight[i, j] = new Slot(1570+60*j,100+60*i,50,50);
                 }
             }
             for (int i = 0; i < 3; i++)
@@ -55,8 +56,8 @@ namespace Active
                 for (int j = 0; j < 3; j++)
                 {
                     // Placera ut dem på rätt plats
-                    //tradeSlotsLeft[i,j] = new Slot();
-                    //tradeSlotsRight[i, j] = new Slot();
+                    tradeSlotsLeft[i,j] = new Slot(1010+60*j,100+60*i,50,50);
+                    tradeSlotsRight[i, j] = new Slot(660+60*j,100+60*i,50,50);
                 }
             }
         }
@@ -72,7 +73,7 @@ namespace Active
         
         // Håller processen trading igång. När den returnerar false betyder det att transaktionen är ej över och vice versa när man returnerar true
         // Behöver mycket arbete!!!
-        bool Update()
+        bool Update(ref Inventory participantLeft, ref Inventory participantRight)
         {
             //När ett mussklick händer
             if (KMReader.MouseClick())
@@ -80,20 +81,15 @@ namespace Active
                 // Om knappen accept klickas
                 if (accept.Click())
                 {
-                    /*if (AcceptTrade())
+                    if (AcceptTrade(ref participantLeft, ref participantRight))
                     {
                         return true;
                     }
-                    else
-                    {
-
-                    }
-                    */
                 }
                 // Om knappen reset klickas
                 else if (reset.Click())
                 {
-                    
+                    ResetTrade();
                 }
                 // Om knappen back klickas
                 else if (back.Click())
@@ -106,10 +102,11 @@ namespace Active
                     CheckInvClick();
                 }
             }
+            UpdatePrices();
             return false;
         }
 
-        //klar
+        //Lite till
         bool CheckInvClick()
         {
             counterCol = 0;
@@ -137,7 +134,8 @@ namespace Active
 
             if (slotsLeft[counterCol, counterRow].Clicked() == true) // Om det vänstra inventory:n har blivit klickat
             {
-                tradeLeft.AddItem(slotsLeft[counterCol,counterRow].Item);// Lägger till item till det vänstra trade fältet
+                tradeLeft.AddItem(slotsLeft[counterCol,counterRow].Item);// Lägger till item till det vänstra trade fältet   
+                // Måste ta bort från inventory;n också!!!
                 UpdateSlots();
                 return true;
             }
@@ -166,6 +164,7 @@ namespace Active
             if (slotsRight[counterCol, counterRow].Clicked() == true) // Om det högra inventory:n har blivit klickat
             {
                 tradeRight.AddItem(slotsLeft[counterCol, counterRow].Item); // Lägger till item till det högra trade fältet
+                // Måste ta bort från inventory;n också!!!
                 UpdateSlots();
                 return true;
             }
@@ -221,7 +220,7 @@ namespace Active
                     catch (Exception)
                     {
 
-                        tradeSlotsLeft[i, j].Empty = true;
+                        tradeSlotsLeft[i, j].Item = null;
                     }
                 }
             }
@@ -233,10 +232,10 @@ namespace Active
                     {
                         tradeSlotsRight[i, j].Item = tradeRight.ItemList[i * 3 + j];
                     }
-                    catch (Exception)
+                    catch (Exception) // Ifall det finns tomma rutor
                     {
 
-                        tradeSlotsRight[i, j].Empty = true;
+                        tradeSlotsRight[i, j].Item = null;
                     }
                     
                 }
@@ -251,7 +250,7 @@ namespace Active
                     }
                     catch (Exception)
                     {
-                        slotsLeft[i, j].Empty = true;
+                        slotsLeft[i, j].Item = null;
                     }
                 }
             }
@@ -265,13 +264,20 @@ namespace Active
                     }
                     catch (Exception)
                     {
-                        slotsRight[i, j].Empty = true;
+                        slotsRight[i, j].Item = null;
                     }
                     
                 }
             }
         }
 
+        void UpdateInventory()
+        {
+            for (int i = 0; i < 5; i++)
+            {
+
+            }
+        }
         //Medium Arbete Kvar!!
         bool AcceptTrade(ref Inventory participantLeft, ref Inventory participantRight)
         {
@@ -289,12 +295,12 @@ namespace Active
             
             //If player doesn't have enough coin and merchant neither.
             //Else prompt that you do not have enough gold
-            if (false)
+            if (priceDifference != 0)
             {
                 return false;
             }
 
-            // Update both player and merchant's inventory
+            // Update both player and merchant's inventory            
             participantLeft = invLeft;
             participantRight = invRight;
             return true;
@@ -311,7 +317,15 @@ namespace Active
             return sum;
         }        
 
-        // Oklart
+        //Klar
+        void UpdatePrices()
+        {
+            leftPrice = CheckValue(tradeLeft);
+            rightPrice = CheckValue(tradeRight);
+            priceDifference = leftPrice - rightPrice;
+        }
+
+        // Gammal
         void ConstructInventory(Participant participant, Inventory inventory)
         {
             if (participant == Participant.Left)
@@ -376,6 +390,44 @@ namespace Active
             }
         }
 
+        //Klar
+        void ConstructSlots(Inventory inventory)
+        {
+            // Konstrurerar inventory slots
+            for (int i = 0; i < 5; i++)
+            {
+                for (int j = 0; j < 5; j++)
+                {
+                    try
+                    {
+                        slotsLeft[j, i].Item = invLeft.ItemList[i * 5 + j];                        
+                    }
+                    catch (Exception)
+                    {
+                        slotsLeft[j, i].Item = null;
+                    }
+                    try
+                    {
+                        slotsRight[j, i].Item = invRight.ItemList[i * 5 + j];
+                    }
+                    catch (Exception)
+                    {
+                        slotsRight[j, i].Item = null;
+                    }
+                    
+                }
+            }
+
+            // Konstruerar trade rutorna
+            for (int i = 0; i < 3; i++)
+            {
+                for (int j = 0; j < 3; j++)
+                {
+                    tradeSlotsLeft[j, i].Item = null;
+                    tradeSlotsRight[j, i].Item = null;
+                }
+            }
+        }
 
             // Klar
         void ResetTrade()
