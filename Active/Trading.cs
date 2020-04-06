@@ -31,7 +31,7 @@ namespace Active
         void Initialize(Inventory left, Inventory right)
         {
             this.invLeft = left;
-            this.invRight = right;            
+            this.invRight = right;
         }
 
         // Behöver lite arbete till
@@ -61,7 +61,7 @@ namespace Active
             }
         }
 
-        // Justera värderna
+        // Lite arbete kvar. Justera värderna
         void CreateButtons()
         {
             
@@ -109,85 +109,167 @@ namespace Active
             return false;
         }
 
-        //Mycket arbete kvar!!!
+        //klar
         bool CheckInvClick()
         {
             counterCol = 0;
             counterRow = 0;
             // Tittar om vänstra inventory:n har blivit klickat
-            while (counterCol < 5 && slotsLeft[counterCol, counterRow].Clicked())
+            ////////////////////////////////
+            do
             {
-                while (counterRow < 5 && slotsLeft[counterCol, counterRow].Clicked())
+                do
                 {
-                    ++counterRow;
-                }
-                if (slotsLeft[counterCol, counterRow].Clicked())
-                {
-                    //Add item to the trade inventory on the left
-                    AddItem(Participant.Left,/*itemId,*/ counterRow, counterCol);
-                    return true;
-                }
-                ++counterCol;
-            }
+                    if (slotsLeft[counterCol, counterRow].Clicked() == false)
+                    {                        
+                        ++counterRow;
+                    }
+                    
+                } while (counterRow < 5 && slotsLeft[counterCol, counterRow].Clicked() == false);
 
+                if (slotsLeft[counterCol, counterRow].Clicked() == false)
+                {
+                    
+                    ++counterCol;
+                }
+                
+            } while (counterCol < 5 && slotsLeft[counterCol, counterRow].Clicked() == false);
+
+            if (slotsLeft[counterCol, counterRow].Clicked() == true) // Om det vänstra inventory:n har blivit klickat
+            {
+                tradeLeft.AddItem(slotsLeft[counterCol,counterRow].Item);// Lägger till item till det vänstra trade fältet
+                UpdateSlots();
+                return true;
+            }
+            ////////////////////////////////
             counterCol = 0;
             counterRow = 0;
-            // Tittar om högra inventory:n har blivit klickat
-            while (counterCol < 5 && slotsLeft[counterCol, counterRow].Clicked())
+            ////////////////////////////////
+            do
             {
-                while (counterRow < 5 && slotsLeft[counterCol, counterRow].Clicked())
+                do
                 {
-                    ++counterRow;
-                }
-                if (slotsLeft[counterCol, counterRow].Clicked())
+                    if (slotsRight[counterCol, counterRow].Clicked() == false)
+                    {
+                        ++counterRow;
+                    }
+
+                } while (counterRow < 5 && slotsRight[counterCol, counterRow].Clicked() == false);
+
+                if (slotsRight[counterCol, counterRow].Clicked() == false)
                 {
-                    // Add item to the trade inventory on the right
-                    AddItem(Participant.Right,/*itemId,*/ counterRow, counterCol);
-                    return true;
+
+                    ++counterCol;
                 }
-                ++counterCol;
+            } while (counterCol < 5 && slotsRight[counterCol, counterRow].Clicked() == false);
+
+            if (slotsRight[counterCol, counterRow].Clicked() == true) // Om det högra inventory:n har blivit klickat
+            {
+                tradeRight.AddItem(slotsLeft[counterCol, counterRow].Item); // Lägger till item till det högra trade fältet
+                UpdateSlots();
+                return true;
             }
+            ////////////////////////////////
+
+            /* while (counterCol < 5 && slotsLeft[counterCol, counterRow].Clicked() == false)
+             {
+                 while (counterRow < 5 && slotsLeft[counterCol, counterRow].Clicked())
+                 {
+                     ++counterRow;
+                 }
+                 if (slotsLeft[counterCol, counterRow].Clicked())
+                 {
+                     //Add item to the trade inventory on the left
+                     //AddItem(Participant.Left,/*itemId,*/ /*counterRow, counterCol);
+                     return true;
+                 }
+                 ++counterCol;
+             }*/
+
+
+            // Tittar om högra inventory:n har blivit klickat
+            /* while (counterCol < 5 && slotsLeft[counterCol, counterRow].Clicked())
+             {
+                 while (counterRow < 5 && slotsLeft[counterCol, counterRow].Clicked())
+                 {
+                     ++counterRow;
+                 }
+                 if (slotsLeft[counterCol, counterRow].Clicked())
+                 {
+                     // Add item to the trade inventory on the right
+                     AddItem(Participant.Right,/*itemId,*/ /*counterRow, counterCol);
+                     return true;
+                 }
+                 ++counterCol;
+             }*/
 
             return false;
         }
 
-        // Mycket Arbete kvar!!!
-        void AddItem(Participant participant, Item item,int posRow, int posCol)
+        // Klar
+        //Uppdaterar Slots
+        void UpdateSlots()
         {
-            bool finding = false;
-            counterCol = 0;
-            counterRow = 0;
-            if (participant == Participant.Left)
+            for (int i = 0; i < 3; i++)
             {
-                while (finding == false && counterCol < 3)
+                for (int j = 0; j < 3; j++)
                 {
-                    while (counterRow < 3)
+                    try
                     {
-                        // Jämnför itemId som ska läggas till med itemId i denna Slot.
-                        if (true/*itemId == invLeft[].itemId*/)
-                        {
-                            finding = true;
-                        }
-                        ++counterRow;
+                        tradeSlotsLeft[i, j].Item = tradeLeft.ItemList[i * 3 + j];
                     }
-                    if (finding == false)
+                    catch (Exception)
                     {
-                        ++counterCol;
+
+                        tradeSlotsLeft[i, j].Empty = true;
                     }
                 }
             }
-            else if (participant == Participant.Right)
+            for (int i = 0; i < 3; i++)
             {
+                for (int j = 0; j < 3; j++)
+                {
+                    try
+                    {
+                        tradeSlotsRight[i, j].Item = tradeRight.ItemList[i * 3 + j];
+                    }
+                    catch (Exception)
+                    {
 
+                        tradeSlotsRight[i, j].Empty = true;
+                    }
+                    
+                }
             }
-            
-            // Search if it's already inside the trade 
-            //      If inside add another
-            //      If not Check if there's a free slot
-            //              If there is add that item to that free slot
-            //              If not, Nothing happens
-
-            
+            for (int i = 0; i < 5; i++)
+            {
+                for (int j = 0; j < 5; j++)
+                {
+                    try
+                    {
+                        slotsLeft[i, j].Item = invRight.ItemList[i * 5 + j];
+                    }
+                    catch (Exception)
+                    {
+                        slotsLeft[i, j].Empty = true;
+                    }
+                }
+            }
+            for (int i = 0; i < 5; i++)
+            {
+                for (int j = 0; j < 5; j++)
+                {
+                    try
+                    {
+                        slotsRight[i, j].Item = invRight.ItemList[i * 5 + j];
+                    }
+                    catch (Exception)
+                    {
+                        slotsRight[i, j].Empty = true;
+                    }
+                    
+                }
+            }
         }
 
         //Medium Arbete Kvar!!
@@ -215,22 +297,19 @@ namespace Active
             // Update both player and merchant's inventory
             participantLeft = invLeft;
             participantRight = invRight;
-            // Return true;
             return true;
         }
 
-        // Snart klart
+        // Klar men Behöver ändra BasePrice till något mer verkligt
         int CheckValue(Inventory inv)
         {
             int sum = 0;
             for (int i = 0; i < inv.ItemList.Count; i++)
             {
-                // sum += inv[i].price * inv[i].Amount;
+                sum += inv.ItemList[i].BasePrice * inv.ItemList[i].Amount;
             }
             return sum;
-        }
-
-        
+        }        
 
         // Oklart
         void ConstructInventory(Participant participant, Inventory inventory)
@@ -296,10 +375,9 @@ namespace Active
                 }
             }
         }
-        // Cleans slots of items 
 
 
-        // Lite Arbete kvar!
+            // Klar
         void ResetTrade()
         {
             foreach (var item in tradeSlotsLeft)
@@ -310,9 +388,18 @@ namespace Active
             {
                 item.Reset();
             }
-            //invLeft = entity.inventory
-            //invRight = entity.inventory
-
+            foreach (var item in slotsLeft)
+            {
+                item.Reset();
+            }
+            foreach (var item in slotsRight)
+            {
+                item.Reset();
+            }
+            invLeft = null;
+            invRight = null;
+            tradeLeft = null;
+            tradeRight = null;
         }
 
         // Oklart

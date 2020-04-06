@@ -24,9 +24,9 @@ namespace Active
         public void Draw(SpriteBatch sb)
         {
             sb.Draw(TextureManager.texBox,hitbox,Color.White);
-            if (item != null)
+            if (Item != null)
             {
-                item.Draw(sb, hitbox);
+                Item.Draw(sb, hitbox);
             }
         }
 
@@ -48,7 +48,7 @@ namespace Active
         }
         public void AddItem(Item item, int amountOfItem)
         {
-            this.item = item;
+            this.Item = item;
             this.amountOfItem = amountOfItem;
         }
         public int GetItemId()
@@ -58,11 +58,14 @@ namespace Active
         }
 
 
+
         public bool Empty { get => empty; set => empty = value; }
         public int AmountOfItem { get => amountOfItem; set => amountOfItem = value; }
+        internal Item Item { get => item; set => item = value; }
+
         public void Reset()
         {
-            item = null;
+            Item = null;
             empty = true;
             amountOfItem = 0;
         }
