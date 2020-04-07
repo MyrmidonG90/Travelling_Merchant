@@ -14,6 +14,7 @@ namespace Active
     {
         Inventory inventory;
         Item selected;
+        int selectedSquare;
         Rectangle mainBox;
         Rectangle inventoryBox;
         Rectangle categoryBox;
@@ -28,6 +29,8 @@ namespace Active
             inventoryBox = new Rectangle(300, 180, 720, 720);
             categoryBox = new Rectangle(1100, 750, 120, 120);
             disposeBox = new Rectangle(1560, 920, 70, 70);
+
+            selectedSquare = 50;
 
             StreamReader streamReader = new StreamReader("./Data/InventoryGrid.txt");
             inventoryGrid = new Rectangle[25];
@@ -54,6 +57,7 @@ namespace Active
                         try
                         {
                             selected = inventory.ItemList[counter];
+                            selectedSquare = counter;
                         }
                         catch
                         {
@@ -68,6 +72,7 @@ namespace Active
             {
                 inventory.ItemList.Remove(selected);
                 selected = null;
+                selectedSquare = 50;
             }
 
             if (KMReader.prevKeyState.IsKeyUp(Keys.A) && KMReader.keyState.IsKeyDown(Keys.A))
@@ -86,15 +91,23 @@ namespace Active
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(TextureManager.texBox, mainBox, Color.Black);
+            spriteBatch.Draw(TextureManager.WhiteTex, mainBox, Color.Wheat);
             spriteBatch.DrawString(TextureManager.fontInventory, "Currency: " + inventory.Money.ToString(), new Vector2(300, 920), Color.White);
-            spriteBatch.Draw(TextureManager.texBox, inventoryBox, Color.DarkGray);
+            spriteBatch.Draw(TextureManager.WhiteTex, inventoryBox, Color.DarkGray);
 
             int counter = 0;
             foreach (Item tempItem in inventory.ItemList)
             {
                 tempItem.Draw(spriteBatch, inventoryGrid[counter]);
-                Vector2 temp = new Vector2(inventoryGrid[counter].X + 60, inventoryGrid[counter].Y + 60);
+                Vector2 temp = new Vector2();
+                if (tempItem.Amount > 99)
+                {
+                    temp = new Vector2(inventoryGrid[counter].X + 36, inventoryGrid[counter].Y + 60);
+                }
+                else
+                {
+                    temp = new Vector2(inventoryGrid[counter].X + 60, inventoryGrid[counter].Y + 60); 
+                }
                 spriteBatch.DrawString(TextureManager.fontInventory, tempItem.Amount.ToString(), temp, Color.White);
                 counter++;
             }
@@ -102,10 +115,11 @@ namespace Active
             if (selected != null)
             {
                 Vector2 posCategoryString = new Vector2(1110, 785);
-                //spriteBatch.Draw(TextureManager.texBox, Vector2.Zero, Color.White);
+
                 spriteBatch.DrawString(TextureManager.fontHeader, "Carrot", new Vector2(1100, 200), Color.White);
                 spriteBatch.DrawString(TextureManager.fontInventory, "Info: \n" + selected.Description, new Vector2(1100, 300), Color.White);
                 spriteBatch.DrawString(TextureManager.fontInventory, "Standard Price: " + selected.BasePrice.ToString() + "c", new Vector2(1100, 650), Color.White);
+
                 if (selected.Category == 1)
                 {
                     spriteBatch.Draw(TextureManager.texBox, categoryBox, Color.Green);
@@ -116,8 +130,14 @@ namespace Active
                     spriteBatch.Draw(TextureManager.texBox, categoryBox, Color.DarkSlateGray);
                     spriteBatch.DrawString(TextureManager.fontInventory, "Metal", posCategoryString, Color.White);
                 }
+
                 spriteBatch.Draw(TextureManager.texBox, disposeBox, Color.Red);
                 spriteBatch.DrawString(TextureManager.fontInventory, "D", new Vector2(1580, 930), Color.White);
+            }
+
+            if (selectedSquare != 50)
+            {
+                spriteBatch.Draw(TextureManager.texSelect, inventoryGrid[selectedSquare], Color.White);
             }
         }
 
