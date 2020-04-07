@@ -15,6 +15,7 @@ namespace Active
         bool test;
         bool disposing;
         bool dragging;
+        bool fix;
         Inventory inventory;
         Item selected;
         int selectedSquare;
@@ -29,7 +30,7 @@ namespace Active
         Rectangle disposeBox;
         Rectangle[] inventoryGrid;
 
-        public PlayerInventoryModule(Inventory inv, ItemCreator itemCreator)
+        public PlayerInventoryModule(Inventory inv)
         {
             inventory = inv;
             test = true;
@@ -59,8 +60,9 @@ namespace Active
             }
         }
 
-        public void Update(GameTime gameTime, ItemCreator itemCreator)
+        public void Update(GameTime gameTime)
         {
+            //Kollar om man har selectat ett item i inventoryn
             if (KMReader.MouseClick())
             {
                 int counter = 0;
@@ -75,18 +77,16 @@ namespace Active
                         }
                         catch
                         {
-
+                            //Mys 10/10 felhantering
                         }
                     }
                     counter++;
                 }
             }
 
+            //startar dispose processen
             if (disposeButton.Click() && selected != null)
             {
-                //inventory.ItemList.Remove(selected);
-                //selected = null;
-                //selectedSquare = 50;
                 disposing = true;
             }
 
@@ -95,16 +95,32 @@ namespace Active
                 if (disposeOKButton.Click())
                 {
                     disposing = false;
+                    dragging = false;
                     disposeDragger.HitBox = new Rectangle(710, disposeDragger.HitBox.Y, disposeDragger.HitBox.Width, disposeDragger.HitBox.Height);
+
+                    selected.Amount -= numberToDispose;
+                    foreach (Item tempItem in inventory.ItemList)
+                    {
+                        if (tempItem.Amount <= 0)
+                        {
+                            Inventory.ItemList.Remove(tempItem);
+                            selected = null;
+                            selectedSquare = 50;
+                            break;
+                        }
+                    }
                 }
+
                 if (disposeDragger.Click())
                 {
                     dragging = true;
+                    fix = true;
                 }
 
-                if (KMReader.HeldMouseClick())
+                if (KMReader.HeldMouseClick() && dragging == true)
                 {
                     dragging = true;
+                    fix = false;
                     if (KMReader.GetMouseVector2().X > disposeDragger.HitBox.X + (500 / 20) && disposeDragger.HitBox.X < 1211)
                     {
                         Vector2 temp = KMReader.GetMouseVector2();
@@ -134,25 +150,26 @@ namespace Active
                         numberToDispose = 0;
                     }
                 }
-                else
+                else if (!fix)
                 {
                     dragging = false;
                 }
             }
 
+            //debug funktioner
             if (test)
             {
                 if (KMReader.prevKeyState.IsKeyUp(Keys.A) && KMReader.keyState.IsKeyDown(Keys.A))
                 {
-                    inventory.AddItem(itemCreator.createItem(1, 20));
+                    inventory.AddItem(ItemCreator.createItem(1, 20));
                 }
                 if (KMReader.prevKeyState.IsKeyUp(Keys.B) && KMReader.keyState.IsKeyDown(Keys.B))
                 {
-                    inventory.AddItem(itemCreator.createItem(2, 30));
+                    inventory.AddItem(ItemCreator.createItem(2, 30));
                 }
                 if (KMReader.prevKeyState.IsKeyUp(Keys.C) && KMReader.keyState.IsKeyDown(Keys.C))
                 {
-                    inventory.AddItem(itemCreator.createItem(3, 10));
+                    inventory.AddItem(ItemCreator.createItem(3, 10));
                 }
             }
         }
@@ -220,11 +237,7 @@ namespace Active
                 spriteBatch.Draw(TextureManager.WhiteTex, disposeBar, Color.LightSeaGreen);
 
                 disposeOKButton.Draw(spriteBatch);
-                disposeDragger.Draw(spriteBatch);
-                if (dragging)
-                {
-                    spriteBatch.Draw(TextureManager.WhiteTex, Vector2.Zero, Color.Red);
-                }
+                disposeDragger.Draw(spriteBatch);                
             }
         }
 
