@@ -12,23 +12,29 @@ namespace Active
 {
     class PlayerInventoryModule
     {
+        bool test;
+        bool disposing;
         Inventory inventory;
         Item selected;
         int selectedSquare;
         Rectangle mainBox;
         Rectangle inventoryBox;
         Rectangle categoryBox;
+        Rectangle disposeButton;
         Rectangle disposeBox;
         Rectangle[] inventoryGrid;
 
         public PlayerInventoryModule(Inventory inv, ItemCreator itemCreator)
         {
             inventory = inv;
+            test = true;
+            disposing = false;
 
             mainBox = new Rectangle(260, 140, 1400, 880);
             inventoryBox = new Rectangle(300, 180, 720, 720);
             categoryBox = new Rectangle(1100, 750, 120, 120);
-            disposeBox = new Rectangle(1560, 920, 70, 70);
+            disposeButton = new Rectangle(1560, 920, 70, 70);
+            disposeBox = new Rectangle(660, 240, 600, 500);
 
             selectedSquare = 50;
 
@@ -68,24 +74,28 @@ namespace Active
                 }
             }
 
-            if (disposeBox.Contains(KMReader.GetMousePoint()) && KMReader.MouseClick())
+            if (disposeButton.Contains(KMReader.GetMousePoint()) && KMReader.MouseClick() && selected != null)
             {
-                inventory.ItemList.Remove(selected);
-                selected = null;
-                selectedSquare = 50;
+                //inventory.ItemList.Remove(selected);
+                //selected = null;
+                //selectedSquare = 50;
+                disposing = true;
             }
 
-            if (KMReader.prevKeyState.IsKeyUp(Keys.A) && KMReader.keyState.IsKeyDown(Keys.A))
+            if (test)
             {
-                inventory.AddItem(itemCreator.createItem(1, 20));
-            }
-            if (KMReader.prevKeyState.IsKeyUp(Keys.B) && KMReader.keyState.IsKeyDown(Keys.B))
-            {
-                inventory.AddItem(itemCreator.createItem(2, 30));
-            }
-            if (KMReader.prevKeyState.IsKeyUp(Keys.C) && KMReader.keyState.IsKeyDown(Keys.C))
-            {
-                inventory.AddItem(itemCreator.createItem(3, 10));
+                if (KMReader.prevKeyState.IsKeyUp(Keys.A) && KMReader.keyState.IsKeyDown(Keys.A))
+                {
+                    inventory.AddItem(itemCreator.createItem(1, 20));
+                }
+                if (KMReader.prevKeyState.IsKeyUp(Keys.B) && KMReader.keyState.IsKeyDown(Keys.B))
+                {
+                    inventory.AddItem(itemCreator.createItem(2, 30));
+                }
+                if (KMReader.prevKeyState.IsKeyUp(Keys.C) && KMReader.keyState.IsKeyDown(Keys.C))
+                {
+                    inventory.AddItem(itemCreator.createItem(3, 10));
+                }
             }
         }
 
@@ -131,13 +141,23 @@ namespace Active
                     spriteBatch.DrawString(TextureManager.fontInventory, "Metal", posCategoryString, Color.White);
                 }
 
-                spriteBatch.Draw(TextureManager.texBox, disposeBox, Color.Red);
+                spriteBatch.Draw(TextureManager.texBox, disposeButton, Color.Red);
                 spriteBatch.DrawString(TextureManager.fontInventory, "D", new Vector2(1580, 930), Color.White);
             }
 
             if (selectedSquare != 50)
             {
                 spriteBatch.Draw(TextureManager.texSelect, inventoryGrid[selectedSquare], Color.White);
+            }
+
+            if (disposing)
+            {
+                spriteBatch.Draw(TextureManager.WhiteTex, disposeBox, Color.White);
+                Vector2 temp = TextureManager.fontInventory.MeasureString("Select amount to remove");
+                spriteBatch.DrawString(TextureManager.fontInventory, "Select amount to remove", new Vector2((1920-temp.X)/2, 260), Color.Black);
+
+                temp = TextureManager.fontInventory.MeasureString(selected.Amount.ToString());
+                spriteBatch.DrawString(TextureManager.fontInventory, selected.Amount.ToString(), new Vector2((1920 - temp.X) / 2, 360), Color.Black);
             }
         }
 
