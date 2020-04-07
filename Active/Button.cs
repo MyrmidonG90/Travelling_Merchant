@@ -47,12 +47,24 @@ namespace Active
 
         public void Update(GameTime gameTime)
         {
-            
+
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(tex, hitBox, Color.White);
+        }
+
+        public Rectangle HitBox
+        {
+            get
+            {
+                return hitBox;
+            }
+            set
+            {
+                hitBox = value;
+            }
         }
     }
 }

@@ -14,13 +14,18 @@ namespace Active
     {
         bool test;
         bool disposing;
+        bool dragging;
         Inventory inventory;
         Item selected;
         int selectedSquare;
+        int numberToDispose;
         Rectangle mainBox;
         Rectangle inventoryBox;
         Rectangle categoryBox;
-        Rectangle disposeButton;
+        Button disposeButton;
+        Button disposeOKButton;
+        Button disposeDragger;
+        Rectangle disposeBar;
         Rectangle disposeBox;
         Rectangle[] inventoryGrid;
 
@@ -33,8 +38,11 @@ namespace Active
             mainBox = new Rectangle(260, 140, 1400, 880);
             inventoryBox = new Rectangle(300, 180, 720, 720);
             categoryBox = new Rectangle(1100, 750, 120, 120);
-            disposeButton = new Rectangle(1560, 920, 70, 70);
+            disposeButton = new Button(1560, 920, 70, 70, TextureManager.WhiteTex);
             disposeBox = new Rectangle(660, 240, 600, 500);
+            disposeBar = new Rectangle(710, 500, 520, 20);
+            disposeDragger = new Button(710, 480, 20, 60, TextureManager.WhiteTex);
+            disposeOKButton = new Button(900, 640, 120, 60, TextureManager.WhiteTex);
 
             selectedSquare = 50;
 
@@ -74,12 +82,62 @@ namespace Active
                 }
             }
 
-            if (disposeButton.Contains(KMReader.GetMousePoint()) && KMReader.MouseClick() && selected != null)
+            if (disposeButton.Click() && selected != null)
             {
                 //inventory.ItemList.Remove(selected);
                 //selected = null;
                 //selectedSquare = 50;
                 disposing = true;
+            }
+
+            if (disposing)
+            {
+                if (disposeOKButton.Click())
+                {
+                    disposing = false;
+                    disposeDragger.HitBox = new Rectangle(710, disposeDragger.HitBox.Y, disposeDragger.HitBox.Width, disposeDragger.HitBox.Height);
+                }
+                if (disposeDragger.Click())
+                {
+                    dragging = true;
+                }
+
+                if (KMReader.HeldMouseClick())
+                {
+                    dragging = true;
+                    if (KMReader.GetMouseVector2().X > disposeDragger.HitBox.X + (500 / 20) && disposeDragger.HitBox.X < 1211)
+                    {
+                        Vector2 temp = KMReader.GetMouseVector2();
+                        temp.Y = disposeDragger.HitBox.Y;
+                        Rectangle temp2 = new Rectangle((int)temp.X, (int)temp.Y, disposeDragger.HitBox.Width, disposeDragger.HitBox.Height);
+                        disposeDragger.HitBox = temp2;
+                        numberToDispose = 5 * ((disposeDragger.HitBox.X - 710) / (500 / 20));
+                    }
+                    else if (KMReader.GetMouseVector2().X < disposeDragger.HitBox.X - (500f / 20) && disposeDragger.HitBox.X > 710)
+                    {
+                        Vector2 temp = KMReader.GetMouseVector2();
+                        temp.Y = disposeDragger.HitBox.Y;
+                        Rectangle temp2 = new Rectangle((int)temp.X, (int)temp.Y, disposeDragger.HitBox.Width, disposeDragger.HitBox.Height);
+                        disposeDragger.HitBox = temp2;
+                        numberToDispose = 5 * ((disposeDragger.HitBox.X - 710) / (500 / 20));
+                    }
+
+                    if (disposeDragger.HitBox.X > 1211 && disposeDragger.HitBox.X > 710)
+                    {
+                        disposeDragger.HitBox = new Rectangle(1211, disposeDragger.HitBox.Y, disposeDragger.HitBox.Width, disposeDragger.HitBox.Height);
+                        numberToDispose = 100;
+                    }
+
+                    if (disposeDragger.HitBox.X < 710 && disposeDragger.HitBox.X < 1211)
+                    {
+                        disposeDragger.HitBox = new Rectangle(710, disposeDragger.HitBox.Y, disposeDragger.HitBox.Width, disposeDragger.HitBox.Height);
+                        numberToDispose = 0;
+                    }
+                }
+                else
+                {
+                    dragging = false;
+                }
             }
 
             if (test)
@@ -141,8 +199,8 @@ namespace Active
                     spriteBatch.DrawString(TextureManager.fontInventory, "Metal", posCategoryString, Color.White);
                 }
 
-                spriteBatch.Draw(TextureManager.texBox, disposeButton, Color.Red);
-                spriteBatch.DrawString(TextureManager.fontInventory, "D", new Vector2(1580, 930), Color.White);
+                disposeButton.Draw(spriteBatch);
+                spriteBatch.DrawString(TextureManager.fontInventory, "D", new Vector2(1580, 930), Color.Black);
             }
 
             if (selectedSquare != 50)
@@ -152,12 +210,21 @@ namespace Active
 
             if (disposing)
             {
-                spriteBatch.Draw(TextureManager.WhiteTex, disposeBox, Color.White);
+                spriteBatch.Draw(TextureManager.WhiteTex, disposeBox, Color.LightGray);
                 Vector2 temp = TextureManager.fontInventory.MeasureString("Select amount to remove");
                 spriteBatch.DrawString(TextureManager.fontInventory, "Select amount to remove", new Vector2((1920-temp.X)/2, 260), Color.Black);
 
-                temp = TextureManager.fontInventory.MeasureString(selected.Amount.ToString());
-                spriteBatch.DrawString(TextureManager.fontInventory, selected.Amount.ToString(), new Vector2((1920 - temp.X) / 2, 360), Color.Black);
+                temp = TextureManager.fontInventory.MeasureString(numberToDispose.ToString());
+                spriteBatch.DrawString(TextureManager.fontInventory, numberToDispose.ToString(), new Vector2((1920 - temp.X) / 2, 360), Color.Black);
+
+                spriteBatch.Draw(TextureManager.WhiteTex, disposeBar, Color.LightSeaGreen);
+
+                disposeOKButton.Draw(spriteBatch);
+                disposeDragger.Draw(spriteBatch);
+                if (dragging)
+                {
+                    spriteBatch.Draw(TextureManager.WhiteTex, Vector2.Zero, Color.Red);
+                }
             }
         }
 
