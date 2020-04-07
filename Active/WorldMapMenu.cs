@@ -91,12 +91,12 @@ namespace Active
             if (showText)
             {
                 spriteBatch.DrawString(TextureManager.fontInventory, cityName, new Vector2(cityCords.X + 80, cityCords.Y), Color.White);
-                spriteBatch.DrawString(TextureManager.font, "Carrot Town is the great city of carrots." +
-                    "\r\nIts agricultural roots can be traced \r\nthousands of years! There is no better " +
-                    "\r\nplace to buy fruits, vegetables \r\nand, of course, carrots.", new Vector2(cityCords.X + 80, cityCords.Y + 40), Color.White);
+                //spriteBatch.DrawString(TextureManager.font, "Carrot Town is the great city of carrots." +
+                //    "\r\nIts agricultural roots can be traced \r\nthousands of years! There is no better " +
+                //    "\r\nplace to buy fruits, vegetables \r\nand, of course, carrots.", new Vector2(cityCords.X + 80, cityCords.Y + 40), Color.White);
 
                 //Funkar inte 
-                //spriteBatch.DrawString(TextureManager.font, cityInfo, new Vector2(cityCords.X + 80, cityCords.Y + 40), Color.White); 
+                spriteBatch.DrawString(TextureManager.font, cityInfo, new Vector2(cityCords.X + 80, cityCords.Y + 40), Color.White); 
 
                 foreach (Button button in travelButtons)
                 {
@@ -133,6 +133,11 @@ namespace Active
                 cityButtons[counter] = new Button((int)cord.X, (int)cord.Y, 75, 75, tempName, TextureManager.texBox);
                 travelButtons[counter] = new Button((int)cord.X, (int)cord.Y + 80, 75, 30, tempName, TextureManager.texBox);
                 counter++;
+            }
+
+            for (int i = 0; i < cities.Length; i++)
+            {
+                cities[i].information = cities[i].information.Replace(";", "\n");
             }
         }
 

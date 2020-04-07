@@ -153,10 +153,6 @@ namespace Active
 
             if (gameState == GameState.CityMenu)
             {
-                InventoryButton.Draw(spriteBatch);
-                TradeButton.Draw(spriteBatch);
-                MapButton.Draw(spriteBatch);
-
                 cityMeny.Draw(spriteBatch);
             }
             else if (gameState == GameState.MapMenu)
