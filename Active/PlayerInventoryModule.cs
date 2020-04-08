@@ -58,6 +58,7 @@ namespace Active
                 inventoryGrid[counter] = new Rectangle((int)tempPos.X, (int)tempPos.Y, 120, 120);
                 counter++;
             }
+            streamReader.Close();
         }
 
         public void Update(GameTime gameTime)
@@ -109,6 +110,7 @@ namespace Active
                             break;
                         }
                     }
+                    numberToDispose = 0;
                 }
 
                 if (disposeDragger.Click())
@@ -246,6 +248,10 @@ namespace Active
             get
             {
                 return inventory;
+            }
+            set
+            {
+                inventory = value;
             }
         }
     }

@@ -40,6 +40,13 @@ namespace Active
             spriteBatch.Draw(tex, pos, Color.White);
         }
 
+        //kommer säkert behöva ändras till andra syften
+        public override string ToString()
+        {
+            string temp = id.ToString() + ';' + amount.ToString();
+            return temp;
+        }
+
         public string Name
         {
             get
