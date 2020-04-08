@@ -26,11 +26,15 @@ namespace Active
         // Oklart
         void Initialize(Inventory left, Inventory right)
         {
-            this.invLeft = left;
-            this.invRight = right;
+            invLeft = left;
+            invRight = right;
+            //tradeLeft = new Inventory(0,);
+            //tradeRight = new Inventory(0,);
+            CreateSlots();
+            CreateButtons();
         }
 
-        // Behöver lite arbete till
+        // Klar
         void CreateSlots()
         {
             slotsLeft = new Slot[5, 5];
@@ -40,8 +44,7 @@ namespace Active
             for (int i = 0; i < 5; i++)
             {
                 for (int j = 0; j < 5; j++)
-                {
-                    // Placera ut dem på rätt plats
+                {                    
                     slotsLeft[i, j] = new Slot(50+60*j,100+60*i,50,50);
                     slotsRight[i, j] = new Slot(1570+60*j,100+60*i,50,50);
                 }
@@ -49,21 +52,19 @@ namespace Active
             for (int i = 0; i < 3; i++)
             {
                 for (int j = 0; j < 3; j++)
-                {
-                    // Placera ut dem på rätt plats
+                {                    
                     tradeSlotsLeft[i,j] = new Slot(1010+60*j,100+60*i,50,50);
                     tradeSlotsRight[i, j] = new Slot(660+60*j,100+60*i,50,50);
                 }
             }
         }
 
-        // Lite arbete kvar. Justera värderna
-        void CreateButtons()
-        {
-            
-            accept = new Button(5, 5, 100, 100, TextureManager.texBox);
-            reset = new Button(5, 5, 100, 100, TextureManager.texBox);
-            back = new Button(5, 5, 100, 100, TextureManager.texBox);
+        // Klar
+        void CreateButtons() // Initialiserar knapparna
+        {            
+            accept = new Button(710, 630, 500, 200, TextureManager.texBox);
+            reset = new Button(1260, 630, 500, 200, TextureManager.texBox);
+            back = new Button(160, 630, 500, 200, TextureManager.texBox);
         }
         
         // Håller processen trading igång. När den returnerar false betyder det att transaktionen är ej över och vice versa när man returnerar true
@@ -113,7 +114,7 @@ namespace Active
                 do
                 {
                     if (slotsLeft[counterCol, counterRow].Clicked() == false)
-                    {                        
+                    {
                         ++counterRow;
                     }
                     
@@ -273,6 +274,7 @@ namespace Active
 
             }
         }
+
         //Medium Arbete Kvar!!
         bool AcceptTrade(ref Inventory participantLeft, ref Inventory participantRight)
         {
@@ -424,7 +426,7 @@ namespace Active
             }
         }
 
-            // Klar
+        // Klar
         void ResetTrade()
         {
             foreach (var item in tradeSlotsLeft)
@@ -449,7 +451,7 @@ namespace Active
             tradeRight = null;
         }
 
-        // Oklart
+        // Klar
         void Draw(SpriteBatch sb)
         {
             foreach (var item in slotsLeft)
