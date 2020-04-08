@@ -44,6 +44,14 @@ namespace Active
                 itemList.RemoveAt(FindIndexOf(reduceItem.ID));
             }
         }
+        public void ReduceAmountOfItems(int itemID, int amount)
+        {
+            itemList[FindIndexOf(itemID)].Amount -= amount; // Reducerar antalet man har sålt.
+            if (itemList[FindIndexOf(itemID)].Amount == 0) // Har ej tillgång till item:et längre
+            {
+                itemList.RemoveAt(FindIndexOf(itemID));
+            }
+        }
         private int FindIndexOf(int itemID)
         {
             bool found = false;
