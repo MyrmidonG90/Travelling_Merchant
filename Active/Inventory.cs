@@ -15,6 +15,11 @@ namespace Active
             money = m;
             itemList = iL;
         }
+        public Inventory(int m)
+        {
+            money = m;
+            itemList = new List<Item>();
+        }
 
         public bool AddItem(Item newItem)
         {
@@ -32,6 +37,25 @@ namespace Active
                 }
             }
             
+            return false;
+            //här ska det läggas till någon prompt att det inte går att lägga till pga plats
+        }
+        public bool AddItem(int itemID, int amount)
+        {
+            if (FindIndexOf(itemID) != -1) // Om den redan finns i listan
+            {
+                itemList[FindIndexOf(itemID)].Amount += amount; // Ändrar summan av totala antalet av den item:et
+                return true;
+            }
+            else
+            {
+                if (itemList.Count <= 24) // Om det finns plats i listan för en ny item
+                {
+                    ItemList[FindIndexOf(itemID)].Amount += amount;
+                    return true;
+                }
+            }
+
             return false;
             //här ska det läggas till någon prompt att det inte går att lägga till pga plats
         }

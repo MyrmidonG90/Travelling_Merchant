@@ -10,8 +10,7 @@ namespace Active
 {
     class Trading
     {
-        /*
-         Enitity entLeft,entRight;*/
+
         Inventory invLeft, invRight,tradeLeft,tradeRight;             
         Slot[,] slotsLeft, slotsRight,tradeSlotsLeft,tradeSlotsRight;        
         Button accept, reset,back;
@@ -23,13 +22,13 @@ namespace Active
         }
         int counterCol, counterRow,tmpCounter,leftPrice,rightPrice,priceDifference;
 
-        // Oklart
+        // Klart
         void Initialize(Inventory left, Inventory right)
         {
             invLeft = left;
             invRight = right;
-            //tradeLeft = new Inventory(0,);
-            //tradeRight = new Inventory(0,);
+            tradeLeft = new Inventory(left.Money);
+            tradeRight = new Inventory(right.Money);
             CreateSlots();
             CreateButtons();
         }
@@ -68,7 +67,7 @@ namespace Active
         }
         
         // Håller processen trading igång. När den returnerar false betyder det att transaktionen är ej över och vice versa när man returnerar true
-        // Behöver mycket arbete!!!
+        // Klar?
         bool Update(ref Inventory participantLeft, ref Inventory participantRight)
         {
             //När ett mussklick händer
@@ -111,7 +110,6 @@ namespace Active
             counterCol = 0;
             counterRow = 0;
             // Tittar om vänstra inventory:n har blivit klickat
-            ////////////////////////////////
             do // Observera om man behöver verkligen använda do-while-loop
             {
                 do
@@ -128,48 +126,55 @@ namespace Active
                 }
             } while (counterCol < 5 && slots[counterCol, counterRow].Clicked() == false);
 
-            if (slots[counterCol, counterRow].Clicked() == true) // Om det inventory:n har blivit klickat
+            if (slots[counterCol, counterRow].Clicked() == true) // Om Slots:en som tillhör inventory:n har blivit klickat
             {
                 if (participant == Participant.Left)
                 {
-                    tradeLeft.AddItem(slots[counterCol, counterRow].Item);// Lägger till item till det vänstra trade fältet   
-                                                                          // Måste ta bort från inventory;n också!!!
+                    tradeLeft.AddItem(slots[counterCol, counterRow].Item.ID,1);// Lägger till item till det vänstra trade fältet   
+                    invLeft.ReduceAmountOfItems(slots[counterCol, counterRow].Item.ID, 1);
                 }
                 else if (participant == Participant.Right)
                 {
-                    tradeRight.AddItem(slots[counterCol, counterRow].Item); // Lägger till item till det högra trade fältet
-                                                                                // Måste ta bort från inventory;n också!!!
+                    tradeRight.AddItem(slots[counterCol, counterRow].Item.ID, 1); // Lägger till item till det högra trade fältet
+                    invRight.ReduceAmountOfItems(slots[counterCol, counterRow].Item.ID,1);
                 }
 
                 UpdateSlots();
                 UpdatePrices();
                 return true;
             }
+            
+
+            return false;
+        }
+
+        void OldCode()
+        {
             ////////////////////////////////
             // Checkar om högra inventory:n har blivit klickat
-           /* do
-            {
-                do
-                {
-                    if (slotsRight[counterCol, counterRow].Clicked() == false)
-                    {
-                        ++counterRow;
-                    }
+            /* do
+             {
+                 do
+                 {
+                     if (slotsRight[counterCol, counterRow].Clicked() == false)
+                     {
+                         ++counterRow;
+                     }
 
-                } while (counterRow < 5 && slotsRight[counterCol, counterRow].Clicked() == false);
+                 } while (counterRow < 5 && slotsRight[counterCol, counterRow].Clicked() == false);
 
-                if (slotsRight[counterCol, counterRow].Clicked() == false)
-                {
-                    ++counterCol;
-                }
-            } while (counterCol < 5 && slotsRight[counterCol, counterRow].Clicked() == false);
+                 if (slotsRight[counterCol, counterRow].Clicked() == false)
+                 {
+                     ++counterCol;
+                 }
+             } while (counterCol < 5 && slotsRight[counterCol, counterRow].Clicked() == false);
 
-            if (slotsRight[counterCol, counterRow].Clicked() == true) // Om det högra inventory:n har blivit klickat
-            {
-              
-                UpdateSlots();
-                return true;
-            }*/
+             if (slotsRight[counterCol, counterRow].Clicked() == true) // Om det högra inventory:n har blivit klickat
+             {
+
+                 UpdateSlots();
+                 return true;
+             }*/
             ////////////////////////////////
 
             /* while (counterCol < 5 && slotsLeft[counterCol, counterRow].Clicked() == false)
@@ -203,8 +208,70 @@ namespace Active
                  }
                  ++counterCol;
              }*/
+                                                           // Gammal
+                                                           /* void ConstructInventory(Participant participant, Inventory inventory)
+                                                            {
+                                                                if (participant == Participant.Left)
+                                                                {
+                                                                    if (inventory.ItemList.Count <= 25)
+                                                                    {
+                                                                        tmpCounter = 0;
+                                                                        counterCol = 0;
+                                                                        counterRow = 0;
 
-            return false;
+                                                                        while (tmpCounter <= inventory.ItemList.Count && counterCol < 5 )
+                                                                        {
+                                                                            while (tmpCounter <= inventory.ItemList.Count && counterRow < 5)
+                                                                            {
+                                                                                slotsLeft[counterCol, counterRow].AddItem(inventory.ItemList[tmpCounter],inventory.ItemList[tmpCounter].Amount);
+                                                                                ++tmpCounter;
+                                                                                ++counterRow;
+                                                                            }
+                                                                            if (tmpCounter <= inventory.ItemList.Count)
+                                                                            {
+                                                                                ++counterCol;
+                                                                            }                        
+                                                                        }
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        while (tmpCounter < inventory.ItemList.Count)
+                                                                        {
+
+                                                                        }
+                                                                    }
+                                                                }
+                                                                else
+                                                                {
+                                                                    if (inventory.ItemList.Count <= 25)
+                                                                    {
+                                                                        tmpCounter = 0;
+                                                                        counterCol = 0;
+                                                                        counterRow = 0;
+
+                                                                        while (tmpCounter <= inventory.ItemList.Count && counterCol < 5)
+                                                                        {
+                                                                            while (tmpCounter <= inventory.ItemList.Count && counterRow < 5)
+                                                                            {
+                                                                                slotsRight[counterCol, counterRow].AddItem(inventory.ItemList[tmpCounter], inventory.ItemList[tmpCounter].Amount);
+                                                                                ++tmpCounter;
+                                                                                ++counterRow;
+                                                                            }
+                                                                            if (tmpCounter <= inventory.ItemList.Count)
+                                                                            {
+                                                                                ++counterCol;
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        while (tmpCounter < inventory.ItemList.Count)
+                                                                        {
+
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }*/
         }
 
         // Klar
@@ -235,10 +302,8 @@ namespace Active
                     }
                     catch (Exception) // Ifall det finns tomma rutor
                     {
-
                         tradeSlotsRight[i, j].Item = null;
-                    }
-                    
+                    }                    
                 }
             }
             for (int i = 0; i < 5; i++)
@@ -247,7 +312,7 @@ namespace Active
                 {
                     try
                     {
-                        slotsLeft[i, j].Item = invRight.ItemList[i * 5 + j];
+                        slotsLeft[i, j].Item = invLeft.ItemList[i * 5 + j];
                     }
                     catch (Exception)
                     {
@@ -280,7 +345,7 @@ namespace Active
             }
         }
 
-        //Mycket Arbete Kvar!!
+        //Klar?
         bool AcceptTrade(ref Inventory participantLeft, ref Inventory participantRight)
         {
             //If nothing is presented
@@ -290,7 +355,7 @@ namespace Active
             }
             //If player and Merchant doesn't enough space in inventory Advance.
             //Else prompt that the player doesn't have enough space
-            if (invLeft.ItemList.Count < 24 && invRight.ItemList.Count < 24)
+            if (invLeft.ItemList.Count < 24 || invRight.ItemList.Count < 24)
             {
                 return false;
             }
@@ -325,72 +390,7 @@ namespace Active
             leftPrice = CheckValue(tradeLeft);
             rightPrice = CheckValue(tradeRight);
             priceDifference = leftPrice - rightPrice;
-        }
-
-        // Gammal
-        void ConstructInventory(Participant participant, Inventory inventory)
-        {
-            if (participant == Participant.Left)
-            {
-                if (inventory.ItemList.Count <= 25)
-                {
-                    tmpCounter = 0;
-                    counterCol = 0;
-                    counterRow = 0;
-
-                    while (tmpCounter <= inventory.ItemList.Count && counterCol < 5 )
-                    {
-                        while (tmpCounter <= inventory.ItemList.Count && counterRow < 5)
-                        {
-                            slotsLeft[counterCol, counterRow].AddItem(inventory.ItemList[tmpCounter],inventory.ItemList[tmpCounter].Amount);
-                            ++tmpCounter;
-                            ++counterRow;
-                        }
-                        if (tmpCounter <= inventory.ItemList.Count)
-                        {
-                            ++counterCol;
-                        }                        
-                    }
-                }
-                else
-                {
-                    while (tmpCounter < inventory.ItemList.Count)
-                    {
-
-                    }
-                }
-            }
-            else
-            {
-                if (inventory.ItemList.Count <= 25)
-                {
-                    tmpCounter = 0;
-                    counterCol = 0;
-                    counterRow = 0;
-
-                    while (tmpCounter <= inventory.ItemList.Count && counterCol < 5)
-                    {
-                        while (tmpCounter <= inventory.ItemList.Count && counterRow < 5)
-                        {
-                            slotsRight[counterCol, counterRow].AddItem(inventory.ItemList[tmpCounter], inventory.ItemList[tmpCounter].Amount);
-                            ++tmpCounter;
-                            ++counterRow;
-                        }
-                        if (tmpCounter <= inventory.ItemList.Count)
-                        {
-                            ++counterCol;
-                        }
-                    }
-                }
-                else
-                {
-                    while (tmpCounter < inventory.ItemList.Count)
-                    {
-
-                    }
-                }
-            }
-        }
+        }        
 
         //Klar
         void ConstructSlots(Inventory inventory)
