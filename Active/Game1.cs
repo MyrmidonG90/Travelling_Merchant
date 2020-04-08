@@ -141,6 +141,19 @@ namespace Active
                 }
             }
 
+            if (KMReader.prevKeyState.IsKeyUp(Keys.F5) && KMReader.keyState.IsKeyDown(Keys.F5))
+            {
+                gameState = GameState.Debug;
+            }
+            if (KMReader.prevKeyState.IsKeyUp(Keys.F11) && KMReader.keyState.IsKeyDown(Keys.F11))
+            {
+                playerInventoryModule.Inventory = SaveModule.LoadSave();
+            }
+            if (KMReader.prevKeyState.IsKeyUp(Keys.F12) && KMReader.keyState.IsKeyDown(Keys.F12))
+            {
+                SaveModule.GenerateSave(playerInventoryModule.Inventory);
+            }
+
             base.Update(gameTime);
         }
 
@@ -170,7 +183,7 @@ namespace Active
             }
             else if (gameState == GameState.Debug)
             {
-                spriteBatch.DrawString(TextureManager.fontInventory, "Press F1 for City Menu, F2 for Travel/Map Menu,\nF3 for Inv. Menu or F4 for Trading Menu", new Vector2(200, 200), Color.White);
+                spriteBatch.DrawString(TextureManager.fontInventory, "Press F1 for City Menu, F2 for Travel/Map Menu,\nF3 for Inv. Menu or F4 for Trading Menu and you can always press F5 to return here", new Vector2(200, 200), Color.White);
             }
 
             spriteBatch.End();
