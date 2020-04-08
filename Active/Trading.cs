@@ -95,51 +95,59 @@ namespace Active
                 // Checkar om man har klickat på inventory:n
                 else
                 {
-                    CheckInvClick();
-                }
+                    if (CheckInvSlotClick(tradeSlotsLeft, Participant.Left) == false)
+                    {
+                        CheckInvSlotClick(tradeSlotsLeft, Participant.Right);
+                    }
+                }                
             }
-            UpdatePrices();
+            
             return false;
         }
 
         //Lite till
-        bool CheckInvClick()
+        bool CheckInvSlotClick(Slot[,] slots, Participant participant)
         {
             counterCol = 0;
             counterRow = 0;
             // Tittar om vänstra inventory:n har blivit klickat
             ////////////////////////////////
-            do
+            do // Observera om man behöver verkligen använda do-while-loop
             {
                 do
                 {
-                    if (slotsLeft[counterCol, counterRow].Clicked() == false)
+                    if (slots[counterCol, counterRow].Clicked() == false)
                     {
-                        ++counterRow;
+                        ++counterRow; // Ökar counterRow
                     }
-                    
-                } while (counterRow < 5 && slotsLeft[counterCol, counterRow].Clicked() == false);
+                } while (counterRow < 5 && slots[counterCol, counterRow].Clicked() == false);
 
-                if (slotsLeft[counterCol, counterRow].Clicked() == false)
+                if (slots[counterCol, counterRow].Clicked() == false)
                 {
-                    
-                    ++counterCol;
+                    ++counterCol; // Ökar counterCol
                 }
-                
-            } while (counterCol < 5 && slotsLeft[counterCol, counterRow].Clicked() == false);
+            } while (counterCol < 5 && slots[counterCol, counterRow].Clicked() == false);
 
-            if (slotsLeft[counterCol, counterRow].Clicked() == true) // Om det vänstra inventory:n har blivit klickat
+            if (slots[counterCol, counterRow].Clicked() == true) // Om det inventory:n har blivit klickat
             {
-                tradeLeft.AddItem(slotsLeft[counterCol,counterRow].Item);// Lägger till item till det vänstra trade fältet   
-                // Måste ta bort från inventory;n också!!!
+                if (participant == Participant.Left)
+                {
+                    tradeLeft.AddItem(slots[counterCol, counterRow].Item);// Lägger till item till det vänstra trade fältet   
+                                                                          // Måste ta bort från inventory;n också!!!
+                }
+                else if (participant == Participant.Right)
+                {
+                    tradeRight.AddItem(slots[counterCol, counterRow].Item); // Lägger till item till det högra trade fältet
+                                                                                // Måste ta bort från inventory;n också!!!
+                }
+
                 UpdateSlots();
+                UpdatePrices();
                 return true;
             }
             ////////////////////////////////
-            counterCol = 0;
-            counterRow = 0;
-            ////////////////////////////////
-            do
+            // Checkar om högra inventory:n har blivit klickat
+           /* do
             {
                 do
                 {
@@ -152,18 +160,16 @@ namespace Active
 
                 if (slotsRight[counterCol, counterRow].Clicked() == false)
                 {
-
                     ++counterCol;
                 }
             } while (counterCol < 5 && slotsRight[counterCol, counterRow].Clicked() == false);
 
             if (slotsRight[counterCol, counterRow].Clicked() == true) // Om det högra inventory:n har blivit klickat
             {
-                tradeRight.AddItem(slotsLeft[counterCol, counterRow].Item); // Lägger till item till det högra trade fältet
-                // Måste ta bort från inventory;n också!!!
+              
                 UpdateSlots();
                 return true;
-            }
+            }*/
             ////////////////////////////////
 
             /* while (counterCol < 5 && slotsLeft[counterCol, counterRow].Clicked() == false)
@@ -215,7 +221,6 @@ namespace Active
                     }
                     catch (Exception)
                     {
-
                         tradeSlotsLeft[i, j].Item = null;
                     }
                 }
@@ -275,7 +280,7 @@ namespace Active
             }
         }
 
-        //Medium Arbete Kvar!!
+        //Mycket Arbete Kvar!!
         bool AcceptTrade(ref Inventory participantLeft, ref Inventory participantRight)
         {
             //If nothing is presented
