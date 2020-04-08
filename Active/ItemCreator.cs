@@ -7,13 +7,13 @@ using System.IO;
 
 namespace Active
 {
-    class ItemCreator
+    static class ItemCreator
     {
 
-        public string[,] itemData;
-        int length;
+        static public string[,] itemData;
+        static int length;
 
-        public ItemCreator()
+        static public void LoadItemData()
         {
             StreamReader streamReader = new StreamReader("./Data/Items.txt");
 
@@ -37,7 +37,7 @@ namespace Active
             }
         }
 
-        public Item createItem(int id, int amount)
+        static public Item createItem(int id, int amount)
         {
 
             Item newItem;

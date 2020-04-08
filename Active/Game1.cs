@@ -19,7 +19,6 @@ namespace Active
         PlayerInventoryModule playerInventoryModule;
 
         CityMeny cityMeny;
-        ItemCreator itemCreator;
 
 
 
@@ -66,7 +65,7 @@ namespace Active
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
             TextureManager.LoadContent(Content);
-            itemCreator = new ItemCreator();
+            ItemCreator.LoadItemData();
 
 
             gameState = GameState.Debug;
@@ -78,7 +77,7 @@ namespace Active
             worldMapMenu.LoadCities();
 
 
-            playerInventoryModule = new PlayerInventoryModule(new Inventory(100, new List<Item>()), itemCreator);
+            playerInventoryModule = new PlayerInventoryModule(new Inventory(100, new List<Item>()));
 
 
             cityMeny.InventoryButton = new Button(70, 920, 230, 120, TextureManager.WhiteTex);
@@ -120,7 +119,7 @@ namespace Active
             }
             else if (gameState == GameState.InventoryMenu)
             {
-                playerInventoryModule.Update(gameTime, itemCreator);
+                playerInventoryModule.Update(gameTime);
             }
             else if (gameState == GameState.Debug)
             {
