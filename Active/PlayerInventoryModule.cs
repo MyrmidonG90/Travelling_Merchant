@@ -47,7 +47,7 @@ namespace Active
             disposeDragger = new Button(710, 480, 20, 60, TextureManager.WhiteTex);
             disposeOKButton = new Button(900, 640, 120, 60, TextureManager.WhiteTex);
 
-            selectedSquare = 50;
+            selectedSquare = 50; //50 means no slot is selected
 
             StreamReader streamReader = new StreamReader("./Data/InventoryGrid.txt");
             inventoryGrid = new Rectangle[25];
@@ -112,6 +112,7 @@ namespace Active
 
             if (disposing)
             {
+                //stänger processen och resettar lämpliga värden
                 if (disposeOKButton.Click())
                 {
                     disposing = false;
@@ -132,6 +133,7 @@ namespace Active
                     numberToDispose = 0;
                 }
 
+                //startar slider 
                 if (disposeDragger.Click())
                 {
                     dragging = true;

@@ -65,7 +65,7 @@ namespace Active
                 Item newItem = ItemCreator.createItem(int.Parse(data2[0])+1, int.Parse(data2[1]));
                 temp.AddItem(newItem);
             }
-
+            streamReader.Close();
             return temp;
         }
 

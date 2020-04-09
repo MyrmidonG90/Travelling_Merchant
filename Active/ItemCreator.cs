@@ -35,6 +35,7 @@ namespace Active
             {
                 itemData[i, 3] = itemData[i, 3].Replace(";", "\n");
             }
+            streamReader.Close();
         }
 
         static public Item createItem(int id, int amount)
