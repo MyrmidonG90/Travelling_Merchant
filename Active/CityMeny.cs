@@ -13,9 +13,16 @@ namespace Active
 {
     public class CityMeny
     {
-        public Button InventoryButton;
-        public Button TradeButton;
-        public Button MapButton;
+        private Button InventoryButton;
+        private Button TradeButton;
+        private Button MapButton;
+
+        public CityMeny()
+        {
+            InventoryButton = new Button(70, 920, 230, 120, TextureManager.WhiteTex);
+            TradeButton = new Button(420, 920, 230, 120, TextureManager.WhiteTex);
+            MapButton = new Button(1620, 920, 230, 120, TextureManager.WhiteTex);
+        }
 
         public void Update(GameTime gameTime)
         {

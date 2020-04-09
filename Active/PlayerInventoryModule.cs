@@ -12,27 +12,27 @@ namespace Active
 {
     class PlayerInventoryModule
     {
-        bool test;
-        bool disposing;
-        bool dragging;
-        bool fix;
-        Inventory inventory;
-        Item selected;
-        int selectedSquare;
-        int numberToDispose;
-        Rectangle mainBox;
-        Rectangle inventoryBox;
-        Rectangle categoryBox;
-        Button disposeButton;
-        Button disposeOKButton;
-        Button disposeDragger;
-        Rectangle disposeBar;
-        Rectangle disposeBox;
-        Rectangle[] inventoryGrid;
+        private bool test;
+        private bool disposing;
+        private bool dragging;
+        private bool fix;
+        private Inventory inventory;
+        private Item selected;
+        private int selectedSquare;
+        private int numberToDispose;
+        private Rectangle mainBox;
+        private Rectangle inventoryBox;
+        private Rectangle categoryBox;
+        private Button disposeButton;
+        private Button disposeOKButton;
+        private Button disposeDragger;
+        private Rectangle disposeBar;
+        private Rectangle disposeBox;
+        private Rectangle[] inventoryGrid;
 
-        public PlayerInventoryModule(Inventory inv)
+        public PlayerInventoryModule()
         {
-            inventory = inv;
+            inventory = new Inventory(100);
             test = true;
             disposing = false;
 

@@ -17,20 +17,8 @@ namespace Active
         SpriteBatch spriteBatch;
 
         PlayerInventoryModule playerInventoryModule;
-
         CityMeny cityMeny;
-
-
-
         WorldMapMenu worldMapMenu;
-
-
-        #region pending removal to CityMeny
-        public Button InventoryButton;
-        public Button TradeButton;
-        public Button MapButton;
-        #endregion
-
 
         enum GameState
         {
@@ -42,7 +30,6 @@ namespace Active
         }
 
         GameState gameState;
-
 
         public Game1()
         {
@@ -67,24 +54,12 @@ namespace Active
             TextureManager.LoadContent(Content);
             ItemCreator.LoadItemData();
 
-
             gameState = GameState.Debug;
 
-
             cityMeny = new CityMeny();
-
             worldMapMenu = new WorldMapMenu();
             worldMapMenu.LoadCities();
-
-
-            playerInventoryModule = new PlayerInventoryModule(new Inventory(100, new List<Item>()));
-
-
-            cityMeny.InventoryButton = new Button(70, 920, 230, 120, TextureManager.WhiteTex);
-            cityMeny.TradeButton = new Button(420, 920, 230, 120, TextureManager.WhiteTex);
-            cityMeny.MapButton = new Button(1620, 920, 230, 120, TextureManager.WhiteTex);
-
-
+            playerInventoryModule = new PlayerInventoryModule();         
         }
 
         protected override void Update(GameTime gameTime)
