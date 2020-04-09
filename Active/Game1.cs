@@ -29,6 +29,7 @@ namespace Active
             InventoryMenu,
         }
 
+        GameState previousGameState;
         GameState gameState;
 
         public Game1()
@@ -54,6 +55,7 @@ namespace Active
             TextureManager.LoadContent(Content);
             ItemCreator.LoadItemData();
 
+            previousGameState = GameState.Debug;
             gameState = GameState.Debug;
 
             cityMeny = new CityMeny();
@@ -64,7 +66,7 @@ namespace Active
 
         protected override void Update(GameTime gameTime)
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Back))
                 Exit();
 
             KMReader.Update();
@@ -73,14 +75,17 @@ namespace Active
             {
                 if (cityMeny.CheckInvButton())
                 {
+                    previousGameState = gameState;
                     gameState = GameState.InventoryMenu;
                 }
                 if (cityMeny.CheckTradeButton())
                 {
+                    previousGameState = gameState;
                     gameState = GameState.TradeMenu;
                 }
                 if (cityMeny.CheckMapButton())
                 {
+                    previousGameState = gameState;
                     gameState = GameState.MapMenu;
                 }
             }
@@ -95,29 +100,38 @@ namespace Active
             else if (gameState == GameState.InventoryMenu)
             {
                 playerInventoryModule.Update(gameTime);
+                if (playerInventoryModule.CheckExit())
+                {
+                    gameState = previousGameState;
+                }
             }
             else if (gameState == GameState.Debug)
             {
                 if (KMReader.prevKeyState.IsKeyUp(Keys.F1) && KMReader.keyState.IsKeyDown(Keys.F1))
                 {
+                    previousGameState = gameState;
                     gameState = GameState.CityMenu;
                 }
                 if (KMReader.prevKeyState.IsKeyUp(Keys.F2) && KMReader.keyState.IsKeyDown(Keys.F2))
                 {
+                    previousGameState = gameState;
                     gameState = GameState.MapMenu;
                 }
                 if (KMReader.prevKeyState.IsKeyUp(Keys.F3) && KMReader.keyState.IsKeyDown(Keys.F3))
                 {
+                    previousGameState = gameState;
                     gameState = GameState.InventoryMenu;
                 }
                 if (KMReader.prevKeyState.IsKeyUp(Keys.F4) && KMReader.keyState.IsKeyDown(Keys.F4))
                 {
+                    previousGameState = gameState;
                     gameState = GameState.TradeMenu;
                 }
             }
 
             if (KMReader.prevKeyState.IsKeyUp(Keys.F5) && KMReader.keyState.IsKeyDown(Keys.F5))
             {
+                previousGameState = gameState;
                 gameState = GameState.Debug;
             }
             if (KMReader.prevKeyState.IsKeyUp(Keys.F11) && KMReader.keyState.IsKeyDown(Keys.F11))

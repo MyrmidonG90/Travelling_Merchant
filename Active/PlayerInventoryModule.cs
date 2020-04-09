@@ -26,6 +26,7 @@ namespace Active
         private Button disposeButton;
         private Button disposeOKButton;
         private Button disposeDragger;
+        private Button returnButton;
         private Rectangle disposeBar;
         private Rectangle disposeBox;
         private Rectangle[] inventoryGrid;
@@ -40,6 +41,7 @@ namespace Active
             inventoryBox = new Rectangle(300, 180, 720, 720);
             categoryBox = new Rectangle(1100, 750, 120, 120);
             disposeButton = new Button(1560, 920, 70, 70, TextureManager.WhiteTex);
+            returnButton = new Button(20, 20, 80, 80, TextureManager.texBackArrow);
             disposeBox = new Rectangle(660, 240, 600, 500);
             disposeBar = new Rectangle(710, 500, 520, 20);
             disposeDragger = new Button(710, 480, 20, 60, TextureManager.WhiteTex);
@@ -61,8 +63,25 @@ namespace Active
             streamReader.Close();
         }
 
+        public bool CheckExit()
+        {
+            if (KMReader.prevKeyState.IsKeyUp(Keys.Escape) && KMReader.keyState.IsKeyDown(Keys.Escape))
+            {
+                return true;
+            }
+            if (returnButton.Click())
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+
         public void Update(GameTime gameTime)
         {
+            
+
             //Kollar om man har selectat ett item i inventoryn
             if (KMReader.MouseClick())
             {
@@ -178,6 +197,7 @@ namespace Active
 
         public void Draw(SpriteBatch spriteBatch)
         {
+            returnButton.Draw(spriteBatch);
             spriteBatch.Draw(TextureManager.WhiteTex, mainBox, Color.Wheat);
             spriteBatch.DrawString(TextureManager.fontInventory, "Currency: " + inventory.Money.ToString(), new Vector2(300, 920), Color.White);
             spriteBatch.Draw(TextureManager.WhiteTex, inventoryBox, Color.DarkGray);
