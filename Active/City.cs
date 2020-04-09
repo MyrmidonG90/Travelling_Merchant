@@ -36,6 +36,10 @@ namespace Active
             {
                 return information;
             }
+            set
+            {
+                information = value;
+            }
         }
 
         public Vector2 Coordinates
