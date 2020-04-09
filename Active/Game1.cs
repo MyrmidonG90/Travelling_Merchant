@@ -18,6 +18,7 @@ namespace Active
 
         PlayerInventoryModule playerInventoryModule;
         CityMeny cityMeny;
+        TravelMenu travelMenu;
 
         WorldMapMenu worldMapMenu;
 
