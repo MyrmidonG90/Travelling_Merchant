@@ -134,6 +134,7 @@ namespace Active
                 travelButtons[counter] = new Button((int)cord.X, (int)cord.Y + 80, 75, 30, tempName, TextureManager.texBox);
                 counter++;
             }
+            sr.Close();
 
             for (int i = 0; i < cities.Length; i++)
             {
