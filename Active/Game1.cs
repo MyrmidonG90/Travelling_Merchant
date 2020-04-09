@@ -21,6 +21,7 @@ namespace Active
         TravelMenu travelMenu;
 
         WorldMapMenu worldMapMenu;
+        TravelMenu travelMenu;
 
         enum GameState
         {
@@ -64,7 +65,8 @@ namespace Active
             cityMeny = new CityMeny();
             worldMapMenu = new WorldMapMenu();
             worldMapMenu.LoadCities();
-            playerInventoryModule = new PlayerInventoryModule();         
+            playerInventoryModule = new PlayerInventoryModule();
+            travelMenu = new TravelMenu();
         }
 
         protected override void Update(GameTime gameTime)
@@ -134,13 +136,13 @@ namespace Active
                     previousGameState = gameState;
                     gameState = GameState.TradeMenu;
                 }
-                if (KMReader.prevKeyState.IsKeyUp(Keys.F4) && KMReader.keyState.IsKeyDown(Keys.F5))
+                if (KMReader.prevKeyState.IsKeyUp(Keys.F5) && KMReader.keyState.IsKeyDown(Keys.F5))
                 {
                     gameState = GameState.TravelMenu;
                 }
             }
 
-            if (KMReader.prevKeyState.IsKeyUp(Keys.F5) && KMReader.keyState.IsKeyDown(Keys.F5))
+            if (KMReader.prevKeyState.IsKeyUp(Keys.F6) && KMReader.keyState.IsKeyDown(Keys.F6))
             {
                 previousGameState = gameState;
                 gameState = GameState.Debug;
@@ -187,7 +189,7 @@ namespace Active
             }
             else if (gameState == GameState.Debug)
             {
-                spriteBatch.DrawString(TextureManager.fontInventory, "Press F1 for City Menu, F2 for Travel/Map Menu,\nF3 for Inv. Menu or F4 for Trading Menu and you can always press F5 to return here", new Vector2(200, 200), Color.White);
+                spriteBatch.DrawString(TextureManager.fontInventory, "Press F1 for City Menu, F2 for Travel/Map Menu,\nF3 for Inv. Menu, F4 for Trading Menu or F5 for Travelling Menu \nand you can always press F6 to return here", new Vector2(200, 200), Color.White);
             }
 
             spriteBatch.End();
