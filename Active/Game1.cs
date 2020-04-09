@@ -20,7 +20,7 @@ namespace Active
 
         CityMeny cityMeny;
         ItemCreator itemCreator;
-
+        TravelMenu travelMenu;
 
 
         WorldMapMenu worldMapMenu;
@@ -40,6 +40,7 @@ namespace Active
             MapMenu,
             TradeMenu,
             InventoryMenu,
+            TravelMenu
         }
 
         GameState gameState;
@@ -122,6 +123,10 @@ namespace Active
             {
                 playerInventoryModule.Update(gameTime, itemCreator);
             }
+            else if (gameState == GameState.TravelMenu)
+            {
+                travelMenu.Update(gameTime);
+            }
             else if (gameState == GameState.Debug)
             {
                 if (KMReader.prevKeyState.IsKeyUp(Keys.F1) && KMReader.keyState.IsKeyDown(Keys.F1))
@@ -139,6 +144,10 @@ namespace Active
                 if (KMReader.prevKeyState.IsKeyUp(Keys.F4) && KMReader.keyState.IsKeyDown(Keys.F4))
                 {
                     gameState = GameState.TradeMenu;
+                }
+                if (KMReader.prevKeyState.IsKeyUp(Keys.F4) && KMReader.keyState.IsKeyDown(Keys.F5))
+                {
+                    gameState = GameState.TravelMenu;
                 }
             }
 
@@ -168,6 +177,10 @@ namespace Active
             else if (gameState == GameState.InventoryMenu)
             {
                 playerInventoryModule.Draw(spriteBatch);
+            }
+            else if (gameState == GameState.TravelMenu)
+            {
+                travelMenu.Draw(spriteBatch);
             }
             else if (gameState == GameState.Debug)
             {
