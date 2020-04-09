@@ -29,7 +29,7 @@ namespace Active
 
             if(turnTimer >= 1)
             {
-                turnTimer += gameTime.ElapsedGameTime.TotalSeconds;
+                turnTimer = turnTimer - gameTime.ElapsedGameTime.TotalSeconds;
             }
 
             if(turnTimer <= 0)
