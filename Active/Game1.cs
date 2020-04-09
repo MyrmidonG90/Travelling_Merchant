@@ -18,6 +18,7 @@ namespace Active
 
         PlayerInventoryModule playerInventoryModule;
         CityMeny cityMeny;
+
         WorldMapMenu worldMapMenu;
 
         enum GameState
@@ -27,6 +28,7 @@ namespace Active
             MapMenu,
             TradeMenu,
             InventoryMenu,
+            TravelMenu
         }
 
         GameState previousGameState;
@@ -105,6 +107,10 @@ namespace Active
                     gameState = previousGameState;
                 }
             }
+            else if (gameState == GameState.TravelMenu)
+            {
+                travelMenu.Update(gameTime);
+            }
             else if (gameState == GameState.Debug)
             {
                 if (KMReader.prevKeyState.IsKeyUp(Keys.F1) && KMReader.keyState.IsKeyDown(Keys.F1))
@@ -126,6 +132,10 @@ namespace Active
                 {
                     previousGameState = gameState;
                     gameState = GameState.TradeMenu;
+                }
+                if (KMReader.prevKeyState.IsKeyUp(Keys.F4) && KMReader.keyState.IsKeyDown(Keys.F5))
+                {
+                    gameState = GameState.TravelMenu;
                 }
             }
 
@@ -169,6 +179,10 @@ namespace Active
             else if (gameState == GameState.InventoryMenu)
             {
                 playerInventoryModule.Draw(spriteBatch);
+            }
+            else if (gameState == GameState.TravelMenu)
+            {
+                travelMenu.Draw(spriteBatch);
             }
             else if (gameState == GameState.Debug)
             {
