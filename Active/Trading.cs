@@ -8,22 +8,22 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 namespace Active
 {
-    class Trading
+    public static class Trading
     {
 
-        Inventory invLeft, invRight,tradeLeft,tradeRight;             
-        Slot[,] slotsLeft, slotsRight,tradeSlotsLeft,tradeSlotsRight;        
-        Button accept, reset,back;
+        static Inventory invLeft, invRight,tradeLeft,tradeRight;
+        static  Slot[,] slotsLeft, slotsRight,tradeSlotsLeft,tradeSlotsRight;
+        static Button accept, reset,back;
         enum Participant
         {
             Left,
             Right,
             None
         }
-        int counterCol, counterRow,tmpCounter,leftPrice,rightPrice,priceDifference;
+       static int counterCol, counterRow,tmpCounter,leftPrice,rightPrice,priceDifference;
 
         // Klart
-        void Initialize(Inventory left, Inventory right)
+        static void Initialize(Inventory left, Inventory right)
         {
             invLeft = left;
             invRight = right;
@@ -34,7 +34,7 @@ namespace Active
         }
 
         // Klar
-        void CreateSlots()
+        static void CreateSlots()
         {
             slotsLeft = new Slot[5, 5];
             slotsRight = new Slot[5, 5];
@@ -59,16 +59,16 @@ namespace Active
         }
 
         // Klar
-        void CreateButtons() // Initialiserar knapparna
+        static void CreateButtons() // Initialiserar knapparna
         {            
             accept = new Button(710, 630, 500, 200, TextureManager.texBox);
             reset = new Button(1260, 630, 500, 200, TextureManager.texBox);
             back = new Button(160, 630, 500, 200, TextureManager.texBox);
         }
-        
+
         // Håller processen trading igång. När den returnerar false betyder det att transaktionen är ej över och vice versa när man returnerar true
         // Klar?
-        bool Update(ref Inventory participantLeft, ref Inventory participantRight)
+        static bool Update(ref Inventory participantLeft, ref Inventory participantRight)
         {
             //När ett mussklick händer
             if (KMReader.MouseClick())
@@ -105,7 +105,7 @@ namespace Active
         }
 
         //Lite till
-        bool CheckInvSlotClick(Slot[,] slots, Participant participant)
+        static bool CheckInvSlotClick(Slot[,] slots, Participant participant)
         {
             counterCol = 0;
             counterRow = 0;
@@ -148,7 +148,7 @@ namespace Active
             return false;
         }
 
-        void OldCode()
+        static void OldCode()
         {
             ////////////////////////////////
             // Checkar om högra inventory:n har blivit klickat
@@ -276,7 +276,7 @@ namespace Active
 
         // Klar
         //Uppdaterar Slots
-        void UpdateSlots()
+        static void UpdateSlots()
         {
             for (int i = 0; i < 3; i++)
             {
@@ -337,7 +337,7 @@ namespace Active
             }
         }
 
-        void UpdateInventory()
+        static void UpdateInventory()
         {
             for (int i = 0; i < 5; i++)
             {
@@ -346,7 +346,7 @@ namespace Active
         }
 
         //Klar?
-        bool AcceptTrade(ref Inventory participantLeft, ref Inventory participantRight)
+        static bool AcceptTrade(ref Inventory participantLeft, ref Inventory participantRight)
         {
             //If nothing is presented
             if (tradeLeft.ItemList.Count == 0 && tradeRight.ItemList.Count==0)
@@ -374,7 +374,7 @@ namespace Active
         }
 
         // Klar men Behöver ändra BasePrice till något mer verkligt
-        int CheckValue(Inventory inv)
+        static int CheckValue(Inventory inv)
         {
             int sum = 0;
             for (int i = 0; i < inv.ItemList.Count; i++)
@@ -382,18 +382,18 @@ namespace Active
                 sum += inv.ItemList[i].BasePrice * inv.ItemList[i].Amount;
             }
             return sum;
-        }        
+        }
 
         //Klar
-        void UpdatePrices()
+        static void UpdatePrices()
         {
             leftPrice = CheckValue(tradeLeft);
             rightPrice = CheckValue(tradeRight);
             priceDifference = leftPrice - rightPrice;
-        }        
+        }
 
         //Klar
-        void ConstructSlots(Inventory inventory)
+        static void ConstructSlots(Inventory inventory)
         {
             // Konstrurerar inventory slots
             for (int i = 0; i < 5; i++)
@@ -432,7 +432,7 @@ namespace Active
         }
 
         // Klar
-        void ResetTrade()
+        static void ResetTrade()
         {
             foreach (var item in tradeSlotsLeft)
             {
@@ -450,14 +450,13 @@ namespace Active
             {
                 item.Reset();
             }
-            invLeft = null;
-            invRight = null;
+
             tradeLeft = null;
             tradeRight = null;
         }
 
         // Klar
-        void Draw(SpriteBatch sb)
+        static void Draw(SpriteBatch sb)
         {
             foreach (var item in slotsLeft)
             {
