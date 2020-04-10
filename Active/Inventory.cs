@@ -51,7 +51,7 @@ namespace Active
             {
                 if (itemList.Count <= 24) // Om det finns plats i listan för en ny item
                 {
-                    ItemList[FindIndexOf(itemID)].Amount += amount;
+                    ItemList.Add(ItemCreator.CreateItem(itemID,amount));                    
                     return true;
                 }
             }
