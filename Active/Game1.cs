@@ -21,7 +21,6 @@ namespace Active
         TravelMenu travelMenu;
 
         WorldMapMenu worldMapMenu;
-        TravelMenu travelMenu;
 
         enum GameState
         {
