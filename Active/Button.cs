@@ -14,7 +14,7 @@ namespace Active
         private Rectangle hitBox;
         private Texture2D tex;
 
-        public string name;
+        private string name;
 
         public Button(int x, int y, int xLength, int yLength, string name, Texture2D tex)
         {
@@ -64,6 +64,14 @@ namespace Active
             set
             {
                 hitBox = value;
+            }
+        }
+
+        public string Name
+        {
+            get
+            {
+                return name;
             }
         }
     }

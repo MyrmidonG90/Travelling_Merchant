@@ -12,27 +12,28 @@ namespace Active
 {
     class PlayerInventoryModule
     {
-        bool test;
-        bool disposing;
-        bool dragging;
-        bool fix;
-        Inventory inventory;
-        Item selected;
-        int selectedSquare;
-        int numberToDispose;
-        Rectangle mainBox;
-        Rectangle inventoryBox;
-        Rectangle categoryBox;
-        Button disposeButton;
-        Button disposeOKButton;
-        Button disposeDragger;
-        Rectangle disposeBar;
-        Rectangle disposeBox;
-        Rectangle[] inventoryGrid;
+        private bool test;
+        private bool disposing;
+        private bool dragging;
+        private bool fix;
+        private Inventory inventory;
+        private Item selected;
+        private int selectedSquare;
+        private int numberToDispose;
+        private Rectangle mainBox;
+        private Rectangle inventoryBox;
+        private Rectangle categoryBox;
+        private Button disposeButton;
+        private Button disposeOKButton;
+        private Button disposeDragger;
+        private Button returnButton;
+        private Rectangle disposeBar;
+        private Rectangle disposeBox;
+        private Rectangle[] inventoryGrid;
 
-        public PlayerInventoryModule(Inventory inv)
+        public PlayerInventoryModule()
         {
-            inventory = inv;
+            inventory = new Inventory(100);
             test = true;
             disposing = false;
 
@@ -40,12 +41,13 @@ namespace Active
             inventoryBox = new Rectangle(300, 180, 720, 720);
             categoryBox = new Rectangle(1100, 750, 120, 120);
             disposeButton = new Button(1560, 920, 70, 70, TextureManager.WhiteTex);
+            returnButton = new Button(20, 20, 80, 80, TextureManager.texBackArrow);
             disposeBox = new Rectangle(660, 240, 600, 500);
             disposeBar = new Rectangle(710, 500, 520, 20);
             disposeDragger = new Button(710, 480, 20, 60, TextureManager.WhiteTex);
             disposeOKButton = new Button(900, 640, 120, 60, TextureManager.WhiteTex);
 
-            selectedSquare = 50;
+            selectedSquare = 50; //50 means no slot is selected
 
             StreamReader streamReader = new StreamReader("./Data/InventoryGrid.txt");
             inventoryGrid = new Rectangle[25];
@@ -58,10 +60,28 @@ namespace Active
                 inventoryGrid[counter] = new Rectangle((int)tempPos.X, (int)tempPos.Y, 120, 120);
                 counter++;
             }
+            streamReader.Close();
         }
+
+        public bool CheckExit()
+        {
+            if (KMReader.prevKeyState.IsKeyUp(Keys.Escape) && KMReader.keyState.IsKeyDown(Keys.Escape))
+            {
+                return true;
+            }
+            if (returnButton.Click())
+            {
+                return true;
+            }
+
+            return false;
+        }
+
 
         public void Update(GameTime gameTime)
         {
+            
+
             //Kollar om man har selectat ett item i inventoryn
             if (KMReader.MouseClick())
             {
@@ -92,6 +112,7 @@ namespace Active
 
             if (disposing)
             {
+                //stänger processen och resettar lämpliga värden
                 if (disposeOKButton.Click())
                 {
                     disposing = false;
@@ -109,8 +130,10 @@ namespace Active
                             break;
                         }
                     }
+                    numberToDispose = 0;
                 }
 
+                //startar slider 
                 if (disposeDragger.Click())
                 {
                     dragging = true;
@@ -161,21 +184,22 @@ namespace Active
             {
                 if (KMReader.prevKeyState.IsKeyUp(Keys.A) && KMReader.keyState.IsKeyDown(Keys.A))
                 {
-                    inventory.AddItem(ItemCreator.createItem(1, 20));
+                    inventory.AddItem(ItemCreator.CreateItem(0, 20));
                 }
                 if (KMReader.prevKeyState.IsKeyUp(Keys.B) && KMReader.keyState.IsKeyDown(Keys.B))
                 {
-                    inventory.AddItem(ItemCreator.createItem(2, 30));
+                    inventory.AddItem(ItemCreator.CreateItem(1, 30));
                 }
                 if (KMReader.prevKeyState.IsKeyUp(Keys.C) && KMReader.keyState.IsKeyDown(Keys.C))
                 {
-                    inventory.AddItem(ItemCreator.createItem(3, 10));
+                    inventory.AddItem(ItemCreator.CreateItem(2, 10));
                 }
             }
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
+            returnButton.Draw(spriteBatch);
             spriteBatch.Draw(TextureManager.WhiteTex, mainBox, Color.Wheat);
             spriteBatch.DrawString(TextureManager.fontInventory, "Currency: " + inventory.Money.ToString(), new Vector2(300, 920), Color.White);
             spriteBatch.Draw(TextureManager.WhiteTex, inventoryBox, Color.DarkGray);
@@ -246,6 +270,10 @@ namespace Active
             get
             {
                 return inventory;
+            }
+            set
+            {
+                inventory = value;
             }
         }
     }

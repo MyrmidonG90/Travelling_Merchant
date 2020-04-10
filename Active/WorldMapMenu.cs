@@ -49,13 +49,13 @@ namespace Active
             {
                 foreach (City city in cities)
                 {
-                    if (button.Click() && button.name == city.name)
+                    if (button.Click() && button.Name == city.Name)
                     {
                         showText = true;
-                        cityName = city.name;
-                        cityInfo = city.information;
+                        cityName = city.Name;
+                        cityInfo = city.Information;
 
-                        cityCords = city.coordinates;
+                        cityCords = city.Coordinates;
 
                     }
                 }
@@ -100,7 +100,7 @@ namespace Active
 
                 foreach (Button button in travelButtons)
                 {
-                    if(button.name == cityName)
+                    if(button.Name == cityName)
                     {
                         button.Draw(spriteBatch);
                     }
@@ -134,10 +134,11 @@ namespace Active
                 travelButtons[counter] = new Button((int)cord.X, (int)cord.Y + 80, 75, 30, tempName, TextureManager.texBox);
                 counter++;
             }
+            sr.Close();
 
             for (int i = 0; i < cities.Length; i++)
             {
-                cities[i].information = cities[i].information.Replace(";", "\n");
+                cities[i].Information = cities[i].Information.Replace(";", "\n");
             }
         }
 

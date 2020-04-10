@@ -10,9 +10,9 @@ namespace Active
     class City
     {
 
-        public string name;
-        public string information;
-        public Vector2 coordinates;
+        private string name;
+        private string information;
+        private Vector2 coordinates;
 
         public City(string name, string information, Vector2 coordinates)
         {
@@ -22,5 +22,32 @@ namespace Active
 
         }
 
+        public string Name
+        {
+            get
+            {
+                return name;
+            }
+        }
+
+        public string Information
+        {
+            get
+            {
+                return information;
+            }
+            set
+            {
+                information = value;
+            }
+        }
+
+        public Vector2 Coordinates
+        {
+            get
+            {
+                return coordinates;
+            }
+        }
     }
 }
