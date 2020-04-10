@@ -11,7 +11,7 @@ namespace Active
     static class Trading
     {
 
-        static Inventory invLeft, invRight, tradeLeft, tradeRight;
+        static Inventory invLeft, invRight, tradeLeft, tradeRight, origLeftInv, origRightInv;
         static Slot[,] slotsLeft, slotsRight, tradeSlotsLeft, tradeSlotsRight;
         static Button accept, reset, back;
         enum Participant
@@ -29,6 +29,8 @@ namespace Active
             invRight = right;
             tradeLeft = new Inventory(left.Money);
             tradeRight = new Inventory(right.Money);
+            origLeftInv = left;
+            origRightInv = right;
             CreateSlots();
             CreateButtons();
         }
@@ -46,14 +48,30 @@ namespace Active
                 {
                     slotsLeft[i, j] = new Slot(50 + 60 * j, 100 + 60 * i, 50, 50);
                     slotsRight[i, j] = new Slot(1570 + 60 * j, 100 + 60 * i, 50, 50);
+                    try
+                    {
+                        slotsLeft[i, j].AddItem(invLeft.ItemList[i * 5 + j]);
+                    }
+                    catch (Exception)
+                    {
+
+                    }
+                    try
+                    {
+                        slotsRight[i, j].AddItem(invRight.ItemList[i * 5 + j]);
+                    }
+                    catch (Exception)
+                    {
+
+                    }
                 }
             }
             for (int i = 0; i < 3; i++)
             {
                 for (int j = 0; j < 3; j++)
                 {
-                    tradeSlotsLeft[i, j] = new Slot(1010 + 60 * j, 100 + 60 * i, 50, 50);
-                    tradeSlotsRight[i, j] = new Slot(660 + 60 * j, 100 + 60 * i, 50, 50);
+                    tradeSlotsRight[i, j] = new Slot(1010 + 60 * j, 100 + 60 * i, 50, 50);
+                    tradeSlotsLeft[i, j] = new Slot(660 + 60 * j, 100 + 60 * i, 50, 50);
                 }
             }
         }
@@ -123,14 +141,20 @@ namespace Active
 
                 if (slots[counterCol, counterRow].Clicked() == false)
                 {
+                    counterRow = 0;
                     ++counterCol; // Ökar counterCol
                 }
-            } while (counterCol < 4 && slots[counterCol, counterRow].Clicked() == false);
 
-            if (slots[counterCol, counterRow].Clicked() == true) // Om Slots:en som tillhör inventory:n har blivit klickat
+            } while (counterCol < 5 && slots[counterCol, counterRow].Clicked() == false);
+            if (counterCol == 5)
+            {
+                counterCol = 4;
+            }
+            if (slots[counterCol, counterRow].Clicked() == true && slots[counterCol, counterRow].Item != null) // Om Slots:en som tillhör inventory:n har blivit klickat
             {
                 if (participant == Participant.Left)
                 {
+
                     tradeLeft.AddItem(slots[counterCol, counterRow].Item.ID, 1);// Lägger till item till det vänstra trade fältet   // Error Finns inte
                     invLeft.ReduceAmountOfItems(slots[counterCol, counterRow].Item.ID, 1);
                 }
@@ -145,10 +169,9 @@ namespace Active
                 return true;
             }
 
-
             return false;
         }
-        
+
         // Klar
         //Uppdaterar Slots
         static void UpdateSlots()
@@ -326,8 +349,9 @@ namespace Active
                 item.Reset();
             }
 
-            tradeLeft = null;
-            tradeRight = null;
+            invLeft = origLeftInv;
+            invRight = origRightInv;
+            UpdateSlots();
         }
 
         // Ej klar, måste införa antal pengar och sånt

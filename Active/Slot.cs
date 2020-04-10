@@ -43,10 +43,10 @@ namespace Active
             return false;
         }
 
-        public void AddItem(Item item, int amountOfItem)
+        public void AddItem(Item item)
         {
             this.Item = item;
-            this.item.Amount += amountOfItem;
+
         }
 
         public int GetItemId()
