@@ -67,7 +67,7 @@ namespace Active
             inv1.AddItem(ItemCreator.CreateItem(0,20));
             inv1.AddItem(ItemCreator.CreateItem(1, 20));
             inv2.AddItem(ItemCreator.CreateItem(2, 5));
-
+            Trading.Initialize(inv1,inv2);
             cityMeny = new CityMeny();
             worldMapMenu = new WorldMapMenu();
             worldMapMenu.LoadCities();
@@ -106,7 +106,7 @@ namespace Active
             }
             else if (gameState == GameState.TradeMenu)
             {
-                if (Trading.Update(ref inv1, ref inv2) == false)
+                if (Trading.Update(ref inv1, ref inv2) == true)
                 {
                     gameState = GameState.Debug;
                 }
