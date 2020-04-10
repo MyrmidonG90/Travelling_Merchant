@@ -119,7 +119,7 @@ namespace Active
                     {
                         ++counterRow; // Ökar counterRow
                     }
-                } while (counterRow < 3 && slots[counterCol, counterRow].Clicked() == false);
+                } while (counterRow < 4 && slots[counterCol, counterRow].Clicked() == false);
 
                 if (slots[counterCol, counterRow].Clicked() == false)
                 {
@@ -148,133 +148,7 @@ namespace Active
 
             return false;
         }
-
-        static void OldCode()
-        {
-            ////////////////////////////////
-            // Checkar om högra inventory:n har blivit klickat
-            /* do
-             {
-                 do
-                 {
-                     if (slotsRight[counterCol, counterRow].Clicked() == false)
-                     {
-                         ++counterRow;
-                     }
-
-                 } while (counterRow < 5 && slotsRight[counterCol, counterRow].Clicked() == false);
-
-                 if (slotsRight[counterCol, counterRow].Clicked() == false)
-                 {
-                     ++counterCol;
-                 }
-             } while (counterCol < 5 && slotsRight[counterCol, counterRow].Clicked() == false);
-
-             if (slotsRight[counterCol, counterRow].Clicked() == true) // Om det högra inventory:n har blivit klickat
-             {
-
-                 UpdateSlots();
-                 return true;
-             }*/
-            ////////////////////////////////
-
-            /* while (counterCol < 5 && slotsLeft[counterCol, counterRow].Clicked() == false)
-             {
-                 while (counterRow < 5 && slotsLeft[counterCol, counterRow].Clicked())
-                 {
-                     ++counterRow;
-                 }
-                 if (slotsLeft[counterCol, counterRow].Clicked())
-                 {
-                     //Add item to the trade inventory on the left
-                     //AddItem(Participant.Left,/*itemId,*/ /*counterRow, counterCol);
-                     return true;
-                 }
-                 ++counterCol;
-             }*/
-
-
-            // Tittar om högra inventory:n har blivit klickat
-            /* while (counterCol < 5 && slotsLeft[counterCol, counterRow].Clicked())
-             {
-                 while (counterRow < 5 && slotsLeft[counterCol, counterRow].Clicked())
-                 {
-                     ++counterRow;
-                 }
-                 if (slotsLeft[counterCol, counterRow].Clicked())
-                 {
-                     // Add item to the trade inventory on the right
-                     AddItem(Participant.Right,/*itemId,*/ /*counterRow, counterCol);
-                     return true;
-                 }
-                 ++counterCol;
-             }*/
-                                                           // Gammal
-                                                           /* void ConstructInventory(Participant participant, Inventory inventory)
-                                                            {
-                                                                if (participant == Participant.Left)
-                                                                {
-                                                                    if (inventory.ItemList.Count <= 25)
-                                                                    {
-                                                                        tmpCounter = 0;
-                                                                        counterCol = 0;
-                                                                        counterRow = 0;
-
-                                                                        while (tmpCounter <= inventory.ItemList.Count && counterCol < 5 )
-                                                                        {
-                                                                            while (tmpCounter <= inventory.ItemList.Count && counterRow < 5)
-                                                                            {
-                                                                                slotsLeft[counterCol, counterRow].AddItem(inventory.ItemList[tmpCounter],inventory.ItemList[tmpCounter].Amount);
-                                                                                ++tmpCounter;
-                                                                                ++counterRow;
-                                                                            }
-                                                                            if (tmpCounter <= inventory.ItemList.Count)
-                                                                            {
-                                                                                ++counterCol;
-                                                                            }                        
-                                                                        }
-                                                                    }
-                                                                    else
-                                                                    {
-                                                                        while (tmpCounter < inventory.ItemList.Count)
-                                                                        {
-
-                                                                        }
-                                                                    }
-                                                                }
-                                                                else
-                                                                {
-                                                                    if (inventory.ItemList.Count <= 25)
-                                                                    {
-                                                                        tmpCounter = 0;
-                                                                        counterCol = 0;
-                                                                        counterRow = 0;
-
-                                                                        while (tmpCounter <= inventory.ItemList.Count && counterCol < 5)
-                                                                        {
-                                                                            while (tmpCounter <= inventory.ItemList.Count && counterRow < 5)
-                                                                            {
-                                                                                slotsRight[counterCol, counterRow].AddItem(inventory.ItemList[tmpCounter], inventory.ItemList[tmpCounter].Amount);
-                                                                                ++tmpCounter;
-                                                                                ++counterRow;
-                                                                            }
-                                                                            if (tmpCounter <= inventory.ItemList.Count)
-                                                                            {
-                                                                                ++counterCol;
-                                                                            }
-                                                                        }
-                                                                    }
-                                                                    else
-                                                                    {
-                                                                        while (tmpCounter < inventory.ItemList.Count)
-                                                                        {
-
-                                                                        }
-                                                                    }
-                                                                }
-                                                            }*/
-        }
-
+        
         // Klar
         //Uppdaterar Slots
         static void UpdateSlots()
