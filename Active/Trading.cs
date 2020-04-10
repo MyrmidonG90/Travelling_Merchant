@@ -18,12 +18,14 @@ namespace Active
         {
             Left,
             Right,
+            TradeSlotsLeft,
+            TradeSlotsRight,
             None
         }
         static int counterCol, counterRow, tmpCounter, leftPrice, rightPrice, priceDifference;
 
         // Klart
-        static public void Initialize(Inventory left, Inventory right)
+        static public void Initialize(Inventory left, Inventory right) // Change name to Start
         {
             invLeft = left;
             invRight = right;
@@ -112,10 +114,17 @@ namespace Active
                 // Checkar om man har klickat på inventory:n
                 else
                 {
-                    if (CheckInvSlotClick(slotsLeft, Participant.Left) == false)
+                    if (CheckSlotClick(slotsLeft, Participant.Left) == false)
                     {
-                        CheckInvSlotClick(slotsRight, Participant.Right);
+                        if (CheckSlotClick(slotsRight, Participant.Right) == false)
+                        {
+                            if (CheckSlotClick(tradeSlotsLeft, Participant.TradeSlotsLeft) == false)
+                            {
+                                CheckSlotClick(tradeSlotsRight, Participant.TradeSlotsRight);
+                            }
+                        }
                     }
+                    
                     // glömde lägga till 
                 }
             }
@@ -124,32 +133,31 @@ namespace Active
         }
 
         //Lite till
-        static bool CheckInvSlotClick(Slot[,] slots, Participant participant)
+        static bool CheckSlotClick(Slot[,] slots, Participant participant)
         {
             counterCol = 0;
             counterRow = 0;
-            // Tittar om vänstra inventory:n har blivit klickat
-            do // Observera om man behöver verkligen använda do-while-loop
+            
+
+            while (counterCol <= slots.GetLength(1)-1 && slots[counterCol, counterRow].Clicked() == false)
             {
-                do
+                while (counterRow < slots.GetLength(1) - 1 && slots[counterCol, counterRow].Clicked() == false)
                 {
-                    if (slots[counterCol, counterRow].Clicked() == false)
-                    {
-                        ++counterRow; // Ökar counterRow
-                    }
-                } while (counterRow < 4 && slots[counterCol, counterRow].Clicked() == false);
+                    ++counterRow;
+                }
 
                 if (slots[counterCol, counterRow].Clicked() == false)
                 {
                     counterRow = 0;
-                    ++counterCol; // Ökar counterCol
+                    ++counterCol;
                 }
-
-            } while (counterCol < 5 && slots[counterCol, counterRow].Clicked() == false);
-            if (counterCol == 5)
-            {
-                counterCol = 4;
             }
+            if (counterCol == slots.GetLength(1))
+            {
+                --counterCol;
+            }
+
+
             if (slots[counterCol, counterRow].Clicked() == true && slots[counterCol, counterRow].Item != null) // Om Slots:en som tillhör inventory:n har blivit klickat
             {
                 if (participant == Participant.Left)
@@ -163,7 +171,16 @@ namespace Active
                     tradeRight.AddItem(slots[counterCol, counterRow].Item.ID, 1); // Lägger till item till det högra trade fältet
                     invRight.ReduceAmountOfItems(slots[counterCol, counterRow].Item.ID, 1);
                 }
-
+                else if (participant == Participant.TradeSlotsLeft)
+                {
+                    tradeLeft.ReduceAmountOfItems(slots[counterCol, counterRow].Item.ID, 1);
+                    invLeft.AddItem(slots[counterCol, counterRow].Item.ID, 1);
+                }
+                else if (participant == Participant.TradeSlotsRight)
+                {
+                     tradeRight.ReduceAmountOfItems(slots[counterCol, counterRow].Item.ID, 1);
+                    invRight.AddItem(slots[counterCol, counterRow].Item.ID, 1);
+                }
                 UpdateSlots();
                 UpdatePrices();
                 return true;
@@ -232,14 +249,6 @@ namespace Active
                     }
 
                 }
-            }
-        }
-
-        static void UpdateInventory()
-        {
-            for (int i = 0; i < 5; i++)
-            {
-
             }
         }
 
@@ -352,6 +361,29 @@ namespace Active
             invLeft = origLeftInv;
             invRight = origRightInv;
             UpdateSlots();
+        }
+
+        static void CancelTrade()
+        {
+            foreach (var item in tradeSlotsLeft)
+            {
+                item.Reset();
+            }
+            foreach (var item in tradeSlotsRight)
+            {
+                item.Reset();
+            }
+            foreach (var item in slotsLeft)
+            {
+                item.Reset();
+            }
+            foreach (var item in slotsRight)
+            {
+                item.Reset();
+            }
+
+            invLeft = null;
+            invRight = null;
         }
 
         // Ej klar, måste införa antal pengar och sånt
