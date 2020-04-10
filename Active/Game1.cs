@@ -19,7 +19,7 @@ namespace Active
         PlayerInventoryModule playerInventoryModule;
         CityMeny cityMeny;
         TravelMenu travelMenu;
-
+        Inventory inv1, inv2;
         WorldMapMenu worldMapMenu;
 
         enum GameState
@@ -61,6 +61,13 @@ namespace Active
             previousGameState = GameState.Debug;
             gameState = GameState.Debug;
 
+
+            inv1 = new Inventory(100);
+            inv2 = new Inventory(200);
+            inv1.AddItem(ItemCreator.CreateItem(0,20));
+            inv1.AddItem(ItemCreator.CreateItem(1, 20));
+            inv2.AddItem(ItemCreator.CreateItem(2, 5));
+
             cityMeny = new CityMeny();
             worldMapMenu = new WorldMapMenu();
             worldMapMenu.LoadCities();
@@ -99,7 +106,11 @@ namespace Active
             }
             else if (gameState == GameState.TradeMenu)
             {
-
+                if (Trading.Update(ref inv1, ref inv2) == false)
+                {
+                    gameState = GameState.Debug;
+                }
+                
             }
             else if (gameState == GameState.InventoryMenu)
             {
@@ -176,7 +187,7 @@ namespace Active
             }
             else if (gameState == GameState.TradeMenu)
             {
-                
+                Trading.Draw(spriteBatch);
             }
             else if (gameState == GameState.InventoryMenu)
             {
