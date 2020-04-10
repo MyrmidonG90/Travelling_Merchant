@@ -37,23 +37,20 @@ namespace Active
             }
         }
 
-        static public Item createItem(int id, int amount)
+        static public Item CreateItem(int id, int amount)
         {
 
             Item newItem;
-            if (id == 1)
+            if (id == 0)
             {
-                id--;
                 newItem = new Item(itemData[id, 0], int.Parse(itemData[id, 1]), TextureManager.texCarrot, id, int.Parse(itemData[id, 2]), amount, itemData[id, 3]);
             }
-            else if (id == 2)
+            else if (id == 1)
             {
-                id--;
                 newItem = new Item(itemData[id, 0], int.Parse(itemData[id, 1]), TextureManager.texPotato, id, int.Parse(itemData[id, 2]), amount, itemData[id, 3]);
             }
-            else //id = 3
+            else //id = 2
             {
-                id--;
                 newItem = new Item(itemData[id, 0], int.Parse(itemData[id, 1]), TextureManager.texIronIngot, id, int.Parse(itemData[id, 2]), amount, itemData[id, 3]);
             }
             return newItem;

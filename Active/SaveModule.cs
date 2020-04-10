@@ -62,7 +62,7 @@ namespace Active
             {
                 string data = streamReader.ReadLine();
                 string[] data2 = data.Split(';');
-                Item newItem = ItemCreator.createItem(int.Parse(data2[0])+1, int.Parse(data2[1]));
+                Item newItem = ItemCreator.CreateItem(int.Parse(data2[0]), int.Parse(data2[1]));
                 temp.AddItem(newItem);
             }
 

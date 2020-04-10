@@ -182,15 +182,15 @@ namespace Active
             {
                 if (KMReader.prevKeyState.IsKeyUp(Keys.A) && KMReader.keyState.IsKeyDown(Keys.A))
                 {
-                    inventory.AddItem(ItemCreator.createItem(1, 20));
+                    inventory.AddItem(ItemCreator.CreateItem(0, 20));
                 }
                 if (KMReader.prevKeyState.IsKeyUp(Keys.B) && KMReader.keyState.IsKeyDown(Keys.B))
                 {
-                    inventory.AddItem(ItemCreator.createItem(2, 30));
+                    inventory.AddItem(ItemCreator.CreateItem(1, 30));
                 }
                 if (KMReader.prevKeyState.IsKeyUp(Keys.C) && KMReader.keyState.IsKeyDown(Keys.C))
                 {
-                    inventory.AddItem(ItemCreator.createItem(3, 10));
+                    inventory.AddItem(ItemCreator.CreateItem(2, 10));
                 }
             }
         }
