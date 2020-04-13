@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework;
+
 namespace Active
 {
     static class Trading
@@ -14,7 +16,6 @@ namespace Active
         static Inventory invLeft, invRight, tradeLeft, tradeRight, origLeftInv, origRightInv;
         static Slot[,] slotsLeft, slotsRight, tradeSlotsLeft, tradeSlotsRight;
         static Button accept, reset, back;
-        static int origLeftMoney,origRightMoney;
         enum Participant
         {
             Left,
@@ -23,20 +24,19 @@ namespace Active
             TradeSlotsRight,
             None
         }
-        static int counterCol, counterRow, tmpCounter, leftPrice, rightPrice, priceDifference;
+        static int counterCol, counterRow, leftPrice, rightPrice, priceDifference;
 
         // Klart
-        static public void Initialize(Inventory left, Inventory right) // Change name to Start
+        static public void Initialize(Inventory player, Inventory trader) // Change name to Start
         {
-            invLeft = left;
-            invRight = right;
-            origLeftMoney = left.Money;
-            origRightMoney = right.Money;
-            tradeLeft = new Inventory(origLeftMoney);
-            tradeRight = new Inventory(origRightMoney);
-            priceDifference = tradeLeft.Money - tradeRight.Money;
-            origLeftInv = left;
-            origRightInv = right;
+            invLeft = player;
+            invRight = trader;
+
+            tradeLeft = new Inventory(player.Money);
+            tradeRight = new Inventory(trader.Money);
+            priceDifference = 0;
+            origLeftInv = player;
+            origRightInv = trader;
             CreateSlots();
             CreateButtons();
         }
@@ -90,8 +90,7 @@ namespace Active
             back = new Button(160, 630, 500, 200, TextureManager.texBox);
         }
 
-        // Håller processen trading igång. När den returnerar false betyder det att transaktionen är ej över och vice versa när man returnerar true
-        // Klar?
+        // Klar
         static public bool Update(ref Inventory participantLeft, ref Inventory participantRight)
         {
             //När ett mussklick händer
@@ -264,29 +263,33 @@ namespace Active
             return false;
         }
         
-        //Ej klar
+        //Klar
         static bool AcceptTrade(ref Inventory participantLeft, ref Inventory participantRight)
         {
             //If nothing is presented
-            if (tradeLeft.ItemList.Count == 0 && tradeRight.ItemList.Count == 0)// !!!Något fel här!!!
+            if (tradeLeft.ItemList.Count == 0 && tradeRight.ItemList.Count == 0)
             {
                 return false;
             }
-            //If player and Merchant doesn't enough space in inventory Advance.
-            //Else prompt that the player doesn't have enough space
-            if (invLeft.ItemList.Count < 24 && invRight.ItemList.Count < 24)
+            //If player and Merchant doesn't have enough space in inventory.
+            if (invLeft.ItemList.Count > 23 && invRight.ItemList.Count > 23)
             {
                 return false;
             }
 
             //If player doesn't have enough coin and merchant neither.
-            //Else prompt that you do not have enough gold
-            if (priceDifference != 0)
+            if (invLeft.Money+leftPrice-rightPrice < 0)
+            {
+                return false;
+            }
+            if (invRight.Money + rightPrice-leftPrice < 0)
             {
                 return false;
             }
 
-            // Update both player and merchant's inventory            
+            // Update both player and merchant's inventory
+            invLeft.Money += leftPrice - rightPrice;
+            invRight.Money += rightPrice - leftPrice;
             participantLeft = invLeft;
             participantRight = invRight;
             return true;
@@ -336,8 +339,10 @@ namespace Active
             tradeLeft.ItemList.Clear();
             tradeRight.ItemList.Clear();
             UpdateSlots();
+            UpdatePrices();
         }
 
+        //Klar
         static bool Exit()
         {
             invLeft = null;
@@ -351,13 +356,10 @@ namespace Active
             slotsLeft = null;
             slotsRight = null;
 
-            origLeftMoney = 0;
-            origRightMoney = 0;
-
             return true;
         }
 
-        // Ej klar, måste införa antal pengar och sånt
+        // Klar
         static public void Draw(SpriteBatch sb)
         {
             foreach (var item in slotsLeft)
@@ -379,6 +381,18 @@ namespace Active
             accept.Draw(sb);
             reset.Draw(sb);
             back.Draw(sb);
+            sb.DrawString(TextureManager.font,"Player money: " , new Microsoft.Xna.Framework.Vector2(1920/2,1080/2),Color.White);
+            sb.DrawString(TextureManager.font, "Merchant money: ", new Microsoft.Xna.Framework.Vector2(1920 / 2+500, 1080 / 2), Color.White);
+            if (priceDifference < 0)
+            {
+                sb.DrawString(TextureManager.font, "Cost: " + priceDifference*-1, new Microsoft.Xna.Framework.Vector2(1920 / 2, 1080 / 2+20), Color.White);
+            }
+            else
+            {
+                sb.DrawString(TextureManager.font, "Gain: " + priceDifference, new Microsoft.Xna.Framework.Vector2(1920 / 2, 1080 / 2+20), Color.White);
+            }
+            
+            
         }
     }
 }
