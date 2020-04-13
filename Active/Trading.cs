@@ -14,6 +14,7 @@ namespace Active
         static Inventory invLeft, invRight, tradeLeft, tradeRight, origLeftInv, origRightInv;
         static Slot[,] slotsLeft, slotsRight, tradeSlotsLeft, tradeSlotsRight;
         static Button accept, reset, back;
+        static int origLeftMoney,origRightMoney;
         enum Participant
         {
             Left,
@@ -29,8 +30,11 @@ namespace Active
         {
             invLeft = left;
             invRight = right;
-            tradeLeft = new Inventory(left.Money);
-            tradeRight = new Inventory(right.Money);
+            origLeftMoney = left.Money;
+            origRightMoney = right.Money;
+            tradeLeft = new Inventory(origLeftMoney);
+            tradeRight = new Inventory(origRightMoney);
+            priceDifference = tradeLeft.Money - tradeRight.Money;
             origLeftInv = left;
             origRightInv = right;
             CreateSlots();
@@ -98,7 +102,7 @@ namespace Active
                 {
                     if (AcceptTrade(ref participantLeft, ref participantRight))
                     {
-                        return true;
+                        return Exit();
                     }
                 }
                 // Om knappen reset klickas
@@ -109,7 +113,7 @@ namespace Active
                 // Om knappen back klickas
                 else if (back.Click())
                 {
-                    return true;
+                    return Exit();
                 }
                 // Checkar om man har klickat på inventory:n
                 else
@@ -125,70 +129,13 @@ namespace Active
                         }
                     }
                     
-                    // glömde lägga till 
+                    
                 }
             }
 
             return false;
         }
-
-        //Lite till
-        static bool CheckSlotClick(Slot[,] slots, Participant participant)
-        {
-            counterCol = 0;
-            counterRow = 0;
-            
-
-            while (counterCol <= slots.GetLength(1)-1 && slots[counterCol, counterRow].Clicked() == false)
-            {
-                while (counterRow < slots.GetLength(1) - 1 && slots[counterCol, counterRow].Clicked() == false)
-                {
-                    ++counterRow;
-                }
-
-                if (slots[counterCol, counterRow].Clicked() == false)
-                {
-                    counterRow = 0;
-                    ++counterCol;
-                }
-            }
-            if (counterCol == slots.GetLength(1))
-            {
-                --counterCol;
-            }
-
-
-            if (slots[counterCol, counterRow].Clicked() == true && slots[counterCol, counterRow].Item != null) // Om Slots:en som tillhör inventory:n har blivit klickat
-            {
-                if (participant == Participant.Left)
-                {
-
-                    tradeLeft.AddItem(slots[counterCol, counterRow].Item.ID, 1);// Lägger till item till det vänstra trade fältet   // Error Finns inte
-                    invLeft.ReduceAmountOfItems(slots[counterCol, counterRow].Item.ID, 1);
-                }
-                else if (participant == Participant.Right)
-                {
-                    tradeRight.AddItem(slots[counterCol, counterRow].Item.ID, 1); // Lägger till item till det högra trade fältet
-                    invRight.ReduceAmountOfItems(slots[counterCol, counterRow].Item.ID, 1);
-                }
-                else if (participant == Participant.TradeSlotsLeft)
-                {
-                    tradeLeft.ReduceAmountOfItems(slots[counterCol, counterRow].Item.ID, 1);
-                    invLeft.AddItem(slots[counterCol, counterRow].Item.ID, 1);
-                }
-                else if (participant == Participant.TradeSlotsRight)
-                {
-                     tradeRight.ReduceAmountOfItems(slots[counterCol, counterRow].Item.ID, 1);
-                    invRight.AddItem(slots[counterCol, counterRow].Item.ID, 1);
-                }
-                UpdateSlots();
-                UpdatePrices();
-                return true;
-            }
-
-            return false;
-        }
-
+       
         // Klar
         //Uppdaterar Slots
         static void UpdateSlots()
@@ -252,7 +199,72 @@ namespace Active
             }
         }
 
-        //Klar?
+        //Klar
+        static void UpdatePrices()
+        {
+            leftPrice = CheckValue(tradeLeft);
+            rightPrice = CheckValue(tradeRight);
+            priceDifference = leftPrice - rightPrice;
+        }
+
+        //Klar
+        static bool CheckSlotClick(Slot[,] slots, Participant participant)
+        {
+            counterCol = 0;
+            counterRow = 0;
+            
+
+            while (counterCol <= slots.GetLength(1)-1 && slots[counterCol, counterRow].Clicked() == false)
+            {
+                while (counterRow < slots.GetLength(1) - 1 && slots[counterCol, counterRow].Clicked() == false)
+                {
+                    ++counterRow;
+                }
+
+                if (slots[counterCol, counterRow].Clicked() == false)
+                {
+                    counterRow = 0;
+                    ++counterCol;
+                }
+            }
+            if (counterCol == slots.GetLength(1))
+            {
+                --counterCol;
+            }
+
+
+            if (slots[counterCol, counterRow].Clicked() == true && slots[counterCol, counterRow].Item != null) // Om Slots:en som tillhör inventory:n har blivit klickat
+            {
+                if (participant == Participant.Left)
+                {
+
+                    tradeLeft.AddItem(slots[counterCol, counterRow].Item.ID, 1);// Lägger till item till det vänstra trade fältet   // Error Finns inte
+                    invLeft.ReduceAmountOfItems(slots[counterCol, counterRow].Item.ID, 1);
+                }
+                else if (participant == Participant.Right)
+                {
+                    tradeRight.AddItem(slots[counterCol, counterRow].Item.ID, 1); // Lägger till item till det högra trade fältet
+                    invRight.ReduceAmountOfItems(slots[counterCol, counterRow].Item.ID, 1);
+                }
+                else if (participant == Participant.TradeSlotsLeft)
+                {
+                    tradeLeft.ReduceAmountOfItems(slots[counterCol, counterRow].Item.ID, 1);
+                    invLeft.AddItem(slots[counterCol, counterRow].Item.ID, 1);
+                }
+                else if (participant == Participant.TradeSlotsRight)
+                {
+                     tradeRight.ReduceAmountOfItems(slots[counterCol, counterRow].Item.ID, 1);
+                    invRight.AddItem(slots[counterCol, counterRow].Item.ID, 1);
+                }
+                UpdateSlots();
+                UpdatePrices();
+                return true;
+            }
+
+            return false;
+        }
+        
+        //Ej klar
         static bool AcceptTrade(ref Inventory participantLeft, ref Inventory participantRight)
         {
             //If nothing is presented
@@ -262,7 +274,7 @@ namespace Active
             }
             //If player and Merchant doesn't enough space in inventory Advance.
             //Else prompt that the player doesn't have enough space
-            if (invLeft.ItemList.Count < 24 || invRight.ItemList.Count < 24)
+            if (invLeft.ItemList.Count < 24 && invRight.ItemList.Count < 24)
             {
                 return false;
             }
@@ -289,55 +301,8 @@ namespace Active
                 sum += inv.ItemList[i].BasePrice * inv.ItemList[i].Amount;
             }
             return sum;
-        }
-
-        //Klar
-        static void UpdatePrices()
-        {
-            leftPrice = CheckValue(tradeLeft);
-            rightPrice = CheckValue(tradeRight);
-            priceDifference = leftPrice - rightPrice;
-        }
-
-        //Klar
-        static void ConstructSlots(Inventory inventory)
-        {
-            // Konstrurerar inventory slots
-            for (int i = 0; i < 5; i++)
-            {
-                for (int j = 0; j < 5; j++)
-                {
-                    try
-                    {
-                        slotsLeft[j, i].Item = invLeft.ItemList[i * 5 + j];
-                    }
-                    catch (Exception)
-                    {
-                        slotsLeft[j, i].Item = null;
-                    }
-                    try
-                    {
-                        slotsRight[j, i].Item = invRight.ItemList[i * 5 + j];
-                    }
-                    catch (Exception)
-                    {
-                        slotsRight[j, i].Item = null;
-                    }
-
-                }
-            }
-
-            // Konstruerar trade rutorna
-            for (int i = 0; i < 3; i++)
-            {
-                for (int j = 0; j < 3; j++)
-                {
-                    tradeSlotsLeft[j, i].Item = null;
-                    tradeSlotsRight[j, i].Item = null;
-                }
-            }
-        }
-
+        }        
+        
         // Klar
         static void ResetTrade()
         {
@@ -357,33 +322,39 @@ namespace Active
             {
                 item.Reset();
             }
-
+            
             invLeft = origLeftInv;
             invRight = origRightInv;
+            foreach (var item in tradeLeft.ItemList)
+            {
+                invLeft.AddItem(item);
+            }
+            foreach (var item in tradeRight.ItemList)
+            {
+                invRight.AddItem(item);
+            }
+            tradeLeft.ItemList.Clear();
+            tradeRight.ItemList.Clear();
             UpdateSlots();
         }
 
-        static void CancelTrade()
+        static bool Exit()
         {
-            foreach (var item in tradeSlotsLeft)
-            {
-                item.Reset();
-            }
-            foreach (var item in tradeSlotsRight)
-            {
-                item.Reset();
-            }
-            foreach (var item in slotsLeft)
-            {
-                item.Reset();
-            }
-            foreach (var item in slotsRight)
-            {
-                item.Reset();
-            }
-
             invLeft = null;
             invRight = null;
+            tradeLeft = null;
+            tradeRight = null;
+            origLeftInv = null;
+            origRightInv = null;            
+            tradeSlotsLeft = null;
+            tradeSlotsRight = null;
+            slotsLeft = null;
+            slotsRight = null;
+
+            origLeftMoney = 0;
+            origRightMoney = 0;
+
+            return true;
         }
 
         // Ej klar, måste införa antal pengar och sånt
