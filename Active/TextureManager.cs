@@ -12,13 +12,14 @@ namespace Active
 
 
         static public Texture2D texMap;
-        static public Texture2D WhiteTex;
+        static public Texture2D texWhite;
         static public Texture2D texCarrot;
         static public Texture2D texPotato;
         static public Texture2D texIronIngot;
         static public Texture2D texBox;
         static public Texture2D texSelect;
         static public Texture2D texBackArrow;
+
         static public void LoadContent(ContentManager content)
         {
             font = content.Load<SpriteFont>("File");
@@ -27,7 +28,7 @@ namespace Active
 
             texBox = content.Load<Texture2D>("box");
             texMap = content.Load<Texture2D>("merchant_map_with_nothing");
-            WhiteTex = content.Load<Texture2D>("White");
+            texWhite = content.Load<Texture2D>("White");
             texCarrot = content.Load<Texture2D>("carrot");
             texPotato = content.Load<Texture2D>("potato");
             texIronIngot = content.Load<Texture2D>("iron_ingot");
