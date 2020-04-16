@@ -45,10 +45,6 @@ namespace Active
             return false;
         }
 
-        public void Update(GameTime gameTime)
-        {
-
-        }
 
         public void Draw(SpriteBatch spriteBatch)
         {
