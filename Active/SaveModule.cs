@@ -14,6 +14,7 @@ namespace Active
 {
     static class SaveModule
     {
+
         static public bool GenerateSave(Inventory inventory)
         {
             string path = Path.Combine("./Saves/", "Save-" + DateTime.Now.ToString() + ".ptmsave");

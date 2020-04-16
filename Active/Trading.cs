@@ -210,8 +210,7 @@ namespace Active
         static bool CheckSlotClick(Slot[,] slots, Participant participant)
         {
             counterCol = 0;
-            counterRow = 0;
-            
+            counterRow = 0;         
 
             while (counterCol <= slots.GetLength(1)-1 && slots[counterCol, counterRow].Clicked() == false)
             {
@@ -231,12 +230,10 @@ namespace Active
                 --counterCol;
             }
 
-
             if (slots[counterCol, counterRow].Clicked() == true && slots[counterCol, counterRow].Item != null) // Om Slots:en som tillhör inventory:n har blivit klickat
             {
                 if (participant == Participant.Left)
                 {
-
                     tradeLeft.AddItem(slots[counterCol, counterRow].Item.ID, 1);// Lägger till item till det vänstra trade fältet   // Error Finns inte
                     invLeft.ReduceAmountOfItems(slots[counterCol, counterRow].Item.ID, 1);
                 }
@@ -259,7 +256,6 @@ namespace Active
                 UpdatePrices();
                 return true;
             }
-
             return false;
         }
         

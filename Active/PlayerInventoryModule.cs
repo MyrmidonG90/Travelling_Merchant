@@ -40,12 +40,12 @@ namespace Active
             mainBox = new Rectangle(260, 140, 1400, 880);
             inventoryBox = new Rectangle(300, 180, 720, 720);
             categoryBox = new Rectangle(1100, 750, 120, 120);
-            disposeButton = new Button(1560, 920, 70, 70, TextureManager.WhiteTex);
+            disposeButton = new Button(1560, 920, 70, 70, TextureManager.texWhite);
             returnButton = new Button(20, 20, 80, 80, TextureManager.texBackArrow);
             disposeBox = new Rectangle(660, 240, 600, 500);
             disposeBar = new Rectangle(710, 500, 520, 20);
-            disposeDragger = new Button(710, 480, 20, 60, TextureManager.WhiteTex);
-            disposeOKButton = new Button(900, 640, 120, 60, TextureManager.WhiteTex);
+            disposeDragger = new Button(710, 480, 20, 60, TextureManager.texWhite);
+            disposeOKButton = new Button(900, 640, 120, 60, TextureManager.texWhite);
 
             selectedSquare = 50; //50 means no slot is selected
 
@@ -80,8 +80,6 @@ namespace Active
 
         public void Update(GameTime gameTime)
         {
-            
-
             //Kollar om man har selectat ett item i inventoryn
             if (KMReader.MouseClick())
             {
@@ -200,9 +198,9 @@ namespace Active
         public void Draw(SpriteBatch spriteBatch)
         {
             returnButton.Draw(spriteBatch);
-            spriteBatch.Draw(TextureManager.WhiteTex, mainBox, Color.Wheat);
+            spriteBatch.Draw(TextureManager.texWhite, mainBox, Color.Wheat);
             spriteBatch.DrawString(TextureManager.fontInventory, "Currency: " + inventory.Money.ToString(), new Vector2(300, 920), Color.White);
-            spriteBatch.Draw(TextureManager.WhiteTex, inventoryBox, Color.DarkGray);
+            spriteBatch.Draw(TextureManager.texWhite, inventoryBox, Color.DarkGray);
 
             int counter = 0;
             foreach (Item tempItem in inventory.ItemList)
@@ -251,14 +249,14 @@ namespace Active
 
             if (disposing)
             {
-                spriteBatch.Draw(TextureManager.WhiteTex, disposeBox, Color.LightGray);
+                spriteBatch.Draw(TextureManager.texWhite, disposeBox, Color.LightGray);
                 Vector2 temp = TextureManager.fontInventory.MeasureString("Select amount to remove");
                 spriteBatch.DrawString(TextureManager.fontInventory, "Select amount to remove", new Vector2((1920-temp.X)/2, 260), Color.Black);
 
                 temp = TextureManager.fontInventory.MeasureString(numberToDispose.ToString());
                 spriteBatch.DrawString(TextureManager.fontInventory, numberToDispose.ToString(), new Vector2((1920 - temp.X) / 2, 360), Color.Black);
 
-                spriteBatch.Draw(TextureManager.WhiteTex, disposeBar, Color.LightSeaGreen);
+                spriteBatch.Draw(TextureManager.texWhite, disposeBar, Color.LightSeaGreen);
 
                 disposeOKButton.Draw(spriteBatch);
                 disposeDragger.Draw(spriteBatch);                
