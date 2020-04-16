@@ -13,15 +13,15 @@ namespace Active
 {
     public class CityMeny
     {
-        private Button InventoryButton;
-        private Button TradeButton;
-        private Button MapButton;
+        Button inventoryButton;
+        Button tradeButton;
+        Button mapButton;
 
         public CityMeny()
         {
-            InventoryButton = new Button(70, 920, 230, 120, TextureManager.WhiteTex);
-            TradeButton = new Button(420, 920, 230, 120, TextureManager.WhiteTex);
-            MapButton = new Button(1620, 920, 230, 120, TextureManager.WhiteTex);
+            inventoryButton = new Button(70, 920, 230, 120, TextureManager.texWhite);
+            tradeButton = new Button(420, 920, 230, 120, TextureManager.texWhite);
+            mapButton = new Button(1620, 920, 230, 120, TextureManager.texWhite);
         }
 
         public void Update(GameTime gameTime)
@@ -30,7 +30,7 @@ namespace Active
         }
         public bool CheckInvButton()
         {
-            if (InventoryButton.Click())
+            if (inventoryButton.Click())
             {
                 return true;
             }
@@ -38,7 +38,7 @@ namespace Active
         }
         public bool CheckTradeButton()
         {
-            if (TradeButton.Click())
+            if (tradeButton.Click())
             {
                 return true;
             }
@@ -46,7 +46,7 @@ namespace Active
         }
         public bool CheckMapButton()
         {
-            if (MapButton.Click())
+            if (mapButton.Click())
             {
                 return true;
             }
@@ -55,9 +55,9 @@ namespace Active
         public void Draw(SpriteBatch spriteBatch)
         {
 
-            InventoryButton.Draw(spriteBatch);
-            TradeButton.Draw(spriteBatch);
-            MapButton.Draw(spriteBatch);
+            inventoryButton.Draw(spriteBatch);
+            tradeButton.Draw(spriteBatch);
+            mapButton.Draw(spriteBatch);
             spriteBatch.DrawString(TextureManager.font, "CITY NAME: ", new Vector2(30, 50), Color.Black, 0, Vector2.Zero, 4, SpriteEffects.None, 1);
             spriteBatch.DrawString(TextureManager.font, "City Type: ", new Vector2(40, 120), Color.Black, 0, Vector2.Zero, 2, SpriteEffects.None, 1);
             spriteBatch.DrawString(TextureManager.font, "Population: ", new Vector2(40, 160), Color.Black, 0, Vector2.Zero, 2, SpriteEffects.None, 1);
