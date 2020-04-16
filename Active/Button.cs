@@ -14,7 +14,7 @@ namespace Active
         private Rectangle hitBox;
         private Texture2D tex;
 
-        public string name;
+        private string name;
 
         public Button(int x, int y, int xLength, int yLength, string name, Texture2D tex)
         {
@@ -47,12 +47,32 @@ namespace Active
 
         public void Update(GameTime gameTime)
         {
-            
+
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(tex, hitBox, Color.White);
+        }
+
+        public Rectangle HitBox
+        {
+            get
+            {
+                return hitBox;
+            }
+            set
+            {
+                hitBox = value;
+            }
+        }
+
+        public string Name
+        {
+            get
+            {
+                return name;
+            }
         }
     }
 }

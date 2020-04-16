@@ -7,13 +7,13 @@ using System.IO;
 
 namespace Active
 {
-    class ItemCreator
+    static class ItemCreator
     {
 
-        public string[,] itemData;
-        int length;
+        static public string[,] itemData;
+        static int length;
 
-        public ItemCreator()
+        static public void LoadItemData()
         {
             StreamReader streamReader = new StreamReader("./Data/Items.txt");
 
@@ -35,25 +35,23 @@ namespace Active
             {
                 itemData[i, 3] = itemData[i, 3].Replace(";", "\n");
             }
+            streamReader.Close();
         }
 
-        public Item createItem(int id, int amount)
+        static public Item CreateItem(int id, int amount)
         {
 
             Item newItem;
-            if (id == 1)
+            if (id == 0)
             {
-                id--;
                 newItem = new Item(itemData[id, 0], int.Parse(itemData[id, 1]), TextureManager.texCarrot, id, int.Parse(itemData[id, 2]), amount, itemData[id, 3]);
             }
-            else if (id == 2)
+            else if (id == 1)
             {
-                id--;
                 newItem = new Item(itemData[id, 0], int.Parse(itemData[id, 1]), TextureManager.texPotato, id, int.Parse(itemData[id, 2]), amount, itemData[id, 3]);
             }
-            else //id = 3
+            else //id = 2
             {
-                id--;
                 newItem = new Item(itemData[id, 0], int.Parse(itemData[id, 1]), TextureManager.texIronIngot, id, int.Parse(itemData[id, 2]), amount, itemData[id, 3]);
             }
             return newItem;

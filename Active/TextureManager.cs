@@ -17,6 +17,8 @@ namespace Active
         static public Texture2D texPotato;
         static public Texture2D texIronIngot;
         static public Texture2D texBox;
+        static public Texture2D texSelect;
+        static public Texture2D texBackArrow;
         static public void LoadContent(ContentManager content)
         {
             font = content.Load<SpriteFont>("File");
@@ -29,6 +31,8 @@ namespace Active
             texCarrot = content.Load<Texture2D>("carrot");
             texPotato = content.Load<Texture2D>("potato");
             texIronIngot = content.Load<Texture2D>("iron_ingot");
+            texSelect = content.Load<Texture2D>("select");
+            texBackArrow = content.Load<Texture2D>("backarrow");
         }
 
     }

@@ -38,5 +38,13 @@ namespace Active
             }
             return false;
         }
+        public static bool HeldMouseClick()
+        {
+            if (prevMouseState.LeftButton == ButtonState.Pressed && mouseState.LeftButton == ButtonState.Pressed)
+            {
+                return true;
+            }
+            return false;
+        }
     }
 }
