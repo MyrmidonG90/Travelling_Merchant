@@ -16,7 +16,7 @@ namespace Active
         Button[] cityButtons = new Button[3];
         Button[] travelButtons = new Button[3];
         bool showText;
-      
+        
         string cityName;
         string cityInfo;
         Vector2 cityCords;
@@ -66,10 +66,10 @@ namespace Active
                 if (button.Click())
                 {
 
-
+                    //------------------------//
                     //INSERT TRAVEL TO CITY HERE
+                    //------------------------//
 
-                    
                 }
             }
 
@@ -91,11 +91,6 @@ namespace Active
             if (showText)
             {
                 spriteBatch.DrawString(TextureManager.fontInventory, cityName, new Vector2(cityCords.X + 80, cityCords.Y), Color.White);
-                //spriteBatch.DrawString(TextureManager.font, "Carrot Town is the great city of carrots." +
-                //    "\r\nIts agricultural roots can be traced \r\nthousands of years! There is no better " +
-                //    "\r\nplace to buy fruits, vegetables \r\nand, of course, carrots.", new Vector2(cityCords.X + 80, cityCords.Y + 40), Color.White);
-
-                //Funkar inte 
                 spriteBatch.DrawString(TextureManager.font, cityInfo, new Vector2(cityCords.X + 80, cityCords.Y + 40), Color.White); 
 
                 foreach (Button button in travelButtons)
