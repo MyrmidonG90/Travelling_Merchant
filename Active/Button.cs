@@ -11,10 +11,10 @@ namespace Active
 {
     public class Button
     {
-        private Rectangle hitBox;
-        private Texture2D tex;
+        Rectangle hitBox;
+        Texture2D tex;
 
-        private string name;
+        string name;
 
         public Button(int x, int y, int xLength, int yLength, string name, Texture2D tex)
         {
@@ -23,6 +23,7 @@ namespace Active
             this.tex = tex;
             this.name = name;
         }
+
         public Button(int x, int y, int xLength, int yLength, Texture2D tex)
         {
             hitBox = new Rectangle(x, y, xLength, yLength);

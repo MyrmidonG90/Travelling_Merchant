@@ -13,9 +13,9 @@ namespace Active
 {
     public class CityMeny
     {
-        private Button InventoryButton;
-        private Button TradeButton;
-        private Button MapButton;
+        Button InventoryButton;
+        Button TradeButton;
+        Button MapButton;
 
         public CityMeny()
         {
