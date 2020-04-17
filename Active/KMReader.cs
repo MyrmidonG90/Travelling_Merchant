@@ -22,14 +22,17 @@ namespace Active
             keyState = Keyboard.GetState();
             mouseState = Mouse.GetState();
         }
+
         public static Vector2 GetMouseVector2()
         {
             return new Vector2(mouseState.Position.X, mouseState.Position.Y);
         }
+
         public static Point GetMousePoint()
         {
             return mouseState.Position;
         }
+
         public static bool MouseClick()
         {
             if (prevMouseState.LeftButton == ButtonState.Released && mouseState.LeftButton == ButtonState.Pressed)
@@ -38,6 +41,7 @@ namespace Active
             }
             return false;
         }
+
         public static bool HeldMouseClick()
         {
             if (prevMouseState.LeftButton == ButtonState.Pressed && mouseState.LeftButton == ButtonState.Pressed)
@@ -46,5 +50,6 @@ namespace Active
             }
             return false;
         }
+
     }
 }

@@ -11,13 +11,13 @@ namespace Active
 {
     class Item
     {
-        private string name;
-        private int basePrice;
-        private Texture2D tex;
-        private int id;
-        private int category;
-        private int amount;
-        private string description;
+        string name;
+        int basePrice;
+        Texture2D tex;
+        int id;
+        int category;
+        int amount;
+        string description;
 
         public Item(string n, int bp, Texture2D tex, int id, int c, int a, string d)
         {

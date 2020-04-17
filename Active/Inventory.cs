@@ -8,8 +8,9 @@ namespace Active
 {
     class Inventory
     {
-        private int money;
-        private List<Item> itemList;
+        int money;
+        List<Item> itemList;
+
         public Inventory(int m, List<Item> iL)
         {
             money = m;
@@ -76,7 +77,9 @@ namespace Active
                 itemList.RemoveAt(FindIndexOf(itemID));
             }
         }
-        private int FindIndexOf(int itemID)
+
+        int FindIndexOf(int itemID)
+
         {
             bool found = false;
             int tmpCounter = 0;
