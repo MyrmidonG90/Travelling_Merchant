@@ -13,10 +13,13 @@ namespace Active
         static public string[,] itemData;
         static int length;
 
+        //This method is responsible for loading in data for all the items in the game the data file is structured as follows:
+        //the first line only contains a number which has to be correspondent to the number of items that are currently present
+        //in the data-file after that each line contains the data for one item with the following the following format: [NAME],[BASE PRICE],[CATEGORY],[DESCRIPTION]
+        //the final bit of the method is used to replace the "stand-ins" we use for new-lines since it will not work if you try and read "\n" from a external file
         static public void LoadItemData()
         {
             StreamReader streamReader = new StreamReader("./Data/Items.txt");
-
 
             length = int.Parse(streamReader.ReadLine());
             itemData = new string[length, 4];

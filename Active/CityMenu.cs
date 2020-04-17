@@ -11,13 +11,13 @@ using Microsoft.Xna.Framework.Input;
 
 namespace Active
 {
-    public class CityMeny
+    public class CityMenu
     {
         Button inventoryButton;
         Button tradeButton;
         Button mapButton;
 
-        public CityMeny()
+        public CityMenu()
         {
             inventoryButton = new Button(70, 920, 230, 120, TextureManager.texWhite);
             tradeButton = new Button(420, 920, 230, 120, TextureManager.texWhite);

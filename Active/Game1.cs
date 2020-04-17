@@ -17,7 +17,7 @@ namespace Active
         SpriteBatch spriteBatch;
 
         PlayerInventoryModule playerInventoryModule;
-        CityMeny cityMeny;
+        CityMenu cityMeny;
         TravelMenu travelMenu;
         Inventory inv1, inv2;
         WorldMapMenu worldMapMenu;
@@ -68,7 +68,7 @@ namespace Active
             inv1.AddItem(ItemCreator.CreateItem(1, 20));
             inv2.AddItem(ItemCreator.CreateItem(2, 5));
             Trading.Initialize(inv1,inv2);
-            cityMeny = new CityMeny();
+            cityMeny = new CityMenu();
             worldMapMenu = new WorldMapMenu();
             worldMapMenu.LoadCities();
             playerInventoryModule = new PlayerInventoryModule();
