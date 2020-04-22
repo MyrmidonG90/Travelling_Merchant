@@ -80,7 +80,7 @@ namespace Active
                                     itemList[FindStackNotFull(itemID)].Amount += amount; // Ändrar summan av totala antalet av den item:et
                                     working = true;
                                 }
-                            }                            
+                            }
                         }
                     }
                 }
@@ -90,7 +90,7 @@ namespace Active
                     {
                         ItemList.Add(ItemCreator.CreateItem(itemID, amount));
                         working = true;
-                    }                    
+                    }
                 }
             }
             return working;
@@ -149,6 +149,10 @@ namespace Active
                     {
                         ++tmpCounter;
                     }
+                }
+                else
+                {
+                    ++tmpCounter;
                 }
             }
             return answer;
