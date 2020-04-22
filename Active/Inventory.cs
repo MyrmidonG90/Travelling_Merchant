@@ -8,21 +8,27 @@ namespace Active
 {
     class Inventory
     {
-        int money, stackLimit;
+        int money, stackLimit, invLimit;
         List<Item> itemList;
         
         public Inventory(int m, List<Item> iL)
         {
             money = m;
             itemList = iL;
-            stackLimit = 50;
+            Initialize();
         }
         public Inventory(int m)
         {
             money = m;
             itemList = new List<Item>();
+            Initialize();
         }
 
+        void Initialize()
+        {
+            stackLimit = 50;
+            invLimit = 24;
+        }
         public bool AddItem(Item newItem)
         {
             return AddItem(newItem.ID,newItem.Amount);
@@ -30,37 +36,64 @@ namespace Active
 
         public bool AddItem(int itemID, int amount)
         {
-            if (itemList.Count <= 24) // Om det finns plats i listan för en ny item
+            bool working = false;
+            if (itemList.Count <= invLimit) // Om det finns plats i listan för en ny item
             {
                 if (FindIndexOf(itemID) != -1) // Om den redan finns i listan
                 {
                     if (itemList[FindIndexOf(itemID)].Amount + amount <= stackLimit ) // Om stacken som item:et är med i har plats
                     {
                         itemList[FindIndexOf(itemID)].Amount += amount; // Ändrar summan av totala antalet av den item:et
-                        return true;
+                        working = true;
                     }
                     else // Om stacken som item:et är med i inte har plats
                     {
-                        if (itemList.Count < 24) // Om det finns plats för att göra en ny stack
+                        if (itemList.Count < invLimit) // Om det finns plats för att göra en ny stack
                         {
-                            int tmp = itemList[FindIndexOf(itemID)].Amount + amount - stackLimit;
-                            itemList[FindIndexOf(itemID)].Amount += amount - tmp;
-                            ItemList.Add(ItemCreator.CreateItem(itemID, tmp));
-                            return true;
+                            if (FindStackNotFull(itemID) != -1)
+                            {
+                                if (itemList[FindStackNotFull(itemID)].Amount + amount <= stackLimit)
+                                {
+                                    itemList[FindStackNotFull(itemID)].Amount += amount; // Ändrar summan av totala antalet av den item:et
+                                    working = true;
+                                }
+                                else
+                                {
+                                    int tmp = itemList[FindStackNotFull(itemID)].Amount + amount - stackLimit;
+                                    itemList[FindStackNotFull(itemID)].Amount += amount - tmp;
+                                    ItemList.Add(ItemCreator.CreateItem(itemID, tmp));
+                                    working = true;
+                                }
+                            }
+                            else
+                            {
+                                ItemList.Add(ItemCreator.CreateItem(itemID, amount));
+                                working = true;
+                            }
                         }
-                        else // Om det inte finns plats för stacken
+                        else
                         {
-                            return false;
-                        }                        
+                            if (FindStackNotFull(itemID) != -1)
+                            {
+                                if (itemList[FindStackNotFull(itemID)].Amount + amount <= stackLimit) // Om stacken som item:et är med i har plats
+                                {
+                                    itemList[FindStackNotFull(itemID)].Amount += amount; // Ändrar summan av totala antalet av den item:et
+                                    working = true;
+                                }
+                            }                            
+                        }
                     }
                 }
                 else // Om item:et inte redan finns i inventory:n.
                 {
-                    ItemList.Add(ItemCreator.CreateItem(itemID, amount));
-                    return true;
+                    if (itemList.Count < invLimit)
+                    {
+                        ItemList.Add(ItemCreator.CreateItem(itemID, amount));
+                        working = true;
+                    }                    
                 }
             }
-            return false;
+            return working;
             //här ska det läggas till någon prompt att det inte går att lägga till pga plats
         }
 
@@ -78,7 +111,6 @@ namespace Active
         }
 
         int FindIndexOf(int itemID)
-
         {
             bool found = false;
             int tmpCounter = 0;
@@ -98,6 +130,30 @@ namespace Active
             }
             return answer;            
         }
+
+        int FindStackNotFull(int itemID)
+        {
+            bool found = false;
+            int tmpCounter = 0;
+            int answer = -1;
+            while (found == false && tmpCounter < itemList.Count)
+            {
+                if (itemList[tmpCounter].ID == itemID)
+                {
+                    if (itemList[tmpCounter].Amount != stackLimit)
+                    {
+                        found = true;
+                        answer = tmpCounter;
+                    }
+                    else
+                    {
+                        ++tmpCounter;
+                    }
+                }
+            }
+            return answer;
+        }
+
         public int Money
         {
             get
