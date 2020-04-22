@@ -64,6 +64,7 @@
     <Compile Include="Item.cs" />
     <Compile Include="ItemCreator.cs" />
     <Compile Include="KMReader.cs" />
+    <Compile Include="ModifierManager.cs" />
     <Compile Include="PlayerInventoryModule.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

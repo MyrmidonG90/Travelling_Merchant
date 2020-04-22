@@ -21,6 +21,7 @@ namespace Active
         TravelMenu travelMenu;
         Inventory inv1, inv2;
         WorldMapMenu worldMapMenu;
+        ModifierManager modifierManager;
 
         enum GameState
         {
@@ -73,6 +74,9 @@ namespace Active
             worldMapMenu.LoadCities();
             playerInventoryModule = new PlayerInventoryModule();
             travelMenu = new TravelMenu();
+            modifierManager = new ModifierManager();
+            modifierManager.LoadCityAndItemLists();
+
         }
 
         protected override void Update(GameTime gameTime)
@@ -103,6 +107,16 @@ namespace Active
             else if (gameState == GameState.MapMenu)
             {
                 worldMapMenu.Update(gameTime);
+                if (worldMapMenu.inventoryButton.Click())
+                {
+                    gameState = GameState.InventoryMenu;
+                }
+
+                if (worldMapMenu.returnButton.Click())
+                {
+                    gameState = GameState.CityMenu;
+                }
+
             }
             else if (gameState == GameState.TradeMenu)
             {
