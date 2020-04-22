@@ -15,6 +15,10 @@ namespace Active
         City[] cities = new City[3];
         Button[] cityButtons = new Button[3];
         Button[] travelButtons = new Button[3];
+
+        public Button inventoryButton = new Button(10, 20, 200, 50, TextureManager.texBox);
+        public Button returnButton = new Button(240, 20, 200, 50, TextureManager.texBox);
+
         bool showText;
         
         string cityName;
@@ -28,6 +32,7 @@ namespace Active
         {
 
             bool temp = false;
+
             foreach (Button button in cityButtons)
             {
                 if (button.Click())
@@ -86,13 +91,20 @@ namespace Active
                 button.Draw(spriteBatch);
             }
 
+
             
+            inventoryButton.Draw(spriteBatch);
+            returnButton.Draw(spriteBatch);
+            spriteBatch.DrawString(TextureManager.font, "Return", new Vector2(300, 20), Color.Red);
+            spriteBatch.DrawString(TextureManager.font, "Inventory", new Vector2(70, 20), Color.Red);
 
             if (showText)
             {
                 spriteBatch.DrawString(TextureManager.fontInventory, cityName, new Vector2(cityCords.X + 80, cityCords.Y), Color.White);
-                spriteBatch.DrawString(TextureManager.font, cityInfo, new Vector2(cityCords.X + 80, cityCords.Y + 40), Color.White); 
+                spriteBatch.DrawString(TextureManager.font, cityInfo, new Vector2(cityCords.X + 80, cityCords.Y + 40), Color.White);
 
+
+                
                 foreach (Button button in travelButtons)
                 {
                     if(button.Name == cityName)
