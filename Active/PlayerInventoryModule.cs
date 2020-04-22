@@ -12,11 +12,9 @@ namespace Active
 {
     class PlayerInventoryModule
     {
-        bool test;
         bool disposing;
         bool dragging;
         bool fix;
-        Inventory inventory;
         Item selected;
         int selectedSquare;
         int numberToDispose;
@@ -33,8 +31,6 @@ namespace Active
 
         public PlayerInventoryModule()
         {
-            inventory = new Inventory(100);
-            test = true;
             disposing = false;
 
             mainBox = new Rectangle(260, 140, 1400, 880);
@@ -90,7 +86,7 @@ namespace Active
                     {
                         try
                         {
-                            selected = inventory.ItemList[counter];
+                            selected = Player.Inventory.ItemList[counter];
                             selectedSquare = counter;
                         }
                         catch
@@ -118,11 +114,11 @@ namespace Active
                     disposeDragger.HitBox = new Rectangle(710, disposeDragger.HitBox.Y, disposeDragger.HitBox.Width, disposeDragger.HitBox.Height);
 
                     selected.Amount -= numberToDispose;
-                    foreach (Item tempItem in inventory.ItemList)
+                    foreach (Item tempItem in Player.Inventory.ItemList)
                     {
                         if (tempItem.Amount <= 0)
                         {
-                            Inventory.ItemList.Remove(tempItem);
+                            Player.Inventory.ItemList.Remove(tempItem);
                             selected = null;
                             selectedSquare = 50;
                             break;
@@ -175,35 +171,18 @@ namespace Active
                 {
                     dragging = false;
                 }
-            }
-
-            //debug funktioner
-            if (test)
-            {
-                if (KMReader.prevKeyState.IsKeyUp(Keys.A) && KMReader.keyState.IsKeyDown(Keys.A))
-                {
-                    inventory.AddItem(ItemCreator.CreateItem(0, 20));
-                }
-                if (KMReader.prevKeyState.IsKeyUp(Keys.B) && KMReader.keyState.IsKeyDown(Keys.B))
-                {
-                    inventory.AddItem(ItemCreator.CreateItem(1, 30));
-                }
-                if (KMReader.prevKeyState.IsKeyUp(Keys.C) && KMReader.keyState.IsKeyDown(Keys.C))
-                {
-                    inventory.AddItem(ItemCreator.CreateItem(2, 10));
-                }
-            }
+            }         
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
             returnButton.Draw(spriteBatch);
             spriteBatch.Draw(TextureManager.texWhite, mainBox, Color.Wheat);
-            spriteBatch.DrawString(TextureManager.fontInventory, "Currency: " + inventory.Money.ToString(), new Vector2(300, 920), Color.White);
+            spriteBatch.DrawString(TextureManager.fontInventory, "Currency: " + Player.Inventory.Money.ToString(), new Vector2(300, 920), Color.White);
             spriteBatch.Draw(TextureManager.texWhite, inventoryBox, Color.DarkGray);
 
             int counter = 0;
-            foreach (Item tempItem in inventory.ItemList)
+            foreach (Item tempItem in Player.Inventory.ItemList)
             {
                 tempItem.Draw(spriteBatch, inventoryGrid[counter]);
                 Vector2 temp = new Vector2();
@@ -260,18 +239,6 @@ namespace Active
 
                 disposeOKButton.Draw(spriteBatch);
                 disposeDragger.Draw(spriteBatch);                
-            }
-        }
-
-        public Inventory Inventory
-        {
-            get
-            {
-                return inventory;
-            }
-            set
-            {
-                inventory = value;
             }
         }
     }

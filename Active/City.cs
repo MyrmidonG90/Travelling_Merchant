@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Active
 {
-    class City
+    public class City
     {
 
         string name;
