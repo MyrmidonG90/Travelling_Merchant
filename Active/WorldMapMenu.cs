@@ -10,8 +10,7 @@ using System.Threading.Tasks;
 namespace Active
 {
     class WorldMapMenu
-    {
-        
+    {      
         City[] cities = new City[3];
         Button[] cityButtons = new Button[3];
         Button[] travelButtons = new Button[3];
@@ -25,8 +24,20 @@ namespace Active
         string cityInfo;
         Vector2 cityCords;
 
+        public string CheckNewTravel()
+        {
+            int counter = 0;
+            foreach (Button button in travelButtons)
+            {
+                if (button.Click())
+                {
+                    return cities[counter].Name;
+                }
+                counter++;
+            }
 
-
+            return null;
+        }
 
         public void Update(GameTime gameTime)
         {
@@ -65,22 +76,7 @@ namespace Active
                     }
                 }
             }
-
-            foreach (Button button in travelButtons)
-            {
-                if (button.Click())
-                {
-
-                    //------------------------//
-                    //INSERT TRAVEL TO CITY HERE
-                    //------------------------//
-
-                }
-            }
-
-
-
-            }
+        }
 
         public void Draw(SpriteBatch spriteBatch)
         {
@@ -90,8 +86,6 @@ namespace Active
             {
                 button.Draw(spriteBatch);
             }
-
-
             
             inventoryButton.Draw(spriteBatch);
             returnButton.Draw(spriteBatch);
@@ -102,9 +96,7 @@ namespace Active
             {
                 spriteBatch.DrawString(TextureManager.fontInventory, cityName, new Vector2(cityCords.X + 80, cityCords.Y), Color.White);
                 spriteBatch.DrawString(TextureManager.font, cityInfo, new Vector2(cityCords.X + 80, cityCords.Y + 40), Color.White);
-
-
-                
+            
                 foreach (Button button in travelButtons)
                 {
                     if(button.Name == cityName)
@@ -112,17 +104,12 @@ namespace Active
                         button.Draw(spriteBatch);
                     }
                 }
-            }
-            
-
+            }          
         }
 
         public void LoadCities()
         {
-
-
             StreamReader sr = new StreamReader("./Data/cityInfo.txt");
-
 
             int counter = 0;
             while (!sr.EndOfStream)
@@ -149,5 +136,27 @@ namespace Active
             }
         }
 
+        public City[] Cities
+        {
+            get
+            {
+                return cities;
+            }
+        }
+
+        public string CityName
+        {
+            get
+            {
+                return cityName;
+            }
+        }
+        public string CityInfo
+        {
+            get
+            {
+                return cityInfo;
+            }
+        }
     }
 }

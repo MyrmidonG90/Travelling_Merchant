@@ -15,9 +15,9 @@ namespace Active
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-
+        
         PlayerInventoryModule playerInventoryModule;
-        CityMenu cityMeny;
+        CityMenu cityMenu;
         TravelMenu travelMenu;
         Inventory inv1, inv2;
         WorldMapMenu worldMapMenu;
@@ -58,6 +58,7 @@ namespace Active
             spriteBatch = new SpriteBatch(GraphicsDevice);
             TextureManager.LoadContent(Content);
             ItemCreator.LoadItemData();
+            Player.Init();
 
             previousGameState = GameState.Debug;
             gameState = GameState.Debug;
@@ -69,7 +70,7 @@ namespace Active
             inv1.AddItem(ItemCreator.CreateItem(1, 20));
             inv2.AddItem(ItemCreator.CreateItem(2, 5));
             Trading.Initialize(inv1,inv2);
-            cityMeny = new CityMenu();
+            cityMenu = new CityMenu();
             worldMapMenu = new WorldMapMenu();
             worldMapMenu.LoadCities();
             playerInventoryModule = new PlayerInventoryModule();
@@ -88,17 +89,17 @@ namespace Active
 
             if (gameState == GameState.CityMenu)
             {
-                if (cityMeny.CheckInvButton())
+                if (cityMenu.CheckInvButton())
                 {
                     previousGameState = gameState;
                     gameState = GameState.InventoryMenu;
                 }
-                if (cityMeny.CheckTradeButton())
+                if (cityMenu.CheckTradeButton())
                 {
                     previousGameState = gameState;
                     gameState = GameState.TradeMenu;
                 }
-                if (cityMeny.CheckMapButton())
+                if (cityMenu.CheckMapButton())
                 {
                     previousGameState = gameState;
                     gameState = GameState.MapMenu;
@@ -107,6 +108,14 @@ namespace Active
             else if (gameState == GameState.MapMenu)
             {
                 worldMapMenu.Update(gameTime);
+
+                string temp = worldMapMenu.CheckNewTravel();
+                if (temp != null)
+                {
+                    travelMenu.StartTravel(temp);
+                    gameState = GameState.TravelMenu;
+                }
+
                 if (worldMapMenu.inventoryButton.Click())
                 {
                     gameState = GameState.InventoryMenu;
@@ -116,7 +125,6 @@ namespace Active
                 {
                     gameState = GameState.CityMenu;
                 }
-
             }
             else if (gameState == GameState.TradeMenu)
             {
@@ -136,7 +144,11 @@ namespace Active
             }
             else if (gameState == GameState.TravelMenu)
             {
-                travelMenu.Update(gameTime);
+                if (travelMenu.Update(gameTime))
+                {
+                    Player.Location = travelMenu.Destination;
+                    gameState = GameState.CityMenu;
+                }
             }
             else if (gameState == GameState.Debug)
             {
@@ -173,12 +185,14 @@ namespace Active
             }
             if (KMReader.prevKeyState.IsKeyUp(Keys.F11) && KMReader.keyState.IsKeyDown(Keys.F11))
             {
-                playerInventoryModule.Inventory = SaveModule.LoadSave();
+                Player.Inventory = SaveModule.LoadSave();
             }
             if (KMReader.prevKeyState.IsKeyUp(Keys.F12) && KMReader.keyState.IsKeyDown(Keys.F12))
             {
-                SaveModule.GenerateSave(playerInventoryModule.Inventory);
+                SaveModule.GenerateSave(Player.Inventory);
             }
+
+            Player.Update();
 
             base.Update(gameTime);
         }
@@ -191,7 +205,7 @@ namespace Active
 
             if (gameState == GameState.CityMenu)
             {
-                cityMeny.Draw(spriteBatch);
+                cityMenu.Draw(spriteBatch, worldMapMenu.Cities);
             }
             else if (gameState == GameState.MapMenu)
             {
