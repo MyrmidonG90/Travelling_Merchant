@@ -12,18 +12,14 @@ namespace Active
         static public StreamReader sr;
         static public StreamWriter sw;
         static public FileStream fs;
-        static public string[] charSplitter;
-        static public string[] secondCharSplitter;
-        static public string[] thirdCharSplitter;
+        static public string[] splitter, secondSplitter, thirdSplitter, fourthSplitter;
         static public string fileText;
         static public List<string> readFilePerLine;
         static public List<City> cities;
 
         public static string[] SplitText(char splitChar, string text)
         {
-            string[] splitter;
-            splitter = text.Split(splitChar);
-            return splitter;
+            return text.Split(splitChar);
         }
         public static void ReadFile(string name)
         {
@@ -42,7 +38,7 @@ namespace Active
                 sw = new StreamWriter(name);
                 sw.Write(text);
                 sw.Close();
-            }            
+            }
         }
         public static void ReWriteFile(string name, List<string> text)
         {
@@ -57,33 +53,58 @@ namespace Active
                 sw.Close();
             }
         }
-        public static void CreateCities()
+        public static void LoadCities()
         {
-            int nrOfTerms = 5;
             ReadFile("");
+            Inventory inv;
+            splitter = SplitText('|', fileText); // Splits the text per object
             
-            charSplitter = SplitText(';', fileText);
-            
-            for (int i = 0; i < charSplitter.Length/nrOfTerms; i++)
+            for (int i = 0; i < splitter.Length; i++)
             {
-                cities.Add(new City(charSplitter[nrOfTerms*i%nrOfTerms],charSplitter[nrOfTerms*(i+1)%nrOfTerms],new Vector2(float.Parse(charSplitter[nrOfTerms * (i + 2) % nrOfTerms]), float.Parse(charSplitter[nrOfTerms * (i + 3) % nrOfTerms]))));
-                secondCharSplitter = SplitText(',', charSplitter[nrOfTerms*(5+i)%nrOfTerms]);
-                Inventory inv = new Inventory(int.Parse(charSplitter[nrOfTerms*(4+i)%nrOfTerms]));
-                for (int j = 0; j < secondCharSplitter.Length; j++)
+                secondSplitter = SplitText(';', splitter[i]); // Splits the text per data structure
+                cities.Add(new City(secondSplitter[0], secondSplitter[1], new Vector2(float.Parse(secondSplitter[2]), float.Parse(secondSplitter[3]))));
+                inv = new Inventory(int.Parse(secondSplitter[4])); 
+                thirdSplitter = SplitText(',',secondSplitter[5]); // Splits data structure inventory
+                for (int j = 0; j < thirdSplitter.Length; j++)
                 {
-                    thirdCharSplitter = SplitText(':', secondCharSplitter[j]);
-                    inv.AddItem(int.Parse(thirdCharSplitter[0]), int.Parse(thirdCharSplitter[1]));
-                    
+                    fourthSplitter = SplitText(':',thirdSplitter[j]); // Splits the data structure inside of inventory
+                    inv.AddItem(int.Parse(fourthSplitter[0]),int.Parse(fourthSplitter[1]));
                 }
-                cities[i / nrOfTerms].AddInventory(inv);
+                cities[i].AddInventory(inv);
             }
+            Reset();
         }
+        public static void CreateCity()
+        {
+
+        }
+        public static void SaveCities()
+        {
+            if (File.Exists(""))
+            {
+                for (int i = 0; i < cities.Count; i++)
+                {
+                    fileText += cities[i].ToString();
+                }
+                EmptyFile("");
+                sw = new StreamWriter("");
+                sw.Write(fileText);
+                sw.Close();
+            }
+
+            Reset();
+        }
+        public static void UpdateCities()
+        {
+
+        }
+        
         static void Reset()
         {
             fileText = null;
-            charSplitter = null;
-            secondCharSplitter = null;
-            thirdCharSplitter = null;
+            splitter = null;
+            secondSplitter = null;
+            thirdSplitter = null;
         }
 
         public static void EmptyFile(string fileName)
@@ -91,8 +112,9 @@ namespace Active
             if (File.Exists(fileName))
             {
                 File.WriteAllText(fileName, String.Empty);
-            }            
+            }
         }
-        
     }
+
+
 }

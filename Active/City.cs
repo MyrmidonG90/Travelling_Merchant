@@ -14,13 +14,11 @@ namespace Active
 {
     class City
     {
-
-        string name;
+        readonly string name;
         string information;
         Vector2 coordinates;
         Inventory inv;
-        StreamReader sr;
-        StreamWriter sw;
+
         float x, y;
 
         public City(string name, string information, Vector2 coordinates)
@@ -41,9 +39,9 @@ namespace Active
             }
         }
         /*File structure
-         * name;information;x;y;money;inventory 
+         * name;information;x;y;money;inventory; 
          * Inventory structure
-         * ;item1:amount,item2:amount,item3:amount
+         * ;item1:amount,item2:amount,item3:amount;
          * 
          */
 
@@ -88,5 +86,24 @@ namespace Active
         }
 
         public Inventory Inv { get => inv; set => inv = value; }
+        public override string ToString()
+        {
+            string total, items;
+            items = "";
+            if (inv.ItemList.Count != 0)
+            {
+                for (int i = 0; i < inv.ItemList.Count; i++)
+                {
+                    items = inv.ItemList[i].ID.ToString() + ':' + inv.ItemList[i].Amount.ToString() + ',';
+                }
+                total = name + ';' + information + ';' + x + ';' + y + ';' + inv.Money + ';' + items + '|';
+            }
+            else
+            {
+                total = name + ';' + information + ';' + x + ';' + y + ';' + inv.Money + ';' + '|';
+            }
+            
+            return total;
+        }
     }
 }
