@@ -95,8 +95,8 @@ namespace Active
             
             inventoryButton.Draw(spriteBatch);
             returnButton.Draw(spriteBatch);
-            spriteBatch.DrawString(TextureManager.font, "Return", new Vector2(300, 20), Color.Red);
-            spriteBatch.DrawString(TextureManager.font, "Inventory", new Vector2(70, 20), Color.Red);
+            spriteBatch.DrawString(TextureManager.fontInventory, "Return", new Vector2(280, 20), Color.Red);
+            spriteBatch.DrawString(TextureManager.fontInventory, "Inventory", new Vector2(20, 20), Color.Red);
 
             if (showText)
             {
