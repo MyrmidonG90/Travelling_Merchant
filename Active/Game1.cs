@@ -118,6 +118,7 @@ namespace Active
 
                 if (worldMapMenu.inventoryButton.Click())
                 {
+                    previousGameState = gameState;
                     gameState = GameState.InventoryMenu;
                 }
 
