@@ -4,23 +4,32 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
+using System.IO;
+using System.Windows.Forms;
+using System.Reflection;
 
 namespace Active
 {
     public class City
     {
-
-        string name;
+        readonly string name;
         string information;
         Vector2 coordinates;
+        Inventory inv;
+
+        float x, y;
 
         public City(string name, string information, Vector2 coordinates)
         {
             this.name = name;
             this.information = information;
             this.coordinates = coordinates;
-
+            x = coordinates.X;
+            y = coordinates.Y;
         }
+        
 
         public string Name
         {
@@ -28,6 +37,11 @@ namespace Active
             {
                 return name;
             }
+        }
+        
+        public void AddInventory(Inventory inv)
+        {
+            this.inv = inv;
         }
 
         public string Information
@@ -48,6 +62,26 @@ namespace Active
             {
                 return coordinates;
             }
+        }
+
+        public Inventory Inv { get => inv; set => inv = value; }
+        public override string ToString()
+        {
+            string total, items;
+            items = "";
+            if (inv.ItemList.Count != 0)
+            {
+                for (int i = 0; i < inv.ItemList.Count; i++)
+                {
+                    items = inv.ItemList[i].ID.ToString() + ':' + inv.ItemList[i].Amount.ToString() + ',';
+                }
+                total = name + ';' + information + ';' + x + ';' + y + ';' + inv.Money + ';' + items + '|';
+            }
+            else
+            {
+                total = name + ';' + information + ';' + x + ';' + y + ';' + inv.Money + ';' + '|';
+            }            
+            return total;
         }
     }
 }
