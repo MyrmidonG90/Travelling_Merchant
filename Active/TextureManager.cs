@@ -9,7 +9,7 @@ namespace Active
         static public SpriteFont font;
         static public SpriteFont fontInventory;
         static public SpriteFont fontHeader;
-
+        static public SpriteFont fontButton;
 
         static public Texture2D texMap;
         static public Texture2D texWhite;
@@ -23,6 +23,7 @@ namespace Active
         static public void LoadContent(ContentManager content)
         {
             font = content.Load<SpriteFont>("File");
+            fontButton = content.Load<SpriteFont>("fontButton");
             fontInventory = content.Load<SpriteFont>("fontInventory");
             fontHeader = content.Load<SpriteFont>("fontHeader");
 

@@ -130,3 +130,10 @@
 /processorParam:TextureFormat=Color
 /build:backArrow.png
 
+#begin FontButton.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:FontButton.spritefont
+
