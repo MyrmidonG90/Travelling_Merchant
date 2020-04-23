@@ -38,28 +38,7 @@ namespace Active
                 return name;
             }
         }
-        /*File structure
-         * name;information;x;y;money;inventory; 
-         * Inventory structure
-         * ;item1:amount,item2:amount,item3:amount;
-         * 
-         */
-
-        void LoadCity()
-        {
-            
-            FileManager.ReadFile("");
-            
-            FileManager.SplitText('h', FileManager.fileText);
-
-            //Ladda in fil
-            //Sök efter stadens namnet
-            //Läs in datan i en string
-            //Splitta datan korrekt
-            //Sätt rätt data till respektive stad
-
-
-        }
+        
         public void AddInventory(Inventory inv)
         {
             this.inv = inv;
@@ -101,8 +80,7 @@ namespace Active
             else
             {
                 total = name + ';' + information + ';' + x + ';' + y + ';' + inv.Money + ';' + '|';
-            }
-            
+            }            
             return total;
         }
     }

@@ -7,14 +7,13 @@ using System.IO;
 using Microsoft.Xna.Framework;
 namespace Active
 {
-    static class FileManager
+    static class CityManager
     {
-        static public StreamReader sr;
-        static public StreamWriter sw;
+        static StreamReader sr;
+        static StreamWriter sw;
         static public FileStream fs;
         static public string[] splitter, secondSplitter, thirdSplitter, fourthSplitter;
-        static public string fileText;
-        static public List<string> readFilePerLine;
+        static string fileText;
         static public List<City> cities;
 
         public static string[] SplitText(char splitChar, string text)
@@ -27,30 +26,8 @@ namespace Active
             if (File.Exists(name))
             {
                 sr = new StreamReader(name);
-                sr.ReadToEnd();
-            }
-        }
-        public static void ReWriteFile(string name, string text)
-        {
-            if (File.Exists(name))
-            {
-                EmptyFile(name);
-                sw = new StreamWriter(name);
-                sw.Write(text);
-                sw.Close();
-            }
-        }
-        public static void ReWriteFile(string name, List<string> text)
-        {
-            if (File.Exists(name))
-            {
-                EmptyFile(name);
-                sw = new StreamWriter(name);
-                foreach (var item in text)
-                {
-                    sw.WriteLine(item);
-                }
-                sw.Close();
+                fileText = sr.ReadToEnd();
+                sr.Close();
             }
         }
         public static void LoadCities()
@@ -74,9 +51,9 @@ namespace Active
             }
             Reset();
         }
-        public static void CreateCity()
+        public static void CreateCity(string name, string information, Vector2 coordinates)
         {
-
+            cities.Add(new City(name,information, coordinates));
         }
         public static void SaveCities()
         {
@@ -91,12 +68,7 @@ namespace Active
                 sw.Write(fileText);
                 sw.Close();
             }
-
             Reset();
-        }
-        public static void UpdateCities()
-        {
-
         }
         
         static void Reset()
@@ -107,7 +79,7 @@ namespace Active
             thirdSplitter = null;
         }
 
-        public static void EmptyFile(string fileName)
+        static void EmptyFile(string fileName)
         {
             if (File.Exists(fileName))
             {
