@@ -11,7 +11,7 @@ namespace Active
     class TravelMenu
     {
         int turnsToTravel;
-        int currentTurnTickDown;
+        int turnsLeft;
         double turnTimer;
 
         string turnDisplay;
@@ -26,10 +26,10 @@ namespace Active
         public TravelMenu()
         {
             turnsToTravel = 5;
-            currentTurnTickDown = turnsToTravel;
+            turnsLeft = 0;
             turnTimer = 3;
 
-            turnDisplay = currentTurnTickDown.ToString() + "/" + turnsToTravel.ToString();
+            turnDisplay = turnsLeft.ToString() + "/" + turnsToTravel.ToString();
 
             pauseButton = new Button(810, 900, 300, 100, "paused", "Pause/Unpause", TextureManager.texWhite);
             invButton = new Button(1310, 900, 300, 100, "inv", "Inventory", TextureManager.texWhite);
@@ -44,13 +44,33 @@ namespace Active
             paused = false;
 
             turnsToTravel = 5;
-            currentTurnTickDown = turnsToTravel;
+            turnsLeft = turnsToTravel;
             turnTimer = 3;
+        }
+
+        public bool CheckInvbutton()
+        {
+            if (invButton.Click())
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        public bool CheckMapButton()
+        {
+            if (mapButton.Click())
+            {
+                return true;
+            }
+
+            return false;
         }
 
         public bool Update(GameTime gameTime)
         {
-            turnDisplay = currentTurnTickDown.ToString() + "/" + turnsToTravel.ToString();
+            turnDisplay = turnsLeft.ToString() + "/" + turnsToTravel.ToString();
 
             if (pauseButton.Click())
             {
@@ -64,11 +84,11 @@ namespace Active
 
             if(turnTimer <= 0)
             {
-                currentTurnTickDown--;
+                turnsLeft--;
                 turnTimer = 3;
             }
 
-            if (currentTurnTickDown == 0)
+            if (turnsLeft == 0)
             {
                 return true;
             }
@@ -90,6 +110,14 @@ namespace Active
             get
             {
                 return destination;
+            }
+        }
+
+        public int TurnsLeft
+        {
+            get
+            {
+                return turnsLeft;
             }
         }
     }
