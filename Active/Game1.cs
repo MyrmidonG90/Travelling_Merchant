@@ -22,6 +22,7 @@ namespace Active
         Inventory inv1, inv2;
         WorldMapMenu worldMapMenu;
         ModifierManager modifierManager;
+        Calendar calendar;
 
         enum GameState
         {
@@ -77,6 +78,9 @@ namespace Active
             travelMenu = new TravelMenu();
             modifierManager = new ModifierManager();
             modifierManager.LoadCityAndItemLists();
+            calendar = new Calendar(0, 0, 0);
+            calendar.PrepareCalendar();
+
 
         }
 
@@ -86,6 +90,7 @@ namespace Active
                 Exit();
 
             KMReader.Update();
+            calendar.Update();
 
             if (gameState == GameState.CityMenu)
             {
@@ -211,6 +216,7 @@ namespace Active
             else if (gameState == GameState.MapMenu)
             {
                 worldMapMenu.Draw(spriteBatch);
+                calendar.Draw(spriteBatch);
             }
             else if (gameState == GameState.TradeMenu)
             {
