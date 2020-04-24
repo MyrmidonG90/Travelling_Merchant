@@ -22,7 +22,7 @@ namespace Active
             StreamReader streamReader = new StreamReader("./Data/Items.txt");
 
             length = int.Parse(streamReader.ReadLine());
-            itemData = new string[length, 4];
+            itemData = new string[length, 6];
             int counter = 0;
             while (!streamReader.EndOfStream)
             {
@@ -34,11 +34,29 @@ namespace Active
                 }
                 counter++;
             }
+            streamReader.Close();
+
             for (int i = 0; i < length; i++)
             {
-                itemData[i, 3] = itemData[i, 3].Replace(";", "\n");
-            }
-            streamReader.Close();
+                itemData[i, 5] = itemData[i, 5].Replace(";", "\n");
+
+                //for safekeeping /my
+
+                //if (int.Parse(itemData[i, 3]) == 999)
+                //{
+                //    itemData[i, 3] = null;
+                //}
+
+                //if (int.Parse(itemData[i, 2]) == 999)
+                //{
+                //    itemData[i, 2] = null;
+                //}
+
+                //if (int.Parse(itemData[i, 1]) == 999)
+                //{
+                //    itemData[i, 1] = null;
+                //}
+            }        
         }
 
         static public Item CreateItem(int id, int amount)
@@ -47,15 +65,103 @@ namespace Active
             Item newItem;
             if (id == 0)
             {
-                newItem = new Item(itemData[id, 0], int.Parse(itemData[id, 1]), TextureManager.texCarrot, id, int.Parse(itemData[id, 2]), amount, itemData[id, 3]);
+                newItem = new Item(itemData[id, 0], int.Parse(itemData[id, 1]), TextureManager.texCarrot, id, int.Parse(itemData[id, 2]), int.Parse(itemData[id, 3]), int.Parse(itemData[id, 4]), amount, itemData[id, 5]);
             }
             else if (id == 1)
             {
-                newItem = new Item(itemData[id, 0], int.Parse(itemData[id, 1]), TextureManager.texPotato, id, int.Parse(itemData[id, 2]), amount, itemData[id, 3]);
+                newItem = new Item(itemData[id, 0], int.Parse(itemData[id, 1]), TextureManager.texPotato, id, int.Parse(itemData[id, 2]), int.Parse(itemData[id, 3]), int.Parse(itemData[id, 4]), amount, itemData[id, 5]);
             }
-            else //id = 2
+            else if (id == 2)
             {
-                newItem = new Item(itemData[id, 0], int.Parse(itemData[id, 1]), TextureManager.texIronIngot, id, int.Parse(itemData[id, 2]), amount, itemData[id, 3]);
+                newItem = new Item(itemData[id, 0], int.Parse(itemData[id, 1]), TextureManager.texIronIngot, id, int.Parse(itemData[id, 2]), int.Parse(itemData[id, 3]), int.Parse(itemData[id, 4]), amount, itemData[id, 5]);
+            }
+            else if (id == 3)
+            {
+                newItem = new Item(itemData[id, 0], int.Parse(itemData[id, 1]), TextureManager.texIronOre, id, int.Parse(itemData[id, 2]), int.Parse(itemData[id, 3]), int.Parse(itemData[id, 4]), amount, itemData[id, 5]);
+            }
+            else if (id == 4)
+            {
+                newItem = new Item(itemData[id, 0], int.Parse(itemData[id, 1]), TextureManager.texGoldIngot, id, int.Parse(itemData[id, 2]), int.Parse(itemData[id, 3]), int.Parse(itemData[id, 4]), amount, itemData[id, 5]);
+            }
+            else if (id == 5)
+            {
+                newItem = new Item(itemData[id, 0], int.Parse(itemData[id, 1]), TextureManager.texGoldOre, id, int.Parse(itemData[id, 2]), int.Parse(itemData[id, 3]), int.Parse(itemData[id, 4]), amount, itemData[id, 5]);
+            }
+            else if (id == 6)
+            {
+                newItem = new Item(itemData[id, 0], int.Parse(itemData[id, 1]), TextureManager.texRuby, id, int.Parse(itemData[id, 2]), int.Parse(itemData[id, 3]), int.Parse(itemData[id, 4]), amount, itemData[id, 5]);
+            }
+            else if (id == 7)
+            {
+                newItem = new Item(itemData[id, 0], int.Parse(itemData[id, 1]), TextureManager.texEmerald, id, int.Parse(itemData[id, 2]), int.Parse(itemData[id, 3]), int.Parse(itemData[id, 4]), amount, itemData[id, 5]);
+            }
+            else if (id == 8)
+            {
+                newItem = new Item(itemData[id, 0], int.Parse(itemData[id, 1]), TextureManager.texDiamond, id, int.Parse(itemData[id, 2]), int.Parse(itemData[id, 3]), int.Parse(itemData[id, 4]), amount, itemData[id, 5]);
+            }
+            else if (id == 9)
+            {
+                newItem = new Item(itemData[id, 0], int.Parse(itemData[id, 1]), TextureManager.texFur, id, int.Parse(itemData[id, 2]), int.Parse(itemData[id, 3]), int.Parse(itemData[id, 4]), amount, itemData[id, 5]);
+            }
+            else if (id == 10)
+            {
+                newItem = new Item(itemData[id, 0], int.Parse(itemData[id, 1]), TextureManager.texSilk, id, int.Parse(itemData[id, 2]), int.Parse(itemData[id, 3]), int.Parse(itemData[id, 4]), amount, itemData[id, 5]);
+            }
+            else if (id == 11)
+            {
+                newItem = new Item(itemData[id, 0], int.Parse(itemData[id, 1]), TextureManager.texCotton, id, int.Parse(itemData[id, 2]), int.Parse(itemData[id, 3]), int.Parse(itemData[id, 4]), amount, itemData[id, 5]);
+            }
+            else if (id == 12)
+            {
+                newItem = new Item(itemData[id, 0], int.Parse(itemData[id, 1]), TextureManager.texLumber, id, int.Parse(itemData[id, 2]), int.Parse(itemData[id, 3]), int.Parse(itemData[id, 4]), amount, itemData[id, 5]);
+            }
+            else if (id == 13)
+            {
+                newItem = new Item(itemData[id, 0], int.Parse(itemData[id, 1]), TextureManager.texStone, id, int.Parse(itemData[id, 2]), int.Parse(itemData[id, 3]), int.Parse(itemData[id, 4]), amount, itemData[id, 5]);
+            }
+            else if (id == 14)
+            {
+                newItem = new Item(itemData[id, 0], int.Parse(itemData[id, 1]), TextureManager.texWeaponNormal, id, int.Parse(itemData[id, 2]), int.Parse(itemData[id, 3]), int.Parse(itemData[id, 4]), amount, itemData[id, 5]);
+            }
+            else if (id == 15)
+            {
+                newItem = new Item(itemData[id, 0], int.Parse(itemData[id, 1]), TextureManager.texArmourNormal, id, int.Parse(itemData[id, 2]), int.Parse(itemData[id, 3]), int.Parse(itemData[id, 4]), amount, itemData[id, 5]);
+            }
+            else if (id == 16)
+            {
+                newItem = new Item(itemData[id, 0], int.Parse(itemData[id, 1]), TextureManager.texWeaponFine, id, int.Parse(itemData[id, 2]), int.Parse(itemData[id, 3]), int.Parse(itemData[id, 4]), amount, itemData[id, 5]);
+            }
+            else if (id == 17)
+            {
+                newItem = new Item(itemData[id, 0], int.Parse(itemData[id, 1]), TextureManager.texArmourFine, id, int.Parse(itemData[id, 2]), int.Parse(itemData[id, 3]), int.Parse(itemData[id, 4]), amount, itemData[id, 5]);
+            }
+            else if (id == 18)
+            {
+                newItem = new Item(itemData[id, 0], int.Parse(itemData[id, 1]), TextureManager.texWeaponMagic, id, int.Parse(itemData[id, 2]), int.Parse(itemData[id, 3]), int.Parse(itemData[id, 4]), amount, itemData[id, 5]);
+            }
+            else if (id == 19)
+            {
+                newItem = new Item(itemData[id, 0], int.Parse(itemData[id, 1]), TextureManager.texArmourMagic, id, int.Parse(itemData[id, 2]), int.Parse(itemData[id, 3]), int.Parse(itemData[id, 4]), amount, itemData[id, 5]);
+            }
+            else if (id == 20)
+            {
+                newItem = new Item(itemData[id, 0], int.Parse(itemData[id, 1]), TextureManager.texWhaleMeat, id, int.Parse(itemData[id, 2]), int.Parse(itemData[id, 3]), int.Parse(itemData[id, 4]), amount, itemData[id, 5]);
+            }
+            else if (id == 21)
+            {
+                newItem = new Item(itemData[id, 0], int.Parse(itemData[id, 1]), TextureManager.texGryphonMeat, id, int.Parse(itemData[id, 2]), int.Parse(itemData[id, 3]), int.Parse(itemData[id, 4]), amount, itemData[id, 5]);
+            }
+            else if (id == 22)
+            {
+                newItem = new Item(itemData[id, 0], int.Parse(itemData[id, 1]), TextureManager.texDragonScale, id, int.Parse(itemData[id, 2]), int.Parse(itemData[id, 3]), int.Parse(itemData[id, 4]), amount, itemData[id, 5]);
+            }
+            else if (id == 23)
+            {
+                newItem = new Item(itemData[id, 0], int.Parse(itemData[id, 1]), TextureManager.texSpices, id, int.Parse(itemData[id, 2]), int.Parse(itemData[id, 3]), int.Parse(itemData[id, 4]), amount, itemData[id, 5]);
+            }
+            else
+            {
+                newItem = new Item(itemData[id, 0], int.Parse(itemData[id, 1]), TextureManager.texPotion, id, int.Parse(itemData[id, 2]), int.Parse(itemData[id, 3]), int.Parse(itemData[id, 4]), amount, itemData[id, 5]);
             }
             return newItem;
         }
