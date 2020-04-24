@@ -76,12 +76,12 @@ namespace Active
 
             cats[0] = "Food";
             cats[1] = "Metal";
-            cats[2] = "Raw Materials";
-            cats[3] = "Textiles";
+            cats[2] = "Raw M.";
+            cats[3] = "Text.";
             cats[4] = "Gear";
             cats[5] = "Magic";
-            cats[6] = "Valuables";
-            cats[7] = "Manufactured";
+            cats[6] = "Valua.";
+            cats[7] = "Manu.";
 
             selectedSquare = 50; //50 means no slot is selected
 
