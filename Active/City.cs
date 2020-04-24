@@ -12,7 +12,7 @@ using System.Reflection;
 
 namespace Active
 {
-    public class City
+    class City
     {
         readonly string name;
         string information;
@@ -28,6 +28,7 @@ namespace Active
             this.coordinates = coordinates;
             x = coordinates.X;
             y = coordinates.Y;
+            
         }
         
 
@@ -64,22 +65,23 @@ namespace Active
             }
         }
 
-        public Inventory Inv { get => inv; set => inv = value; }
+        Inventory Inv { get => inv; set => inv = value; }
+
         public override string ToString()
         {
             string total, items;
             items = "";
-            if (inv.ItemList.Count != 0)
+            if (Inv.ItemList.Count != 0)
             {
-                for (int i = 0; i < inv.ItemList.Count; i++)
+                for (int i = 0; i < Inv.ItemList.Count; i++)
                 {
-                    items = inv.ItemList[i].ID.ToString() + ':' + inv.ItemList[i].Amount.ToString() + ',';
+                    items = Inv.ItemList[i].ID.ToString() + ':' + Inv.ItemList[i].Amount.ToString() + ',';
                 }
-                total = name + ';' + information + ';' + x + ';' + y + ';' + inv.Money + ';' + items + '|';
+                total = name + ';' + information + ';' + x + ';' + y + ';' + Inv.Money + ';' + items + '|';
             }
             else
             {
-                total = name + ';' + information + ';' + x + ';' + y + ';' + inv.Money + ';' + '|';
+                total = name + ';' + information + ';' + x + ';' + y + ';' + Inv.Money + ';' + '|';
             }            
             return total;
         }

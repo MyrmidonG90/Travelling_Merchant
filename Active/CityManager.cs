@@ -47,7 +47,7 @@ namespace Active
                     fourthSplitter = SplitText(':',thirdSplitter[j]); // Splits the data structure inside of inventory
                     inv.AddItem(int.Parse(fourthSplitter[0]),int.Parse(fourthSplitter[1]));
                 }
-                cities[i].AddInventory(inv);
+                //cities[i].AddInventory(inv);
             }
             Reset();
         }
