@@ -29,6 +29,14 @@ namespace Active
                 return name;
             }
         }
+<<<<<<< Updated upstream
+=======
+
+        public void AddInventory(Inventory inv)
+        {
+            this.inv = inv;
+        }
+>>>>>>> Stashed changes
 
         public string Information
         {
