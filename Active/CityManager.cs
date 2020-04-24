@@ -16,7 +16,7 @@ namespace Active
         static string fileText;
         static public List<City> cities;
 
-        public static string[] SplitText(char splitChar, string text)
+        public static string[] SplitText(char splitChar, string text)// Splits the text, Easier to read imo
         {
             return text.Split(splitChar);
         }
@@ -47,7 +47,7 @@ namespace Active
                     fourthSplitter = SplitText(':',thirdSplitter[j]); // Splits the data structure inside of inventory
                     inv.AddItem(int.Parse(fourthSplitter[0]),int.Parse(fourthSplitter[1]));
                 }
-                //cities[i].AddInventory(inv);
+                cities[i].AddInventory(inv);
             }
             Reset();
         }

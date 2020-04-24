@@ -29,8 +29,7 @@ namespace Active
             x = coordinates.X;
             y = coordinates.Y;
             
-        }
-        
+        }        
 
         public string Name
         {
