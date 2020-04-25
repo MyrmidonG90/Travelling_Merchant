@@ -31,6 +31,7 @@ namespace Active
         {
 
         }
+
         public bool CheckInvButton()
         {
             if (inventoryButton.Click())

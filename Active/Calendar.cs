@@ -127,7 +127,7 @@ namespace Active
 
         }
 
-        
+
 
         public void Draw(SpriteBatch spriteBatch)
         {
@@ -141,3 +141,5 @@ namespace Active
 
     }
 }
+
+
