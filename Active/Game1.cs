@@ -226,7 +226,7 @@ namespace Active
             }
             if (KMReader.prevKeyState.IsKeyUp(Keys.F12) && KMReader.keyState.IsKeyDown(Keys.F12))
             {
-                SaveModule.GenerateSave(Player.Inventory);
+                SaveModule.GenerateSave(Player.Inventory, Player.Location);
             }
 
             Player.Update();
@@ -263,7 +263,7 @@ namespace Active
             }
             else if (gameState == GameState.Debug)
             {
-                spriteBatch.DrawString(TextureManager.fontInventory, "Press F1 for City Menu, F2 for Travel/Map Menu,\nF3 for Inv. Menu, F4 for Trading Menu or F5 for Travelling Menu \nand you can always press F6 to return here", new Vector2(200, 200), Color.White);
+                spriteBatch.DrawString(TextureManager.fontInventory, "Press F1 for City Menu, F2 for Travel/Map Menu,\nF3 for Inv. Menu, F4 for Trading Menu or F5 for Travelling Menu \nand you can always press F6 to return here\nF11 loads and F12 saves", new Vector2(200, 200), Color.White);
             }
 
             spriteBatch.End();

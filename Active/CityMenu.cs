@@ -11,7 +11,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace Active
 {
-    public class CityMenu
+    class CityMenu
     {
         Button inventoryButton;
         Button tradeButton;
@@ -68,7 +68,7 @@ namespace Active
                         currentCityInfo = tempCity.Information;
                     }
                 }
-            }           
+            }
 
             inventoryButton.Draw(spriteBatch);
             tradeButton.Draw(spriteBatch);

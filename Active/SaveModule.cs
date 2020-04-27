@@ -15,11 +15,12 @@ namespace Active
     static class SaveModule
     {
 
-        static public bool GenerateSave(Inventory inventory)
+        static public bool GenerateSave(Inventory inventory, string location)
         {
             string path = Path.Combine("./Saves/", "Save-" + DateTime.Now.ToString() + ".ptmsave");
             StreamWriter streamWriter = new StreamWriter(ToSafeFileName(path), false);
 
+            streamWriter.WriteLine(location);
             streamWriter.WriteLine(inventory.Money);
             streamWriter.WriteLine(inventory.ItemList.Count);
 
@@ -55,7 +56,10 @@ namespace Active
 
             openFileDialog.ShowDialog();
             Inventory temp = new Inventory(0);
+
             StreamReader streamReader = new StreamReader(openFileDialog.FileName);
+
+            Player.Location = streamReader.ReadLine();
             temp.Money = int.Parse(streamReader.ReadLine());
             int counter = int.Parse(streamReader.ReadLine());
 
