@@ -39,7 +39,7 @@ namespace Active
                 return name;
             }
         }
-        
+
         public void AddInventory(Inventory inv)
         {
             this.inv = inv;
