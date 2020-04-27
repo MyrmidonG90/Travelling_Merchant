@@ -34,6 +34,7 @@ namespace Active
             TravelMenu
         }
 
+        GameState previousGameState2;
         GameState previousGameState;
         GameState gameState;
 
@@ -61,6 +62,7 @@ namespace Active
             ItemCreator.LoadItemData();
             Player.Init();
 
+            previousGameState2 = GameState.Debug;
             previousGameState = GameState.Debug;
             gameState = GameState.Debug;
 
@@ -96,16 +98,19 @@ namespace Active
             {
                 if (cityMenu.CheckInvButton())
                 {
+                    previousGameState2 = previousGameState;
                     previousGameState = gameState;
                     gameState = GameState.InventoryMenu;
                 }
                 if (cityMenu.CheckTradeButton())
                 {
+                    previousGameState2 = previousGameState;
                     previousGameState = gameState;
                     gameState = GameState.TradeMenu;
                 }
                 if (cityMenu.CheckMapButton())
                 {
+                    previousGameState2 = previousGameState;
                     previousGameState = gameState;
                     gameState = GameState.MapMenu;
                 }
@@ -115,21 +120,25 @@ namespace Active
                 worldMapMenu.Update(gameTime);
 
                 string temp = worldMapMenu.CheckNewTravel();
-                if (temp != null)
+                if (temp != null && travelMenu.TurnsLeft == 0)
                 {
                     travelMenu.StartTravel(temp);
+                    previousGameState2 = previousGameState;
+                    previousGameState = gameState;
                     gameState = GameState.TravelMenu;
                 }
 
                 if (worldMapMenu.inventoryButton.Click())
                 {
+                    previousGameState2 = previousGameState;
                     previousGameState = gameState;
                     gameState = GameState.InventoryMenu;
                 }
 
                 if (worldMapMenu.returnButton.Click())
                 {
-                    gameState = GameState.CityMenu;
+                    gameState = previousGameState;
+                    previousGameState = previousGameState2;
                 }
             }
             else if (gameState == GameState.TradeMenu)
@@ -146,6 +155,7 @@ namespace Active
                 if (playerInventoryModule.CheckExit())
                 {
                     gameState = previousGameState;
+                    previousGameState = previousGameState2;
                 }
             }
             else if (gameState == GameState.TravelMenu)
@@ -153,39 +163,60 @@ namespace Active
                 if (travelMenu.Update(gameTime))
                 {
                     Player.Location = travelMenu.Destination;
+                    previousGameState2 = previousGameState;
+                    previousGameState = gameState;
                     gameState = GameState.CityMenu;
+                }
+                if (travelMenu.CheckInvbutton())
+                {
+                    previousGameState2 = previousGameState;
+                    previousGameState = gameState;
+                    gameState = GameState.InventoryMenu;
+                }
+                if (travelMenu.CheckMapButton())
+                {
+                    previousGameState2 = previousGameState;
+                    previousGameState = gameState;
+                    gameState = GameState.MapMenu;
                 }
             }
             else if (gameState == GameState.Debug)
             {
                 if (KMReader.prevKeyState.IsKeyUp(Keys.F1) && KMReader.keyState.IsKeyDown(Keys.F1))
                 {
+                    previousGameState2 = previousGameState;
                     previousGameState = gameState;
                     gameState = GameState.CityMenu;
                 }
                 if (KMReader.prevKeyState.IsKeyUp(Keys.F2) && KMReader.keyState.IsKeyDown(Keys.F2))
                 {
+                    previousGameState2 = previousGameState;
                     previousGameState = gameState;
                     gameState = GameState.MapMenu;
                 }
                 if (KMReader.prevKeyState.IsKeyUp(Keys.F3) && KMReader.keyState.IsKeyDown(Keys.F3))
                 {
+                    previousGameState2 = previousGameState;
                     previousGameState = gameState;
                     gameState = GameState.InventoryMenu;
                 }
                 if (KMReader.prevKeyState.IsKeyUp(Keys.F4) && KMReader.keyState.IsKeyDown(Keys.F4))
                 {
+                    previousGameState2 = previousGameState;
                     previousGameState = gameState;
                     gameState = GameState.TradeMenu;
                 }
                 if (KMReader.prevKeyState.IsKeyUp(Keys.F5) && KMReader.keyState.IsKeyDown(Keys.F5))
                 {
+                    previousGameState2 = previousGameState;
+                    previousGameState = gameState;
                     gameState = GameState.TravelMenu;
                 }
             }
 
             if (KMReader.prevKeyState.IsKeyUp(Keys.F6) && KMReader.keyState.IsKeyDown(Keys.F6))
             {
+                previousGameState2 = previousGameState;
                 previousGameState = gameState;
                 gameState = GameState.Debug;
             }

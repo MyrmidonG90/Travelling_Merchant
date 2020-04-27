@@ -20,7 +20,15 @@ namespace Active
         int numberToDispose;
         Rectangle mainBox;
         Rectangle inventoryBox;
-        Rectangle categoryBox;
+
+        Rectangle priCategoryBox;
+        Rectangle secCategoryBox;
+        Rectangle terCategoryBox;
+
+        Vector2 posPriCategoryString;
+        Vector2 posSecCategoryString;
+        Vector2 posTerCategoryString;
+
         Button disposeButton;
         Button disposeOKButton;
         Button disposeDragger;
@@ -29,19 +37,51 @@ namespace Active
         Rectangle disposeBox;
         Rectangle[] inventoryGrid;
 
+        Color[] colors;
+        string[] cats;
+
         public PlayerInventoryModule()
         {
             disposing = false;
 
             mainBox = new Rectangle(260, 140, 1400, 880);
             inventoryBox = new Rectangle(300, 180, 720, 720);
-            categoryBox = new Rectangle(1100, 750, 120, 120);
+
+            priCategoryBox = new Rectangle(1100, 750, 120, 120);
+            secCategoryBox = new Rectangle(1240, 750, 120, 120);
+            terCategoryBox = new Rectangle(1380, 750, 120, 120);
+
+            posPriCategoryString = new Vector2(1110, 785);
+            posSecCategoryString = new Vector2(1250, 785);
+            posTerCategoryString = new Vector2(1390, 785);
+
             disposeButton = new Button(1560, 920, 70, 70, TextureManager.texWhite);
             returnButton = new Button(20, 20, 80, 80, TextureManager.texBackArrow);
             disposeBox = new Rectangle(660, 240, 600, 500);
             disposeBar = new Rectangle(710, 500, 520, 20);
             disposeDragger = new Button(710, 480, 20, 60, TextureManager.texWhite);
             disposeOKButton = new Button(900, 640, 120, 60, TextureManager.texWhite);
+
+            colors = new Color[8];
+            cats = new string[8];
+
+            colors[0] = Color.Green;
+            colors[1] = Color.DarkSlateGray;
+            colors[2] = Color.LightGray;
+            colors[3] = Color.SaddleBrown;
+            colors[4] = Color.Gold;
+            colors[5] = Color.DarkBlue;
+            colors[6] = Color.Red;
+            colors[7] = Color.Beige;
+
+            cats[0] = "Food";
+            cats[1] = "Metal";
+            cats[2] = "Raw M.";
+            cats[3] = "Text.";
+            cats[4] = "Gear";
+            cats[5] = "Magic";
+            cats[6] = "Valua.";
+            cats[7] = "Manu.";
 
             selectedSquare = 50; //50 means no slot is selected
 
@@ -200,22 +240,28 @@ namespace Active
 
             if (selected != null)
             {
-                Vector2 posCategoryString = new Vector2(1110, 785);
+                
 
-                spriteBatch.DrawString(TextureManager.fontHeader, "Carrot", new Vector2(1100, 200), Color.White);
+                spriteBatch.DrawString(TextureManager.fontHeader, selected.Name, new Vector2(1100, 200), Color.White);
                 spriteBatch.DrawString(TextureManager.fontInventory, "Info: \n" + selected.Description, new Vector2(1100, 300), Color.White);
                 spriteBatch.DrawString(TextureManager.fontInventory, "Standard Price: " + selected.BasePrice.ToString() + "c", new Vector2(1100, 650), Color.White);
 
-                if (selected.Category == 1)
+                if (selected.PrimaryCategory != 999)
                 {
-                    spriteBatch.Draw(TextureManager.texBox, categoryBox, Color.Green);
-                    spriteBatch.DrawString(TextureManager.fontInventory, "Food", posCategoryString, Color.White);
+                    spriteBatch.Draw(TextureManager.texBox, priCategoryBox, colors[selected.PrimaryCategory-1]);
+                    spriteBatch.DrawString(TextureManager.fontInventory, cats[selected.PrimaryCategory-1], posPriCategoryString, Color.White);
                 }
-                else if (selected.Category == 2)
+                if (selected.SecondaryCategory != 999)
                 {
-                    spriteBatch.Draw(TextureManager.texBox, categoryBox, Color.DarkSlateGray);
-                    spriteBatch.DrawString(TextureManager.fontInventory, "Metal", posCategoryString, Color.White);
+                    spriteBatch.Draw(TextureManager.texBox, secCategoryBox, colors[selected.SecondaryCategory-1]);
+                    spriteBatch.DrawString(TextureManager.fontInventory, cats[selected.SecondaryCategory-1], posSecCategoryString, Color.White);
                 }
+                if (selected.TertiaryCategory != 999)
+                {
+                    spriteBatch.Draw(TextureManager.texBox, terCategoryBox, colors[selected.TertiaryCategory-1]);
+                    spriteBatch.DrawString(TextureManager.fontInventory, cats[selected.TertiaryCategory-1], posTerCategoryString, Color.White);
+                }
+
 
                 disposeButton.Draw(spriteBatch);
                 spriteBatch.DrawString(TextureManager.fontInventory, "D", new Vector2(1580, 930), Color.Black);

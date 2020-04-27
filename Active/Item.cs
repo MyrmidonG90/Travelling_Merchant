@@ -15,17 +15,21 @@ namespace Active
         int basePrice;
         Texture2D tex;
         int id;
-        int category;
+        int primaryCategory;
+        int secondaryCategory;
+        int tertiaryCategory;
         int amount;
         string description;
 
-        public Item(string n, int bp, Texture2D tex, int id, int c, int a, string d)
+        public Item(string n, int bp, Texture2D tex, int id, int c1, int c2, int c3, int a, string d)
         {
             name = n;
             basePrice = bp;
             this.tex = tex;
             this.id = id;
-            category = c;
+            primaryCategory = c1;
+            secondaryCategory = c2;
+            tertiaryCategory = c3;
             amount = a;
             description = d;
         }
@@ -68,11 +72,25 @@ namespace Active
                 return id;
             }
         }
-        public int Category
+        public int PrimaryCategory
         {
             get
             {
-                return category;
+                return primaryCategory;
+            }
+        }
+        public int SecondaryCategory
+        {
+            get
+            {
+                return secondaryCategory;
+            }
+        }
+        public int TertiaryCategory
+        {
+            get
+            {
+                return tertiaryCategory;
             }
         }
         public int Amount

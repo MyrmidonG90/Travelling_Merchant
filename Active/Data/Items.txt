@@ -1,4 +1,26 @@
-3
-Carrot,2,1,The Carrot has no natural ;predators
-Potato,4,1,Potatoes are apex hunters
-Iron Ingot,10,2,An iron ingot what did you ;expect?
+25
+Carrot,2,1,999,999,The Carrot has no natural ;predators
+Potato,4,1,999,999,Potatoes are apex hunters
+Iron Ingot,10,2,999,999,An iron ingot what did you ;expect?
+Iron Ore,6,2,3,999,TBD
+Gold Ingot,30,2,7,999,TBD
+Gold Ore,20,2,3,7,TBD
+Ruby,40,7,999,999,TBD
+Emerald,50,7,999,999,TBD
+Diamond,60,6,999,999,TBD
+Fur,8,4,3,999,TBD
+Silk,24,4,8,999,TBD
+Cotton,12,4,3,999,TBD
+Lumber,5,3,999,999,TBD
+Stone,4,3,999,999,TBD
+Simple Weapons,12,5,8,999,TBD
+Simple Armour,18,5,8,999,TBD
+Fine Weapons,24,5,8,999,TBD
+Fine Armour,36,5,8,999,TBD
+Magic Weapons,48,5,8,6,TBD
+Magic Armour,72,5,8,6,TBD
+Whale Meat,50,1,999,999,TBD
+Gryphon Meat,200,1,6,999,TBD
+Dragon Scale,500,6,7,999,TBD
+Spices,48,1,7,999,TBD
+Potions,72,6,999,999,TBD

@@ -17,6 +17,7 @@ namespace Active
             itemList = iL;
             Initialize();
         }
+
         public Inventory(int m)
         {
             money = m;
