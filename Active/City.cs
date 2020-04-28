@@ -19,6 +19,7 @@ namespace Active
         Vector2 coordinates;
         Inventory inv;
         Inventory templateInv;
+        int lastTraded;
 
         float x, y;
 
