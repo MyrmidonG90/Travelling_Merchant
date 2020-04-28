@@ -15,7 +15,7 @@ namespace Active
     static class SaveModule
     {
 
-        static public bool GenerateSave(Inventory inventory, string location)
+        static public bool GenerateSave(Inventory inventory, string location, TravelMenu travelMenu)
         {
             string path = Path.Combine("./Saves/", "Save-" + DateTime.Now.ToString() + ".ptmsave");
             StreamWriter streamWriter = new StreamWriter(ToSafeFileName(path), false);
@@ -28,12 +28,22 @@ namespace Active
             {
                 streamWriter.WriteLine(tempItem.ToString());
             }
+            if (Player.Location != travelMenu.Destination)
+            {
+                streamWriter.WriteLine('1');
+                streamWriter.WriteLine(travelMenu.TurnsLeft);
+                streamWriter.WriteLine(travelMenu.Destination);
+            }
+            else
+            {
+                streamWriter.WriteLine('0');
+            }
             streamWriter.Close();
 
             return true;
         }
 
-        static public Inventory LoadSave()
+        static public string[] LoadSave()
         {
             //hot steaming mess av stack overflow
             string path = "Saves\\";
@@ -70,8 +80,24 @@ namespace Active
                 Item newItem = ItemCreator.CreateItem(int.Parse(data2[0]), int.Parse(data2[1]));
                 temp.AddItem(newItem);
             }
-            streamReader.Close();
-            return temp;
+
+            int check = int.Parse(streamReader.ReadLine());         
+            Player.Inventory = temp;
+
+            if (check == 1)
+            {
+                string[] data = new string[2];
+                data[0] = streamReader.ReadLine();
+                data[1] = streamReader.ReadLine();
+                streamReader.Close();
+                return data;
+            }
+            else
+            {
+                streamReader.Close();
+                return null;
+            }
+
         }
 
         //skamlöst stulen från the interwebs 
