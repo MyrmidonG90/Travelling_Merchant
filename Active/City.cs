@@ -64,7 +64,7 @@ namespace Active
             }
         }
 
-        Inventory Inv { get => inv; set => inv = value; }
+        public Inventory Inv { get => inv; set => inv = value; }
 
         public override string ToString()
         {
