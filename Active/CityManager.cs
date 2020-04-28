@@ -13,8 +13,9 @@ namespace Active
         static StreamWriter sw;
         static public FileStream fs;
         static public string[] splitter, secondSplitter, thirdSplitter, fourthSplitter;
-        static string fileText;
+        static string fileText,pathway;
         static public List<City> cities;
+        
 
         public static string[] SplitText(char splitChar, string text)// Splits the text, Easier to read imo
         {
@@ -32,7 +33,8 @@ namespace Active
         }
         public static void LoadCities()
         {
-            ReadFile("");
+            pathway = "./Data/test.txt";
+            ReadFile(pathway);
             Inventory inv;
             splitter = SplitText('|', fileText); // Splits the text per object
             
@@ -57,14 +59,15 @@ namespace Active
         }
         public static void SaveCities()
         {
-            if (File.Exists(""))
+            pathway = "./Data/test.txt";
+            if (File.Exists(pathway))
             {
                 for (int i = 0; i < cities.Count; i++)
                 {
                     fileText += cities[i].ToString();
                 }
-                EmptyFile("");
-                sw = new StreamWriter("");
+                EmptyFile(pathway);
+                sw = new StreamWriter(pathway);
                 sw.Write(fileText);
                 sw.Close();
             }

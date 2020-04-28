@@ -29,7 +29,7 @@ namespace Active
             x = coordinates.X;
             y = coordinates.Y;
             
-        }        
+        }
 
         public string Name
         {
@@ -81,7 +81,7 @@ namespace Active
             else
             {
                 total = name + ';' + information + ';' + x + ';' + y + ';' + Inv.Money + ';' + '|';
-            }            
+            }
             return total;
         }
     }

@@ -103,6 +103,7 @@
     <Content Include="Data\Items.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Data\test.txt" />
     <Content Include="Icon.ico" />
   </ItemGroup>
   <ItemGroup>
