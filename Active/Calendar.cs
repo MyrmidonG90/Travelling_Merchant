@@ -8,38 +8,31 @@ using System.Threading.Tasks;
 
 namespace Active
 {
-    class Calendar
+    static class Calendar
     {
-        List<string> months = new List<string>();
-        List<string> days = new List<string>();
+        static List<string> months = new List<string>();
+        static List<string> days = new List<string>();
 
-        string currentDay;
-        string currentMonth;
-        string dayFollowUp;
+        static string currentDay;
+        static string currentMonth;
+        static string dayFollowUp;
 
-        int totalDays = 0;
-        int timer = 0;
+        static int totalDays = 0;
+        static int timer = 0;
 
-        int day;
-        int week;
-        int month;
-        int dayOfMonth;
+        static int day;
+        static int week;
+        static int month;
+        static int dayOfMonth;
 
-        Vector2 pos = new Vector2(1600, 20);
+        static Vector2 pos = new Vector2(1600, 20);
 
-
-
-        public Calendar(int day, int week, int month)
+        static public void PrepareCalendar()
         {
-            this.day = day;
-            this.week = week;
-            this.month = month;
-        }
+            day = 0;
+            week = 0;
+            month = 0;
 
-
-
-        public void PrepareCalendar()
-        {
             months.Add("January");
             months.Add("February");
             months.Add("March");
@@ -62,11 +55,8 @@ namespace Active
             days.Add("Sunday");
         }
 
-
-
-        public void AddDays(int addedDays)
-        {
-
+        static public void AddDays(int addedDays)
+        { 
             for (int i = 0; i < addedDays; i++)
             {
                 totalDays++;
@@ -88,13 +78,11 @@ namespace Active
                 {
                     month = 0;
                 }
-
             }
         }
 
-        public void Update()
+        static public void Update()
         {
-
             timer++; //can be removed later
 
             if (timer == 60)
@@ -106,7 +94,6 @@ namespace Active
             currentDay = days[day];
             currentMonth = months[month];
             dayOfMonth = 7 * week + day + 1;
-
 
             if (dayOfMonth == 1)
             {
@@ -127,19 +114,11 @@ namespace Active
 
         }
 
-
-
-        public void Draw(SpriteBatch spriteBatch)
+        static public void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.DrawString(TextureManager.fontInventory, currentDay, pos, Color.Black);
             spriteBatch.DrawString(TextureManager.fontInventory, dayOfMonth.ToString() + dayFollowUp + " " + currentMonth, new Vector2(pos.X, pos.Y + 40), Color.Black);
             spriteBatch.DrawString(TextureManager.fontInventory, "Total days: " + totalDays.ToString(), new Vector2(pos.X, pos.Y + 80), Color.Black);
         }
-
-
-
-
     }
 }
-
-

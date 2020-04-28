@@ -41,7 +41,6 @@ namespace Active
 
         public void Update(GameTime gameTime)
         {
-
             bool temp = false;
 
             foreach (Button button in cityButtons)
@@ -59,7 +58,6 @@ namespace Active
                     showText = false;
                 }
             }
-
 
             foreach (Button button in cityButtons)
             {
@@ -144,6 +142,7 @@ namespace Active
             foreach (City tempCity in cities)
             {
                 tempCity.AddInventory(LoadCityMerchant(tempCity.Name));
+                tempCity.InvInit();
             }
         }
 

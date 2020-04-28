@@ -18,6 +18,7 @@ namespace Active
         string information;
         Vector2 coordinates;
         Inventory inv;
+        Inventory templateInv;
 
         float x, y;
 
@@ -27,8 +28,17 @@ namespace Active
             this.information = information;
             this.coordinates = coordinates;
             x = coordinates.X;
-            y = coordinates.Y;
-            
+            y = coordinates.Y;          
+        }
+
+        public void InvReset()
+        {
+            inv = templateInv;
+        }
+
+        public void InvInit()
+        {
+            templateInv = inv;
         }
 
         public string Name
