@@ -134,6 +134,14 @@ namespace Active
             {
                 cities[i].Information = cities[i].Information.Replace(";", "\n");
             }
+
+
+            string tmp = cities[0].ToString();
+            tmp = cities[1].ToString();
+            tmp = cities[2].ToString();
+            tmp = cities[0].ToString();
+
+
         }
 
         public City[] Cities

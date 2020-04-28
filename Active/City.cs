@@ -70,7 +70,10 @@ namespace Active
         {
             string total, items;
             items = "";
-            if (Inv.ItemList.Count != 0)
+
+            if (inv.ItemList != null)
+            {
+                if (Inv.ItemList.Count != 0)
             {
                 for (int i = 0; i < Inv.ItemList.Count; i++)
                 {
@@ -82,6 +85,12 @@ namespace Active
             {
                 total = name + ';' + information + ';' + x + ';' + y + ';' + Inv.Money + ';' + '|';
             }
+            }
+            else
+            {
+                total = name + ';' + information + ';' + x + ';' + y + ';' + 0 + ';' + '|';
+            }
+            
             return total;
         }
     }
