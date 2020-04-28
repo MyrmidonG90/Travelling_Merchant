@@ -66,7 +66,6 @@ namespace Active
             previousGameState = GameState.Debug;
             gameState = GameState.Debug;
 
-
             inv1 = new Inventory(100);
             inv2 = new Inventory(200);
             inv1.AddItem(ItemCreator.CreateItem(0,20));
@@ -82,8 +81,6 @@ namespace Active
             modifierManager.LoadCityAndItemLists();
             calendar = new Calendar(0, 0, 0);
             calendar.PrepareCalendar();
-
-
         }
 
         protected override void Update(GameTime gameTime)

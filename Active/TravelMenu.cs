@@ -28,6 +28,7 @@ namespace Active
             turnsToTravel = 5;
             turnsLeft = 0;
             turnTimer = 3;
+            destination = "CarrotTown"; 
 
             turnDisplay = turnsLeft.ToString() + "/" + turnsToTravel.ToString();
 
