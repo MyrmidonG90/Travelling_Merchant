@@ -37,6 +37,7 @@ namespace Active
         }
 
 
+
         public void PrepareCalendar()
         {
             months.Add("January");
@@ -61,52 +62,57 @@ namespace Active
             days.Add("Sunday");
         }
 
+
+
+        public void AddDays(int addedDays)
+        {
+
+            for (int i = 0; i < addedDays; i++)
+            {
+                totalDays++;
+                day++;
+
+                if (day >= 7)
+                {
+                    day = 0;
+                    week++;
+                }
+
+                if (week >= 4)
+                {
+                    week = 0;
+                    month++;
+                }
+
+                if (month >= 12)
+                {
+                    month = 0;
+                }
+
+            }
+        }
+
         public void Update()
         {
 
-            timer++;
+            timer++; //can be removed later
 
             if (timer == 60)
             {
-                day++;
-                totalDays++;
+                AddDays(1);
                 timer = 0;
-            }
-
-            if (day >= 7)
-            {
-                day = 0;
-                week++;
-            }
-
-            if (week >= 4)
-            {
-                week = 0;
-                month++;
-            }
-
-            if(month >= 12)
-            {
-                month = 0;
-            }
-
-
-            
-
-            
+            }      //Can be removed later
 
             currentDay = days[day];
             currentMonth = months[month];
-
             dayOfMonth = 7 * week + day + 1;
 
-            
 
-            if(dayOfMonth == 1)
+            if (dayOfMonth == 1)
             {
                 dayFollowUp = "st";
             }
-            else if(dayOfMonth == 2)
+            else if (dayOfMonth == 2)
             {
                 dayFollowUp = "nd";
             }
@@ -121,7 +127,7 @@ namespace Active
 
         }
 
-        
+
 
         public void Draw(SpriteBatch spriteBatch)
         {
@@ -135,3 +141,5 @@ namespace Active
 
     }
 }
+
+

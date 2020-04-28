@@ -22,7 +22,7 @@ namespace Active
             StreamReader streamReader = new StreamReader("./Data/Items.txt");
 
             length = int.Parse(streamReader.ReadLine());
-            itemData = new string[length, 4];
+            itemData = new string[length, 6];
             int counter = 0;
             while (!streamReader.EndOfStream)
             {
@@ -34,29 +34,37 @@ namespace Active
                 }
                 counter++;
             }
+            streamReader.Close();
+
             for (int i = 0; i < length; i++)
             {
-                itemData[i, 3] = itemData[i, 3].Replace(";", "\n");
-            }
-            streamReader.Close();
+                itemData[i, 5] = itemData[i, 5].Replace(";", "\n");
+
+                //for safekeeping /my
+
+                //if (int.Parse(itemData[i, 3]) == 999)
+                //{
+                //    itemData[i, 3] = null;
+                //}
+
+                //if (int.Parse(itemData[i, 2]) == 999)
+                //{
+                //    itemData[i, 2] = null;
+                //}
+
+                //if (int.Parse(itemData[i, 1]) == 999)
+                //{
+                //    itemData[i, 1] = null;
+                //}
+            }        
         }
 
         static public Item CreateItem(int id, int amount)
         {
-
             Item newItem;
-            if (id == 0)
-            {
-                newItem = new Item(itemData[id, 0], int.Parse(itemData[id, 1]), TextureManager.texCarrot, id, int.Parse(itemData[id, 2]), amount, itemData[id, 3]);
-            }
-            else if (id == 1)
-            {
-                newItem = new Item(itemData[id, 0], int.Parse(itemData[id, 1]), TextureManager.texPotato, id, int.Parse(itemData[id, 2]), amount, itemData[id, 3]);
-            }
-            else //id = 2
-            {
-                newItem = new Item(itemData[id, 0], int.Parse(itemData[id, 1]), TextureManager.texIronIngot, id, int.Parse(itemData[id, 2]), amount, itemData[id, 3]);
-            }
+
+            newItem = new Item(itemData[id, 0], int.Parse(itemData[id, 1]), TextureManager.texItems[id], id, int.Parse(itemData[id, 2]), int.Parse(itemData[id, 3]), int.Parse(itemData[id, 4]), amount, itemData[id, 5]);
+          
             return newItem;
         }
     }

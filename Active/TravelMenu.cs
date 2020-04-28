@@ -50,7 +50,7 @@ namespace Active
 
         public bool CheckInvbutton()
         {
-            if (invButton.Click())
+            if (invButton.Click() && paused)
             {
                 return true;
             }
@@ -60,7 +60,7 @@ namespace Active
 
         public bool CheckMapButton()
         {
-            if (mapButton.Click())
+            if (mapButton.Click() && paused)
             {
                 return true;
             }
@@ -101,8 +101,11 @@ namespace Active
             spriteBatch.DrawString(TextureManager.font, turnDisplay, new Vector2(50, 50), Color.White);
             spriteBatch.DrawString(TextureManager.font, " " + turnTimer, new Vector2(50, 150), Color.White);
             pauseButton.Draw(spriteBatch);
-            invButton.Draw(spriteBatch);
-            mapButton.Draw(spriteBatch);
+            if (paused)
+            {
+                invButton.Draw(spriteBatch);
+                mapButton.Draw(spriteBatch);
+            }
         }
 
         public string Destination
@@ -111,6 +114,10 @@ namespace Active
             {
                 return destination;
             }
+            set
+            {
+                destination = value;
+            }
         }
 
         public int TurnsLeft
@@ -118,6 +125,10 @@ namespace Active
             get
             {
                 return turnsLeft;
+            }
+            set
+            {
+                turnsLeft = value;
             }
         }
     }
