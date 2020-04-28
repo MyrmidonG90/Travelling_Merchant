@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using System.Collections.Generic;
 
 namespace Active
 {
@@ -17,6 +18,7 @@ namespace Active
         static public Texture2D texSelect;
         static public Texture2D texBackArrow;
         static public Texture2D texArmourFine, texArmourMagic, texArmourNormal, texCarrot, texCotton, texDragonScale, texFur, texGoldIngot, texGoldOre, texGryphonMeat, texIronIngot, texIronOre, texDiamond, texEmerald, texRuby, texLumber, texPotato, texPotion, texSilk, texSpices, texStone, texWeaponFine, texWeaponMagic, texWeaponNormal, texWhaleMeat;
+        static public List<Texture2D> texItems;
 
         static public void LoadContent(ContentManager content)
         {
@@ -57,7 +59,38 @@ namespace Active
             texWeaponMagic = content.Load<Texture2D>("weapon_magic");
             texWeaponNormal = content.Load<Texture2D>("weapon_normal");
             texWhaleMeat = content.Load<Texture2D>("whale_meat");
+
+            LoadList();
         }
 
+        static private void LoadList()
+        {
+            texItems = new List<Texture2D>();
+            texItems.Add(texCarrot);
+            texItems.Add(texPotato);
+            texItems.Add(texIronIngot);
+            texItems.Add(texIronOre);
+            texItems.Add(texGoldIngot);
+            texItems.Add(texGoldOre);
+            texItems.Add(texRuby);
+            texItems.Add(texEmerald);
+            texItems.Add(texDiamond);
+            texItems.Add(texFur);
+            texItems.Add(texSilk);
+            texItems.Add(texCotton);
+            texItems.Add(texLumber);
+            texItems.Add(texStone);
+            texItems.Add(texWeaponNormal);
+            texItems.Add(texArmourNormal);
+            texItems.Add(texWeaponFine);
+            texItems.Add(texArmourFine);
+            texItems.Add(texWeaponMagic);
+            texItems.Add(texArmourMagic);
+            texItems.Add(texWhaleMeat);
+            texItems.Add(texGryphonMeat);
+            texItems.Add(texDragonScale);
+            texItems.Add(texSpices);
+            texItems.Add(texPotion);
+        }
     }
 }
