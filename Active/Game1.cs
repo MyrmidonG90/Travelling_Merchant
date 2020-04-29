@@ -114,7 +114,7 @@ namespace Active
                             activePlayerInv = Player.Inventory;
                         }
                     }
-                    Trading.Initialize(Player.Inventory, activeInv);
+                    Trading.Initialize(activePlayerInv, activeInv);
                 }
                 if (cityMenu.CheckMapButton())
                 {
