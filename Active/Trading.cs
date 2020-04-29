@@ -34,6 +34,7 @@ namespace Active
 
             tradeLeft = new Inventory(player.Money);
             tradeRight = new Inventory(trader.Money);
+
             priceDifference = 0;
             origLeftInv = player;
             origRightInv = trader;
@@ -259,7 +260,6 @@ namespace Active
             {
                 return false;
             }
-
             //If player doesn't have enough coin and merchant neither.
             if (invLeft.Money+leftPrice-rightPrice < 0)
             {
@@ -275,6 +275,7 @@ namespace Active
             invRight.Money += rightPrice - leftPrice;
             participantLeft = invLeft;
             participantRight = invRight;
+            Exit();
             return true;
         }
 
@@ -311,14 +312,14 @@ namespace Active
             
             invLeft = origLeftInv;
             invRight = origRightInv;
-            foreach (var item in tradeLeft.ItemList)
+            /*foreach (var item in tradeLeft.ItemList) Onödig?
             {
                 invLeft.AddItem(item);
             }
             foreach (var item in tradeRight.ItemList)
             {
                 invRight.AddItem(item);
-            }
+            }*/
             tradeLeft.ItemList.Clear();
             tradeRight.ItemList.Clear();
             UpdateSlots();
