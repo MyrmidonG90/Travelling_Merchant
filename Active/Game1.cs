@@ -60,7 +60,7 @@ namespace Active
             TextureManager.LoadContent(Content);
             ItemCreator.LoadItemData();
             Player.Init();
-
+            CityManager.Initialize();
             previousGameState2 = GameState.Debug;
             previousGameState = GameState.Debug;
             gameState = GameState.Debug;

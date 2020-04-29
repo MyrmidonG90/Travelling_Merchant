@@ -11,12 +11,14 @@ namespace Active
     {
         static StreamReader sr;
         static StreamWriter sw;
-        static public FileStream fs;
         static public string[] splitter, secondSplitter, thirdSplitter, fourthSplitter;
         static string fileText,pathway;
         static public List<City> cities;
         
-
+        static public void Initialize()
+        {
+            cities = new List<City>();
+        }
         public static string[] SplitText(char splitChar, string text)// Splits the text, Easier to read imo
         {
             return text.Split(splitChar);
@@ -62,13 +64,17 @@ namespace Active
             pathway = "./Data/test.txt";
             if (File.Exists(pathway))
             {
+
                 for (int i = 0; i < cities.Count; i++)
                 {
                     fileText += cities[i].ToString();
                 }
+                
                 EmptyFile(pathway);
                 sw = new StreamWriter(pathway);
-                sw.Write(fileText);
+                
+                sw.Write("hi");
+
                 sw.Close();
             }
             Reset();
