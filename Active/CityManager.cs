@@ -40,17 +40,21 @@ namespace Active
             Inventory inv;
             splitter = SplitText('|', fileText); // Splits the text per object
             
-            for (int i = 0; i < splitter.Length; i++)
+            for (int i = 0; i < splitter.Length-1; i++)
             {
                 secondSplitter = SplitText(';', splitter[i]); // Splits the text per data structure
-                cities.Add(new City(secondSplitter[0], secondSplitter[1], new Vector2(float.Parse(secondSplitter[2]), float.Parse(secondSplitter[3]))));
+                cities.Add(new City(secondSplitter[0], secondSplitter[1], new Vector2(float.Parse(secondSplitter[2]), float.Parse(secondSplitter[3]))));// Error
                 inv = new Inventory(int.Parse(secondSplitter[4])); 
                 thirdSplitter = SplitText(',',secondSplitter[5]); // Splits data structure inventory
-                for (int j = 0; j < thirdSplitter.Length; j++)
+                if (thirdSplitter[0] != "")
                 {
-                    fourthSplitter = SplitText(':',thirdSplitter[j]); // Splits the data structure inside of inventory
-                    inv.AddItem(int.Parse(fourthSplitter[0]),int.Parse(fourthSplitter[1]));
-                }
+                    for (int j = 0; j < thirdSplitter.Length; j++)
+                    {
+                        fourthSplitter = SplitText(':', thirdSplitter[j]); // Splits the data structure inside of inventory
+                        inv.AddItem(int.Parse(fourthSplitter[0]), int.Parse(fourthSplitter[1]));
+                    }
+                }               
+                
                 cities[i].AddInventory(inv);
             }
             Reset();
@@ -59,6 +63,7 @@ namespace Active
         {
             cities.Add(new City(name,information, coordinates));
         }
+        
         public static void SaveCities()
         {
             pathway = "./Data/test.txt";
@@ -73,8 +78,7 @@ namespace Active
                 EmptyFile(pathway);
                 sw = new StreamWriter(pathway);
                 
-                sw.Write("hi");
-
+                sw.Write(fileText);
                 sw.Close();
             }
             Reset();
