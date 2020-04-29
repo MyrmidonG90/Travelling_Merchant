@@ -71,7 +71,7 @@ namespace Active
             string total, items;
             items = "";
 
-            if (inv.ItemList != null)
+            if (inv != null)
             {
                 if (Inv.ItemList.Count != 0)
             {
