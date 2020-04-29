@@ -124,7 +124,7 @@ namespace Active
                 cities[counter] = new City(tempName, tempInfo, cord);
                 cityButtons[counter] = new Button((int)cord.X, (int)cord.Y, 75, 75, tempName, TextureManager.texBox);
                 travelButtons[counter] = new Button((int)cord.X, (int)cord.Y + 80, 75, 30, tempName, TextureManager.texBox);
-                CityManager.CreateCity(tempName,tempInfo,cord); //
+                //CityManager.CreateCity(tempName,tempInfo,cord); //
                 counter++;
             }
             sr.Close();
@@ -137,7 +137,7 @@ namespace Active
 
             CityManager.LoadCities();
 
-            CityManager.SaveCities();
+            
 
             foreach (City tempCity in cities)
             {

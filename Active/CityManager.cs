@@ -18,6 +18,7 @@ namespace Active
         static public void Initialize()
         {
             cities = new List<City>();
+            
         }
         public static string[] SplitText(char splitChar, string text)// Splits the text, Easier to read imo
         {
