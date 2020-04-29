@@ -18,6 +18,8 @@ namespace Active
         string information;
         Vector2 coordinates;
         Inventory inv;
+        Inventory templateInv;
+        int lastTraded;
 
         float x, y;
 
@@ -27,8 +29,17 @@ namespace Active
             this.information = information;
             this.coordinates = coordinates;
             x = coordinates.X;
-            y = coordinates.Y;
-            
+            y = coordinates.Y;          
+        }
+
+        public void InvReset()
+        {
+            inv = templateInv;
+        }
+
+        public void InvInit()
+        {
+            templateInv = inv;
         }
 
         public string Name
@@ -64,7 +75,7 @@ namespace Active
             }
         }
 
-        Inventory Inv { get => inv; set => inv = value; }
+        public Inventory Inv { get => inv; set => inv = value; }
 
         public override string ToString()
         {

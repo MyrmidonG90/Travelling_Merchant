@@ -41,7 +41,6 @@ namespace Active
 
         public void Update(GameTime gameTime)
         {
-
             bool temp = false;
 
             foreach (Button button in cityButtons)
@@ -59,7 +58,6 @@ namespace Active
                     showText = false;
                 }
             }
-
 
             foreach (Button button in cityButtons)
             {
@@ -137,12 +135,34 @@ namespace Active
             }
 
 
-            string tmp = cities[0].ToString();
-            tmp = cities[1].ToString();
-            tmp = cities[2].ToString();
-            tmp = cities[0].ToString();
-
+            //string tmp = cities[0].ToString();
+            //tmp = cities[1].ToString();
+            //tmp = cities[2].ToString();
+            //tmp = cities[0].ToString();
             CityManager.SaveCities();
+
+            foreach (City tempCity in cities)
+            {
+                tempCity.AddInventory(LoadCityMerchant(tempCity.Name));
+                tempCity.InvInit();
+            }
+        }
+
+        private Inventory LoadCityMerchant(string name)
+        {
+            string path = Path.Combine("./Data/", name + ".txt");
+            StreamReader sr = new StreamReader(path);
+            Inventory temp = new Inventory(int.Parse(sr.ReadLine()));
+            int counter = int.Parse(sr.ReadLine());
+            for (int i = 0; i < counter; i++)
+            {
+                string data = sr.ReadLine();
+                string[] data2 = data.Split(';');
+                Item newItem = ItemCreator.CreateItem(int.Parse(data2[0]), int.Parse(data2[1]));
+                temp.AddItem(newItem);
+            }
+
+            return temp;
         }
 
         public City[] Cities
