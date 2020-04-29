@@ -23,6 +23,9 @@ namespace Active
         WorldMapMenu worldMapMenu;
         ModifierManager modifierManager;
 
+        Inventory activeInv;
+        Inventory activePlayerInv;
+
         enum GameState
         {
             Debug,
@@ -67,6 +70,7 @@ namespace Active
 
             inv1 = new Inventory(100);
             inv2 = new Inventory(200);
+            activeInv = new Inventory(100);
             inv1.AddItem(ItemCreator.CreateItem(0,20));
             inv1.AddItem(ItemCreator.CreateItem(1, 20));
             inv2.AddItem(ItemCreator.CreateItem(2, 5));
@@ -102,6 +106,15 @@ namespace Active
                     previousGameState2 = previousGameState;
                     previousGameState = gameState;
                     gameState = GameState.TradeMenu;
+                    foreach (City tempCity in worldMapMenu.Cities)
+                    {
+                        if (tempCity.Name == Player.Location)
+                        {
+                            activeInv = tempCity.Inv;
+                            activePlayerInv = Player.Inventory;
+                        }
+                    }
+                    Trading.Initialize(Player.Inventory, activeInv);
                 }
                 if (cityMenu.CheckMapButton())
                 {
@@ -138,11 +151,19 @@ namespace Active
             }
             else if (gameState == GameState.TradeMenu)
             {
-                if (Trading.Update(ref inv1, ref inv2) == true)
+                if (Trading.Update(ref activePlayerInv, ref activeInv) == true)
                 {
-                    gameState = GameState.Debug;
-                }
-                
+                    gameState = previousGameState;
+                    previousGameState = previousGameState2;
+                    foreach (City tempCity in worldMapMenu.Cities)
+                    {
+                        if (tempCity.Name == Player.Location)
+                        {
+                            tempCity.Inv = activeInv;
+                            Player.Inventory = activePlayerInv;
+                        }
+                    }
+                }               
             }
             else if (gameState == GameState.InventoryMenu)
             {

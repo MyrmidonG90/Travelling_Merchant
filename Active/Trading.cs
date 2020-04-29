@@ -85,9 +85,9 @@ namespace Active
         // Klar
         static void CreateButtons() // Initialiserar knapparna
         {
-            accept = new Button(710, 630, 500, 200, TextureManager.texBox);
-            reset = new Button(1260, 630, 500, 200, TextureManager.texBox);
-            back = new Button(160, 630, 500, 200, TextureManager.texBox);
+            accept = new Button(710, 630, 500, 200, "accept", "Accept Trade", TextureManager.texBox);
+            reset = new Button(1260, 630, 500, 200, "reset", "Reset Trade", TextureManager.texBox);
+            back = new Button(160, 630, 500, 200, "back", "Return", TextureManager.texBox);
         }
 
         // Klar
@@ -364,8 +364,8 @@ namespace Active
             accept.Draw(sb);
             reset.Draw(sb);
             back.Draw(sb);
-            sb.DrawString(TextureManager.font,"Player money: " , new Microsoft.Xna.Framework.Vector2(1920/2,1080/2),Color.White);
-            sb.DrawString(TextureManager.font, "Merchant money: ", new Microsoft.Xna.Framework.Vector2(1920 / 2+500, 1080 / 2), Color.White);
+            sb.DrawString(TextureManager.font,"Player money: " + invLeft.Money, new Microsoft.Xna.Framework.Vector2(1920/2,1080/2),Color.White);
+            sb.DrawString(TextureManager.font, "Merchant money: " + invRight.Money, new Microsoft.Xna.Framework.Vector2(1920 / 2+500, 1080 / 2), Color.White);
             if (priceDifference < 0)
             {
                 sb.DrawString(TextureManager.font, "Cost: " + priceDifference*-1, new Microsoft.Xna.Framework.Vector2(1920 / 2, 1080 / 2+20), Color.White);
