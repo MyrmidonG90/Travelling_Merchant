@@ -17,8 +17,7 @@ namespace Active
         
         static public void Initialize()
         {
-            cities = new List<City>();
-            
+            cities = new List<City>();            
         }
         public static string[] SplitText(char splitChar, string text)// Splits the text, Easier to read imo
         {
@@ -64,7 +63,12 @@ namespace Active
         {
             cities.Add(new City(name,information, coordinates));
         }
-        
+        public static void CreateCity(string name, string information, Vector2 coordinates,Inventory inv)
+        {
+            cities.Add(new City(name, information, coordinates));
+            cities[cities.Count-1].AddInventory(inv);
+        }
+
         public static void SaveCities()
         {
             pathway = "./Data/test.txt";
