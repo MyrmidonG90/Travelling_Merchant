@@ -13,7 +13,7 @@ namespace Active
     static class Trading
     {
 
-        static Inventory invLeft, invRight, tradeLeft, tradeRight, origLeftInv, origRightInv;
+        static Inventory invLeft, invRight, tradeLeft, tradeRight, origLeftInv, origRightInv, tmpInv;
         static Slot[,] slotsLeft, slotsRight, tradeSlotsLeft, tradeSlotsRight;
         static Button accept, reset, back;
         enum Participant
@@ -200,7 +200,7 @@ namespace Active
             counterCol = 0;
             counterRow = 0;         
 
-            while (counterCol <= slots.GetLength(1)-1 && slots[counterCol, counterRow].Clicked() == false)
+            while (counterCol <= slots.GetLength(1)-1 && slots[counterCol, counterRow].Clicked() == false) 
             {
                 while (counterRow < slots.GetLength(1) - 1 && slots[counterCol, counterRow].Clicked() == false)
                 {
@@ -217,7 +217,7 @@ namespace Active
             {
                 --counterCol;
             }
-
+            // Här ligger problemet!!!!!!!!
             if (slots[counterCol, counterRow].Clicked() == true && slots[counterCol, counterRow].Item != null) // Om Slots:en som tillhör inventory:n har blivit klickat
             {
                 if (participant == Participant.Left)
@@ -256,7 +256,8 @@ namespace Active
                 return false;
             }
             //If player and Merchant doesn't have enough space in inventory.
-            if (invLeft.ItemList.Count > 23 && invRight.ItemList.Count > 23)
+
+            if (CheckInvFull())
             {
                 return false;
             }
@@ -271,12 +272,48 @@ namespace Active
             }
 
             // Update both player and merchant's inventory
-            invLeft.Money += leftPrice - rightPrice;
-            invRight.Money += rightPrice - leftPrice;
+            ChangeInv();
             participantLeft = invLeft;
             participantRight = invRight;
             Exit();
             return true;
+        }
+
+        static bool CheckInvFull()
+        {
+            bool full = false;
+            Inventory left = invLeft;
+            Inventory right = invRight;
+            foreach (var item in tradeRight.ItemList)
+            {
+                if (left.AddItem(item) == false)
+                {
+                    full = true;
+                }
+            }
+            foreach (var item in tradeLeft.ItemList)
+            {
+                if (right.AddItem(item) == false)
+                {
+                    full = true;
+                }
+            }            
+
+            return full;
+        }
+
+        static void ChangeInv()
+        {
+            invLeft.Money += leftPrice - rightPrice;
+            invRight.Money += rightPrice - leftPrice;
+            foreach (var item in tradeRight.ItemList)
+            {
+                invLeft.AddItem(item);
+            }
+            foreach (var item in tradeLeft.ItemList)
+            {
+                invRight.AddItem(item);
+            }
         }
 
         // Klar men Behöver ändra BasePrice till något mer verkligt
