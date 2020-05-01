@@ -25,6 +25,20 @@ namespace Active
             Initialize();
         }
 
+        //skum jag vet men fixade problem med referenser som pekar på samma objekt i minnet
+        public Inventory(Inventory inv)
+        {
+            money = inv.Money;
+            
+            itemList = new List<Item>();
+            foreach (Item item in inv.ItemList)
+            {               
+                itemList.Add(ItemCreator.CreateItem(item.ID, item.Amount));
+            }
+
+            Initialize();
+        }
+
         void Initialize()
         {
             stackLimit = 50;
