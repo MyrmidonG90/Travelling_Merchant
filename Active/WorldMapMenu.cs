@@ -74,6 +74,11 @@ namespace Active
                     }
                 }
             }
+
+            foreach (City tempCity in cities)
+            {
+                tempCity.Update();
+            }
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -134,11 +139,8 @@ namespace Active
                 cities[i].Information = cities[i].Information.Replace(";", "\n");
             }
 
-
             CityManager.LoadCities();
-
-            
-
+           
             foreach (City tempCity in cities)
             {
                 tempCity.AddInventory(LoadCityMerchant(tempCity.Name));

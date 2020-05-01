@@ -120,5 +120,13 @@ namespace Active
             spriteBatch.DrawString(TextureManager.fontInventory, dayOfMonth.ToString() + dayFollowUp + " " + currentMonth, new Vector2(pos.X, pos.Y + 40), Color.Black);
             spriteBatch.DrawString(TextureManager.fontInventory, "Total days: " + totalDays.ToString(), new Vector2(pos.X, pos.Y + 80), Color.Black);
         }
+
+        public static int TotalDays
+        {
+            get
+            {
+                return totalDays;
+            }
+        }
     }
 }

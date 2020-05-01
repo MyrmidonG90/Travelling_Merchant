@@ -20,6 +20,7 @@ namespace Active
         Inventory inv;
         Inventory templateInv;
         int lastTraded;
+        bool traded;
 
         float x, y;
 
@@ -29,17 +30,36 @@ namespace Active
             this.information = information;
             this.coordinates = coordinates;
             x = coordinates.X;
-            y = coordinates.Y;          
+            y = coordinates.Y;
+            inv = new Inventory(100);
+            templateInv = new Inventory(100);
+        }
+
+        public void Update()
+        {
+            if (traded)
+            {
+                if (lastTraded + 7 <= Calendar.TotalDays)
+                {
+                    InvReset();
+                    traded = false;
+                }
+            }
         }
 
         public void InvReset()
         {
-            inv = templateInv;
+            inv = new Inventory(templateInv);
         }
 
         public void InvInit()
         {
-            templateInv = inv;
+            templateInv = new Inventory(inv);
+        }
+
+        public void CheckDate()
+        {
+            lastTraded = Calendar.TotalDays;
         }
 
         public string Name
@@ -75,6 +95,18 @@ namespace Active
             }
         }
 
+        public bool Traded
+        {
+            get
+            {
+                return traded;
+            }
+            set
+            {
+                traded = value;
+            }
+        }
+
         public Inventory Inv { get => inv; set => inv = value; }
 
         public override string ToString()
@@ -103,6 +135,6 @@ namespace Active
             }
             
             return total;
-        }
+        }      
     }
 }
