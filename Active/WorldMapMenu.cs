@@ -131,8 +131,8 @@ namespace Active
 
             //CityManager.SaveCities();
             CityManager.LoadCities();
-            CityManager.SaveCities();
-            CityManager.LoadCities();
+            /*CityManager.SaveCities();
+            CityManager.LoadCities();*/
 
             for (int i = 0; i < cities.Length; i++)
             {
