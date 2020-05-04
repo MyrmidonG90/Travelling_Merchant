@@ -1,0 +1,8 @@
+Food
+Metals
+Raw Materials
+Textiles
+Gear
+Magic
+Valuables
+Manufactured
