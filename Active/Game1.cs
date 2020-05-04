@@ -81,7 +81,7 @@ namespace Active
             playerInventoryModule = new PlayerInventoryModule();
             travelMenu = new TravelMenu();
             modifierManager = new ModifierManager();
-            modifierManager.LoadCityAndItemLists();
+            modifierManager.LoadCityAndCategoryLists();
             Calendar.PrepareCalendar();
         }
 
