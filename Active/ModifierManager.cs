@@ -12,13 +12,12 @@ namespace Active
     {
         List<string> cities = new List<string>();
         List<string> items = new List<string>();
-        int amountOfCities, amountOfItems;
+        int amountOfCities, amountOfCategories;
 
-        string activeCity, categoryName; //temporary variables that will later be replaced with variables from another-
-        int sellPrice, buyPrice;    //class that store the current city and the current item that should be checked.
+       
 
 
-        public void CheckModifiers()
+        public double CheckModifiers(string city, string category)
         {
             StreamReader sr = new StreamReader("./Data/ItemPrices.txt");
             while (!sr.EndOfStream)
@@ -26,27 +25,27 @@ namespace Active
                 for (int i = 0; i < amountOfCities; i++)
                 {
                     string tempCity = sr.ReadLine();
-                    for (int j = 0; j < amountOfItems; j++)
+                    for (int j = 0; j < amountOfCategories; j++)
                     {
                         string tempCategoryName = sr.ReadLine();
-                        string tempBuyModifier= sr.ReadLine();
-                        string tempSellModifier = sr.ReadLine();
+                        string tempModifier= sr.ReadLine();
 
-                        if (activeCity == tempCity && tempCategoryName == categoryName)
+                        if (city == tempCity && tempCategoryName == category)
                         {
-                            sellPrice = int.Parse(tempSellModifier);
-                            buyPrice = int.Parse(tempBuyModifier);
+                            sr.Close();
+                            return double.Parse(tempModifier);
                         }
                     }
                 }
             }
 
             sr.Close();
+            return 1;
         }
 
 
 
-        public void LoadCityAndItemLists()
+        public void LoadCityAndCategoryLists()
         {
             StreamReader sr = new StreamReader("./Data/cityInfo.txt");
             amountOfCities = 0;
@@ -63,8 +62,8 @@ namespace Active
             }
             sr.Close();
 
-            StreamReader sr2 = new StreamReader("./Data/ItemList.txt");
-            amountOfItems = 0;
+            StreamReader sr2 = new StreamReader("./Data/CategoryList.txt");
+            amountOfCategories = 0;
             while (!sr2.EndOfStream)
             {
 
@@ -72,7 +71,7 @@ namespace Active
 
                 items.Add(tempName);
 
-                amountOfItems++;
+                amountOfCategories++;
             }
             sr2.Close();
         }
