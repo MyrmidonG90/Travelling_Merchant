@@ -14,12 +14,21 @@ namespace Active
 {
     static class SaveModule
     {
-
+        //==================================================================================
+        //OM DU ÄNDRAR HUR SPELET SPARAR SÅ ***MÅSTE*** DU ÄNDRA VÄRDET I ver
+        //==================================================================================
+        //OM DU ÄNDRAR HUR SPELET SPARAR SÅ ***MÅSTE*** DU ÄNDRA VÄRDET I ver
+        //==================================================================================
+        //OM DU ÄNDRAR HUR SPELET SPARAR SÅ ***MÅSTE*** DU ÄNDRA VÄRDET I ver
+        //==================================================================================
+        static string ver = "1.0.1";
         static public bool GenerateSave(Inventory inventory, string location, TravelMenu travelMenu)
         {
             string path = Path.Combine("./Saves/", "Save-" + DateTime.Now.ToString() + ".ptmsave");
             StreamWriter streamWriter = new StreamWriter(ToSafeFileName(path), false);
 
+            streamWriter.WriteLine(ver);
+            streamWriter.WriteLine(Calendar.TotalDays);
             streamWriter.WriteLine(location);
             streamWriter.WriteLine(inventory.Money);
             streamWriter.WriteLine(inventory.ItemList.Count);
@@ -43,6 +52,13 @@ namespace Active
             return true;
         }
 
+        //==================================================================================
+        //OM DU ÄNDRAR HUR SPELET SPARAR SÅ ***MÅSTE*** DU ÄNDRA VÄRDET I ver
+        //==================================================================================
+        //OM DU ÄNDRAR HUR SPELET SPARAR SÅ ***MÅSTE*** DU ÄNDRA VÄRDET I ver
+        //==================================================================================
+        //OM DU ÄNDRAR HUR SPELET SPARAR SÅ ***MÅSTE*** DU ÄNDRA VÄRDET I ver
+        //==================================================================================
         static public string[] LoadSave()
         {
             //hot steaming mess av stack overflow
@@ -69,36 +85,50 @@ namespace Active
 
             StreamReader streamReader = new StreamReader(openFileDialog.FileName);
 
-            Player.Location = streamReader.ReadLine();
-            temp.Money = int.Parse(streamReader.ReadLine());
-            int counter = int.Parse(streamReader.ReadLine());
-
-            for (int i = 0; i < counter; i++)
+            if (streamReader.ReadLine() == ver)
             {
-                string data = streamReader.ReadLine();
-                string[] data2 = data.Split(';');
-                Item newItem = ItemCreator.CreateItem(int.Parse(data2[0]), int.Parse(data2[1]));
-                temp.AddItem(newItem);
-            }
+                Calendar.TotalDays = int.Parse(streamReader.ReadLine());
+                Player.Location = streamReader.ReadLine();
+                temp.Money = int.Parse(streamReader.ReadLine());
+                int counter = int.Parse(streamReader.ReadLine());
 
-            int check = int.Parse(streamReader.ReadLine());         
-            Player.Inventory = temp;
+                for (int i = 0; i < counter; i++)
+                {
+                    string data = streamReader.ReadLine();
+                    string[] data2 = data.Split(';');
+                    Item newItem = ItemCreator.CreateItem(int.Parse(data2[0]), int.Parse(data2[1]));
+                    temp.AddItem(newItem);
+                }
 
-            if (check == 1)
-            {
-                string[] data = new string[2];
-                data[0] = streamReader.ReadLine();
-                data[1] = streamReader.ReadLine();
-                streamReader.Close();
-                return data;
+                int check = int.Parse(streamReader.ReadLine());
+                Player.Inventory = temp;
+
+                if (check == 1)
+                {
+                    string[] data = new string[2];
+                    data[0] = streamReader.ReadLine();
+                    data[1] = streamReader.ReadLine();
+                    streamReader.Close();
+                    return data;
+                }
+                else
+                {
+                    streamReader.Close();
+                    return null;
+                }
             }
             else
             {
-                streamReader.Close();
                 return null;
             }
-
         }
+        //==================================================================================
+        //OM DU ÄNDRAR HUR SPELET SPARAR SÅ ***MÅSTE*** DU ÄNDRA VÄRDET I ver
+        //==================================================================================
+        //OM DU ÄNDRAR HUR SPELET SPARAR SÅ ***MÅSTE*** DU ÄNDRA VÄRDET I ver
+        //==================================================================================
+        //OM DU ÄNDRAR HUR SPELET SPARAR SÅ ***MÅSTE*** DU ÄNDRA VÄRDET I ver
+        //==================================================================================
 
         //skamlöst stulen från the interwebs 
         //https://stackoverflow.com/questions/7348768/the-given-paths-format-is-not-supported

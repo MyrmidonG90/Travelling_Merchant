@@ -127,6 +127,10 @@ namespace Active
             {
                 return totalDays;
             }
+            set
+            {
+                totalDays = value;
+            }
         }
     }
 }

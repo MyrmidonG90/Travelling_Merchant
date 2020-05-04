@@ -240,7 +240,7 @@ namespace Active
             if (KMReader.prevKeyState.IsKeyUp(Keys.F11) && KMReader.keyState.IsKeyDown(Keys.F11))
             {
                 string[] temp = SaveModule.LoadSave();
-                if (null != temp)
+                if (temp != null)
                 {
                     travelMenu.TurnsLeft = int.Parse(temp[0]);
                     travelMenu.Destination = temp[1];
