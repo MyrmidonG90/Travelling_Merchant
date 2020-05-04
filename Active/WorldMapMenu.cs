@@ -146,7 +146,7 @@ namespace Active
 
         private Inventory LoadCityMerchant(string name)
         {
-            string path = Path.Combine("./Data/", name + ".txt");
+            string path = Path.Combine("./Data/City_Data/", name + ".txt");
             StreamReader sr = new StreamReader(path);
             Inventory temp = new Inventory(int.Parse(sr.ReadLine()));
             int counter = int.Parse(sr.ReadLine());
