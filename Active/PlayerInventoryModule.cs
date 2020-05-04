@@ -44,23 +44,23 @@ namespace Active
         {
             disposing = false;
 
-            mainBox = new Rectangle(260, 140, 1400, 880);
-            inventoryBox = new Rectangle(300, 180, 720, 720);
+            mainBox = new Rectangle(260, 150, 1400, 880);
+            inventoryBox = new Rectangle(300, 170, 720, 720);
 
-            priCategoryBox = new Rectangle(1100, 750, 120, 120);
-            secCategoryBox = new Rectangle(1240, 750, 120, 120);
-            terCategoryBox = new Rectangle(1380, 750, 120, 120);
+            priCategoryBox = new Rectangle(1100, 760, 120, 120);
+            secCategoryBox = new Rectangle(1240, 760, 120, 120);
+            terCategoryBox = new Rectangle(1380, 760, 120, 120);
 
-            posPriCategoryString = new Vector2(1110, 785);
-            posSecCategoryString = new Vector2(1250, 785);
-            posTerCategoryString = new Vector2(1390, 785);
+            posPriCategoryString = new Vector2(1110, 795);
+            posSecCategoryString = new Vector2(1250, 795);
+            posTerCategoryString = new Vector2(1390, 795);
 
-            disposeButton = new Button(1560, 920, 70, 70, TextureManager.texWhite);
+            disposeButton = new Button(1560, 930, 70, 70, TextureManager.texWhite);
             returnButton = new Button(20, 20, 80, 80, TextureManager.texBackArrow);
-            disposeBox = new Rectangle(660, 240, 600, 500);
-            disposeBar = new Rectangle(710, 500, 520, 20);
-            disposeDragger = new Button(710, 480, 20, 60, TextureManager.texWhite);
-            disposeOKButton = new Button(900, 640, 120, 60, TextureManager.texWhite);
+            disposeBox = new Rectangle(660, 250, 600, 500);
+            disposeBar = new Rectangle(710, 510, 520, 20);
+            disposeDragger = new Button(710, 490, 20, 60, TextureManager.texWhite);
+            disposeOKButton = new Button(900, 650, 120, 60, TextureManager.texWhite);
 
             colors = new Color[8];
             cats = new string[8];
@@ -136,7 +136,7 @@ namespace Active
         {
             returnButton.Draw(spriteBatch);
             spriteBatch.Draw(TextureManager.texWhite, mainBox, Color.Wheat);
-            spriteBatch.DrawString(TextureManager.fontInventory, "Currency: " + Player.Inventory.Money.ToString(), new Vector2(300, 920), Color.White);
+            spriteBatch.DrawString(TextureManager.fontInventory, "Currency: " + Player.Inventory.Money.ToString(), new Vector2(300, 930), Color.White);
             spriteBatch.Draw(TextureManager.texWhite, inventoryBox, Color.DarkGray);
 
             DrawGrid(spriteBatch);
@@ -144,8 +144,8 @@ namespace Active
             if (selected != null)
             {
                 spriteBatch.DrawString(TextureManager.fontHeader, selected.Name, new Vector2(1100, 200), Color.White);
-                spriteBatch.DrawString(TextureManager.fontInventory, "Info: \n" + selected.Description, new Vector2(1100, 300), Color.White);
-                spriteBatch.DrawString(TextureManager.fontInventory, "Standard Price: " + selected.BasePrice.ToString() + "c", new Vector2(1100, 650), Color.White);
+                spriteBatch.DrawString(TextureManager.fontInventory, "Info: \n" + selected.Description, new Vector2(1100, 310), Color.White);
+                spriteBatch.DrawString(TextureManager.fontInventory, "Standard Price: " + selected.BasePrice.ToString() + "c", new Vector2(1100, 660), Color.White);
 
                 if (selected.PrimaryCategory != 999)
                 {
@@ -164,7 +164,7 @@ namespace Active
                 }
 
                 disposeButton.Draw(spriteBatch);
-                spriteBatch.DrawString(TextureManager.fontInventory, "D", new Vector2(1580, 930), Color.Black);
+                spriteBatch.DrawString(TextureManager.fontInventory, "D", new Vector2(1580, 940), Color.Black);
             }
 
             if (selectedSquare != 50)
@@ -197,7 +197,7 @@ namespace Active
                 int counter = 0;
                 foreach (Rectangle tempRectangle in inventoryGrid)
                 {
-                    if (tempRectangle.Contains(KMReader.GetMousePoint()))
+                    if (tempRectangle.Contains(KMReader.GetMousePoint()) && !disposing)
                     {
                         try
                         {
@@ -284,10 +284,10 @@ namespace Active
             {
                 spriteBatch.Draw(TextureManager.texWhite, disposeBox, Color.LightGray);
                 Vector2 temp = TextureManager.fontInventory.MeasureString("Select amount to remove");
-                spriteBatch.DrawString(TextureManager.fontInventory, "Select amount to remove", new Vector2((1920 - temp.X) / 2, 260), Color.Black);
+                spriteBatch.DrawString(TextureManager.fontInventory, "Select amount to remove", new Vector2((1920 - temp.X) / 2, 270), Color.Black);
 
                 temp = TextureManager.fontInventory.MeasureString(numberToDispose.ToString());
-                spriteBatch.DrawString(TextureManager.fontInventory, numberToDispose.ToString(), new Vector2((1920 - temp.X) / 2, 360), Color.Black);
+                spriteBatch.DrawString(TextureManager.fontInventory, numberToDispose.ToString(), new Vector2((1920 - temp.X) / 2, 370), Color.Black);
 
                 spriteBatch.Draw(TextureManager.texWhite, disposeBar, Color.LightSeaGreen);
 
@@ -305,11 +305,11 @@ namespace Active
                 Vector2 temp = new Vector2();
                 if (tempItem.Amount > 99)
                 {
-                    temp = new Vector2(inventoryGrid[counter].X + 36, inventoryGrid[counter].Y + 60);
+                    temp = new Vector2(inventoryGrid[counter].X + 36, inventoryGrid[counter].Y + 70);
                 }
                 else
                 {
-                    temp = new Vector2(inventoryGrid[counter].X + 60, inventoryGrid[counter].Y + 60);
+                    temp = new Vector2(inventoryGrid[counter].X + 60, inventoryGrid[counter].Y + 70);
                 }
                 spriteBatch.DrawString(TextureManager.fontInventory, tempItem.Amount.ToString(), temp, Color.White);
                 counter++;
