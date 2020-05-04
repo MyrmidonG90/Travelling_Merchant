@@ -127,9 +127,7 @@ namespace Active
                                 CheckSlotClick(tradeSlotsRight, Participant.TradeSlotsRight);
                             }
                         }
-                    }
-                    
-                    
+                    }                    
                 }
             }
 
@@ -217,15 +215,14 @@ namespace Active
             {
                 --counterCol;
             }
-            // Här ligger problemet!!!!!!!!
             if (slots[counterCol, counterRow].Clicked() == true && slots[counterCol, counterRow].Item != null) // Om Slots:en som tillhör inventory:n har blivit klickat
             {
-                if (participant == Participant.Left)
+                if (participant == Participant.Left) // Inventory to the left aka Player
                 {
                     tradeLeft.AddItem(slots[counterCol, counterRow].Item.ID, 1);// Lägger till item till det vänstra trade fältet   // Error Finns inte
                     invLeft.ReduceAmountOfItems(slots[counterCol, counterRow].Item.ID, 1);
                 }
-                else if (participant == Participant.Right)
+                else if (participant == Participant.Right) // Inventoty to the right aka Merchant
                 {
                     tradeRight.AddItem(slots[counterCol, counterRow].Item.ID, 1); // Lägger till item till det högra trade fältet
                     invRight.ReduceAmountOfItems(slots[counterCol, counterRow].Item.ID, 1);
@@ -256,7 +253,6 @@ namespace Active
                 return false;
             }
             //If player and Merchant doesn't have enough space in inventory.
-
             if (CheckInvFull())
             {
                 return false;
@@ -282,8 +278,16 @@ namespace Active
         static bool CheckInvFull()
         {
             bool full = false;
-            Inventory left = invLeft;
-            Inventory right = invRight;
+            Inventory left = new Inventory(invLeft.Money);
+            Inventory right = new Inventory(invLeft.Money);
+            foreach (var item in invLeft.ItemList)
+            {
+                left.AddItem(item);
+            }
+            foreach (var item in invRight.ItemList)
+            {
+                right.AddItem(item);
+            }
             foreach (var item in tradeRight.ItemList)
             {
                 if (left.AddItem(item) == false)
@@ -297,7 +301,7 @@ namespace Active
                 {
                     full = true;
                 }
-            }            
+            }
 
             return full;
         }

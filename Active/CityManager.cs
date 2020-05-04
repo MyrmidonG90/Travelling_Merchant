@@ -19,6 +19,7 @@ namespace Active
         {
             cities = new List<City>();
         }
+
         public static string[] SplitText(char splitChar, string text)// Splits the text, Easier to read imo
         {
             return text.Split(splitChar);
@@ -40,6 +41,7 @@ namespace Active
             pathway = "./Data/test.txt";
             ReadFile(pathway);
             Inventory inv;
+            cities = new List<City>();
             splitter = SplitText('|', fileText); // Splits the text per object
             
             for (int i = 0; i < splitter.Length-1; i++)

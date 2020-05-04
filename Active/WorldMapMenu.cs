@@ -124,22 +124,20 @@ namespace Active
                 cities[counter] = new City(tempName, tempInfo, cord);
                 cityButtons[counter] = new Button((int)cord.X, (int)cord.Y, 75, 75, tempName, TextureManager.texBox);
                 travelButtons[counter] = new Button((int)cord.X, (int)cord.Y + 80, 75, 30, tempName, TextureManager.texBox);
-                //CityManager.CreateCity(tempName,tempInfo,cord); //
+                //CityManager.CreateCity(tempName,tempInfo,cord);//
                 counter++;
             }
             sr.Close();
+
+            //CityManager.SaveCities();
+            CityManager.LoadCities();
+            CityManager.SaveCities();
+            CityManager.LoadCities();
 
             for (int i = 0; i < cities.Length; i++)
             {
                 cities[i].Information = cities[i].Information.Replace(";", "\n");
             }
-
-
-            CityManager.LoadCities();
-
-
-            /*CityManager.SaveCities();
-            CityManager.LoadCities();*/
 
             foreach (City tempCity in cities)
             {
