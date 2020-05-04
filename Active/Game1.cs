@@ -273,8 +273,7 @@ namespace Active
             }
             else if (gameState == GameState.MapMenu)
             {
-                worldMapMenu.Draw(spriteBatch);
-                Calendar.Draw(spriteBatch);
+                worldMapMenu.Draw(spriteBatch);               
             }
             else if (gameState == GameState.TradeMenu)
             {
@@ -292,7 +291,7 @@ namespace Active
             {
                 spriteBatch.DrawString(TextureManager.fontInventory, "Press F1 for City Menu, F2 for Map Menu, F3 for Inv. Menu,\nF4 for Trading Menu or F5 for Travelling Menu \nand you can always press F6 to return here\nF11 loads and F12 saves", new Vector2(200, 200), Color.White);
             }
-
+            Calendar.Draw(spriteBatch);
             spriteBatch.End();
 
             base.Draw(gameTime);

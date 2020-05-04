@@ -22,9 +22,9 @@ namespace Active
 
         public CityMenu()
         {
-            inventoryButton = new Button(70, 920, 230, 120, TextureManager.texWhite);
-            tradeButton = new Button(420, 920, 230, 120, TextureManager.texWhite);
-            mapButton = new Button(1620, 920, 230, 120, TextureManager.texWhite);
+            inventoryButton = new Button(70, 920, 260, 120, "inv", "Inventory", TextureManager.texWhite);
+            tradeButton = new Button(400, 920, 260, 120, "trade", "Trade", TextureManager.texWhite);
+            mapButton = new Button(1620, 920, 260, 120, "map", "Map", TextureManager.texWhite);
         }
 
         public void Update(GameTime gameTime)
@@ -79,9 +79,6 @@ namespace Active
             //spriteBatch.DrawString(TextureManager.font, "Races: ", new Vector2(40, 200), Color.Black, 0, Vector2.Zero, 2, SpriteEffects.None, 1);
             //spriteBatch.DrawString(TextureManager.font, "Kingdom: ", new Vector2(40, 240), Color.Black, 0, Vector2.Zero, 2, SpriteEffects.None, 1);
             //spriteBatch.DrawString(TextureManager.font, "Resources: ", new Vector2(40, 280), Color.Black, 0, Vector2.Zero, 2, SpriteEffects.None, 1);
-            spriteBatch.DrawString(TextureManager.font, "Inventory ", new Vector2(120, 962), Color.Black, 0, Vector2.Zero, 2, SpriteEffects.None, 1);
-            spriteBatch.DrawString(TextureManager.font, "Trade ", new Vector2(495, 962), Color.Black, 0, Vector2.Zero, 2, SpriteEffects.None, 1);
-            spriteBatch.DrawString(TextureManager.font, "Map ", new Vector2(1700, 962), Color.Black, 0, Vector2.Zero, 2, SpriteEffects.None, 1);
         }
     }
 }

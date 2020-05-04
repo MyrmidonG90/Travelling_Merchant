@@ -53,8 +53,8 @@ namespace Active
             {
                 for (int j = 0; j < 5; j++)
                 {
-                    slotsLeft[i, j] = new Slot(50 + 60 * j, 100 + 60 * i, 50, 50);
-                    slotsRight[i, j] = new Slot(1570 + 60 * j, 100 + 60 * i, 50, 50);
+                    slotsLeft[i, j] = new Slot(245 + 60 * j, 200 + 60 * i, 50, 50);
+                    slotsRight[i, j] = new Slot(1385 + 60 * j, 200 + 60 * i, 50, 50);
                     try
                     {
                         slotsLeft[i, j].AddItem(invLeft.ItemList[i * 5 + j]);
@@ -77,8 +77,8 @@ namespace Active
             {
                 for (int j = 0; j < 3; j++)
                 {
-                    tradeSlotsRight[i, j] = new Slot(1010 + 60 * j, 100 + 60 * i, 50, 50);
-                    tradeSlotsLeft[i, j] = new Slot(660 + 60 * j, 100 + 60 * i, 50, 50);
+                    tradeSlotsRight[i, j] = new Slot(1045 + 60 * j, 320 + 60 * i, 50, 50);
+                    tradeSlotsLeft[i, j] = new Slot(705 + 60 * j, 320 + 60 * i, 50, 50);
                 }
             }
         }
@@ -86,9 +86,9 @@ namespace Active
         // Klar
         static void CreateButtons() // Initialiserar knapparna
         {
-            accept = new Button(710, 630, 500, 200, "accept", "Accept Trade", TextureManager.texBox);
-            reset = new Button(1260, 630, 500, 200, "reset", "Reset Trade", TextureManager.texBox);
-            back = new Button(160, 630, 500, 200, "back", "Return", TextureManager.texBox);
+            accept = new Button(830, 600, 260, 120, "accept", "Accept Trade", TextureManager.texBox);
+            reset = new Button(830, 740, 260, 120, "reset", "Reset Trade", TextureManager.texBox);
+            back = new Button(20, 20, 80, 80, TextureManager.texBackArrow);
         }
 
         // Klar
@@ -406,15 +406,15 @@ namespace Active
             accept.Draw(sb);
             reset.Draw(sb);
             back.Draw(sb);
-            sb.DrawString(TextureManager.font,"Player money: " + invLeft.Money, new Microsoft.Xna.Framework.Vector2(1920/2,1080/2),Color.White);
-            sb.DrawString(TextureManager.font, "Merchant money: " + invRight.Money, new Microsoft.Xna.Framework.Vector2(1920 / 2+500, 1080 / 2), Color.White);
+            sb.DrawString(TextureManager.fontButton,"Player money: " + invLeft.Money, new Vector2(245, 520),Color.White);
+            sb.DrawString(TextureManager.fontButton, "Merchant money: " + invRight.Money, new Vector2(1385, 520), Color.White);
             if (priceDifference < 0)
             {
-                sb.DrawString(TextureManager.font, "Cost: " + priceDifference*-1, new Microsoft.Xna.Framework.Vector2(1920 / 2, 1080 / 2+20), Color.White);
+                sb.DrawString(TextureManager.fontButton, "Cost: " + priceDifference*-1, new Vector2(900, 520), Color.White);
             }
             else
             {
-                sb.DrawString(TextureManager.font, "Gain: " + priceDifference, new Microsoft.Xna.Framework.Vector2(1920 / 2, 1080 / 2+20), Color.White);
+                sb.DrawString(TextureManager.fontButton, "Gain: " + priceDifference, new Vector2(900, 520), Color.White);
             }
             
             

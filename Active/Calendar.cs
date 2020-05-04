@@ -25,7 +25,7 @@ namespace Active
         static int month;
         static int dayOfMonth;
 
-        static Vector2 pos = new Vector2(1600, 20);
+        static Vector2 pos = new Vector2(820, 18);
 
         static public void PrepareCalendar()
         {

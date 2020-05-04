@@ -15,8 +15,8 @@ namespace Active
         Button[] cityButtons = new Button[3];
         Button[] travelButtons = new Button[3];
 
-        public Button inventoryButton = new Button(10, 20, 200, 50, TextureManager.texBox);
-        public Button returnButton = new Button(240, 20, 200, 50, TextureManager.texBox);
+        public Button inventoryButton = new Button(70, 920, 260, 120, "inv", "Inventory", TextureManager.texBox);
+        public Button returnButton = new Button(20, 20, 80, 80, TextureManager.texBackArrow);
 
         bool showText;
         
@@ -87,8 +87,6 @@ namespace Active
             
             inventoryButton.Draw(spriteBatch);
             returnButton.Draw(spriteBatch);
-            spriteBatch.DrawString(TextureManager.fontInventory, "Return", new Vector2(280, 20), Color.Red);
-            spriteBatch.DrawString(TextureManager.fontInventory, "Inventory", new Vector2(20, 20), Color.Red);
 
             if (showText)
             {
