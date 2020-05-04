@@ -109,7 +109,9 @@
     <Content Include="Data\SteelVille.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Data\test.txt" />
+    <Content Include="Data\test.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Data\TowerTown.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
