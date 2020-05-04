@@ -17,12 +17,13 @@ namespace Active
         
         static public void Initialize()
         {
-            cities = new List<City>();            
+            cities = new List<City>();
         }
         public static string[] SplitText(char splitChar, string text)// Splits the text, Easier to read imo
         {
             return text.Split(splitChar);
         }
+
         public static void ReadFile(string name)
         {
             fileText = null;
@@ -33,6 +34,7 @@ namespace Active
                 sr.Close();
             }
         }
+
         public static void LoadCities()
         {
             pathway = "./Data/test.txt";
@@ -59,7 +61,8 @@ namespace Active
             }
             Reset();
         }
-        public static void CreateCity(string name, string information, Vector2 coordinates)
+
+        public static void CreateCity(string name, string information, Vector2 coordinates) 
         {
             cities.Add(new City(name,information, coordinates));
         }

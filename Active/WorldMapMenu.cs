@@ -136,8 +136,10 @@ namespace Active
 
 
             CityManager.LoadCities();
-            CityManager.SaveCities();
-            CityManager.LoadCities();
+
+
+            /*CityManager.SaveCities();
+            CityManager.LoadCities();*/
 
             foreach (City tempCity in cities)
             {
