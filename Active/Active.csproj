@@ -91,6 +91,9 @@
     <Content Include="Data\CarrotTown.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Data\CategoryList.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Data\cityInfo.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
