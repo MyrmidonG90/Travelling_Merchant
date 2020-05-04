@@ -83,7 +83,16 @@ namespace Active
             openFileDialog.ShowDialog();
             Inventory temp = new Inventory(0);
 
-            StreamReader streamReader = new StreamReader(openFileDialog.FileName);
+            StreamReader streamReader;
+            try
+            {
+                streamReader = new StreamReader(openFileDialog.FileName);
+            }
+            catch
+            {
+                return null;
+            }
+            
 
             if (streamReader.ReadLine() == ver)
             {
