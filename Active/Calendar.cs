@@ -83,14 +83,6 @@ namespace Active
 
         static public void Update()
         {
-            timer++; //can be removed later
-
-            if (timer == 120)
-            {
-                AddDays(1);
-                timer = 0;
-            }      //Can be removed later
-
             currentDay = days[day];
             currentMonth = months[month];
             dayOfMonth = 7 * week + day + 1;

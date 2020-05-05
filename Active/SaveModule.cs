@@ -21,13 +21,14 @@ namespace Active
         //==================================================================================
         //OM DU ÄNDRAR HUR SPELET SPARAR SÅ ***MÅSTE*** DU ÄNDRA VÄRDET I ver
         //==================================================================================
-        static string ver = "1.0.1";
-        static public bool GenerateSave(Inventory inventory, string location, TravelMenu travelMenu)
+        static string ver = "1.1.0";
+        static public bool GenerateSave(Inventory inventory, string location, TravelMenu travelMenu, string gameState)
         {
             string path = Path.Combine("./Saves/", "Save-" + DateTime.Now.ToString() + ".ptmsave");
             StreamWriter streamWriter = new StreamWriter(ToSafeFileName(path), false);
 
             streamWriter.WriteLine(ver);
+            streamWriter.WriteLine(gameState);
             streamWriter.WriteLine(Calendar.TotalDays);
             streamWriter.WriteLine(location);
             streamWriter.WriteLine(inventory.Money);
@@ -96,6 +97,8 @@ namespace Active
 
             if (streamReader.ReadLine() == ver)
             {
+                string[] data = new string[3];
+                data[0] = streamReader.ReadLine();
                 Calendar.TotalDays = int.Parse(streamReader.ReadLine());
                 Player.Location = streamReader.ReadLine();
                 temp.Money = int.Parse(streamReader.ReadLine());
@@ -103,8 +106,8 @@ namespace Active
 
                 for (int i = 0; i < counter; i++)
                 {
-                    string data = streamReader.ReadLine();
-                    string[] data2 = data.Split(';');
+                    string tempData = streamReader.ReadLine();
+                    string[] data2 = tempData.Split(';');
                     Item newItem = ItemCreator.CreateItem(int.Parse(data2[0]), int.Parse(data2[1]));
                     temp.AddItem(newItem);
                 }
@@ -114,22 +117,17 @@ namespace Active
 
                 if (check == 1)
                 {
-                    string[] data = new string[2];
-                    data[0] = streamReader.ReadLine();
+                    
                     data[1] = streamReader.ReadLine();
+                    data[2] = streamReader.ReadLine();
                     streamReader.Close();
                     return data;
                 }
-                else
-                {
-                    streamReader.Close();
-                    return null;
-                }
+
+                streamReader.Close();
+                return data;               
             }
-            else
-            {
-                return null;
-            }
+            return null;
         }
         //==================================================================================
         //OM DU ÄNDRAR HUR SPELET SPARAR SÅ ***MÅSTE*** DU ÄNDRA VÄRDET I ver
