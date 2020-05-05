@@ -97,6 +97,7 @@ namespace Active
 
             if (gameState == GameState.CityMenu)
             {
+                cityMenu.Update(gameTime);
                 if (cityMenu.CheckInvButton())
                 {
                     ChangeGameState(GameState.InventoryMenu);

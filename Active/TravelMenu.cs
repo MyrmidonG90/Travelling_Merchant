@@ -13,6 +13,7 @@ namespace Active
         int turnsToTravel;
         int turnsLeft;
         double turnTimer;
+        double timerLength;
 
         string turnDisplay;
 
@@ -28,7 +29,8 @@ namespace Active
         {
             turnsToTravel = 5;
             turnsLeft = 0;
-            turnTimer = 3;
+            turnTimer = timerLength;
+            timerLength = 1;
             destination = "CarrotTown"; 
 
             turnDisplay = turnsLeft.ToString() + "/" + turnsToTravel.ToString();
@@ -48,7 +50,7 @@ namespace Active
 
             turnsToTravel = 5;
             turnsLeft = turnsToTravel;
-            turnTimer = 3;
+            turnTimer = timerLength;
         }
 
         public bool CheckInvbutton()
@@ -87,8 +89,9 @@ namespace Active
 
             if(turnTimer <= 0)
             {
+                Calendar.AddDays(1);
                 turnsLeft--;
-                turnTimer = 3;
+                turnTimer = timerLength;
             }
 
             if (turnsLeft == 0)
