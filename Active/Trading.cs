@@ -353,14 +353,14 @@ namespace Active
             
             invLeft = origLeftInv;
             invRight = origRightInv;
-            /*foreach (var item in tradeLeft.ItemList) Onödig?
+            foreach (var item in tradeLeft.ItemList) 
             {
                 invLeft.AddItem(item);
             }
             foreach (var item in tradeRight.ItemList)
             {
                 invRight.AddItem(item);
-            }*/
+            }
             tradeLeft.ItemList.Clear();
             tradeRight.ItemList.Clear();
             UpdateSlots();

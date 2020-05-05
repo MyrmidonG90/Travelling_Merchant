@@ -51,7 +51,6 @@ namespace Active
             amountOfCities = 0;
             while (!sr.EndOfStream)
             {
-
                 string tempName = sr.ReadLine();
                 string skip1 = sr.ReadLine();
                 string skip2 = sr.ReadLine();
