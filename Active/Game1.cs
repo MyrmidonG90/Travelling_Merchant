@@ -22,7 +22,6 @@ namespace Active
         Inventory inv1, inv2;
         WorldMapMenu worldMapMenu;
 
-
         Inventory activeInv;
         Inventory activePlayerInv;
 
@@ -33,7 +32,8 @@ namespace Active
             MapMenu,
             TradeMenu,
             InventoryMenu,
-            TravelMenu
+            TravelMenu,
+            MainMenu,
         }
 
         GameState previousGameState2;
@@ -63,10 +63,11 @@ namespace Active
             TextureManager.LoadContent(Content);
             ItemCreator.LoadItemData();
             Player.Init();
+            MainMenuManager.Init();
             CityManager.Initialize();
             previousGameState2 = GameState.Debug;
             previousGameState = GameState.Debug;
-            gameState = GameState.Debug;
+            gameState = GameState.MainMenu;
 
             inv1 = new Inventory(100);
             inv2 = new Inventory(200);
@@ -164,7 +165,7 @@ namespace Active
                             tempCity.Traded = true;
                         }
                     }
-                }               
+                }
             }
             else if (gameState == GameState.InventoryMenu)
             {
@@ -195,6 +196,31 @@ namespace Active
                     previousGameState2 = previousGameState;
                     previousGameState = gameState;
                     gameState = GameState.MapMenu;
+                }
+            }
+            else if (gameState == GameState.MainMenu)
+            {
+                if (MainMenuManager.CheckNewGame())
+                {
+                    gameState = GameState.CityMenu;
+                }
+                if (MainMenuManager.CheckLoadGame())
+                {
+                    string[] temp = SaveModule.LoadSave();
+                    if (temp != null)
+                    {
+                        travelMenu.TurnsLeft = int.Parse(temp[0]);
+                        travelMenu.Destination = temp[1];
+                        gameState = GameState.TravelMenu;
+                    }
+                    else
+                    {
+                        gameState = GameState.CityMenu;
+                    }
+                }
+                if (MainMenuManager.CheckExitGame())
+                {
+                    Exit();
                 }
             }
             else if (gameState == GameState.Debug)
@@ -286,6 +312,10 @@ namespace Active
             else if (gameState == GameState.TravelMenu)
             {
                 travelMenu.Draw(spriteBatch);
+            }
+            else if (gameState == GameState.MainMenu)
+            {
+                MainMenuManager.Draw(spriteBatch);
             }
             else if (gameState == GameState.Debug)
             {
