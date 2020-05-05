@@ -16,6 +16,7 @@ namespace Active
         static Inventory invLeft, invRight, tradeLeft, tradeRight, origLeftInv, origRightInv, tmpInv;
         static Slot[,] slotsLeft, slotsRight, tradeSlotsLeft, tradeSlotsRight;
         static Button accept, reset, back;
+        static string zoneName;
         enum Participant
         {
             Left,
@@ -27,7 +28,7 @@ namespace Active
         static int counterCol, counterRow, leftPrice, rightPrice, priceDifference;
 
         // Klart
-        static public void Initialize(Inventory player, Inventory trader) // Change name to Start
+        static public void Initialize(Inventory player, Inventory trader, string zone) // Change name to Start
         {
             invLeft = player;
             invRight = trader;
@@ -40,6 +41,8 @@ namespace Active
             origRightInv = trader;
             CreateSlots();
             CreateButtons();
+            
+            zoneName = zone;
         }
 
         // Klar
@@ -326,10 +329,10 @@ namespace Active
             int sum = 0;
             for (int i = 0; i < inv.ItemList.Count; i++)
             {
-                sum += inv.ItemList[i].BasePrice * inv.ItemList[i].Amount;
+                sum += inv.ItemList[i].BasePrice*ModifierManager.GetModifier(zoneName, inv.ItemList[i].PrimaryCategory) * inv.ItemList[i].Amount;
             }
             return sum;
-        }        
+        }
         
         // Klar
         static void ResetTrade()
@@ -380,6 +383,7 @@ namespace Active
             tradeSlotsRight = null;
             slotsLeft = null;
             slotsRight = null;
+            zoneName = null;
 
             return true;
         }

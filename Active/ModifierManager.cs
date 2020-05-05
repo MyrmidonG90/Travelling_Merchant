@@ -14,7 +14,8 @@ namespace Active
         static List<string> items = new List<string>();
         static int amountOfCities, amountOfCategories;
         
-        static public double CheckModifiers(string city, string category)
+
+        static public double GetModifier(string city, string category)
         {
             StreamReader sr = new StreamReader("./Data/ItemPrices.txt");
             while (!sr.EndOfStream)
@@ -30,14 +31,14 @@ namespace Active
                         if (city == tempCity && tempCategoryName == category)
                         {
                             sr.Close();
-                            return double.Parse(tempModifier);
+                            return double.Parse(tempModifier); // Return modifier
                         }
                     }
                 }
             }
 
             sr.Close();
-            return 1;
+            return 1; // return modifier 1 in case of errors 
         }
 
         
