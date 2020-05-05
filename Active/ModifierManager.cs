@@ -8,16 +8,13 @@ using System.Threading.Tasks;
 
 namespace Active
 {
-    class ModifierManager
+    static public class ModifierManager
     {
-        List<string> cities = new List<string>();
-        List<string> items = new List<string>();
-        int amountOfCities, amountOfCategories;
-
-       
-
-
-        public double CheckModifiers(string city, string category)
+        static List<string> cities = new List<string>();
+        static List<string> items = new List<string>();
+        static int amountOfCities, amountOfCategories;
+        
+        static public double CheckModifiers(string city, string category)
         {
             StreamReader sr = new StreamReader("./Data/ItemPrices.txt");
             while (!sr.EndOfStream)
@@ -43,9 +40,9 @@ namespace Active
             return 1;
         }
 
-
-
-        public void LoadCityAndCategoryLists()
+        
+        
+        static public void LoadCityAndCategoryLists()
         {
             StreamReader sr = new StreamReader("./Data/cityInfo.txt");
             amountOfCities = 0;

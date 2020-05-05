@@ -21,7 +21,7 @@ namespace Active
         TravelMenu travelMenu;
         Inventory inv1, inv2;
         WorldMapMenu worldMapMenu;
-        ModifierManager modifierManager;
+
 
         Inventory activeInv;
         Inventory activePlayerInv;
@@ -80,8 +80,8 @@ namespace Active
             worldMapMenu.LoadCities();
             playerInventoryModule = new PlayerInventoryModule();
             travelMenu = new TravelMenu();
-            modifierManager = new ModifierManager();
-            modifierManager.LoadCityAndCategoryLists();
+
+            ModifierManager.LoadCityAndCategoryLists();
             Calendar.PrepareCalendar();
         }
 
