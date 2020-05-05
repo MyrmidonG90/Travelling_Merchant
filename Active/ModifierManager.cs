@@ -13,7 +13,17 @@ namespace Active
         static List<string> cities = new List<string>();
         static List<int> items = new List<int>();
         static int amountOfCities, amountOfCategories;
-        
+        /*
+         0.Food
+         1.Metal 
+         2.Raw Materials
+         3.Textiles
+         4.Gear
+         5.Magic
+         6.Valuables
+         7.Manufactured
+
+             */
 
         static public double GetModifier(string city, int category)
         {
@@ -31,7 +41,20 @@ namespace Active
                         if (city == tempCity && tempCategoryNr == category) // Söker efter stadens kategori modifiers.
                         {
                             sr.Close();
-                            return double.Parse(tempModifier); // Return modifier
+                            try
+                            {
+                                return double.Parse(tempModifier); // Return modifier
+                            }
+                            catch (Exception)
+                            {
+                                tempModifier.Split('.');
+                                double tmp = 0;
+                                tmp += double.Parse(tempModifier.Split('.')[0]);
+                                tmp += double.Parse(tempModifier.Split('.')[1])/10;
+                                return tmp;
+                                
+                            }
+                            
                         }
                     }
                 }

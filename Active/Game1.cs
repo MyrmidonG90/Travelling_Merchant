@@ -105,15 +105,17 @@ namespace Active
                 if (cityMenu.CheckTradeButton())
                 {
                     ChangeGameState(GameState.TradeMenu);
+                    string tmp = "";
                     foreach (City tempCity in worldMapMenu.Cities)
                     {
                         if (tempCity.Name == Player.Location)
                         {
                             activeInv = tempCity.Inv;
+                            tmp = tempCity.Name;
                             activePlayerInv = Player.Inventory;
                         }
                     }
-                    Trading.Initialize(activePlayerInv, activeInv);
+                    Trading.StartTrade(activePlayerInv, activeInv, tmp);
                 }
                 if (cityMenu.CheckMapButton())
                 {
