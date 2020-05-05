@@ -16,23 +16,34 @@ namespace Active
         static Button options;
         static Button fullscreen;
         static Button menu;
+        static Button optionsReturn;
+        static Button close;
 
         static Rectangle box;
         static Rectangle ring;
 
         static bool alt;
         static bool full;
+        static bool block;
 
         static public void Init()
         {
-            main = new Button(830, 160, 260, 120, "main", "Main Menu", TextureManager.texWhite);
-            save = new Button(830, 300, 260, 120, "save", "Save Game", TextureManager.texWhite);
-            load = new Button(830, 440, 260, 120, "load", "Load Game", TextureManager.texWhite);
-            options = new Button(830, 580, 260, 120, "options", "Options", TextureManager.texWhite);
-            fullscreen = new Button(830, 160, 260, 120, "full", "Fullscreen", TextureManager.texWhite);
+            main = new Button(830, 160, 260, 80, "main", "Main Menu", TextureManager.texWhite);
+            fullscreen = new Button(830, 160, 260, 80, "full", "Fullscreen", TextureManager.texWhite);
+
+            save = new Button(830, 260, 260, 80, "save", "Save Game", TextureManager.texWhite);
+
+            load = new Button(830, 360, 260, 80, "load", "Load Game", TextureManager.texWhite);
+
+            options = new Button(830, 560, 260, 80, "options", "Options", TextureManager.texWhite);
+            optionsReturn = new Button(830, 560, 260, 80, "options", "Return", TextureManager.texWhite);
+
+            close = new Button(830, 660, 260, 80, "close", "Close", TextureManager.texWhite);
+
+
             menu = new Button(1820, 20, 80, 80, TextureManager.texBackArrow);
 
-            box = new Rectangle(810, 140, 300, 580);
+            box = new Rectangle(810, 140, 300, 620);
 
             alt = false;
             full = false;
@@ -40,7 +51,7 @@ namespace Active
 
         static public bool CheckMainMenu()
         {
-            if (main.Click())
+            if (main.Click() && !alt)
             {
                 return true;
             }
@@ -52,7 +63,7 @@ namespace Active
 
         static public bool CheckSaveGame()
         {
-            if (save.Click())
+            if (save.Click() && !alt)
             {
                 return true;
             }
@@ -64,7 +75,7 @@ namespace Active
 
         static public bool CheckLoadGame()
         {
-            if (load.Click())
+            if (load.Click() && !alt)
             {
                 return true;
             }
@@ -72,16 +83,7 @@ namespace Active
             {
                 return false;
             }
-        }
-
-        static public void CheckOptions()
-        {
-            if (options.Click())
-            {
-                //disabled until i fix fullscreen
-                //alt = true; 
-            }
-        }
+        }       
 
         static public bool CheckFullscreen()
         {
@@ -111,11 +113,32 @@ namespace Active
             }
         }
 
+        static public bool Update()
+        {
+            block = false;
+            if (options.Click() && !alt && !block)
+            {
+                alt = true;
+                block = true;
+            }
+            if (optionsReturn.Click() && alt && !block)
+            {
+                alt = false;
+                block = true;
+            }
+            if (close.Click())
+            {
+                return true;
+            }
+            return false;
+        }
+
         static public void Draw(SpriteBatch spriteBatch, bool mode)
         {
             if (mode)
             {
                 spriteBatch.Draw(TextureManager.texWhite, box, Color.DarkGray);
+                close.Draw(spriteBatch);
             }
 
             if (!alt && mode)
@@ -128,6 +151,7 @@ namespace Active
             else if (alt && mode)
             {
                 fullscreen.Draw(spriteBatch);
+                optionsReturn.Draw(spriteBatch);
             }
 
             menu.Draw(spriteBatch);

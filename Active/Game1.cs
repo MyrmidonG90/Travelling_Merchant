@@ -253,7 +253,10 @@ namespace Active
                     graphics.IsFullScreen = !graphics.IsFullScreen;
                     graphics.ApplyChanges();
                 }
-                OptionsMenu.CheckOptions();
+                if (OptionsMenu.Update())
+                {
+                    options = false;
+                }
             }
 
             if (OptionsMenu.CheckMenuToggle())
