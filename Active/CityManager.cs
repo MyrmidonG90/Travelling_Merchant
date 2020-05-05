@@ -13,6 +13,7 @@ namespace Active
         static StreamWriter sw;
         static public string[] splitter, secondSplitter, thirdSplitter, fourthSplitter;
         static string fileText,pathway;
+        static List<string> readPerLine;
         static public List<City> cities;
         
         static public void Initialize()
@@ -35,6 +36,21 @@ namespace Active
                 sr.Close();
             }
         }
+        public static void ReadFilePerLine(string pathway)
+        {
+            readPerLine = new List<string>();
+            if (File.Exists(pathway))
+            {
+                sr = new StreamReader(pathway);
+                while (!sr.EndOfStream)
+                {                    
+                    readPerLine.Add(sr.ReadLine());                    
+                }
+                sr.Close();
+            }            
+        }
+
+
 
         public static void LoadCities()
         {
@@ -63,7 +79,21 @@ namespace Active
             }
             Reset();
         }
+        public static void LoadCities(int o)
+        {
+            cities = new List<City>();
+            pathway = "./Data/test.txt";
+            ReadFilePerLine(pathway);
+            Inventory inv;
+            int nrOfItems = readPerLine.Count / 6;
+            for (int i = 0; i < nrOfItems; i++)
+            {
+                Vector2 vector = new Vector2(float.Parse(SplitText(';',readPerLine[2 + i * 6])[0]), float.Parse(SplitText(';', readPerLine[2 + i * 6])[1]));
+                cities.Add(new City(readPerLine[i*6], readPerLine[1+i*6], vector));
 
+            }
+
+        }
         public static void CreateCity(string name, string information, Vector2 coordinates) 
         {
             cities.Add(new City(name,information, coordinates));
@@ -100,6 +130,7 @@ namespace Active
             splitter = null;
             secondSplitter = null;
             thirdSplitter = null;
+            readPerLine = null;
         }
 
         static void EmptyFile(string fileName)

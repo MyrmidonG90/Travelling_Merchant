@@ -25,10 +25,11 @@ namespace Active
             TradeSlotsRight,
             None
         }
+
         static int counterCol, counterRow, leftPrice, rightPrice, priceDifference;
 
         // Klart
-        static public void Initialize(Inventory player, Inventory trader, string zone) // Change name to Start
+        static public void StartTrade(Inventory player, Inventory trader, string zone) 
         {
             invLeft = player;
             invRight = trader;
@@ -46,7 +47,7 @@ namespace Active
         }
 
         // Klar
-        static void CreateSlots()
+        static void CreateSlots() // Skapar slots
         {
             slotsLeft = new Slot[5, 5];
             slotsRight = new Slot[5, 5];
@@ -278,6 +279,7 @@ namespace Active
             return true;
         }
 
+        //Klar
         static bool CheckInvFull()
         {
             bool full = false;
@@ -309,6 +311,7 @@ namespace Active
             return full;
         }
 
+        //Klar
         static void ChangeInv()
         {
             invLeft.Money += leftPrice - rightPrice;
@@ -323,15 +326,15 @@ namespace Active
             }
         }
 
-        // Klar men Behöver ändra BasePrice till något mer verkligt
+        // Klar
         static int CheckValue(Inventory inv)
         {
-            int sum = 0;
+            double sum = 0;
             for (int i = 0; i < inv.ItemList.Count; i++)
             {
                 sum += inv.ItemList[i].BasePrice*ModifierManager.GetModifier(zoneName, inv.ItemList[i].PrimaryCategory) * inv.ItemList[i].Amount;
             }
-            return sum;
+            return (int)sum; // Avrundas nedåt
         }
         
         // Klar

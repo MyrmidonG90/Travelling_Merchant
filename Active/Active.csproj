@@ -88,6 +88,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Data\CityStructure.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Data\City_Data\CarrotTown.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

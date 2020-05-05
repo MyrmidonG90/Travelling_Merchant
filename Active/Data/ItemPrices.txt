@@ -18,7 +18,6 @@ Manufactured
 SteelVille
 Food
 2
-2
 Metals
 0.5
 Raw Materials

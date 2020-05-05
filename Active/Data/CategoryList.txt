@@ -1,8 +1,8 @@
-Food
-Metals
-Raw Materials
-Textiles
-Gear
-Magic
-Valuables
-Manufactured
+0
+1
+2
+3
+4
+5
+6
+7

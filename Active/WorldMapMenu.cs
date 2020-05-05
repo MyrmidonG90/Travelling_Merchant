@@ -35,7 +35,6 @@ namespace Active
                 }
                 counter++;
             }
-
             return null;
         }
 

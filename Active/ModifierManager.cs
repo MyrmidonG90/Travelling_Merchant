@@ -11,11 +11,11 @@ namespace Active
     static public class ModifierManager
     {
         static List<string> cities = new List<string>();
-        static List<string> items = new List<string>();
+        static List<int> items = new List<int>();
         static int amountOfCities, amountOfCategories;
         
 
-        static public double GetModifier(string city, string category)
+        static public double GetModifier(string city, int category)
         {
             StreamReader sr = new StreamReader("./Data/ItemPrices.txt");
             while (!sr.EndOfStream)
@@ -25,10 +25,10 @@ namespace Active
                     string tempCity = sr.ReadLine();
                     for (int j = 0; j < amountOfCategories; j++)
                     {
-                        string tempCategoryName = sr.ReadLine();
-                        string tempModifier= sr.ReadLine();
+                        int tempCategoryNr = int.Parse(sr.ReadLine()); // Get Category
+                        string tempModifier= sr.ReadLine(); // Get Category modifier
 
-                        if (city == tempCity && tempCategoryName == category)
+                        if (city == tempCity && tempCategoryNr == category) // Söker efter stadens kategori modifiers.
                         {
                             sr.Close();
                             return double.Parse(tempModifier); // Return modifier
@@ -64,7 +64,7 @@ namespace Active
             while (!sr2.EndOfStream)
             {
 
-                string tempName = sr2.ReadLine();
+                int tempName = int.Parse(sr2.ReadLine());
 
                 items.Add(tempName);
 
