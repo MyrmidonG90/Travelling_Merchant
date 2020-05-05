@@ -22,7 +22,6 @@ namespace Active
         Inventory inv1, inv2;
         WorldMapMenu worldMapMenu;
 
-
         Inventory activeInv;
         Inventory activePlayerInv;
 
@@ -33,7 +32,8 @@ namespace Active
             MapMenu,
             TradeMenu,
             InventoryMenu,
-            TravelMenu
+            TravelMenu,
+            MainMenu,
         }
 
         GameState previousGameState2;
@@ -63,10 +63,11 @@ namespace Active
             TextureManager.LoadContent(Content);
             ItemCreator.LoadItemData();
             Player.Init();
+            MainMenuManager.Init();
             CityManager.Initialize();
             previousGameState2 = GameState.Debug;
             previousGameState = GameState.Debug;
-            gameState = GameState.Debug;
+            gameState = GameState.MainMenu;
 
             inv1 = new Inventory(100);
             inv2 = new Inventory(200);
@@ -164,7 +165,7 @@ namespace Active
                             tempCity.Traded = true;
                         }
                     }
-                }               
+                }
             }
             else if (gameState == GameState.InventoryMenu)
             {
@@ -195,6 +196,21 @@ namespace Active
                     previousGameState2 = previousGameState;
                     previousGameState = gameState;
                     gameState = GameState.MapMenu;
+                }
+            }
+            else if (gameState == GameState.MainMenu)
+            {
+                if (MainMenuManager.CheckNewGame())
+                {
+                    gameState = GameState.CityMenu;
+                }
+                if (MainMenuManager.CheckLoadGame())
+                {
+                    LoadSave();
+                }
+                if (MainMenuManager.CheckExitGame())
+                {
+                    Exit();
                 }
             }
             else if (gameState == GameState.Debug)
@@ -239,21 +255,11 @@ namespace Active
             }
             if (KMReader.prevKeyState.IsKeyUp(Keys.F11) && KMReader.keyState.IsKeyDown(Keys.F11))
             {
-                string[] temp = SaveModule.LoadSave();
-                if (temp != null)
-                {
-                    travelMenu.TurnsLeft = int.Parse(temp[0]);
-                    travelMenu.Destination = temp[1];
-                    gameState = GameState.TravelMenu;
-                }
-                else
-                {
-                    gameState = GameState.CityMenu;
-                }
+                LoadSave();
             }
             if (KMReader.prevKeyState.IsKeyUp(Keys.F12) && KMReader.keyState.IsKeyDown(Keys.F12))
             {
-                SaveModule.GenerateSave(Player.Inventory, Player.Location, travelMenu);
+                SaveModule.GenerateSave(Player.Inventory, Player.Location, travelMenu, gameState.ToString());
             }
 
             Player.Update();
@@ -287,14 +293,64 @@ namespace Active
             {
                 travelMenu.Draw(spriteBatch);
             }
+            else if (gameState == GameState.MainMenu)
+            {
+                MainMenuManager.Draw(spriteBatch);
+            }
             else if (gameState == GameState.Debug)
             {
                 spriteBatch.DrawString(TextureManager.fontInventory, "Press F1 for City Menu, F2 for Map Menu, F3 for Inv. Menu,\nF4 for Trading Menu or F5 for Travelling Menu \nand you can always press F6 to return here\nF11 loads and F12 saves", new Vector2(200, 200), Color.White);
             }
-            Calendar.Draw(spriteBatch);
+            if (gameState != GameState.MainMenu)
+            {
+                Calendar.Draw(spriteBatch);
+            }
+
             spriteBatch.End();
 
+            Window.Title = "Press F6 for debug menu";
+
             base.Draw(gameTime);
+        }
+
+        private void LoadSave()
+        {
+            string[] temp = SaveModule.LoadSave();
+
+            if (temp == null)
+            {
+                return;
+            }
+
+            if (temp[0] == GameState.CityMenu.ToString())
+            {
+                gameState = GameState.CityMenu;
+            }
+            else if (temp[0] == GameState.InventoryMenu.ToString())
+            {
+                gameState = GameState.InventoryMenu;
+            }
+            else if (temp[0] == GameState.MapMenu.ToString())
+            {
+                gameState = GameState.MapMenu;
+            }
+            else if (temp[0] == GameState.TravelMenu.ToString())
+            {
+                if (temp[1] != null)
+                {
+                    travelMenu.TurnsLeft = int.Parse(temp[1]);
+                    travelMenu.Destination = temp[2];
+                    gameState = GameState.TravelMenu;
+                }
+                else
+                {
+                    gameState = GameState.CityMenu;
+                }
+            }            
+            else
+            {
+                gameState = GameState.CityMenu;
+            }
         }
     }
 }

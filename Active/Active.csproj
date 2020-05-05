@@ -66,6 +66,7 @@
     <Compile Include="Item.cs" />
     <Compile Include="ItemCreator.cs" />
     <Compile Include="KMReader.cs" />
+    <Compile Include="MainMenuManager.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="ModifierManager.cs" />
     <Compile Include="PlayerInventoryModule.cs" />
@@ -116,6 +117,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Icon.ico" />
+    <Content Include="Saves\dummy.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <MonoGameContentReference Include="Content\Content.mgcb" />
