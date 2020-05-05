@@ -85,7 +85,7 @@ namespace Active
         {
             timer++; //can be removed later
 
-            if (timer == 60)
+            if (timer == 120)
             {
                 AddDays(1);
                 timer = 0;
