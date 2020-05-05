@@ -19,7 +19,6 @@ namespace Active
         PlayerInventoryModule playerInventoryModule;
         CityMenu cityMenu;
         TravelMenu travelMenu;
-        Inventory inv1, inv2;
         WorldMapMenu worldMapMenu;
 
         Inventory activeInv;
@@ -73,14 +72,8 @@ namespace Active
             gameState = GameState.MainMenu;
 
             options = true;
-
-            inv1 = new Inventory(100);
-            inv2 = new Inventory(200);
             activeInv = new Inventory(100);
-            inv1.AddItem(ItemCreator.CreateItem(0,20));
-            inv1.AddItem(ItemCreator.CreateItem(1, 20));
-            inv2.AddItem(ItemCreator.CreateItem(2, 5));
-            Trading.Initialize(inv1,inv2);
+
             cityMenu = new CityMenu();
             worldMapMenu = new WorldMapMenu();
             worldMapMenu.LoadCities();
