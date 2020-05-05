@@ -71,7 +71,7 @@ namespace Active
             previousGameState = GameState.Debug;
             gameState = GameState.MainMenu;
 
-            options = true;
+            options = false;
             activeInv = new Inventory(100);
 
             cityMenu = new CityMenu();
