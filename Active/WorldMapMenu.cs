@@ -10,10 +10,11 @@ using System.Threading.Tasks;
 namespace Active
 {
     class WorldMapMenu
-    {      
-        City[] cities = new City[3];
-        Button[] cityButtons = new Button[3];
-        Button[] travelButtons = new Button[3];
+    {
+        const int nrCities = 10;
+        City[] cities = new City[nrCities];
+        Button[] cityButtons = new Button[nrCities];
+        Button[] travelButtons = new Button[nrCities];
 
         public Button inventoryButton = new Button(70, 920, 260, 120, "inv", "Inventory", TextureManager.texBox);
         public Button returnButton = new Button(20, 20, 80, 80, TextureManager.texBackArrow);
