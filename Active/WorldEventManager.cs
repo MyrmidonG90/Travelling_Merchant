@@ -14,6 +14,9 @@ namespace Active
         static List<bool[]> effectIDList;
         static List<int[]> effectValList;
         static List<int> durationList;
+        static List<ItemModifierTemplate> itemModifierList;
+        static List<InventoryTemplate> inventoryList;
+        static int stage;
 
         static public void Init()
         {
@@ -22,41 +25,87 @@ namespace Active
             effectIDList = new List<bool[]>();
             effectValList = new List<int[]>();
             durationList = new List<int>();
+            itemModifierList = new List<ItemModifierTemplate>();
+            inventoryList = new List<InventoryTemplate>();
 
             StreamReader sr = new StreamReader("./Data/WorldEvents.txt");
 
+            stage = 0;
             while (!sr.EndOfStream)
             {
-                eventNameList.Add(sr.ReadLine());
-                eventDesList.Add(sr.ReadLine());
-
-                string temp = sr.ReadLine();
-                string[] temp2 = temp.Split(';');
-                bool[] data = new bool[4];
-
-                for (int i = 0; i < temp2.Length; i++)
+                if (stage == 0)
                 {
-                    if (temp2[i] == "true")
+                    eventNameList.Add(sr.ReadLine());
+                    eventDesList.Add(sr.ReadLine());
+
+                    string temp = sr.ReadLine();
+                    string[] temp2 = temp.Split(';');
+                    bool[] data = new bool[4];
+
+                    for (int i = 0; i < temp2.Length; i++)
                     {
-                        data[i] = true;
+                        if (temp2[i] == "true")
+                        {
+                            data[i] = true;
+                        }
+                        else
+                        {
+                            data[i] = false;
+                        }
                     }
-                    else
+                    effectIDList.Add(data);
+
+                    temp = sr.ReadLine();
+                    temp2 = temp.Split(';');
+                    int[] data2 = new int[4];
+
+                    for (int i = 0; i < temp2.Length; i++)
                     {
-                        data[i] = false;
+                        data2[i] = int.Parse(temp2[i]);
                     }
+                    effectValList.Add(data2);
+                    durationList.Add(int.Parse(sr.ReadLine()));
                 }
-                effectIDList.Add(data);
-
-                temp = sr.ReadLine();
-                temp2 = temp.Split(';');
-                int[] data2 = new int[4];
-
-                for (int i = 0; i < temp2.Length; i++)
+                else if (stage == 1)
                 {
-                    data2[i] = int.Parse(temp2[i]);
+                    int id = int.Parse(sr.ReadLine());
+                    int counter = int.Parse(sr.ReadLine());
+                    List<int> itemCategories = new List<int>();
+                    List<float> itemModifiers = new List<float>();
+                    for (int i = 0; i < counter; i++)
+                    {
+                        itemCategories.Add(int.Parse(sr.ReadLine()));
+                        itemModifiers.Add(float.Parse(sr.ReadLine()));
+                    }
+                    itemModifierList.Add(new ItemModifierTemplate(id, itemCategories, itemModifiers));
                 }
-                effectValList.Add(data2);
-                durationList.Add(int.Parse(sr.ReadLine()));
+                else if (stage == 2)
+                {
+                    int id = int.Parse(sr.ReadLine());
+                    int counter = int.Parse(sr.ReadLine());
+                    List<bool> amountNegOrPos = new List<bool>();
+                    List<Item> items = new List<Item>();
+                    for (int i = 0; i < counter; i++)
+                    {
+                        int itemID = int.Parse(sr.ReadLine());
+                        int amount = int.Parse(sr.ReadLine());
+                        items.Add(ItemCreator.CreateItem(itemID, amount));
+                        if (sr.ReadLine() == "-")
+                        {
+                            amountNegOrPos.Add(false);
+                        }
+                        else
+                        {
+                            amountNegOrPos.Add(true);
+                        }
+                    }
+                    inventoryList.Add(new InventoryTemplate(id, amountNegOrPos, items));
+                }
+
+                if (sr.ReadLine() == "--------")
+                {
+                    stage++;
+                }
             }
         }
 
