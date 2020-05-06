@@ -104,9 +104,10 @@ namespace Active
                 // Om knappen accept klickas
                 if (accept.Click())
                 {
-                    if (AcceptTrade(ref participantLeft, ref participantRight))
+                    //AcceptTrade(ref participantLeft, ref participantRight);
+                    if (AcceptTrade(ref participantLeft, ref participantRight)) //Debuff
                     {
-                        return Exit();
+                        
                     }
                 }
                 // Om knappen reset klickas
@@ -275,7 +276,10 @@ namespace Active
             ChangeInv();
             participantLeft = invLeft;
             participantRight = invRight;
-            Exit();
+            origLeftInv = invLeft;
+            origRightInv = invRight;
+            ResetTrade();
+            //Exit();
             return true;
         }
 
