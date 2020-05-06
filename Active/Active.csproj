@@ -81,8 +81,8 @@
     <Compile Include="TextureManager.cs" />
     <Compile Include="Trading.cs" />
     <Compile Include="TravelMenu.cs" />
+    <Compile Include="WorldEvent.cs" />
     <Compile Include="WorldMapMenu.cs" />
-    <Compile Include="WorldModule.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">

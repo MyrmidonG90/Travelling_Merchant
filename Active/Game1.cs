@@ -80,6 +80,7 @@ namespace Active
             TravelMenu.Init();
 
             ModifierManager.LoadCityAndCategoryLists();
+            ModifierManager.LoadItemModifiers();
             Calendar.PrepareCalendar();
         }
 

@@ -12,59 +12,74 @@ namespace Active
     {
         static List<string> cities = new List<string>();
         static List<int> items = new List<int>();
+        static List<int> itemCategories = new List<int>();
+        static List<float> itemModifiers = new List<float>();
         static int amountOfCities, amountOfCategories;
-        /*
-         0.Food
-         1.Metal 
-         2.Raw Materials
-         3.Textiles
-         4.Gear
-         5.Magic
-         6.Valuables
-         7.Manufactured
+        
+        //0.Food
+        //1.Metal 
+        //2.Raw Materials
+        //3.Textiles
+        //4.Gear
+        //5.Magic
+        //6.Valuables
+        //7.Manufactured
 
-             */
-
+        //om du fattar vafan som händer här inne så ändrades det senast av My 6 maj
+                
         static public double GetModifier(string city, int category)
+        {
+            category--;
+            int counter = 0;
+            for (int i = 0; i < amountOfCities; i++)
+            {
+                for (int j = 0; j < amountOfCategories; j++)
+                {
+                    if (city == cities[i] && itemCategories[j] == category) // Söker efter stadens kategori modifiers.
+                    {
+                        return itemModifiers[counter]; // Return modifier
+                    }
+                    counter++;
+                }
+            }         
+            return 1; // return modifier 1 in case of errors 
+        }
+
+        static public void SetModifier(string city, int category, float modifier)
+        {
+            int counter = 0;
+            for (int i = 0; i < amountOfCities; i++)
+            {
+                for (int j = 0; j < amountOfCategories; j++)
+                {
+                    category--;
+                    if (city == cities[i] && itemCategories[j] == category) // Söker efter stadens kategori modifiers.
+                    {
+                        itemModifiers[counter] = modifier;
+                    }
+                    counter++;
+                }
+            }
+        }
+
+        static public void LoadItemModifiers()
         {
             StreamReader sr = new StreamReader("./Data/ItemPrices.txt");
             while (!sr.EndOfStream)
             {
                 for (int i = 0; i < amountOfCities; i++)
                 {
-                    string tempCity = sr.ReadLine();
+                    sr.ReadLine();
                     for (int j = 0; j < amountOfCategories; j++)
                     {
-                        int tempCategoryNr = int.Parse(sr.ReadLine()); // Get Category
-                        string tempModifier= sr.ReadLine(); // Get Category modifier
-
-                        if (city == tempCity && tempCategoryNr == category) // Söker efter stadens kategori modifiers.
-                        {
-                            sr.Close();
-                            try
-                            {
-                                return double.Parse(tempModifier); // Return modifier
-                            }
-                            catch (Exception)
-                            {
-                                tempModifier.Split('.');
-                                double tmp = 0;
-                                tmp += double.Parse(tempModifier.Split('.')[0]);
-                                tmp += double.Parse(tempModifier.Split('.')[1])/10;
-                                return tmp;
-                                
-                            }
-                            
-                        }
+                        string temp = sr.ReadLine();
+                        itemCategories.Add(int.Parse(temp));
+                        temp = sr.ReadLine();
+                        itemModifiers.Add(float.Parse(temp));                        
                     }
                 }
             }
-
-            sr.Close();
-            return 1; // return modifier 1 in case of errors 
         }
-
-        
         
         static public void LoadCityAndCategoryLists()
         {
