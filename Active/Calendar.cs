@@ -25,7 +25,7 @@ namespace Active
         static int month;
         static int dayOfMonth;
 
-        static Vector2 pos = new Vector2(820, 18);
+        static Vector2 pos = new Vector2(820, 14);
 
         static public void PrepareCalendar()
         {
@@ -108,9 +108,9 @@ namespace Active
 
         static public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.DrawString(TextureManager.fontInventory, currentDay, pos, Color.Black);
-            spriteBatch.DrawString(TextureManager.fontInventory, dayOfMonth.ToString() + dayFollowUp + " " + currentMonth, new Vector2(pos.X, pos.Y + 40), Color.Black);
-            spriteBatch.DrawString(TextureManager.fontInventory, "Total days: " + totalDays.ToString(), new Vector2(pos.X, pos.Y + 80), Color.Black);
+            spriteBatch.DrawString(TextureManager.fontButton, currentDay, pos, Color.Black);
+            spriteBatch.DrawString(TextureManager.fontButton, dayOfMonth.ToString() + dayFollowUp + " " + currentMonth, new Vector2(pos.X, pos.Y + 30), Color.Black);
+            spriteBatch.DrawString(TextureManager.fontButton, "Total days: " + totalDays.ToString(), new Vector2(pos.X, pos.Y + 60), Color.Black);
         }
 
         public static int TotalDays

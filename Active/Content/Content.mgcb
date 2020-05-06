@@ -85,18 +85,6 @@
 /processorParam:TextureFormat=Color
 /build:carrot.png
 
-#begin carrot.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:carrot.png
-
 #begin cotton.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -202,18 +190,6 @@
 /processorParam:TextureFormat=Color
 /build:iron_ingot.png
 
-#begin iron_ingot.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:iron_ingot.png
-
 #begin iron_ore.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -285,18 +261,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:merchant_map_with_nothing.png
-
-#begin potato.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:potato.png
 
 #begin potato.png
 /importer:TextureImporter
@@ -436,4 +400,16 @@
 /processorParam:PremultiplyAlpha=True
 /processorParam:TextureFormat=Compressed
 /build:FontButton.spritefont
+
+#begin Tab.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Tab.png
 
