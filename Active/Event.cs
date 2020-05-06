@@ -20,8 +20,9 @@ namespace Active
             this.percentage = percentage;
         }
 
-        public int Percentage { get => percentage; set => percentage = value; }
-        public int EID { get => eID; set => eID = value; }
-        public int Id { get => id; set => id = value; }
+        public int Percentage { get => percentage;}
+        public int EID { get => eID;}
+        public int Id { get => id;}
+        public List<string> Text { get => text;}
     }
 }

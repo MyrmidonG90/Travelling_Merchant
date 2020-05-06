@@ -14,64 +14,110 @@ namespace Active
     {
         static Random rand;
         static StreamReader sr;
-        static public List<Event> events;
+        static List<Event> events;
+        static bool eventOnGoing;
+        internal static List<Event> Events { get => events;}
+
+        static public void Initialize()
+        {
+            LoadEvents();
+            if (CheckPercentageValue() == false) // Bugg check
+            {
+                // Kommer att funka men det kommer inte vara rätt slump.
+            }
+        }
+
         static public bool Encountered()
         {
-            /*TextFil Events.txt
+            if (rand.Next(0, 9) == 0)
+            {
+                eventOnGoing = true;                
+            }
+
+            return eventOnGoing;
+        }
+
+        static int RandomiseEncounter()
+        {
+            int chance = rand.Next(1,100);
+            int counter = 0;
+
+            while (chance > 0)
+            {
+
+                chance -= Events[counter].Percentage;
+
+                if (chance > 0)
+                {
+                    ++counter;
+                }
+
+            }
+
+            return counter;
+        }
+
+        /*TextFil Events.txt
              ID
              Händelse ID
              Text|text
              Procent
-             */
-             
-            
+        */
 
-            if (rand.Next(0, 9) == 0)
+        static public void LoadEvents() // Laddar in alla events från en textfil
+        {
+            events = new List<Event>();
+            FileManager.ReadFilePerLine("./Data/Events.txt"); // Läser in filen där alla events är
+
+            for (int i = 0; i < FileManager.ReadPerLine.Count/4; i++) //
             {
-                return true;
-            }
-
-            return false;
-        }
-
-        static int RandomiseEncouonter()
-        {
-            return 0;
-        }
-        static public int GetEventID()
-        {
-            return 1;
-        }
-        static public void LoadEvents()
-        {
-            FileManager.ReadFilePerLine("");
-            for (int i = 0; i < FileManager.ReadPerLine.Count/4; i++)
-            {
-                List<string> tmp;
-                int tmpID = int.Parse(FileManager.ReadPerLine[0 + i * 4]);
-                int tmpEID = int.Parse(FileManager.ReadPerLine[1 + i * 4]);
                 
-                int tmpPercentage = int.Parse(FileManager.ReadPerLine[3+i*4]);
-                events.Add(,));
+                int tmpID = int.Parse(FileManager.ReadPerLine[0 + i * 4]); // Får ID för eventet
+
+                int tmpEID = int.Parse(FileManager.ReadPerLine[1 + i * 4]); // Får Event ID
+
+                List<string> tmpString = new List<string>(); 
+
+                FileManager.splitter = FileManager.SplitText('|',FileManager.ReadPerLine[2+i*4]);
+
+                for (int j = 0; j < FileManager.splitter.Length; j++)
+                {
+                    tmpString.Add(FileManager.splitter[j]); // Lägger in event text
+                }
+
+                int tmpPercentage = int.Parse(FileManager.ReadPerLine[3+i*4]); // Får event procent
+
+                Events.Add(new Event(tmpID,tmpEID,tmpString,tmpPercentage)); // Skapar events
             }
-            FileManager.ReadPerLine
 
         }
 
-        static bool CheckPercentageValue()
+        static bool CheckPercentageValue() // Debugg funktion
         {
             bool answer = false;
             int sum = 0;
-            for (int i = 0; i < events.Count; i++)
+
+            for (int i = 0; i < Events.Count; i++)
             {
-                sum +=events[i].Percentage;
+                sum +=Events[i].Percentage;
             }
+
             if (sum == 100)
             {
                 answer = true;
             }
 
             return answer;            
+        }
+
+        static void Update() // Bör endast hända i TravelMenu
+        {
+            
+        }
+
+        static void Draw(SpriteBatch sb) // Bör endast hända i TravelMenu
+        {
+            
         }
         
     }

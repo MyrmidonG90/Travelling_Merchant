@@ -13,11 +13,17 @@ namespace Active
         static StreamReader sr;
         static StreamWriter sw;
         static public string[] splitter, secondSplitter, thirdSplitter, fourthSplitter;
-        static string fileText, pathway;
+        static string fileText;
         static List<string> readPerLine;
 
-        public static string FileText { get => fileText; set => fileText = value; }
-        public static List<string> ReadPerLine { get => readPerLine; set => readPerLine = value; }
+        public static string FileText { get => fileText;}
+        public static List<string> ReadPerLine { get => readPerLine;}
+
+        
+        public static string[] SplitText(char splitChar, string text)// Splits the text, Easier to read imo
+        {
+            return text.Split(splitChar);
+        }
 
         public static void ReadFile(string name)
         {
@@ -28,10 +34,6 @@ namespace Active
                 FileText = sr.ReadToEnd();
                 sr.Close();
             }
-        }
-        public static string[] SplitText(char splitChar, string text)// Splits the text, Easier to read imo
-        {
-            return text.Split(splitChar);
         }
 
         public static void ReadFilePerLine(string pathway)
@@ -46,6 +48,11 @@ namespace Active
                 }
                 sr.Close();
             }
+        }
+
+        public static void SaveFile()
+        {
+
         }
 
         static void Reset()
