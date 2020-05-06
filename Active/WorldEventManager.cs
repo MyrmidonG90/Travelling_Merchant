@@ -23,12 +23,46 @@ namespace Active
             effectValList = new List<int[]>();
             durationList = new List<int>();
 
-            StreamReader sr = new StreamReader("./Data/WorldEvents.tst");
+            StreamReader sr = new StreamReader("./Data/WorldEvents.txt");
 
             while (!sr.EndOfStream)
             {
                 eventNameList.Add(sr.ReadLine());
+                eventDesList.Add(sr.ReadLine());
+
+                string temp = sr.ReadLine();
+                string[] temp2 = temp.Split(';');
+                bool[] data = new bool[4];
+
+                for (int i = 0; i < temp2.Length; i++)
+                {
+                    if (temp2[i] == "true")
+                    {
+                        data[i] = true;
+                    }
+                    else
+                    {
+                        data[i] = false;
+                    }
+                }
+                effectIDList.Add(data);
+
+                temp = sr.ReadLine();
+                temp2 = temp.Split(';');
+                int[] data2 = new int[4];
+
+                for (int i = 0; i < temp2.Length; i++)
+                {
+                    data2[i] = int.Parse(temp2[i]);
+                }
+                effectValList.Add(data2);
+                durationList.Add(int.Parse(sr.ReadLine()));
             }
+        }
+
+        static public void Update()
+        {
+
         }
     }
 }

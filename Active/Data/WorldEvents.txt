@@ -1,0 +1,5 @@
+War
+Lorem Ipsum
+true;false;false;false
+0;99;99;99
+50

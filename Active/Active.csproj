@@ -82,6 +82,7 @@
     <Compile Include="Trading.cs" />
     <Compile Include="TravelMenu.cs" />
     <Compile Include="WorldEvent.cs" />
+    <Compile Include="WorldEventManager.cs" />
     <Compile Include="WorldMapMenu.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -124,6 +125,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Data\City_Data\TowerTown.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\WorldEvents.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Icon.ico" />

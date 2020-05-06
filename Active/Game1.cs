@@ -82,6 +82,7 @@ namespace Active
             ModifierManager.LoadCityAndCategoryLists();
             ModifierManager.LoadItemModifiers();
             Calendar.PrepareCalendar();
+            WorldEventManager.Init();
         }
 
         //========================================================================
@@ -91,6 +92,8 @@ namespace Active
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Back))
                 Exit();
+
+            WorldEventManager.Update();
 
             KMReader.Update();
             Calendar.Update();

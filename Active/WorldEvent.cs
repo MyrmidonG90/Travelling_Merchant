@@ -15,5 +15,10 @@ namespace Active
         bool[] effectID;
         int[] effectVal;
         int duration;
+
+        public WorldEvent(int id, string[] target)
+        {
+
+        }
     }
 }
