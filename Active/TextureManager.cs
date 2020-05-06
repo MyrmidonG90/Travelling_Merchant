@@ -16,6 +16,7 @@ namespace Active
         static public Texture2D texWhite;
         static public Texture2D texBox;
         static public Texture2D texSelect;
+        static public Texture2D texTab;
         static public Texture2D texBackArrow;
         static public Texture2D texArmourFine, texArmourMagic, texArmourNormal, texCarrot, texCotton, texDragonScale, texFur, texGoldIngot, texGoldOre, texGryphonMeat, texIronIngot, texIronOre, texDiamond, texEmerald, texRuby, texLumber, texPotato, texPotion, texSilk, texSpices, texStone, texWeaponFine, texWeaponMagic, texWeaponNormal, texWhaleMeat;
         static public List<Texture2D> texItems;
@@ -31,6 +32,7 @@ namespace Active
             texMap = content.Load<Texture2D>("merchant_map_with_nothing");
             texWhite = content.Load<Texture2D>("White");
             texSelect = content.Load<Texture2D>("select");
+            texTab = content.Load<Texture2D>("Tab");
             texBackArrow = content.Load<Texture2D>("backarrow");
 
             //RESOURCE SPRITES

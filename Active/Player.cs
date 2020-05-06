@@ -62,6 +62,7 @@ namespace Active
                 {
                     return skillLevels[counter];
                 }
+                counter++;
             }
             return 50;
         }

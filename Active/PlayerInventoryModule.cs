@@ -15,11 +15,15 @@ namespace Active
         bool disposing;
         bool dragging;
         bool fix;
+        bool alt;
         Item selected;
         int selectedSquare;
         int numberToDispose;
         Rectangle mainBox;
         Rectangle inventoryBox;
+
+        Button invTab;
+        Button skillTab;
 
         Rectangle priCategoryBox;
         Rectangle secCategoryBox;
@@ -43,6 +47,7 @@ namespace Active
         public PlayerInventoryModule()
         {
             disposing = false;
+            alt = false;
 
             mainBox = new Rectangle(260, 150, 1400, 880);
             inventoryBox = new Rectangle(300, 170, 720, 720);
@@ -50,6 +55,9 @@ namespace Active
             priCategoryBox = new Rectangle(1100, 760, 120, 120);
             secCategoryBox = new Rectangle(1240, 760, 120, 120);
             terCategoryBox = new Rectangle(1380, 760, 120, 120);
+
+            invTab = new Button(280, 90, 200, 60, TextureManager.texTab);
+            skillTab = new Button(470, 90, 200, 60, TextureManager.texTab);
 
             posPriCategoryString = new Vector2(1110, 795);
             posSecCategoryString = new Vector2(1250, 795);
@@ -89,90 +97,44 @@ namespace Active
 
             LoadGrid();
         }
-
-        public bool CheckExit()
-        {
-            if (KMReader.prevKeyState.IsKeyUp(Keys.Escape) && KMReader.keyState.IsKeyDown(Keys.Escape))
-            {
-                return true;
-            }
-            if (returnButton.Click())
-            {
-                return true;
-            }
-
-            return false;
-        }
-
-
+   
         public void Update(GameTime gameTime)
         {
-            //Kollar om man har selectat ett item i inventoryn
-            CheckSelect();
+            CheckTabClick();
 
-            //startar dispose processen
-            if (disposeButton.Click() && selected != null)
+            if (!alt)
             {
-                disposing = true;
+                UpdateInventory();
             }
-
-            if (disposing)
+            if (alt)
             {
-                //stänger processen och resettar lämpliga värden
-                CheckDisposeEnd();
-
-                //startar slider 
-                if (disposeDragger.Click())
-                {
-                    dragging = true;
-                    fix = true;
-                }
-
-                CheckDraggerChange();
-            }
+                UpdateSkills();
+            }         
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
             returnButton.Draw(spriteBatch);
+            if (!alt)
+            {
+                skillTab.Draw(spriteBatch);
+                invTab.Draw(spriteBatch);
+            }
+            if (alt)
+            {
+                invTab.Draw(spriteBatch);
+                skillTab.Draw(spriteBatch);
+            }
             spriteBatch.Draw(TextureManager.texWhite, mainBox, Color.Wheat);
-            spriteBatch.DrawString(TextureManager.fontInventory, "Currency: " + Player.Inventory.Money.ToString(), new Vector2(300, 930), Color.White);
-            spriteBatch.Draw(TextureManager.texWhite, inventoryBox, Color.DarkGray);
 
-            DrawGrid(spriteBatch);
-           
-            if (selected != null)
+            if (!alt)
             {
-                spriteBatch.DrawString(TextureManager.fontHeader, selected.Name, new Vector2(1100, 200), Color.White);
-                spriteBatch.DrawString(TextureManager.fontInventory, "Info: \n" + selected.Description, new Vector2(1100, 310), Color.White);
-                spriteBatch.DrawString(TextureManager.fontInventory, "Standard Price: " + selected.BasePrice.ToString() + "c", new Vector2(1100, 660), Color.White);
-
-                if (selected.PrimaryCategory != 999)
-                {
-                    spriteBatch.Draw(TextureManager.texBox, priCategoryBox, colors[selected.PrimaryCategory - 1]);
-                    spriteBatch.DrawString(TextureManager.fontInventory, cats[selected.PrimaryCategory - 1], posPriCategoryString, Color.White);
-                }
-                if (selected.SecondaryCategory != 999)
-                {
-                    spriteBatch.Draw(TextureManager.texBox, secCategoryBox, colors[selected.SecondaryCategory - 1]);
-                    spriteBatch.DrawString(TextureManager.fontInventory, cats[selected.SecondaryCategory - 1], posSecCategoryString, Color.White);
-                }
-                if (selected.TertiaryCategory != 999)
-                {
-                    spriteBatch.Draw(TextureManager.texBox, terCategoryBox, colors[selected.TertiaryCategory - 1]);
-                    spriteBatch.DrawString(TextureManager.fontInventory, cats[selected.TertiaryCategory - 1], posTerCategoryString, Color.White);
-                }
-
-                disposeButton.Draw(spriteBatch);
-                spriteBatch.DrawString(TextureManager.fontInventory, "D", new Vector2(1580, 940), Color.Black);
+                DrawInventory(spriteBatch);
             }
-
-            if (selectedSquare != 50)
+            if (alt)
             {
-                spriteBatch.Draw(TextureManager.texSelect, inventoryGrid[selectedSquare], Color.White);
+                DrawSkills(spriteBatch);
             }
-
-            DrawDisposing(spriteBatch);          
         }
         private void LoadGrid()
         {
@@ -211,6 +173,22 @@ namespace Active
                     }
                     counter++;
                 }
+            }
+        }
+
+        private void CheckTabClick()
+        {
+            if (invTab.Click() && skillTab.Click())
+            {
+                alt = !alt;
+            }
+            else if (invTab.Click())
+            {
+                alt = false;
+            }
+            else if (skillTab.Click())
+            {
+                alt = true;
             }
         }
 
@@ -278,6 +256,51 @@ namespace Active
             }
         }
 
+        public bool CheckExit()
+        {
+            if (KMReader.prevKeyState.IsKeyUp(Keys.Escape) && KMReader.keyState.IsKeyDown(Keys.Escape))
+            {
+                return true;
+            }
+            if (returnButton.Click())
+            {
+                return true;
+            }
+            return false;
+        }
+
+        private void UpdateInventory()
+        {
+            //Kollar om man har selectat ett item i inventoryn
+            CheckSelect();
+
+            //startar dispose processen
+            if (disposeButton.Click() && selected != null)
+            {
+                disposing = true;
+            }
+
+            if (disposing)
+            {
+                //stänger processen och resettar lämpliga värden
+                CheckDisposeEnd();
+
+                //startar slider 
+                if (disposeDragger.Click())
+                {
+                    dragging = true;
+                    fix = true;
+                }
+
+                CheckDraggerChange();
+            }
+        }
+
+        private void UpdateSkills()
+        {
+
+        }
+
         private void DrawDisposing(SpriteBatch spriteBatch)
         {
             if (disposing)
@@ -314,6 +337,54 @@ namespace Active
                 spriteBatch.DrawString(TextureManager.fontInventory, tempItem.Amount.ToString(), temp, Color.White);
                 counter++;
             }
+        }
+
+        private void DrawInventory(SpriteBatch spriteBatch)
+        {
+            spriteBatch.DrawString(TextureManager.fontInventory, "Currency: " + Player.Inventory.Money.ToString(), new Vector2(300, 930), Color.White);
+            spriteBatch.Draw(TextureManager.texWhite, inventoryBox, Color.DarkGray);
+
+            DrawGrid(spriteBatch);
+
+            if (selected != null)
+            {
+                spriteBatch.DrawString(TextureManager.fontHeader, selected.Name, new Vector2(1100, 200), Color.White);
+                spriteBatch.DrawString(TextureManager.fontInventory, "Info: \n" + selected.Description, new Vector2(1100, 310), Color.White);
+                spriteBatch.DrawString(TextureManager.fontInventory, "Standard Price: " + selected.BasePrice.ToString() + "c", new Vector2(1100, 660), Color.White);
+
+                if (selected.PrimaryCategory != 999)
+                {
+                    spriteBatch.Draw(TextureManager.texBox, priCategoryBox, colors[selected.PrimaryCategory - 1]);
+                    spriteBatch.DrawString(TextureManager.fontInventory, cats[selected.PrimaryCategory - 1], posPriCategoryString, Color.White);
+                }
+                if (selected.SecondaryCategory != 999)
+                {
+                    spriteBatch.Draw(TextureManager.texBox, secCategoryBox, colors[selected.SecondaryCategory - 1]);
+                    spriteBatch.DrawString(TextureManager.fontInventory, cats[selected.SecondaryCategory - 1], posSecCategoryString, Color.White);
+                }
+                if (selected.TertiaryCategory != 999)
+                {
+                    spriteBatch.Draw(TextureManager.texBox, terCategoryBox, colors[selected.TertiaryCategory - 1]);
+                    spriteBatch.DrawString(TextureManager.fontInventory, cats[selected.TertiaryCategory - 1], posTerCategoryString, Color.White);
+                }
+
+                disposeButton.Draw(spriteBatch);
+                spriteBatch.DrawString(TextureManager.fontInventory, "D", new Vector2(1580, 940), Color.Black);
+            }
+
+            if (selectedSquare != 50)
+            {
+                spriteBatch.Draw(TextureManager.texSelect, inventoryGrid[selectedSquare], Color.White);
+            }
+
+            DrawDisposing(spriteBatch);
+        }
+
+        private void DrawSkills(SpriteBatch spriteBatch)
+        {
+            spriteBatch.DrawString(TextureManager.fontInventory, "Wisdom: " + Player.ReturnSkillLevel("Wisdom"), new Vector2(400, 300), Color.Black);
+            spriteBatch.DrawString(TextureManager.fontInventory, "Intimidation: " + Player.ReturnSkillLevel("Intimidation"), new Vector2(400, 400), Color.Black);
+            spriteBatch.DrawString(TextureManager.fontInventory, "Persuasion: " + Player.ReturnSkillLevel("Persuasion"), new Vector2(400, 500), Color.Black);
         }
     }
 }
