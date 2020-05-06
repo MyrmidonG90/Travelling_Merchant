@@ -18,7 +18,6 @@ namespace Active
         
         PlayerInventoryModule playerInventoryModule;
         CityMenu cityMenu;
-        TravelMenu travelMenu;
         WorldMapMenu worldMapMenu;
 
         Inventory activeInv;
@@ -78,7 +77,7 @@ namespace Active
             worldMapMenu = new WorldMapMenu();
             worldMapMenu.LoadCities();
             playerInventoryModule = new PlayerInventoryModule();
-            travelMenu = new TravelMenu();
+            TravelMenu.Init();
 
             ModifierManager.LoadCityAndCategoryLists();
             Calendar.PrepareCalendar();
@@ -127,9 +126,9 @@ namespace Active
                 worldMapMenu.Update(gameTime);
 
                 string temp = worldMapMenu.CheckNewTravel();
-                if (temp != null && travelMenu.TurnsLeft == 0)
+                if (temp != null && TravelMenu.TurnsLeft == 0)
                 {
-                    travelMenu.StartTravel(temp);
+                    TravelMenu.StartTravel(temp);
                     ChangeGameState(GameState.TravelMenu);
                 }
 
@@ -169,16 +168,16 @@ namespace Active
             }
             else if (gameState == GameState.TravelMenu)
             {
-                if (travelMenu.Update(gameTime))
+                if (TravelMenu.Update(gameTime))
                 {
-                    Player.Location = travelMenu.Destination;
+                    Player.Location = TravelMenu.Destination;
                     ChangeGameState(GameState.CityMenu);
                 }
-                if (travelMenu.CheckInvbutton())
+                if (TravelMenu.CheckInvbutton())
                 {
                     ChangeGameState(GameState.InventoryMenu);
                 }
-                if (travelMenu.CheckMapButton())
+                if (TravelMenu.CheckMapButton())
                 {
                     ChangeGameState(GameState.MapMenu);
                 }
@@ -295,7 +294,7 @@ namespace Active
             }
             else if (gameState == GameState.TravelMenu)
             {
-                travelMenu.Draw(spriteBatch);
+                TravelMenu.Draw(spriteBatch);
             }
             else if (gameState == GameState.MainMenu)
             {
@@ -340,7 +339,7 @@ namespace Active
 
         private void SaveGame()
         {
-            SaveModule.GenerateSave(Player.Inventory, Player.Location, travelMenu, gameState.ToString());
+            SaveModule.GenerateSave(Player.Inventory, Player.Location, gameState.ToString());
         }
 
         private void LoadSave()
@@ -368,8 +367,8 @@ namespace Active
             {
                 if (temp[1] != null)
                 {
-                    travelMenu.TurnsLeft = int.Parse(temp[1]);
-                    travelMenu.Destination = temp[2];
+                    TravelMenu.TurnsLeft = int.Parse(temp[1]);
+                    TravelMenu.Destination = temp[2];
                     CleanGameState(GameState.TravelMenu);
                 }
                 else
