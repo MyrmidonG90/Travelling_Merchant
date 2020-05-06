@@ -21,7 +21,7 @@ namespace Active
         //==================================================================================
         //OM DU ÄNDRAR HUR SPELET SPARAR SÅ ***MÅSTE*** DU ÄNDRA VÄRDET I ver
         //==================================================================================
-        static string ver = "1.1.0";
+        static string ver = "1.2.1";
         static public bool GenerateSave(Inventory inventory, string location, TravelMenu travelMenu, string gameState)
         {
             string path = Path.Combine("./Saves/", "Save-" + DateTime.Now.ToString() + ".ptmsave");
@@ -31,6 +31,13 @@ namespace Active
             streamWriter.WriteLine(gameState);
             streamWriter.WriteLine(Calendar.TotalDays);
             streamWriter.WriteLine(location);
+
+            int[] temp = Player.SkillLevels;
+            for (int i = 0; i < 3; i++)
+            {
+                streamWriter.WriteLine(temp[i].ToString());
+            }
+
             streamWriter.WriteLine(inventory.Money);
             streamWriter.WriteLine(inventory.ItemList.Count);
 
@@ -82,7 +89,7 @@ namespace Active
             //hot steaming mess slutar här
 
             openFileDialog.ShowDialog();
-            Inventory temp = new Inventory(0);
+            Inventory tempInv = new Inventory(0);
 
             StreamReader streamReader;
             try
@@ -101,7 +108,15 @@ namespace Active
                 data[0] = streamReader.ReadLine();
                 Calendar.TotalDays = int.Parse(streamReader.ReadLine());
                 Player.Location = streamReader.ReadLine();
-                temp.Money = int.Parse(streamReader.ReadLine());
+
+                int[] tempLevels = new int[3];
+                for (int i = 0; i < 3; i++)
+                {
+                    tempLevels[i] = int.Parse(streamReader.ReadLine());
+                }
+                Player.SkillLevels = tempLevels;
+
+                tempInv.Money = int.Parse(streamReader.ReadLine());
                 int counter = int.Parse(streamReader.ReadLine());
 
                 for (int i = 0; i < counter; i++)
@@ -109,11 +124,11 @@ namespace Active
                     string tempData = streamReader.ReadLine();
                     string[] data2 = tempData.Split(';');
                     Item newItem = ItemCreator.CreateItem(int.Parse(data2[0]), int.Parse(data2[1]));
-                    temp.AddItem(newItem);
+                    tempInv.AddItem(newItem);
                 }
 
                 int check = int.Parse(streamReader.ReadLine());
-                Player.Inventory = temp;
+                Player.Inventory = tempInv;
 
                 if (check == 1)
                 {

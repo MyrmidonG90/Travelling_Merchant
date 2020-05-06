@@ -313,7 +313,7 @@ namespace Active
 
             spriteBatch.End();
 
-            Window.Title = "Press F6 for debug menu";
+            Window.Title = "Press F6 for debug menu          " + Player.SkillLevels[0].ToString() + Player.SkillLevels[1].ToString() + Player.SkillLevels[2].ToString() + "    " + OptionsMenu.selectedSkill;
 
             base.Draw(gameTime);
         }
