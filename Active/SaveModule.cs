@@ -22,7 +22,7 @@ namespace Active
         //OM DU ÄNDRAR HUR SPELET SPARAR SÅ ***MÅSTE*** DU ÄNDRA VÄRDET I ver
         //==================================================================================
         static string ver = "1.2.1";
-        static public bool GenerateSave(Inventory inventory, string location, TravelMenu travelMenu, string gameState)
+        static public bool GenerateSave(Inventory inventory, string location, string gameState)
         {
             string path = Path.Combine("./Saves/", "Save-" + DateTime.Now.ToString() + ".ptmsave");
             StreamWriter streamWriter = new StreamWriter(ToSafeFileName(path), false);
@@ -45,11 +45,11 @@ namespace Active
             {
                 streamWriter.WriteLine(tempItem.ToString());
             }
-            if (Player.Location != travelMenu.Destination)
+            if (Player.Location != TravelMenu.Destination)
             {
                 streamWriter.WriteLine('1');
-                streamWriter.WriteLine(travelMenu.TurnsLeft);
-                streamWriter.WriteLine(travelMenu.Destination);
+                streamWriter.WriteLine(TravelMenu.TurnsLeft);
+                streamWriter.WriteLine(TravelMenu.Destination);
             }
             else
             {
