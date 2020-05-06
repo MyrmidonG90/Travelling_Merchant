@@ -27,18 +27,18 @@ namespace Active
 
         public static void ReadFile(string name)
         {
-            FileText = null;
+            fileText = null;
             if (File.Exists(name))
             {
                 sr = new StreamReader(name);
-                FileText = sr.ReadToEnd();
+                fileText = sr.ReadToEnd();
                 sr.Close();
             }
         }
 
         public static void ReadFilePerLine(string pathway)
         {
-            ReadPerLine = new List<string>();
+            readPerLine = new List<string>();
             if (File.Exists(pathway))
             {
                 sr = new StreamReader(pathway);
@@ -57,11 +57,11 @@ namespace Active
 
         static void Reset()
         {
-            FileText = null;
+            fileText = null;
             splitter = null;
             secondSplitter = null;
             thirdSplitter = null;
-            ReadPerLine = null;
+            readPerLine = null;
         }
 
         static void EmptyFile(string fileName)
