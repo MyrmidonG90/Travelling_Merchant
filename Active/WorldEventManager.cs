@@ -16,6 +16,7 @@ namespace Active
         static List<int> durationList;
         static List<ItemModifierTemplate> itemModifierList;
         static List<InventoryTemplate> inventoryList;
+        static List<WorldEvent> activeEvents;
         static int stage;
 
         static public void Init()

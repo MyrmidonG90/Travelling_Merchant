@@ -25,7 +25,7 @@ namespace Active
         //6.Valuables
         //7.Manufactured
 
-        //om du fattar vafan som händer här inne så ändrades det senast av My 6 maj
+        //om du inte fattar vafan som händer här inne så ändrades det senast av My 6 maj
                 
         static public double GetModifier(string city, int category)
         {
