@@ -136,6 +136,7 @@ namespace Active
                 DrawSkills(spriteBatch);
             }
         }
+
         private void LoadGrid()
         {
             StreamReader streamReader = new StreamReader("./Data/InventoryGrid.txt");
@@ -260,10 +261,14 @@ namespace Active
         {
             if (KMReader.prevKeyState.IsKeyUp(Keys.Escape) && KMReader.keyState.IsKeyDown(Keys.Escape))
             {
+                selected = null;
+                selectedSquare = 50;
                 return true;
             }
             if (returnButton.Click())
             {
+                selected = null;
+                selectedSquare = 50;
                 return true;
             }
             return false;

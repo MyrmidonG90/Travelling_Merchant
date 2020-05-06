@@ -8,30 +8,30 @@ using System.Threading.Tasks;
 
 namespace Active
 {
-    class TravelMenu
+    static class TravelMenu
     {
-        int turnsToTravel;
-        int turnsLeft;
-        double turnTimer;
-        double timerLength;
+        static int turnsToTravel;
+        static int turnsLeft;
+        static double turnTimer;
+        static double timerLength;
 
-        string turnDisplay;
+        static string turnDisplay;
 
-        string destination;
-        bool paused;
-        bool test;
+        static string destination;
+        static bool paused;
+        static bool test;
 
-        Button invButton;
-        Button pauseButton;
-        Button mapButton;
+        static Button invButton;
+        static Button pauseButton;
+        static Button mapButton;
 
-        public TravelMenu()
+        static public void Init()
         {
             turnsToTravel = 5;
             turnsLeft = 0;
             turnTimer = timerLength;
             timerLength = 1;
-            destination = "CarrotTown"; 
+            destination = "CarrotTown";
 
             turnDisplay = turnsLeft.ToString() + "/" + turnsToTravel.ToString();
 
@@ -42,9 +42,9 @@ namespace Active
             test = false;
         }
 
-        public void StartTravel(string destination)
+        static public void StartTravel(string newDestination)
         {
-            this.destination = destination;
+            destination = newDestination;
 
             paused = false;
 
@@ -53,7 +53,7 @@ namespace Active
             turnTimer = timerLength;
         }
 
-        public bool CheckInvbutton()
+        static public bool CheckInvbutton()
         {
             if (invButton.Click() && paused)
             {
@@ -63,7 +63,7 @@ namespace Active
             return false;
         }
 
-        public bool CheckMapButton()
+        static public bool CheckMapButton()
         {
             if (mapButton.Click() && paused)
             {
@@ -73,7 +73,7 @@ namespace Active
             return false;
         }
 
-        public bool Update(GameTime gameTime)
+        static public bool Update(GameTime gameTime)
         {
             turnDisplay = turnsLeft.ToString() + "/" + turnsToTravel.ToString();
 
@@ -102,7 +102,7 @@ namespace Active
             return false;
         }
 
-        public void Draw (SpriteBatch spriteBatch)
+        static public void Draw (SpriteBatch spriteBatch)
         {
             Vector2 temp = TextureManager.fontHeader.MeasureString(turnDisplay);
             spriteBatch.DrawString(TextureManager.fontHeader, turnDisplay, new Vector2((1920 - temp.X)/2, 200), Color.White);
@@ -119,7 +119,7 @@ namespace Active
             }
         }
 
-        public string Destination
+        static public string Destination
         {
             get
             {
@@ -131,7 +131,7 @@ namespace Active
             }
         }
 
-        public int TurnsLeft
+        static public int TurnsLeft
         {
             get
             {
