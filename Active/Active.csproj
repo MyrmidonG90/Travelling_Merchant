@@ -61,8 +61,9 @@
     <Compile Include="City.cs" />
     <Compile Include="CityMenu.cs" />
     <Compile Include="CityManager.cs" />
-    <Compile Include="Event.cs" />
-    <Compile Include="EventManager.cs" />
+    <Compile Include="Encounter.cs" />
+    <Compile Include="TravelEvent.cs" />
+    <Compile Include="EncounterManager.cs" />
     <Compile Include="FileManager.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="Inventory.cs" />

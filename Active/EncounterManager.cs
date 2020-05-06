@@ -10,13 +10,19 @@ using Microsoft.Xna.Framework.Input;
 
 namespace Active
 {
-    static class EventManager
+    static class EncounterManager
     {
         static Random rand;
         static StreamReader sr;
-        static List<Event> events;
+        static List<TravelEvent> events;
+        static List<Encounter> encounters;
         static bool eventOnGoing;
-        internal static List<Event> Events { get => events;}
+
+        static int counter;
+        static bool found;
+        static Encounter currentEncounter;
+        internal static List<TravelEvent> Events { get => events;}
+
 
         static public void Initialize()
         {
@@ -29,12 +35,57 @@ namespace Active
 
         static public bool Encountered()
         {
-            if (rand.Next(0, 9) == 0)
+            if (eventOnGoing == false)
             {
-                eventOnGoing = true;                
+                if (rand.Next(0, 9) == 0) // If Encountered
+                {
+                    eventOnGoing = true;
+                    InitiateEncounter(FindEID(RandomiseEncounter()));
+                }
             }
 
             return eventOnGoing;
+        }
+
+        static int FindEID(int id) // Hittar Encounter ID
+        {
+            found = false;
+            counter = 0;
+            while (found == false && events.Count > counter)
+            {
+                if (events[counter].Id == id)
+                {
+                    found = true;
+                }
+                else
+                {
+                    ++counter;
+                }
+            }
+
+            return events[counter].EID;
+        }
+        static int FindEnocunterID(int eID)
+        {
+            found = false;
+            counter = 0;
+            while (found == false && events.Count > counter)
+            {
+                if (encounters[counter].Id == eID)
+                {
+                    found = true;
+                }
+                else
+                {
+                    ++counter;
+                }
+            }
+
+            return events[counter].EID;
+        }
+        static void InitiateEncounter(int eID)
+        {
+            currentEncounter = encounters[FindEnocunterID(eID)];
         }
 
         static int RandomiseEncounter()
@@ -66,7 +117,7 @@ namespace Active
 
         static public void LoadEvents() // Laddar in alla events från en textfil
         {
-            events = new List<Event>();
+            events = new List<TravelEvent>();
             FileManager.ReadFilePerLine("./Data/Events.txt"); // Läser in filen där alla events är
 
             for (int i = 0; i < FileManager.ReadPerLine.Count/4; i++) //
@@ -87,7 +138,7 @@ namespace Active
 
                 int tmpPercentage = int.Parse(FileManager.ReadPerLine[3+i*4]); // Får event procent
 
-                Events.Add(new Event(tmpID,tmpEID,tmpString,tmpPercentage)); // Skapar events
+                Events.Add(new TravelEvent(tmpID,tmpEID,tmpString,tmpPercentage)); // Skapar events
             }
 
         }
@@ -117,7 +168,7 @@ namespace Active
 
         static void Draw(SpriteBatch sb) // Bör endast hända i TravelMenu
         {
-            
+            currentEncounter.Draw(sb);
         }
         
     }

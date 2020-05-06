@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace Active
 {
-    class Event
+    class TravelEvent
     {
         int id;
         int eID;
         List<string> text;
         int percentage;
-        public Event(int id, int eID, List<string> text, int percentage)
+        public TravelEvent(int id, int eID, List<string> text, int percentage)
         {
             this.id = id;
             this.eID = eID;

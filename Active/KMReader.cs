@@ -8,7 +8,7 @@ namespace Active
     {
         public static KeyboardState keyState, prevKeyState;
         public static MouseState mouseState, prevMouseState;
-
+        static bool tmp;
         public static void Update()
         {
             if (prevMouseState != null)
@@ -31,6 +31,17 @@ namespace Active
         public static Point GetMousePoint()
         {
             return mouseState.Position;
+        }
+
+        public static bool ClickRectangle(Rectangle rect)
+        {
+            tmp = false;
+            if (rect.Contains(mouseState.Position))
+            {
+                tmp = true;
+            }
+
+            return tmp;
         }
 
         public static bool MouseClick()
