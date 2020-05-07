@@ -42,7 +42,7 @@ namespace Active
         void Initialize()
         {
             stackLimit = 50;
-            invLimit = 25;
+            invLimit = 24;
         }
         public bool AddItem(Item newItem)
         {
