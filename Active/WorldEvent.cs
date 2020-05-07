@@ -76,6 +76,7 @@ namespace Active
         public Inventory OldTemplateInv
         {
             get => oldTemplateInv;
+            set => oldTemplateInv = value;
         }
     }
 }

@@ -2,19 +2,19 @@ War
 Lorem Ipsum
 true;false;false;false
 0;99;99;99
-50
+20
 ====
 Crop Failure
 Lotem Ipsum2
 false;true;false;false
 99;0;99;99
-100
+20
 --------
 0
 2
-0
+1
 0,5
-4
+5
 1,5
 --------
 0

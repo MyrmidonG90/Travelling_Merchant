@@ -23,6 +23,7 @@ namespace Active
         Inventory activePlayerInv;
 
         bool options;
+        bool test;
 
         enum GameState
         {
@@ -91,7 +92,14 @@ namespace Active
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Back))
                 Exit();
 
-            WorldEventManager.Update();
+            if (WorldEventManager.Update())
+            {
+                test = true;
+            }
+            else
+            {
+                test = false;
+            }
 
             KMReader.Update();
             Calendar.Update();
@@ -267,6 +275,7 @@ namespace Active
                 options = !options;
             }
 
+            WorldMapMenu.UpdateCities();
             Player.Update();
 
             base.Update(gameTime);
@@ -315,6 +324,11 @@ namespace Active
             spriteBatch.End();
 
             Window.Title = "Press F6 for debug menu          " + Player.SkillLevels[0].ToString() + Player.SkillLevels[1].ToString() + Player.SkillLevels[2].ToString() + "    " + OptionsMenu.selectedSkill;
+
+            if (test)
+            {
+                Window.Title = "WAAAAR";
+            }
 
             base.Draw(gameTime);
         }

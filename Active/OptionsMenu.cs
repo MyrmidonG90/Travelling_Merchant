@@ -22,6 +22,7 @@ namespace Active
         static Button btnSkillCycle;
         static Button btnSkillIncrease;
         static Button btnSkillDecrease;
+        static Button btnWorldEventTest;
 
         static Rectangle box;
         static Rectangle ring;
@@ -55,6 +56,7 @@ namespace Active
             btnSkillDecrease = new Button(830, 360, 260, 80, "dec", "-1 Skill", TextureManager.texWhite);
 
             btnDebug = new Button(830, 460, 260, 80, "debug", "Debug", TextureManager.texWhite);
+            btnWorldEventTest = new Button(830, 460, 260, 80, "we", "Test", TextureManager.texWhite);
 
             btnOptions = new Button(830, 560, 260, 80, "options", "Options", TextureManager.texWhite);
             btnOptionsReturn = new Button(830, 560, 260, 80, "options", "Return", TextureManager.texWhite);
@@ -191,6 +193,12 @@ namespace Active
                     Player.SetSkillLevel("Persuasion", -1f);
                 }
             }
+            if (btnWorldEventTest.Click() && menuToggle == MenuToggle.Debug && !block)
+            {
+                string[] test = new string[1];
+                test[0] = "Carrot Town";
+                WorldEventManager.EventFire(1, test);
+            }
             if (btnClose.Click())
             {
                 menuToggle = MenuToggle.Standard;
@@ -227,6 +235,7 @@ namespace Active
                 btnSkillIncrease.Draw(spriteBatch);
                 btnSkillDecrease.Draw(spriteBatch);
                 btnSkillCycle.Draw(spriteBatch);
+                btnWorldEventTest.Draw(spriteBatch);
             }
 
             btnMenu.Draw(spriteBatch);

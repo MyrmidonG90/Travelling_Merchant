@@ -114,6 +114,12 @@ namespace Active
             }
         }
 
+        public Inventory TemplateInv
+        {
+            get => templateInv;
+            set => templateInv = value;
+        }
+
         public Inventory Inv { get => inv; set => inv = value; }
 
         public override string ToString()

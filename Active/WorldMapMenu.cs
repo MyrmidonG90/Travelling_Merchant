@@ -73,6 +73,14 @@ namespace Active
 
                     }
                 }
+            }          
+        }
+
+        static public void UpdateCities()
+        {
+            foreach (City tempCity in cities)
+            {
+                tempCity.Update();
             }
         }
 

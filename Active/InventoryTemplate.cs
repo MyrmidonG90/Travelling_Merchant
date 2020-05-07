@@ -23,5 +23,15 @@ namespace Active
         {
             get => id;
         }
+
+        public List<Item> Items
+        {
+            get => items;
+        }
+
+        public List<bool> AmountNegorPos
+        {
+            get => amountNegOrPos;
+        }
     }
 }
