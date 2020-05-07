@@ -1,27 +1,18 @@
-600
-25
-Carrot;40
-Potato;30
-Iron Ingot;20
-Iron Ore;8
-Gold Ingot;10
-Gold Ore;5
-Ruby;20
-Emerald;30
-Diamond;15
-Fur;15
-Silk;5
-Cotton;5
-Lumber;1
-Stone;3
-Simple Weapons;5
-Simple Armour;5
-Fine Weapons;6
-Fine Armour;5
-Magic Weapons;6
-Magic Armour;3
-Whale Meat;8
-Gryphon Meat;7
-Dragon Scale;2
-Spices;5
-Potions;8
+2550
+16
+Carrot;23
+Potato;12
+Iron Ingot;40
+Iron Ore;50
+Gold Ingot;33
+Gold Ore;28
+Cotton;18
+Lumber;26
+Stone;36
+Simple Weapons;17
+Simple Armour;32
+Fine Weapons;13
+Fine Armour;11
+Magic Weapons;2
+Magic Armour;5
+Potions;4
