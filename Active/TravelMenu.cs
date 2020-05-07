@@ -77,6 +77,12 @@ namespace Active
         {
             turnDisplay = turnsLeft.ToString() + "/" + turnsToTravel.ToString();
 
+            if (EncounterManager.EventOnGoing)
+            {
+                paused = true;
+                EncounterManager.Update();
+            }
+
             if (pauseButton.Click())
             {
                 paused = !paused; 
@@ -92,17 +98,15 @@ namespace Active
                 Calendar.AddDays(1);
                 turnsLeft--;
                 turnTimer = timerLength;
-                if (EncounterManager.Encountered())
+                if (turnsLeft == 0)
                 {
-
+                    return true;
                 }
-                
-            }
-
-            if (turnsLeft == 0)
-            {
-                return true;
-            }
+                else
+                {
+                    EncounterManager.Encountered();
+                }
+            }            
 
             return false;
         }
@@ -121,6 +125,10 @@ namespace Active
             {
                 invButton.Draw(spriteBatch);
                 mapButton.Draw(spriteBatch);
+            }
+            if (EncounterManager.EventOnGoing)
+            {
+                EncounterManager.Draw(spriteBatch);
             }
         }
 

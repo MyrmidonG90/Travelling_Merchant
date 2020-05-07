@@ -23,7 +23,7 @@ namespace Active
         static bool found;
         static Encounter currentEncounter;
         internal static List<TravelEvent> Events { get => events;}
-
+        public static bool EventOnGoing { get => eventOnGoing;}
 
         static public void Initialize()
         {
@@ -68,7 +68,7 @@ namespace Active
             return events[counter].EID;
         }
 
-        static int FindEnocunterID(int eID)
+        static int FindEncounterID(int eID)
         {
             found = false;
             counter = 0;
@@ -89,7 +89,7 @@ namespace Active
 
         static void InitiateEncounter(int eID)
         {
-            currentEncounter = encounters[FindEnocunterID(eID)];
+            currentEncounter = encounters[FindEncounterID(eID)];
         }
 
         static int RandomiseEncounter()
@@ -203,16 +203,37 @@ namespace Active
             return answer;            
         }
 
-        static void Update() // Bör endast hända i TravelMenu
+        static public void Update() // Bör endast hända i TravelMenu
         {
             tmpInt = currentEncounter.Update();
             if (tmpInt != -1)
             {
-
+                Scenarios(currentEncounter.Id,tmpInt);
             }
         }
+        static void Scenarios(int eID, int answer)
+        {
+            switch (eID)
+            {
+                case 0:
+                    if (answer == 0)
+                    {
 
-        static void Draw(SpriteBatch sb) // Bör endast hända i TravelMenu
+                    }
+                    else if (answer == 1)
+                    {
+
+                    }
+                    else if (answer == 2)
+                    {
+
+                    }
+                    break;
+            }
+            eventOnGoing = false;
+        }
+
+        static public void Draw(SpriteBatch sb) // Bör endast hända i TravelMenu
         {
             currentEncounter.Draw(sb);
         }
