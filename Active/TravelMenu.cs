@@ -80,7 +80,11 @@ namespace Active
             if (EncounterManager.EventOnGoing)
             {
                 paused = true;
-                EncounterManager.Update();
+                if (EncounterManager.Update())
+                {
+                    paused = false;
+                }
+                
             }
 
             if (pauseButton.Click())

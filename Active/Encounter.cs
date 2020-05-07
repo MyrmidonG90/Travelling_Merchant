@@ -14,7 +14,7 @@ namespace Active
     {
         int id;
         List<Button> btnOptions;
-        Rectangle rectMessage;
+        
         public int Id { get => id; set => id = value; }
         int counter, click;
         bool found;
@@ -69,7 +69,7 @@ namespace Active
 
         public void Draw(SpriteBatch sb)
         {
-            sb.Draw(TextureManager.texBox,rectMessage,Color.LightGray);
+            
             for (int i = 0; i < btnOptions.Count; i++)
             {
                 sb.Draw(TextureManager.texBox, btnOptions[i].HitBox,Color.Gray);

@@ -21,7 +21,9 @@ namespace Active
         static int tmpInt;
         static int counter;
         static bool found;
+        static bool boolUpdate;
         static Encounter currentEncounter;
+        static TravelEvent currentTravelEvent;
         internal static List<TravelEvent> Events { get => events;}
         public static bool EventOnGoing { get => eventOnGoing;}
 
@@ -29,6 +31,7 @@ namespace Active
         {
             LoadEncountInfo();
             LoadEncounters();
+            rand = new Random();
             if (CheckPercentageValue() == false) // Bugg check
             {
                 // Kommer att funka men det kommer inte vara rätt slump.
@@ -90,6 +93,7 @@ namespace Active
         static void InitiateEncounter(int eID)
         {
             currentEncounter = encounters[FindEncounterID(eID)];
+            boolUpdate = false;
         }
 
         static int RandomiseEncounter()
@@ -106,9 +110,7 @@ namespace Active
                 {
                     ++counter;
                 }
-
             }
-            
 
             return counter;
         }
@@ -203,13 +205,17 @@ namespace Active
             return answer;            
         }
 
-        static public void Update() // Bör endast hända i TravelMenu
-        {
+        static public bool Update() // Bör endast hända i TravelMenu
+        {            
             tmpInt = currentEncounter.Update();
             if (tmpInt != -1)
             {
                 Scenarios(currentEncounter.Id,tmpInt);
+                eventOnGoing = false;
+                boolUpdate = true;
             }
+            return boolUpdate;
+
         }
         static void Scenarios(int eID, int answer)
         {
@@ -229,13 +235,13 @@ namespace Active
 
                     }
                     break;
-            }
-            eventOnGoing = false;
+            }            
         }
 
         static public void Draw(SpriteBatch sb) // Bör endast hända i TravelMenu
         {
             currentEncounter.Draw(sb);
+           // currentTravelEvent.Draw(sb);
         }
         
     }
