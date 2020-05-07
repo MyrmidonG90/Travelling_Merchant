@@ -90,8 +90,8 @@ namespace Active
         // Klar
         static void CreateButtons() // Initialiserar knapparna
         {
-            accept = new Button(830, 600, 260, 120, "accept", "Accept Trade", TextureManager.texBox);
-            reset = new Button(830, 740, 260, 120, "reset", "Reset Trade", TextureManager.texBox);
+            accept = new Button(830, 600, 260, 120, "accept", "Accept Trade", TextureManager.texButton);
+            reset = new Button(830, 740, 260, 120, "reset", "Reset Trade", TextureManager.texButton);
             back = new Button(20, 20, 80, 80, TextureManager.texBackArrow);
         }
 

@@ -18,5 +18,20 @@ namespace Active
             amountNegOrPos = a;
             items = i;
         }
+
+        public int ID
+        {
+            get => id;
+        }
+
+        public List<Item> Items
+        {
+            get => items;
+        }
+
+        public List<bool> AmountNegorPos
+        {
+            get => amountNegOrPos;
+        }
     }
 }

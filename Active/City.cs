@@ -57,6 +57,13 @@ namespace Active
             templateInv = new Inventory(inv);
         }
 
+        public void InvNewSet(Inventory newInv)
+        {
+            templateInv = newInv;
+            CheckDate();
+            traded = true;
+        }
+
         public void CheckDate()
         {
             lastTraded = Calendar.TotalDays;
@@ -105,6 +112,12 @@ namespace Active
             {
                 traded = value;
             }
+        }
+
+        public Inventory TemplateInv
+        {
+            get => templateInv;
+            set => templateInv = value;
         }
 
         public Inventory Inv { get => inv; set => inv = value; }

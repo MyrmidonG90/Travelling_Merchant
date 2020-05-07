@@ -22,7 +22,10 @@ namespace Active
         Inventory activeInv;
         Inventory activePlayerInv;
 
+        List<string> CityControlList;
+
         bool options;
+        bool test;
 
         enum GameState
         {
@@ -81,6 +84,10 @@ namespace Active
             ModifierManager.LoadItemModifiers();
             Calendar.PrepareCalendar();
             WorldEventManager.Init();
+
+            CityControlList = new List<string>();
+            CityControlList.Add("Carrot Town");
+            CityControlList.Add("Tower Town");
         }
 
         //========================================================================
@@ -91,7 +98,14 @@ namespace Active
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Back))
                 Exit();
 
-            WorldEventManager.Update();
+            if (WorldEventManager.Update())
+            {
+                test = true;
+            }
+            else
+            {
+                test = false;
+            }
 
             KMReader.Update();
             Calendar.Update();
@@ -267,6 +281,7 @@ namespace Active
                 options = !options;
             }
 
+            WorldMapMenu.UpdateCities();
             Player.Update();
 
             base.Update(gameTime);
@@ -277,6 +292,11 @@ namespace Active
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             spriteBatch.Begin();
+
+            if (gameState != GameState.MainMenu && Player.Location == TravelMenu.Destination)
+            {
+                DrawBackground(spriteBatch);
+            }
 
             if (gameState == GameState.CityMenu)
             {
@@ -315,6 +335,11 @@ namespace Active
             spriteBatch.End();
 
             Window.Title = "Press F6 for debug menu          " + Player.SkillLevels[0].ToString() + Player.SkillLevels[1].ToString() + Player.SkillLevels[2].ToString() + "    " + OptionsMenu.selectedSkill;
+
+            if (test)
+            {
+                Window.Title = "WAAAAR";
+            }
 
             base.Draw(gameTime);
         }
@@ -381,6 +406,24 @@ namespace Active
             else
             {
                 CleanGameState(GameState.CityMenu);
+            }
+        }
+
+        private void DrawBackground(SpriteBatch spriteBatch)
+        {
+            bool drawn = false;
+            for (int i = 0; i < CityControlList.Count; i++)
+            {
+                if (Player.Location == CityControlList[i] && !drawn)
+                {
+                    spriteBatch.Draw(TextureManager.texCities[i], Vector2.Zero, Color.White);
+                    drawn = true;
+                }
+            }
+            if (!drawn)
+            {
+                spriteBatch.Draw(TextureManager.texDefaultTown, Vector2.Zero, Color.White);
+                drawn = true;
             }
         }
     }

@@ -23,10 +23,10 @@ namespace Active
 
         public CityMenu()
         {
-            inventoryButton = new Button(60, 920, 260, 120, "inv", "Inventory", TextureManager.texWhite);
-            tradeButton = new Button(400, 920, 260, 120, "trade", "Trade", TextureManager.texWhite);
-            nextTurnButton = new Button(1260, 920, 260, 120, "turn", "Next Turn", TextureManager.texWhite);
-            mapButton = new Button(1600, 920, 260, 120, "map", "Map", TextureManager.texWhite);
+            inventoryButton = new Button(60, 920, 260, 120, "inv", "Inventory", TextureManager.texButton);
+            tradeButton = new Button(400, 920, 260, 120, "trade", "Trade", TextureManager.texButton);
+            nextTurnButton = new Button(1260, 920, 260, 120, "turn", "Next Turn", TextureManager.texButton);
+            mapButton = new Button(1600, 920, 260, 120, "map", "Map", TextureManager.texButton);
         }
 
         public void Update(GameTime gameTime)

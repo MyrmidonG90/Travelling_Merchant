@@ -39,6 +39,7 @@ Metal
 3
 Raw Materials
 2
+Steel Ville
 Textiles
 0,5
 Gear

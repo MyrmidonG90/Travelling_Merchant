@@ -69,6 +69,23 @@ namespace Active
             }
         }
 
+        static public void AddModifier(string city, int category, float modifier)
+        {
+            int counter = 0;
+            for (int i = 0; i < amountOfCities; i++)
+            {
+                for (int j = 0; j < amountOfCategories; j++)
+                {
+                    category--;
+                    if (city == cities[i] && itemCategories[j] == category) // Söker efter stadens kategori modifiers.
+                    {
+                        itemModifiers[counter] += modifier;
+                    }
+                    counter++;
+                }
+            }
+        }
+
         static public void LoadItemModifiers()
         {
             StreamReader sr = new StreamReader("./Data/ItemPrices.txt");

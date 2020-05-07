@@ -100,7 +100,7 @@
     <Content Include="Data\CityStructure.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Data\City_Data\CarrotTown.txt">
+    <Content Include="Data\City_Data\Carrot Town.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Data\CategoryList.txt">
@@ -149,13 +149,13 @@
     <Content Include="Data\Items.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Data\City_Data\SteelVille.txt">
+    <Content Include="Data\City_Data\Steel Ville.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Data\test.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Data\City_Data\TowerTown.txt">
+    <Content Include="Data\City_Data\Tower Town.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Data\WorldEvents.txt">
