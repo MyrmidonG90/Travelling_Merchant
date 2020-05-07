@@ -65,6 +65,7 @@ namespace Active
 
             return events[counter].EID;
         }
+
         static int FindEnocunterID(int eID)
         {
             found = false;
@@ -83,6 +84,7 @@ namespace Active
 
             return events[counter].EID;
         }
+
         static void InitiateEncounter(int eID)
         {
             currentEncounter = encounters[FindEnocunterID(eID)];
@@ -91,7 +93,7 @@ namespace Active
         static int RandomiseEncounter()
         {
             int chance = rand.Next(1,100);
-            int counter = 0;
+            counter = 0;
 
             while (chance > 0)
             {

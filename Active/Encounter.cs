@@ -13,12 +13,16 @@ namespace Active
     class Encounter
     {
         int id;
-        List<Rectangle> rectsOptions;
+        List<Button> btnOptions;
         Rectangle rectMessage;
         public int Id { get => id; set => id = value; }
         int counter, click;
         bool found;
-
+        /* Encounters.txt
+         int id
+         string Val1|string Val2|string Val3
+             
+             */
         public void Update()
         {
             
@@ -31,9 +35,9 @@ namespace Active
             {
                 found = false;
                 counter = 0;
-                while (counter < rectsOptions.Count && found == false)
+                while (counter < btnOptions.Count && found == false)
                 {
-                    if (KMReader.ClickRectangle(rectsOptions[counter]) == true)
+                    if (KMReader.ClickRectangle(btnOptions[counter].HitBox) == true)
                     {
                         found = true;
                         click = counter;
@@ -52,9 +56,9 @@ namespace Active
         public void Draw(SpriteBatch sb)
         {
             sb.Draw(TextureManager.texBox,rectMessage,Color.LightGray);
-            for (int i = 0; i < rectsOptions.Count; i++)
+            for (int i = 0; i < btnOptions.Count; i++)
             {
-                sb.Draw(TextureManager.texBox,rectsOptions[i],Color.Gray);
+                sb.Draw(TextureManager.texBox, btnOptions[i].HitBox,Color.Gray);
             }
             
         }

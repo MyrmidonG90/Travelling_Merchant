@@ -106,7 +106,7 @@
     <Content Include="Data\cityInfo.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Data\Events.txt">
+    <Content Include="Data\TravelEvents.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Data\InventoryGrid.txt">
