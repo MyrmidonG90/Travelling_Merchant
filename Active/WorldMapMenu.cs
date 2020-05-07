@@ -9,22 +9,23 @@ using System.Threading.Tasks;
 
 namespace Active
 {
-    class WorldMapMenu
-    {      
-        City[] cities = new City[3];
-        Button[] cityButtons = new Button[3];
-        Button[] travelButtons = new Button[3];
+    static class WorldMapMenu
+    {
+        static int nrCities = 10;
+        static City[] cities = new City[nrCities];
+        static Button[] cityButtons = new Button[nrCities];
+        static Button[] travelButtons = new Button[nrCities];
 
-        public Button inventoryButton = new Button(70, 920, 260, 120, "inv", "Inventory", TextureManager.texBox);
-        public Button returnButton = new Button(20, 20, 80, 80, TextureManager.texBackArrow);
+        static public Button inventoryButton = new Button(70, 920, 260, 120, "inv", "Inventory", TextureManager.texBox);
+        static public Button returnButton = new Button(20, 20, 80, 80, TextureManager.texBackArrow);
 
-        bool showText;
-        
-        string cityName;
-        string cityInfo;
-        Vector2 cityCords;
+        static bool showText;
 
-        public string CheckNewTravel()
+        static string cityName;
+        static string cityInfo;
+        static Vector2 cityCords;
+
+        static public string CheckNewTravel()
         {
             int counter = 0;
             foreach (Button button in travelButtons)
@@ -38,7 +39,7 @@ namespace Active
             return null;
         }
 
-        public void Update(GameTime gameTime)
+        static public void Update(GameTime gameTime)
         {
             bool temp = false;
 
@@ -75,7 +76,7 @@ namespace Active
             }
         }
 
-        public void Draw(SpriteBatch spriteBatch)
+        static public void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(TextureManager.texMap, new Vector2(0, 0), Color.White);
 
@@ -102,7 +103,7 @@ namespace Active
             }          
         }
 
-        public void LoadCities()
+        static public void LoadCities()
         {
             StreamReader sr = new StreamReader("./Data/cityInfo.txt");
 
@@ -143,7 +144,7 @@ namespace Active
             }
         }
 
-        private Inventory LoadCityMerchant(string name)
+        static private Inventory LoadCityMerchant(string name)
         {
             string path = Path.Combine("./Data/City_Data/", name + ".txt");
             StreamReader sr = new StreamReader(path);
@@ -160,7 +161,7 @@ namespace Active
             return temp;
         }
 
-        public City[] Cities
+        static public City[] Cities
         {
             get
             {
@@ -168,14 +169,14 @@ namespace Active
             }
         }
 
-        public string CityName
+        static public string CityName
         {
             get
             {
                 return cityName;
             }
         }
-        public string CityInfo
+        static public string CityInfo
         {
             get
             {

@@ -18,7 +18,6 @@ namespace Active
         
         PlayerInventoryModule playerInventoryModule;
         CityMenu cityMenu;
-        WorldMapMenu worldMapMenu;
 
         Inventory activeInv;
         Inventory activePlayerInv;
@@ -74,13 +73,14 @@ namespace Active
             activeInv = new Inventory(100);
 
             cityMenu = new CityMenu();
-            worldMapMenu = new WorldMapMenu();
-            worldMapMenu.LoadCities();
+            WorldMapMenu.LoadCities();
             playerInventoryModule = new PlayerInventoryModule();
             TravelMenu.Init();
 
             ModifierManager.LoadCityAndCategoryLists();
+            ModifierManager.LoadItemModifiers();
             Calendar.PrepareCalendar();
+            WorldEventManager.Init();
         }
 
         //========================================================================
@@ -90,6 +90,8 @@ namespace Active
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Back))
                 Exit();
+
+            WorldEventManager.Update();
 
             KMReader.Update();
             Calendar.Update();
@@ -105,7 +107,7 @@ namespace Active
                 {
                     ChangeGameState(GameState.TradeMenu);
                     string tmp = "";
-                    foreach (City tempCity in worldMapMenu.Cities)
+                    foreach (City tempCity in WorldMapMenu.Cities)
                     {
                         if (tempCity.Name == Player.Location)
                         {
@@ -123,21 +125,21 @@ namespace Active
             }
             else if (gameState == GameState.MapMenu)
             {
-                worldMapMenu.Update(gameTime);
+                WorldMapMenu.Update(gameTime);
 
-                string temp = worldMapMenu.CheckNewTravel();
+                string temp = WorldMapMenu.CheckNewTravel();
                 if (temp != null && TravelMenu.TurnsLeft == 0)
                 {
                     TravelMenu.StartTravel(temp);
                     ChangeGameState(GameState.TravelMenu);
                 }
 
-                if (worldMapMenu.inventoryButton.Click())
+                if (WorldMapMenu.inventoryButton.Click())
                 {
                     ChangeGameState(GameState.InventoryMenu);
                 }
 
-                if (worldMapMenu.returnButton.Click())
+                if (WorldMapMenu.returnButton.Click())
                 {
                     RevertGameState();
                 }
@@ -147,7 +149,7 @@ namespace Active
                 if (Trading.Update(ref activePlayerInv, ref activeInv) == true)
                 {
                     RevertGameState();
-                    foreach (City tempCity in worldMapMenu.Cities)
+                    foreach (City tempCity in WorldMapMenu.Cities)
                     {
                         if (tempCity.Name == Player.Location)
                         {
@@ -278,11 +280,11 @@ namespace Active
 
             if (gameState == GameState.CityMenu)
             {
-                cityMenu.Draw(spriteBatch, worldMapMenu.Cities);
+                cityMenu.Draw(spriteBatch, WorldMapMenu.Cities);
             }
             else if (gameState == GameState.MapMenu)
             {
-                worldMapMenu.Draw(spriteBatch);               
+                WorldMapMenu.Draw(spriteBatch);               
             }
             else if (gameState == GameState.TradeMenu)
             {
