@@ -56,8 +56,8 @@ namespace Active
             secCategoryBox = new Rectangle(1240, 760, 120, 120);
             terCategoryBox = new Rectangle(1380, 760, 120, 120);
 
-            invTab = new Button(280, 90, 200, 60, TextureManager.texTab);
-            skillTab = new Button(470, 90, 200, 60, TextureManager.texTab);
+            invTab = new Button(280, 90, 200, 60, TextureManager.texInvTab);
+            skillTab = new Button(470, 90, 200, 60, TextureManager.texSkillTab);
 
             posPriCategoryString = new Vector2(1110, 795);
             posSecCategoryString = new Vector2(1250, 795);
@@ -125,7 +125,6 @@ namespace Active
                 invTab.Draw(spriteBatch);
                 skillTab.Draw(spriteBatch);
             }
-            spriteBatch.Draw(TextureManager.texWhite, mainBox, Color.Wheat);
 
             if (!alt)
             {
@@ -346,8 +345,11 @@ namespace Active
 
         private void DrawInventory(SpriteBatch spriteBatch)
         {
-            spriteBatch.DrawString(TextureManager.fontInventory, "Currency: " + Player.Inventory.Money.ToString(), new Vector2(300, 930), Color.White);
-            spriteBatch.Draw(TextureManager.texWhite, inventoryBox, Color.DarkGray);
+            spriteBatch.Draw(TextureManager.texInvMenu, mainBox, Color.White);
+
+            spriteBatch.DrawString(TextureManager.fontButton, "Currency: " + Player.Inventory.Money.ToString(), new Vector2(380, 954), Color.Black);
+            //spriteBatch.Draw(TextureManager.texWhite, inventoryBox, Color.DarkGray);
+
 
             DrawGrid(spriteBatch);
 
@@ -387,6 +389,7 @@ namespace Active
 
         private void DrawSkills(SpriteBatch spriteBatch)
         {
+            spriteBatch.Draw(TextureManager.texSkillMenu, mainBox, Color.White);
             spriteBatch.DrawString(TextureManager.fontInventory, "Wisdom: " + Player.ReturnSkillLevel("Wisdom"), new Vector2(400, 300), Color.Black);
             spriteBatch.DrawString(TextureManager.fontInventory, "Intimidation: " + Player.ReturnSkillLevel("Intimidation"), new Vector2(400, 400), Color.Black);
             spriteBatch.DrawString(TextureManager.fontInventory, "Persuasion: " + Player.ReturnSkillLevel("Persuasion"), new Vector2(400, 500), Color.Black);
