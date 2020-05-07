@@ -18,11 +18,24 @@ namespace Active
         public int Id { get => id; set => id = value; }
         int counter, click;
         bool found;
+        bool occuredDuringTravel;
         /* Encounters.txt
          int id
          string Val1|string Val2|string Val3
              
              */
+
+        public Encounter(int id, List<string> optionTexts)
+        {
+            this.id = id;
+            btnOptions = new List<Button>();
+            for (int i = 0; i < optionTexts.Count; i++)
+            {
+                btnOptions.Add(new Button(970+100*i,500,100,100,"",optionTexts[i],TextureManager.texBox));
+                
+            }
+            occuredDuringTravel = false;
+        }
         public void Update()
         {
             
