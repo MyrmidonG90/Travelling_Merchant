@@ -9,25 +9,25 @@ using System.Threading.Tasks;
 
 namespace Active
 {
-    class WorldMapMenu
+    static class WorldMapMenu
     {
-        const int nrCities = 10;
-        City[] cities = new City[nrCities];
-        Button[] cityButtons = new Button[nrCities];
-        Button[] travelButtons = new Button[nrCities];
+        static int nrCities = 10;
+        static City[] cities = new City[nrCities];
+        static Button[] cityButtons = new Button[nrCities];
+        static Button[] travelButtons = new Button[nrCities];
 
-        public Button inventoryButton = new Button(70, 920, 260, 120, "inv", "Inventory", TextureManager.texBox);
-        public Button returnButton = new Button(20, 20, 80, 80, TextureManager.texBackArrow);
+        static public Button inventoryButton = new Button(70, 920, 260, 120, "inv", "Inventory", TextureManager.texBox);
+        static public Button returnButton = new Button(20, 20, 80, 80, TextureManager.texBackArrow);
+      
+        static List<string> itemList = new List<string>();
+      
+        static bool showText;
 
-        bool showText;
+        static string cityName;
+        static string cityInfo;
+        static Vector2 cityCords;
 
-        List<string> itemList = new List<string>();
-
-        string cityName;
-        string cityInfo;
-        Vector2 cityCords;
-
-        public void ItemList()
+      static void ItemList()
         {
             StreamReader sr = new StreamReader("./Data/ItemList.txt");
 
@@ -40,8 +40,9 @@ namespace Active
             }
             sr.Close();
         }
+      
+        static public string CheckNewTravel()
 
-        public string CheckNewTravel()
         {
             int counter = 0;
             foreach (Button button in travelButtons)
@@ -55,7 +56,7 @@ namespace Active
             return null;
         }
 
-        public void Update(GameTime gameTime)
+        static public void Update(GameTime gameTime)
         {
             bool temp = false;
 
@@ -92,7 +93,7 @@ namespace Active
             }
         }
 
-        public void Draw(SpriteBatch spriteBatch)
+        static public void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(TextureManager.texMap, new Vector2(0, 0), Color.White);
 
@@ -119,7 +120,7 @@ namespace Active
             }          
         }
 
-        public void LoadCities()
+        static public void LoadCities()
         {
             ItemList();
             StreamReader sr = new StreamReader("./Data/cityInfo.txt");
@@ -161,7 +162,7 @@ namespace Active
             }
         }
 
-        private Inventory LoadCityMerchant(string name)
+        static private Inventory LoadCityMerchant(string name)
         {
             string path = Path.Combine("./Data/City_Data/", name + ".txt");
             StreamReader sr = new StreamReader(path);
@@ -190,7 +191,7 @@ namespace Active
             return temp;
         }
 
-        public City[] Cities
+        static public City[] Cities
         {
             get
             {
@@ -198,14 +199,14 @@ namespace Active
             }
         }
 
-        public string CityName
+        static public string CityName
         {
             get
             {
                 return cityName;
             }
         }
-        public string CityInfo
+        static public string CityInfo
         {
             get
             {

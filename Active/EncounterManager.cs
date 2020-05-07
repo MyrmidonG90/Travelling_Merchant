@@ -17,7 +17,8 @@ namespace Active
         static List<TravelEvent> events;
         static List<Encounter> encounters;
         static bool eventOnGoing;
-
+        static List<string> tmpString;
+        static int tmpInt;
         static int counter;
         static bool found;
         static Encounter currentEncounter;
@@ -26,7 +27,8 @@ namespace Active
 
         static public void Initialize()
         {
-            LoadEvents();
+            LoadEncountInfo();
+            LoadEncounters();
             if (CheckPercentageValue() == false) // Bugg check
             {
                 // Kommer att funka men det kommer inte vara rätt slump.
@@ -65,6 +67,7 @@ namespace Active
 
             return events[counter].EID;
         }
+
         static int FindEnocunterID(int eID)
         {
             found = false;
@@ -83,6 +86,7 @@ namespace Active
 
             return events[counter].EID;
         }
+
         static void InitiateEncounter(int eID)
         {
             currentEncounter = encounters[FindEnocunterID(eID)];
@@ -91,12 +95,12 @@ namespace Active
         static int RandomiseEncounter()
         {
             int chance = rand.Next(1,100);
-            int counter = 0;
+            counter = 0;
 
             while (chance > 0)
             {
 
-                chance -= Events[counter].Percentage;
+                chance -= events[counter].Percentage;
 
                 if (chance > 0)
                 {
@@ -104,6 +108,7 @@ namespace Active
                 }
 
             }
+            
 
             return counter;
         }
@@ -115,10 +120,11 @@ namespace Active
              Procent
         */
 
-        static public void LoadEvents() // Laddar in alla events från en textfil
+        static void LoadEncountInfo() // Laddar in alla events från en textfil
         {
             events = new List<TravelEvent>();
-            FileManager.ReadFilePerLine("./Data/Events.txt"); // Läser in filen där alla events är
+            
+            FileManager.ReadFilePerLine("./Data/EncounterInfo.txt"); // Läser in filen där alla events är
 
             for (int i = 0; i < FileManager.ReadPerLine.Count/4; i++) //
             {
@@ -127,7 +133,7 @@ namespace Active
 
                 int tmpEID = int.Parse(FileManager.ReadPerLine[1 + i * 4]); // Får Event ID
 
-                List<string> tmpString = new List<string>(); 
+                tmpString = new List<string>(); 
 
                 FileManager.splitter = FileManager.SplitText('|',FileManager.ReadPerLine[2+i*4]);
 
@@ -140,6 +146,42 @@ namespace Active
 
                 Events.Add(new TravelEvent(tmpID,tmpEID,tmpString,tmpPercentage)); // Skapar events
             }
+
+        }
+        static void LoadEncounters()
+        {
+            encounters = new List<Encounter>();
+            FileManager.ReadFilePerLine("./Data/Encounters.txt");
+
+            for (int i = 0; i < FileManager.ReadPerLine.Count/2; i++)
+            {
+                int tmpID = int.Parse(FileManager.ReadPerLine[0+2*i]);
+                tmpString = new List<string>();
+                FileManager.splitter = FileManager.SplitText('|',FileManager.ReadPerLine[1+i*2]);
+                for (int j = 0; j < FileManager.splitter.Length; j++)
+                {
+                    tmpString.Add(FileManager.splitter[j]);
+                }
+                encounters.Add(new Encounter(tmpID,tmpString));
+            }
+        }
+
+        static void CreateEncounter() // Programmer tool
+        {
+            tmpString = new List<string>();
+            encounters.Add(new Encounter(encounters.Count,tmpString));
+            SaveEncounters();
+        }
+        static public void SaveEncounters() // Programmer tool
+        {
+
+        }
+        static public void CreateTravelEvent() // Programmer tool
+        {
+            SaveTravelEvents();
+        }
+        static public void SaveTravelEvents() // Programmer tool
+        {
 
         }
 
@@ -163,7 +205,11 @@ namespace Active
 
         static void Update() // Bör endast hända i TravelMenu
         {
-            
+            tmpInt = currentEncounter.Update();
+            if (tmpInt != -1)
+            {
+
+            }
         }
 
         static void Draw(SpriteBatch sb) // Bör endast hända i TravelMenu
