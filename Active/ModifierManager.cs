@@ -12,6 +12,7 @@ namespace Active
     {
         static List<string> cities = new List<string>();
         static List<int> items = new List<int>();
+        static List<string> categories = new List<string>();
         static int amountOfCities, amountOfCategories;
         /*
          0.Food
@@ -22,10 +23,22 @@ namespace Active
          5.Magic
          6.Valuables
          7.Manufactured
+         */
 
-             */
 
-        static public double GetModifier(string city, int category)
+        static public void LoadCategories()
+        {
+            categories.Add("Food");
+            categories.Add("Metal");
+            categories.Add("Raw Materials");
+            categories.Add("Textiles");
+            categories.Add("Gear");
+            categories.Add("Magic");
+            categories.Add("Valuables");
+            categories.Add("Manufactured");
+        }
+
+        static public double GetModifier(string city, int categoryNr)
         {
             StreamReader sr = new StreamReader("./Data/ItemPrices.txt");
             while (!sr.EndOfStream)
@@ -35,10 +48,10 @@ namespace Active
                     string tempCity = sr.ReadLine();
                     for (int j = 0; j < amountOfCategories; j++)
                     {
-                        int tempCategoryNr = int.Parse(sr.ReadLine()); // Get Category
+                        string tempCategory = sr.ReadLine(); // Get Category
                         string tempModifier= sr.ReadLine(); // Get Category modifier
 
-                        if (city == tempCity && tempCategoryNr == category) // Söker efter stadens kategori modifiers.
+                        if (city == tempCity && tempCategory == categories[categoryNr]) // Söker efter stadens kategori modifiers.
                         {
                             sr.Close();
                             try
@@ -68,6 +81,7 @@ namespace Active
         
         static public void LoadCityAndCategoryLists()
         {
+            LoadCategories();
             StreamReader sr = new StreamReader("./Data/cityInfo.txt");
             amountOfCities = 0;
             while (!sr.EndOfStream)
@@ -95,6 +109,8 @@ namespace Active
             }
             sr2.Close();
         }
+
+        
 
     }
 }
