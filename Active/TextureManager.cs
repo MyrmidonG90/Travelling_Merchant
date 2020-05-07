@@ -18,8 +18,14 @@ namespace Active
         static public Texture2D texSelect;
         static public Texture2D texTab;
         static public Texture2D texBackArrow;
+        static public Texture2D texOptions;
+        static public Texture2D texButton;
+        static public Texture2D texCarrotTown;
+        static public Texture2D texTowerTown;
+        static public Texture2D texDefaultTown;
         static public Texture2D texArmourFine, texArmourMagic, texArmourNormal, texCarrot, texCotton, texDragonScale, texFur, texGoldIngot, texGoldOre, texGryphonMeat, texIronIngot, texIronOre, texDiamond, texEmerald, texRuby, texLumber, texPotato, texPotion, texSilk, texSpices, texStone, texWeaponFine, texWeaponMagic, texWeaponNormal, texWhaleMeat;
         static public List<Texture2D> texItems;
+        static public List<Texture2D> texCities;
 
         static public void LoadContent(ContentManager content)
         {
@@ -34,6 +40,8 @@ namespace Active
             texSelect = content.Load<Texture2D>("select");
             texTab = content.Load<Texture2D>("Tab");
             texBackArrow = content.Load<Texture2D>("backarrow");
+            texOptions = content.Load<Texture2D>("options");
+            texButton = content.Load<Texture2D>("btn");
 
             //RESOURCE SPRITES
             texArmourFine = content.Load<Texture2D>("armour_fine");
@@ -62,10 +70,15 @@ namespace Active
             texWeaponNormal = content.Load<Texture2D>("weapon_normal");
             texWhaleMeat = content.Load<Texture2D>("whale_meat");
 
-            LoadList();
+            //city backgrounds
+            texCarrotTown = content.Load<Texture2D>("Carrot Town");
+            texTowerTown = content.Load<Texture2D>("Tower Town");
+            texDefaultTown = content.Load<Texture2D>("Default");
+
+            LoadLists();
         }
 
-        static private void LoadList()
+        static private void LoadLists()
         {
             texItems = new List<Texture2D>();
             texItems.Add(texCarrot);
@@ -93,6 +106,10 @@ namespace Active
             texItems.Add(texDragonScale);
             texItems.Add(texSpices);
             texItems.Add(texPotion);
+
+            texCities = new List<Texture2D>();
+            texCities.Add(texCarrotTown);
+            texCities.Add(texTowerTown);
         }
     }
 }

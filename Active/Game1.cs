@@ -22,6 +22,8 @@ namespace Active
         Inventory activeInv;
         Inventory activePlayerInv;
 
+        List<string> CityControlList;
+
         bool options;
         bool test;
 
@@ -82,6 +84,10 @@ namespace Active
             ModifierManager.LoadItemModifiers();
             Calendar.PrepareCalendar();
             WorldEventManager.Init();
+
+            CityControlList = new List<string>();
+            CityControlList.Add("Carrot Town");
+            CityControlList.Add("Tower Town");
         }
 
         //========================================================================
@@ -287,6 +293,11 @@ namespace Active
 
             spriteBatch.Begin();
 
+            if (gameState != GameState.MainMenu && Player.Location == TravelMenu.Destination)
+            {
+                DrawBackground(spriteBatch);
+            }
+
             if (gameState == GameState.CityMenu)
             {
                 cityMenu.Draw(spriteBatch, WorldMapMenu.Cities);
@@ -395,6 +406,24 @@ namespace Active
             else
             {
                 CleanGameState(GameState.CityMenu);
+            }
+        }
+
+        private void DrawBackground(SpriteBatch spriteBatch)
+        {
+            bool drawn = false;
+            for (int i = 0; i < CityControlList.Count; i++)
+            {
+                if (Player.Location == CityControlList[i] && !drawn)
+                {
+                    spriteBatch.Draw(TextureManager.texCities[i], Vector2.Zero, Color.White);
+                    drawn = true;
+                }
+            }
+            if (!drawn)
+            {
+                spriteBatch.Draw(TextureManager.texDefaultTown, Vector2.Zero, Color.White);
+                drawn = true;
             }
         }
     }

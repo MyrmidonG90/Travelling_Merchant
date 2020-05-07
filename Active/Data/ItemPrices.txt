@@ -15,7 +15,7 @@ Carrot Town
 1
 7
 2
-SteelVille
+Steel Ville
 0
 2
 1
@@ -32,7 +32,7 @@ SteelVille
 2
 7
 0,5
-TowerTown
+Tower Town
 0
 3
 1

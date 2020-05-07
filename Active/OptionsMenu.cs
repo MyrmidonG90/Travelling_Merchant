@@ -63,7 +63,7 @@ namespace Active
 
             btnClose = new Button(830, 660, 260, 80, "close", "Close", TextureManager.texWhite);
 
-            btnMenu = new Button(1820, 20, 80, 80, TextureManager.texBackArrow);
+            btnMenu = new Button(1820, 20, 80, 80, TextureManager.texOptions);
 
             box = new Rectangle(810, 140, 300, 620);
 
@@ -197,7 +197,7 @@ namespace Active
             {
                 string[] test = new string[1];
                 test[0] = "Carrot Town";
-                WorldEventManager.EventFire(1, test);
+                WorldEventManager.EventFire(0, test);
             }
             if (btnClose.Click())
             {

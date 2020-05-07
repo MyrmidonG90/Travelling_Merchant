@@ -1,10 +1,10 @@
 Carrot Town
 Carrot Town is the great city of carrots.;Its agricultural roots can be traced ;thousands of years! There is no better ;place to buy fruits, vegetables ;and, of course, carrots.
 250,500
-SteelVille
+Steel Ville
 Lorem ipsum Lorem ipsum Lorem ipsum Lorem ;ipsum Lorem ipsum Lorem ipsum Lorem ipsum ;Lorem ipsum Lorem ipsum Lorem ipsum Lorem ;ipsum Lorem ipsum 
 690,670
-TowerTown
+Tower Town
 Lorem ipsum Lorem ipsum Lorem ipsum Lorem ;ipsum Lorem ipsum Lorem ipsum Lorem ipsum ;Lorem ipsum Lorem ipsum Lorem ipsum Lorem ;ipsum Lorem ipsum Lorem ipsum Lorem ipsum
 1500,600
 Hymn Harbor

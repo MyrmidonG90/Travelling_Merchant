@@ -118,11 +118,15 @@ namespace Active
         }
         public void ReduceAmountOfItems(int itemID, int amount)
         {
-            itemList[FindIndexOf(itemID)].Amount -= amount; // Reducerar antalet man har sålt.
-            if (itemList[FindIndexOf(itemID)].Amount <= 0) // Har ej tillgång till item:et längre
+            try
             {
-                itemList.RemoveAt(FindIndexOf(itemID));
+                itemList[FindIndexOf(itemID)].Amount -= amount; // Reducerar antalet man har sålt.
+                if (itemList[FindIndexOf(itemID)].Amount <= 0) // Har ej tillgång till item:et längre
+                {
+                    itemList.RemoveAt(FindIndexOf(itemID));
+                }
             }
+            catch { }         
         }
 
         int FindIndexOf(int itemID)
