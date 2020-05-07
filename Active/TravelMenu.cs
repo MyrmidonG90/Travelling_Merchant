@@ -31,7 +31,7 @@ namespace Active
             turnsLeft = 0;
             turnTimer = timerLength;
             timerLength = 1;
-            destination = "CarrotTown";
+            destination = "Carrot Town";
 
             turnDisplay = turnsLeft.ToString() + "/" + turnsToTravel.ToString();
 
@@ -84,7 +84,6 @@ namespace Active
                 {
                     paused = false;
                 }
-                
             }
 
             if (pauseButton.Click())

@@ -77,7 +77,7 @@ namespace Active
                 for (int j = 0; j < amountOfCategories; j++)
                 {
                     category--;
-                    if (city == cities[i] && itemCategories[j] == category) // Söker efter stadens kategori modifiers.
+                    if (city == cities[i] && j == category) // Söker efter stadens kategori modifiers.
                     {
                         itemModifiers[counter] += modifier;
                     }
