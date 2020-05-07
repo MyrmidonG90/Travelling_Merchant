@@ -130,9 +130,6 @@
     <Content Include="Data\City_Data\Pyramaad.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Data\Events.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="Data\InventoryGrid.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
