@@ -12,7 +12,8 @@ namespace Active
     {
         static List<string> cities = new List<string>();
         static List<int> items = new List<int>();
-        static List<int> itemCategories = new List<int>();
+
+        static List<string> itemCategories = new List<string>();
         static List<float> itemModifiers = new List<float>();
         static int amountOfCities, amountOfCategories;
         
@@ -27,7 +28,13 @@ namespace Active
 
         //om du inte fattar vafan som händer här inne så ändrades det senast av My 6 maj
                 
+
+            
+        
+
+
         static public double GetModifier(string city, int category)
+
         {
             category--;
             int counter = 0;
@@ -35,7 +42,7 @@ namespace Active
             {
                 for (int j = 0; j < amountOfCategories; j++)
                 {
-                    if (city == cities[i] && itemCategories[j] == category) // Söker efter stadens kategori modifiers.
+                    if (city == cities[i] && j == category) // Söker efter stadens kategori modifiers.
                     {
                         return itemModifiers[counter]; // Return modifier
                     }
@@ -53,7 +60,7 @@ namespace Active
                 for (int j = 0; j < amountOfCategories; j++)
                 {
                     category--;
-                    if (city == cities[i] && itemCategories[j] == category) // Söker efter stadens kategori modifiers.
+                    if (city == cities[i] && j == category) // Söker efter stadens kategori modifiers.
                     {
                         itemModifiers[counter] = modifier;
                     }
@@ -72,10 +79,12 @@ namespace Active
                     sr.ReadLine();
                     for (int j = 0; j < amountOfCategories; j++)
                     {
+
                         string temp = sr.ReadLine();
-                        itemCategories.Add(int.Parse(temp));
+                        itemCategories.Add(temp);
                         temp = sr.ReadLine();
                         itemModifiers.Add(float.Parse(temp));                        
+
                     }
                 }
             }
@@ -83,6 +92,7 @@ namespace Active
         
         static public void LoadCityAndCategoryLists()
         {
+            
             StreamReader sr = new StreamReader("./Data/cityInfo.txt");
             amountOfCities = 0;
             while (!sr.EndOfStream)
@@ -110,6 +120,8 @@ namespace Active
             }
             sr2.Close();
         }
+
+        
 
     }
 }

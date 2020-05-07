@@ -18,14 +18,31 @@ namespace Active
 
         static public Button inventoryButton = new Button(70, 920, 260, 120, "inv", "Inventory", TextureManager.texBox);
         static public Button returnButton = new Button(20, 20, 80, 80, TextureManager.texBackArrow);
-
+      
+        static List<string> itemList = new List<string>();
+      
         static bool showText;
 
         static string cityName;
         static string cityInfo;
         static Vector2 cityCords;
 
+      static void ItemList()
+        {
+            StreamReader sr = new StreamReader("./Data/ItemList.txt");
+
+            while (!sr.EndOfStream)
+            {
+
+                string tempName = sr.ReadLine();
+                itemList.Add(tempName);
+
+            }
+            sr.Close();
+        }
+      
         static public string CheckNewTravel()
+
         {
             int counter = 0;
             foreach (Button button in travelButtons)
@@ -105,6 +122,7 @@ namespace Active
 
         static public void LoadCities()
         {
+            ItemList();
             StreamReader sr = new StreamReader("./Data/cityInfo.txt");
 
             int counter = 0;
@@ -154,7 +172,19 @@ namespace Active
             {
                 string data = sr.ReadLine();
                 string[] data2 = data.Split(';');
-                Item newItem = ItemCreator.CreateItem(int.Parse(data2[0]), int.Parse(data2[1]));
+
+                int placeCounter = 0;
+                int tempNr = 0;
+                foreach (string item in itemList)
+                {
+                    if (item == data2[0])
+                    {
+                        tempNr = placeCounter;
+                    }
+                    placeCounter++;
+                }
+                
+                Item newItem = ItemCreator.CreateItem(tempNr, int.Parse(data2[1]));
                 temp.AddItem(newItem);
             }
 
