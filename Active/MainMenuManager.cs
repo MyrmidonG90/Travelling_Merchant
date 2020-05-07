@@ -18,9 +18,9 @@ namespace Active
 
         static public void Init()
         {
-            newGame = new Button(430, 900, 260, 120, "new", "New Game", TextureManager.texWhite);
-            loadGame = new Button(830, 900, 260, 120, "load", "Load Game", TextureManager.texWhite);
-            exitGame = new Button(1230, 900, 260, 120, "exit", "Exit Game", TextureManager.texWhite);
+            newGame = new Button(430, 900, 260, 120, "new", "New Game", TextureManager.texButton);
+            loadGame = new Button(830, 900, 260, 120, "load", "Load Game", TextureManager.texButton);
+            exitGame = new Button(1230, 900, 260, 120, "exit", "Exit Game", TextureManager.texButton);
             logo = new Rectangle(460, 150, 1000, 600);
         }
 
