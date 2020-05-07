@@ -18,6 +18,7 @@ namespace Active
         static List<Encounter> encounters;
         static bool eventOnGoing;
         static List<string> tmpString;
+        static int tmpInt;
         static int counter;
         static bool found;
         static Encounter currentEncounter;
@@ -167,9 +168,19 @@ namespace Active
 
         static void CreateEncounter() // Programmer tool
         {
-
+            tmpString = new List<string>();
+            encounters.Add(new Encounter(encounters.Count,tmpString));
+            SaveEncounters();
         }
         static public void SaveEncounters() // Programmer tool
+        {
+
+        }
+        static public void CreateTravelEvent() // Programmer tool
+        {
+            SaveTravelEvents();
+        }
+        static public void SaveTravelEvents() // Programmer tool
         {
 
         }
@@ -194,7 +205,11 @@ namespace Active
 
         static void Update() // Bör endast hända i TravelMenu
         {
-            
+            tmpInt = currentEncounter.Update();
+            if (tmpInt != -1)
+            {
+
+            }
         }
 
         static void Draw(SpriteBatch sb) // Bör endast hända i TravelMenu

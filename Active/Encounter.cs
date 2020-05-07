@@ -36,11 +36,12 @@ namespace Active
             }
             occuredDuringTravel = false;
         }
-        public void Update()
+
+        public int Update()
         {
-            
-            
+            return CheckClick();            
         }
+
         int CheckClick()
         {
             click = -1;

@@ -131,6 +131,9 @@
     <Content Include="Data\City_Data\Pyramaad.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Data\EncounterInfo.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Data\Encounters.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
