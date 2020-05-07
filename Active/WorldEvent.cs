@@ -17,9 +17,15 @@ namespace Active
         int daysLeft;
         Inventory oldTemplateInv;
 
-        public WorldEvent(int id, string[] target)
+        public WorldEvent(string n, string d, int id, string[] target, bool[] ei, int[] ev, int days)
         {
-
+            eventName = n;
+            eventDes = d;
+            eventID = id;
+            this.target = target;
+            effectID = ei;
+            effectVal = ev;
+            daysLeft = days;
         }
 
         public bool Countdown(int days)
@@ -30,6 +36,46 @@ namespace Active
                 return true;
             }
             return false;
+        }
+
+        public string EventName
+        {
+            get => eventName;
+        }
+
+        public string EventDes
+        {
+            get => eventDes;
+        }
+
+        public int EventID
+        {
+            get => eventID;
+        }
+
+        public string[] Target
+        {
+            get => target;
+        }
+
+        public bool[] EffectID
+        {
+            get => effectID;
+        }
+
+        public int[] EffectVal
+        {
+            get => effectVal;
+        }
+
+        public int DaysLeft
+        {
+            get => daysLeft;
+        }
+
+        public Inventory OldTemplateInv
+        {
+            get => oldTemplateInv;
         }
     }
 }
