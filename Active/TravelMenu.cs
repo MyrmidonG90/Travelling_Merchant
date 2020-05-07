@@ -45,7 +45,7 @@ namespace Active
         static public void StartTravel(string newDestination)
         {
             destination = newDestination;
-
+            EncounterManager.Initialize();
             paused = false;
 
             turnsToTravel = 5;
@@ -92,6 +92,11 @@ namespace Active
                 Calendar.AddDays(1);
                 turnsLeft--;
                 turnTimer = timerLength;
+                if (EncounterManager.Encountered())
+                {
+
+                }
+                
             }
 
             if (turnsLeft == 0)
