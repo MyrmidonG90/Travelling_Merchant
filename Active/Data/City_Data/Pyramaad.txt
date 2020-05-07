@@ -1,16 +1,19 @@
-﻿1100
-14
-0;10
-2;30
-3;40
-5;20
-8;3
-9;30
-10;15
-13;30
-14;25
-16;15
-15;25
-17;15
-22;1
-23;8
+﻿1300
+17
+Carrot;17
+Potato;20
+Iron Ingot;14
+Iron Ore;9
+Gold Ingot;46
+Gold Ore;20
+Ruby;13
+Emerald;16
+Diamond;4
+Silk;26
+Fine Weapons;6
+Fine Armour;5
+Magic Weapons;6
+Magic Armour;3
+Dragon Scale;7
+Spices;46
+Potions;13

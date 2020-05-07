@@ -1,16 +1,17 @@
-﻿1100
-14
-0;10
-2;30
-3;40
-5;20
-8;3
-9;30
-10;15
-13;30
-14;25
-16;15
-15;25
-17;15
-22;1
-23;8
+﻿1200
+15
+Carrot;10
+Potato;24
+Iron Ingot;35
+Iron Ore;23
+Gold Ingot;10
+Gold Ore;5
+Diamond;2
+Fur;32
+Lumber;18
+Stone;17
+Simple Weapons;15
+Simple Armour;6
+Fine Weapons;8
+Fine Armour;3
+Whale Meat;15

@@ -1,16 +1,15 @@
-﻿1100
-14
-0;10
-2;30
-3;40
-5;20
-8;3
-9;30
-10;15
-13;30
-14;25
-16;15
-15;25
-17;15
-22;1
-23;8
+﻿1200
+13
+Potato;30
+Iron Ingot;21
+Iron Ore;22
+Ruby;12
+Emerald;4
+Diamond;3
+Silk;12
+Cotton;22
+Whale Meat;8
+Gryphon Meat;7
+Dragon Scale;2
+Spices;21
+Potions;8

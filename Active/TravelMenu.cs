@@ -45,7 +45,7 @@ namespace Active
         static public void StartTravel(string newDestination)
         {
             destination = newDestination;
-
+            EncounterManager.Initialize();
             paused = false;
 
             turnsToTravel = 5;
@@ -77,6 +77,16 @@ namespace Active
         {
             turnDisplay = turnsLeft.ToString() + "/" + turnsToTravel.ToString();
 
+            if (EncounterManager.EventOnGoing)
+            {
+                paused = true;
+                if (EncounterManager.Update())
+                {
+                    paused = false;
+                }
+                
+            }
+
             if (pauseButton.Click())
             {
                 paused = !paused; 
@@ -92,12 +102,15 @@ namespace Active
                 Calendar.AddDays(1);
                 turnsLeft--;
                 turnTimer = timerLength;
-            }
-
-            if (turnsLeft == 0)
-            {
-                return true;
-            }
+                if (turnsLeft == 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    EncounterManager.Encountered();
+                }
+            }            
 
             return false;
         }
@@ -116,6 +129,10 @@ namespace Active
             {
                 invButton.Draw(spriteBatch);
                 mapButton.Draw(spriteBatch);
+            }
+            if (EncounterManager.EventOnGoing)
+            {
+                EncounterManager.Draw(spriteBatch);
             }
         }
 

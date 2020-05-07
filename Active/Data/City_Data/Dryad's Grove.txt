@@ -1,16 +1,15 @@
-﻿1100
-14
-0;10
-2;30
-3;40
-5;20
-8;3
-9;30
-10;15
-13;30
-14;25
-16;15
-15;25
-17;15
-22;1
-23;8
+﻿500
+13
+Carrot;27
+Potato;32
+Gold Ore;5
+Emerald;12
+Fur;23
+Silk;19
+Cotton;5
+Lumber;50
+Stone;43
+Magic Weapons;8
+Magic Armour;6
+Dragon Scale;9
+Potions;24

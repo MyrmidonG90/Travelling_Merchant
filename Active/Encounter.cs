@@ -13,17 +13,35 @@ namespace Active
     class Encounter
     {
         int id;
-        List<Rectangle> rectsOptions;
-        Rectangle rectMessage;
+        List<Button> btnOptions;
+        
         public int Id { get => id; set => id = value; }
         int counter, click;
         bool found;
+        bool occuredDuringTravel;
+        /* Encounters.txt
+         int id
+         string Val1|string Val2|string Val3
+             
+             */
 
-        public void Update()
+        public Encounter(int id, List<string> optionTexts)
         {
-            
-            
+            this.id = id;
+            btnOptions = new List<Button>();
+            for (int i = 0; i < optionTexts.Count; i++)
+            {
+                btnOptions.Add(new Button(970+100*i,500,100,100,"",optionTexts[i],TextureManager.texBox));
+                
+            }
+            occuredDuringTravel = false;
         }
+
+        public int Update()
+        {
+            return CheckClick();            
+        }
+
         int CheckClick()
         {
             click = -1;
@@ -31,9 +49,9 @@ namespace Active
             {
                 found = false;
                 counter = 0;
-                while (counter < rectsOptions.Count && found == false)
+                while (counter < btnOptions.Count && found == false)
                 {
-                    if (KMReader.ClickRectangle(rectsOptions[counter]) == true)
+                    if (KMReader.ClickRectangle(btnOptions[counter].HitBox) == true)
                     {
                         found = true;
                         click = counter;
@@ -51,10 +69,10 @@ namespace Active
 
         public void Draw(SpriteBatch sb)
         {
-            sb.Draw(TextureManager.texBox,rectMessage,Color.LightGray);
-            for (int i = 0; i < rectsOptions.Count; i++)
+            
+            for (int i = 0; i < btnOptions.Count; i++)
             {
-                sb.Draw(TextureManager.texBox,rectsOptions[i],Color.Gray);
+                sb.Draw(TextureManager.texBox, btnOptions[i].HitBox,Color.Gray);
             }
             
         }

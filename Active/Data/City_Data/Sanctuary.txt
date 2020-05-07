@@ -1,16 +1,20 @@
-﻿1100
-14
-0;10
-2;30
-3;40
-5;20
-8;3
-9;30
-10;15
-13;30
-14;25
-16;15
-15;25
-17;15
-22;1
-23;8
+﻿5300
+18
+Carrot;12
+Potato;43
+Iron Ingot;23
+Iron Ore;33
+Gold Ingot;35
+Gold Ore;5
+Ruby;2
+Emerald;3
+Diamond;6
+Fur;7
+Stone;22
+Simple Weapons;23
+Simple Armour;33
+Fine Weapons;19
+Fine Armour;18
+Gryphon Meat;5
+Dragon Scale;13
+Potions;19
