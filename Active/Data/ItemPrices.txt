@@ -15,7 +15,7 @@ Valuables
 1
 Manufactured
 2
-SteelVille
+Steel Ville
 Food
 2
 Metal
@@ -32,7 +32,7 @@ Valuables
 2,3
 Manufactured
 0,5
-TowerTown
+Tower Town
 Food
 3
 Metal
