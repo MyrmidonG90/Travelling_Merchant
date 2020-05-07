@@ -109,9 +109,6 @@
     <Content Include="Data\cityInfo.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-<<<<<<< HEAD
-    <Content Include="Data\TravelEvents.txt">
-=======
     <Content Include="Data\City_Data\Hymn Harbor.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -134,7 +131,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Data\Events.txt">
->>>>>>> master
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Data\InventoryGrid.txt">
