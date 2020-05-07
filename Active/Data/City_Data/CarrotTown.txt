@@ -13,5 +13,5 @@ Simple Weapons;9
 Simple Armour;13
 Fur;19
 Lumber;19
-Gold Ore;22
+Gold Ore;17
 Stone;28
