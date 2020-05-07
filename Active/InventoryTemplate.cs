@@ -18,5 +18,10 @@ namespace Active
             amountNegOrPos = a;
             items = i;
         }
+
+        public int ID
+        {
+            get => id;
+        }
     }
 }
