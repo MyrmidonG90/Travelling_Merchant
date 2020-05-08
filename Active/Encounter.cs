@@ -16,6 +16,8 @@ namespace Active
         List<Button> btnOptions;
         
         public int Id { get => id; set => id = value; }
+        public bool OccuredDuringTravel { get => occuredDuringTravel; set => occuredDuringTravel = value; }
+
         int counter, click;
         bool found;
         bool occuredDuringTravel;
@@ -31,7 +33,7 @@ namespace Active
             btnOptions = new List<Button>();
             for (int i = 0; i < optionTexts.Count; i++)
             {
-                btnOptions.Add(new Button(970+100*i,500,100,100,"",optionTexts[i],TextureManager.texBox));
+                btnOptions.Add(new Button(500+270*i,600,260,120,"something",optionTexts[i],TextureManager.texBox));
                 
             }
             occuredDuringTravel = false;
@@ -65,16 +67,12 @@ namespace Active
             return click;
         }
 
-        
-
         public void Draw(SpriteBatch sb)
-        {
-            
+        {            
             for (int i = 0; i < btnOptions.Count; i++)
             {
                 sb.Draw(TextureManager.texBox, btnOptions[i].HitBox,Color.Gray);
-            }
-            
+            }            
         }
     }
 }

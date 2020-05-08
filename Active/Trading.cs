@@ -328,6 +328,8 @@ namespace Active
             {
                 invRight.AddItem(item);
             }
+            tradeLeft.ItemList.Clear();
+            tradeRight.ItemList.Clear();
         }
 
         // Klar
@@ -362,7 +364,8 @@ namespace Active
             }
             
             invLeft = origLeftInv;
-            invRight = origRightInv;
+            invRight = origRightInv;//
+
             foreach (var item in tradeLeft.ItemList) 
             {
                 invLeft.AddItem(item);
@@ -371,8 +374,10 @@ namespace Active
             {
                 invRight.AddItem(item);
             }
+
             tradeLeft.ItemList.Clear();
             tradeRight.ItemList.Clear();
+            //
             UpdateSlots();
             UpdatePrices();
         }

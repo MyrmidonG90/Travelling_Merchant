@@ -10,7 +10,6 @@ namespace Active
     {
         int money, stackLimit, invLimit;
         List<Item> itemList;
-
         public Inventory(int m, List<Item> iL)
         {
             money = m;
@@ -29,10 +28,9 @@ namespace Active
         public Inventory(Inventory inv)
         {
             money = inv.Money;
-
             itemList = new List<Item>();
             foreach (Item item in inv.ItemList)
-            {
+            {               
                 itemList.Add(ItemCreator.CreateItem(item.ID, item.Amount));
             }
 
@@ -57,7 +55,7 @@ namespace Active
             {
                 if (FindIndexOf(itemID) != -1) // Om den redan finns i listan
                 {
-                    if (itemList[FindIndexOf(itemID)].Amount + amount <= stackLimit) // Om stacken som item:et är med i har plats
+                    if (itemList[FindIndexOf(itemID)].Amount + amount <= stackLimit ) // Om stacken som item:et är med i har plats
                     {
                         itemList[FindIndexOf(itemID)].Amount += amount; // Ändrar summan av totala antalet av den item:et
                         working = true;
@@ -151,9 +149,11 @@ namespace Active
                 }
                 else if (amountLeft < 0) // 
                 {
+
                     int tmp;
                     amountLeft *= -1;
                     itemList.RemoveAt(FindIndexOf(itemID));
+
                     while (amountLeft != 0)
                     {
                         tmp = itemList[FindIndexOf(itemID)].Amount -= amountLeft;
@@ -167,6 +167,7 @@ namespace Active
                         }
                         else if (tmp < 0)
                         {
+
                         }
                     }
                 }*/
@@ -192,7 +193,7 @@ namespace Active
                     ++tmpCounter;
                 }
             }
-            return answer;
+            return answer;            
         }
 
         int FindStackNotFull(int itemID)
