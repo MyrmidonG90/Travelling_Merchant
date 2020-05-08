@@ -67,10 +67,10 @@
     <Compile Include="General Classes\FileManager.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="General Classes\Inventory.cs" />
-    <Compile Include="InventoryTemplate.cs" />
+    <Compile Include="World Events Classes\InventoryTemplate.cs" />
     <Compile Include="General Classes\Item.cs" />
     <Compile Include="General Classes\ItemCreator.cs" />
-    <Compile Include="ItemModifierTemplate.cs" />
+    <Compile Include="World Events Classes\ItemModifierTemplate.cs" />
     <Compile Include="General Classes\KMReader.cs" />
     <Compile Include="MainMenuManager.cs" />
     <Compile Include="OptionsMenu.cs" />
@@ -84,8 +84,8 @@
     <Compile Include="General Classes\TextureManager.cs" />
     <Compile Include="Trading.cs" />
     <Compile Include="TravelMenu.cs" />
-    <Compile Include="WorldEvent.cs" />
-    <Compile Include="WorldEventManager.cs" />
+    <Compile Include="World Events Classes\WorldEvent.cs" />
+    <Compile Include="World Events Classes\WorldEventManager.cs" />
     <Compile Include="WorldMapMenu.cs" />
   </ItemGroup>
   <ItemGroup>
