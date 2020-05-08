@@ -50,11 +50,19 @@ namespace Active
         public void InvReset()
         {
             inv = new Inventory(templateInv);
+            int i = 0;
         }
 
         public void InvInit()
         {
             templateInv = new Inventory(inv);
+        }
+
+        public void InvNewSet(Inventory newInv)
+        {
+            templateInv = newInv;
+            CheckDate();
+            traded = true;
         }
 
         public void CheckDate()
@@ -105,6 +113,12 @@ namespace Active
             {
                 traded = value;
             }
+        }
+
+        public Inventory TemplateInv
+        {
+            get => templateInv;
+            set => templateInv = value;
         }
 
         public Inventory Inv { get => inv; set => inv = value; }

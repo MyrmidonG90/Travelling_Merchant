@@ -28,11 +28,6 @@ namespace Active
 
         //om du inte fattar vafan som händer här inne så ändrades det senast av My 6 maj
                 
-
-            
-        
-
-
         static public double GetModifier(string city, int category)
 
         {
@@ -63,6 +58,23 @@ namespace Active
                     if (city == cities[i] && j == category) // Söker efter stadens kategori modifiers.
                     {
                         itemModifiers[counter] = modifier;
+                    }
+                    counter++;
+                }
+            }
+        }
+
+        static public void AddModifier(string city, int category, float modifier)
+        {
+            int counter = 0;
+            for (int i = 0; i < amountOfCities; i++)
+            {
+                for (int j = 0; j < amountOfCategories; j++)
+                {
+                    category--;
+                    if (city == cities[i] && j == category) // Söker efter stadens kategori modifiers.
+                    {
+                        itemModifiers[counter] += modifier;
                     }
                     counter++;
                 }
@@ -120,8 +132,5 @@ namespace Active
             }
             sr2.Close();
         }
-
-        
-
     }
 }

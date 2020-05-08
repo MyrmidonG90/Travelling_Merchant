@@ -19,7 +19,7 @@ namespace Active
         {
             inventory = new Inventory(100);
             test = true;
-            location = "CarrotTown";
+            location = "Carrot Town";
 
             skillNames = new string[3];
             skillNames[0] = "Wisdom";
@@ -31,7 +31,6 @@ namespace Active
             skillLevels[1] = 3;
             skillLevels[2] = 3;
         }
-
 
         static public void Update()
         {

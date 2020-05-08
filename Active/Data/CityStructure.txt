@@ -1,16 +1,16 @@
-﻿CarrotTown
+﻿Carrot Town
 Carrot Town is the great city of carrots.;Its agricultural roots can be traced thousands of years!; There is no better place to buy fruits, vegetables and, of course, carrots.
 250;500;0;
 0
 
 0,0.5;1,2;2,2;3,0.5;4,3;5,4;6,1;7,2
-SteelVille
+Steel Ville
 Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum ;500;750;0;|TowerTown;Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum yughhgLorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum
 1500;600
 0
 
 0,2;1,0.5;2,2.5;3,2;4,0.5;5,4;6,2;7,0.5
-TowerTown
+Tower Town
 Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum yughhgLorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum
 1500;600
 0

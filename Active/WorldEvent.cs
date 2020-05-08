@@ -71,11 +71,13 @@ namespace Active
         public int DaysLeft
         {
             get => daysLeft;
+            set => daysLeft = value;
         }
 
         public Inventory OldTemplateInv
         {
             get => oldTemplateInv;
+            set => oldTemplateInv = value;
         }
     }
 }

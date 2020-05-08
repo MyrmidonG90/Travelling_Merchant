@@ -21,7 +21,7 @@ namespace Active
         //==================================================================================
         //OM DU ÄNDRAR HUR SPELET SPARAR SÅ ***MÅSTE*** DU ÄNDRA VÄRDET I ver
         //==================================================================================
-        static string ver = "1.2.1";
+        static string ver = "1.2.2";
         static public bool GenerateSave(Inventory inventory, string location, string gameState)
         {
             string path = Path.Combine("./Saves/", "Save-" + DateTime.Now.ToString() + ".ptmsave");
@@ -69,67 +69,23 @@ namespace Active
         //==================================================================================
         static public string[] LoadSave()
         {
-            //hot steaming mess av stack overflow
-            string path = "Saves\\";
-            path = Path.Combine(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location), path);
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-
-            openFileDialog.Filter = "Project Travelling Merchant savefiles (*.ptmsave)|*.ptmsave|All files (*.*)|*.*";
-            openFileDialog.FilterIndex = 1;
-            openFileDialog.RestoreDirectory = true;
-
-            if (Directory.Exists(path))
-            {
-                openFileDialog.InitialDirectory = path;
-            }
-            else
-            {
-                openFileDialog.InitialDirectory = @"C:\";
-            }
-            //hot steaming mess slutar här
-
-            openFileDialog.ShowDialog();
             Inventory tempInv = new Inventory(0);
+            StreamReader streamReader = InitLoadSave();
 
-            StreamReader streamReader;
-            try
-            {
-                streamReader = new StreamReader(openFileDialog.FileName);
-            }
-            catch
+            if (streamReader == null)
             {
                 return null;
             }
-            
 
             if (streamReader.ReadLine() == ver)
             {
                 string[] data = new string[3];
                 data[0] = streamReader.ReadLine();
                 Calendar.TotalDays = int.Parse(streamReader.ReadLine());
-                Player.Location = streamReader.ReadLine();
 
-                int[] tempLevels = new int[3];
-                for (int i = 0; i < 3; i++)
-                {
-                    tempLevels[i] = int.Parse(streamReader.ReadLine());
-                }
-                Player.SkillLevels = tempLevels;
-
-                tempInv.Money = int.Parse(streamReader.ReadLine());
-                int counter = int.Parse(streamReader.ReadLine());
-
-                for (int i = 0; i < counter; i++)
-                {
-                    string tempData = streamReader.ReadLine();
-                    string[] data2 = tempData.Split(';');
-                    Item newItem = ItemCreator.CreateItem(int.Parse(data2[0]), int.Parse(data2[1]));
-                    tempInv.AddItem(newItem);
-                }
+                ReadPlayerData(streamReader, tempInv);                
 
                 int check = int.Parse(streamReader.ReadLine());
-                Player.Inventory = tempInv;
-
                 if (check == 1)
                 {
                     
@@ -154,7 +110,7 @@ namespace Active
 
         //skamlöst stulen från the interwebs 
         //https://stackoverflow.com/questions/7348768/the-given-paths-format-is-not-supported
-        public static string ToSafeFileName(this string s)
+        static private string ToSafeFileName(this string s)
         {
             return s
                 .Replace("\\", "")
@@ -166,6 +122,64 @@ namespace Active
                 .Replace("<", "")
                 .Replace(">", "")
                 .Replace("|", "");
+        }
+
+        static private StreamReader InitLoadSave()
+        {
+            //hot steaming mess av stack overflow
+            string path = "Saves\\";
+            path = Path.Combine(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location), path);
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+
+            openFileDialog.Filter = "Project Travelling Merchant savefiles (*.ptmsave)|*.ptmsave|All files (*.*)|*.*";
+            openFileDialog.FilterIndex = 1;
+            openFileDialog.RestoreDirectory = true;
+
+            if (Directory.Exists(path))
+            {
+                openFileDialog.InitialDirectory = path;
+            }
+            else
+            {
+                openFileDialog.InitialDirectory = @"C:\";
+            }
+            //hot steaming mess slutar här
+
+            openFileDialog.ShowDialog();
+            StreamReader streamReader;
+
+            try
+            {
+                streamReader = new StreamReader(openFileDialog.FileName);
+            }
+            catch
+            {
+                return null;
+            }
+            return streamReader;
+        }
+
+        static private void ReadPlayerData(StreamReader streamReader, Inventory tempInv)
+        {
+            Player.Location = streamReader.ReadLine();
+            int[] tempLevels = new int[3];
+            for (int i = 0; i < 3; i++)
+            {
+                tempLevels[i] = int.Parse(streamReader.ReadLine());
+            }
+            Player.SkillLevels = tempLevels;
+
+            tempInv.Money = int.Parse(streamReader.ReadLine());
+            int counter = int.Parse(streamReader.ReadLine());
+
+            for (int i = 0; i < counter; i++)
+            {
+                string tempData = streamReader.ReadLine();
+                string[] data2 = tempData.Split(';');
+                Item newItem = ItemCreator.CreateItem(int.Parse(data2[0]), int.Parse(data2[1]));
+                tempInv.AddItem(newItem);
+            }
+            Player.Inventory = tempInv;
         }
     }
 }

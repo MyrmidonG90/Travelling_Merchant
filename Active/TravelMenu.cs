@@ -31,13 +31,13 @@ namespace Active
             turnsLeft = 0;
             turnTimer = timerLength;
             timerLength = 1;
-            destination = "CarrotTown";
+            destination = "Carrot Town";
 
             turnDisplay = turnsLeft.ToString() + "/" + turnsToTravel.ToString();
 
-            pauseButton = new Button(830, 900, 260, 120, "paused", "Pause/Unpause", TextureManager.texWhite);
-            invButton = new Button(330, 900, 260, 120, "inv", "Inventory", TextureManager.texWhite);
-            mapButton = new Button(1330, 900, 260, 120, "map", "Map", TextureManager.texWhite);
+            pauseButton = new Button(830, 900, 260, 120, "paused", "Pause/Unpause", TextureManager.texButton);
+            invButton = new Button(330, 900, 260, 120, "inv", "Inventory", TextureManager.texButton);
+            mapButton = new Button(1330, 900, 260, 120, "map", "Map", TextureManager.texButton);
 
             test = false;
         }
@@ -84,7 +84,6 @@ namespace Active
                 {
                     paused = false;
                 }
-                
             }
 
             if (pauseButton.Click())

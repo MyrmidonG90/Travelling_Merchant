@@ -16,7 +16,7 @@ namespace Active
         static Button[] cityButtons = new Button[nrCities];
         static Button[] travelButtons = new Button[nrCities];
 
-        static public Button inventoryButton = new Button(70, 920, 260, 120, "inv", "Inventory", TextureManager.texBox);
+        static public Button inventoryButton = new Button(70, 920, 260, 120, "inv", "Inventory", TextureManager.texButton);
         static public Button returnButton = new Button(20, 20, 80, 80, TextureManager.texBackArrow);
       
         static List<string> itemList = new List<string>();
@@ -27,7 +27,7 @@ namespace Active
         static string cityInfo;
         static Vector2 cityCords;
 
-      static void ItemList()
+        static void ItemList()
         {
             StreamReader sr = new StreamReader("./Data/ItemList.txt");
 
@@ -42,7 +42,6 @@ namespace Active
         }
       
         static public string CheckNewTravel()
-
         {
             int counter = 0;
             foreach (Button button in travelButtons)
@@ -90,6 +89,14 @@ namespace Active
 
                     }
                 }
+            }          
+        }
+
+        static public void UpdateCities()
+        {
+            foreach (City tempCity in cities)
+            {
+                tempCity.Update();
             }
         }
 

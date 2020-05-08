@@ -22,7 +22,11 @@ namespace Active
         Inventory activeInv;
         Inventory activePlayerInv;
 
+        List<string> CityControlList;
+        Random random;
+
         bool options;
+        bool test;
 
         enum GameState
         {
@@ -59,28 +63,36 @@ namespace Active
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
+
             TextureManager.LoadContent(Content);
             ItemCreator.LoadItemData();
+
             Player.Init();
             MainMenuManager.Init();
             OptionsMenu.Init();
             CityManager.Initialize();
+            TravelMenu.Init();
+            WorldEventManager.Init();
+            WorldMapMenu.LoadCities();
+
+            ModifierManager.LoadCityAndCategoryLists();
+            ModifierManager.LoadItemModifiers();
+            Calendar.PrepareCalendar();
+
+            cityMenu = new CityMenu();
+            playerInventoryModule = new PlayerInventoryModule();
+
             previousGameState2 = GameState.Debug;
             previousGameState = GameState.Debug;
             gameState = GameState.MainMenu;
 
             options = false;
             activeInv = new Inventory(100);
+            random = new Random();
 
-            cityMenu = new CityMenu();
-            WorldMapMenu.LoadCities();
-            playerInventoryModule = new PlayerInventoryModule();
-            TravelMenu.Init();
-
-            ModifierManager.LoadCityAndCategoryLists();
-            ModifierManager.LoadItemModifiers();
-            Calendar.PrepareCalendar();
-            WorldEventManager.Init();
+            CityControlList = new List<string>();
+            CityControlList.Add("Carrot Town");
+            CityControlList.Add("Tower Town");
         }
 
         //========================================================================
@@ -91,136 +103,45 @@ namespace Active
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Back))
                 Exit();
 
-            WorldEventManager.Update();
+            if (WorldEventManager.Update(random))
+            {
+                test = true;
+            }
+            else
+            {
+                test = false;
+            }
 
             KMReader.Update();
             Calendar.Update();
 
             if (gameState == GameState.CityMenu)
             {
-                cityMenu.Update(gameTime);
-                if (cityMenu.CheckInvButton())
-                {
-                    ChangeGameState(GameState.InventoryMenu);
-                }
-                if (cityMenu.CheckTradeButton())
-                {
-                    ChangeGameState(GameState.TradeMenu);
-                    string tmp = "";
-                    foreach (City tempCity in WorldMapMenu.Cities)
-                    {
-                        if (tempCity.Name == Player.Location)
-                        {
-                            activeInv = tempCity.Inv;
-                            tmp = tempCity.Name;
-                            activePlayerInv = Player.Inventory;
-                        }
-                    }
-                    Trading.StartTrade(activePlayerInv, activeInv, tmp);
-                }
-                if (cityMenu.CheckMapButton())
-                {
-                    ChangeGameState(GameState.MapMenu);
-                }
+                UpdateCityMenu(gameTime);
             }
             else if (gameState == GameState.MapMenu)
             {
-                WorldMapMenu.Update(gameTime);
-
-                string temp = WorldMapMenu.CheckNewTravel();
-                if (temp != null && TravelMenu.TurnsLeft == 0)
-                {
-                    TravelMenu.StartTravel(temp);
-                    ChangeGameState(GameState.TravelMenu);
-                }
-
-                if (WorldMapMenu.inventoryButton.Click())
-                {
-                    ChangeGameState(GameState.InventoryMenu);
-                }
-
-                if (WorldMapMenu.returnButton.Click())
-                {
-                    RevertGameState();
-                }
+                UpdateMapMenu(gameTime);
             }
             else if (gameState == GameState.TradeMenu)
             {
-                if (Trading.Update(ref activePlayerInv, ref activeInv) == true)
-                {
-                    RevertGameState();
-                    foreach (City tempCity in WorldMapMenu.Cities)
-                    {
-                        if (tempCity.Name == Player.Location)
-                        {
-                            tempCity.Inv = activeInv;
-                            Player.Inventory = activePlayerInv;
-                            tempCity.Traded = true;
-                        }
-                    }
-                }
+                UpdateTradeMenu();
             }
             else if (gameState == GameState.InventoryMenu)
             {
-                playerInventoryModule.Update(gameTime);
-                if (playerInventoryModule.CheckExit())
-                {
-                    RevertGameState();
-                }
+                UpdateInventoryMenu(gameTime);
             }
             else if (gameState == GameState.TravelMenu)
             {
-                if (TravelMenu.Update(gameTime))
-                {
-                    Player.Location = TravelMenu.Destination;
-                    ChangeGameState(GameState.CityMenu);
-                }
-                if (TravelMenu.CheckInvbutton())
-                {
-                    ChangeGameState(GameState.InventoryMenu);
-                }
-                if (TravelMenu.CheckMapButton())
-                {
-                    ChangeGameState(GameState.MapMenu);
-                }
+                UpdateTravelMenu(gameTime);
             }
             else if (gameState == GameState.MainMenu)
             {
-                if (MainMenuManager.CheckNewGame())
-                {
-                    ChangeGameState(GameState.CityMenu);
-                }
-                if (MainMenuManager.CheckLoadGame())
-                {
-                    LoadSave();
-                }
-                if (MainMenuManager.CheckExitGame())
-                {
-                    Exit();
-                }
+                UpdateMainMenu();
             }
             else if (gameState == GameState.Debug)
             {
-                if (KMReader.prevKeyState.IsKeyUp(Keys.F1) && KMReader.keyState.IsKeyDown(Keys.F1))
-                {
-                    ChangeGameState(GameState.CityMenu);
-                }
-                if (KMReader.prevKeyState.IsKeyUp(Keys.F2) && KMReader.keyState.IsKeyDown(Keys.F2))
-                {
-                    ChangeGameState(GameState.MapMenu);
-                }
-                if (KMReader.prevKeyState.IsKeyUp(Keys.F3) && KMReader.keyState.IsKeyDown(Keys.F3))
-                {
-                    ChangeGameState(GameState.InventoryMenu);
-                }
-                if (KMReader.prevKeyState.IsKeyUp(Keys.F4) && KMReader.keyState.IsKeyDown(Keys.F4))
-                {
-                    ChangeGameState(GameState.TradeMenu);
-                }
-                if (KMReader.prevKeyState.IsKeyUp(Keys.F5) && KMReader.keyState.IsKeyDown(Keys.F5))
-                {
-                    ChangeGameState(GameState.TravelMenu);
-                }
+                UpdateDebugMenu();
             }
 
             if (KMReader.prevKeyState.IsKeyUp(Keys.F6) && KMReader.keyState.IsKeyDown(Keys.F6))
@@ -238,35 +159,14 @@ namespace Active
 
             if (options)
             {
-                if (OptionsMenu.CheckMainMenu())
-                {
-                    ChangeGameState(GameState.MainMenu);
-                    options = false;
-                }
-                else if (OptionsMenu.CheckLoadGame())
-                {
-                    LoadSave();
-                }
-                else if (OptionsMenu.CheckSaveGame())
-                {
-                    SaveGame();
-                }
-                else if (OptionsMenu.CheckFullscreen()) //funkar inte framtida jag ska försöka fixa /My
-                {
-                    graphics.IsFullScreen = !graphics.IsFullScreen;
-                    graphics.ApplyChanges();
-                }
-                if (OptionsMenu.Update())
-                {
-                    options = false;
-                }
+                UpdateOptionsMenu();
             }
-
             if (OptionsMenu.CheckMenuToggle())
             {
                 options = !options;
             }
 
+            WorldMapMenu.UpdateCities();
             Player.Update();
 
             base.Update(gameTime);
@@ -277,6 +177,11 @@ namespace Active
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             spriteBatch.Begin();
+
+            if (gameState != GameState.MainMenu && Player.Location == TravelMenu.Destination)
+            {
+                DrawBackground(spriteBatch);
+            }
 
             if (gameState == GameState.CityMenu)
             {
@@ -315,6 +220,11 @@ namespace Active
             spriteBatch.End();
 
             Window.Title = "Press F6 for debug menu          " + Player.SkillLevels[0].ToString() + Player.SkillLevels[1].ToString() + Player.SkillLevels[2].ToString() + "    " + OptionsMenu.selectedSkill;
+
+            if (test)
+            {
+                Window.Title = "WAAAAR";
+            }
 
             base.Draw(gameTime);
         }
@@ -381,6 +291,183 @@ namespace Active
             else
             {
                 CleanGameState(GameState.CityMenu);
+            }
+        }
+
+        private void UpdateCityMenu(GameTime gameTime)
+        {
+            cityMenu.Update(gameTime);
+            if (cityMenu.CheckInvButton())
+            {
+                ChangeGameState(GameState.InventoryMenu);
+            }
+            if (cityMenu.CheckTradeButton())
+            {
+                ChangeGameState(GameState.TradeMenu);
+                string tmp = "";
+                foreach (City tempCity in WorldMapMenu.Cities)
+                {
+                    if (tempCity.Name == Player.Location)
+                    {
+                        activeInv = tempCity.Inv;
+                        tmp = tempCity.Name;
+                        activePlayerInv = Player.Inventory;
+                    }
+                }
+                Trading.StartTrade(activePlayerInv, activeInv, tmp);
+            }
+            if (cityMenu.CheckMapButton())
+            {
+                ChangeGameState(GameState.MapMenu);
+            }
+        }
+
+        private void UpdateMapMenu(GameTime gameTime)
+        {
+            WorldMapMenu.Update(gameTime);
+
+            string temp = WorldMapMenu.CheckNewTravel();
+            if (temp != null && TravelMenu.TurnsLeft == 0)
+            {
+                TravelMenu.StartTravel(temp);
+                ChangeGameState(GameState.TravelMenu);
+            }
+
+            if (WorldMapMenu.inventoryButton.Click())
+            {
+                ChangeGameState(GameState.InventoryMenu);
+            }
+
+            if (WorldMapMenu.returnButton.Click())
+            {
+                RevertGameState();
+            }
+        }
+
+        private void UpdateTradeMenu()
+        {
+            if (Trading.Update(ref activePlayerInv, ref activeInv) == true)
+            {
+                RevertGameState();
+                foreach (City tempCity in WorldMapMenu.Cities)
+                {
+                    if (tempCity.Name == Player.Location)
+                    {
+                        tempCity.Inv = activeInv;
+                        Player.Inventory = activePlayerInv;
+                        tempCity.Traded = true;
+                    }
+                }
+            }
+        }
+
+        private void UpdateInventoryMenu(GameTime gameTime)
+        {
+            playerInventoryModule.Update(gameTime);
+            if (playerInventoryModule.CheckExit())
+            {
+                RevertGameState();
+            }
+        }
+
+        private void UpdateTravelMenu(GameTime gameTime)
+        {
+            if (TravelMenu.Update(gameTime))
+            {
+                Player.Location = TravelMenu.Destination;
+                ChangeGameState(GameState.CityMenu);
+            }
+            if (TravelMenu.CheckInvbutton())
+            {
+                ChangeGameState(GameState.InventoryMenu);
+            }
+            if (TravelMenu.CheckMapButton())
+            {
+                ChangeGameState(GameState.MapMenu);
+            }
+        }
+
+        private void UpdateMainMenu()
+        {
+            if (MainMenuManager.CheckNewGame())
+            {
+                ChangeGameState(GameState.CityMenu);
+            }
+            if (MainMenuManager.CheckLoadGame())
+            {
+                LoadSave();
+            }
+            if (MainMenuManager.CheckExitGame())
+            {
+                Exit();
+            }
+        }
+
+        private void UpdateDebugMenu()
+        {
+            if (KMReader.prevKeyState.IsKeyUp(Keys.F1) && KMReader.keyState.IsKeyDown(Keys.F1))
+            {
+                ChangeGameState(GameState.CityMenu);
+            }
+            if (KMReader.prevKeyState.IsKeyUp(Keys.F2) && KMReader.keyState.IsKeyDown(Keys.F2))
+            {
+                ChangeGameState(GameState.MapMenu);
+            }
+            if (KMReader.prevKeyState.IsKeyUp(Keys.F3) && KMReader.keyState.IsKeyDown(Keys.F3))
+            {
+                ChangeGameState(GameState.InventoryMenu);
+            }
+            if (KMReader.prevKeyState.IsKeyUp(Keys.F4) && KMReader.keyState.IsKeyDown(Keys.F4))
+            {
+                ChangeGameState(GameState.TradeMenu);
+            }
+            if (KMReader.prevKeyState.IsKeyUp(Keys.F5) && KMReader.keyState.IsKeyDown(Keys.F5))
+            {
+                ChangeGameState(GameState.TravelMenu);
+            }
+        }
+
+        private void UpdateOptionsMenu()
+        {
+            if (OptionsMenu.CheckMainMenu())
+            {
+                ChangeGameState(GameState.MainMenu);
+                options = false;
+            }
+            else if (OptionsMenu.CheckLoadGame())
+            {
+                LoadSave();
+            }
+            else if (OptionsMenu.CheckSaveGame())
+            {
+                SaveGame();
+            }
+            else if (OptionsMenu.CheckFullscreen()) //funkar inte framtida jag ska försöka fixa /My
+            {
+                graphics.IsFullScreen = !graphics.IsFullScreen;
+                graphics.ApplyChanges();
+            }
+            if (OptionsMenu.Update())
+            {
+                options = false;
+            }
+        }
+
+        private void DrawBackground(SpriteBatch spriteBatch)
+        {
+            bool drawn = false;
+            for (int i = 0; i < CityControlList.Count; i++)
+            {
+                if (Player.Location == CityControlList[i] && !drawn)
+                {
+                    spriteBatch.Draw(TextureManager.texCities[i], Vector2.Zero, Color.White);
+                    drawn = true;
+                }
+            }
+            if (!drawn)
+            {
+                spriteBatch.Draw(TextureManager.texDefaultTown, Vector2.Zero, Color.White);
+                drawn = true;
             }
         }
     }
