@@ -107,14 +107,14 @@ namespace Active
 
             if (showText)
             {
-                spriteBatch.DrawString(TextureManager.fontInventory, cityName, new Vector2(cityCords.X + 80, cityCords.Y), Color.White);
-                spriteBatch.DrawString(TextureManager.font, cityInfo, new Vector2(cityCords.X + 80, cityCords.Y + 40), Color.White);
+                spriteBatch.DrawString(TextureManager.fontInventory, cityName, new Vector2(cityCords.X + 50, cityCords.Y), Color.White);
+                spriteBatch.DrawString(TextureManager.font, cityInfo, new Vector2(cityCords.X + 55, cityCords.Y + 45), Color.White);
             
                 foreach (Button button in travelButtons)
                 {
                     if(button.Name == cityName)
                     {
-                        button.Draw(spriteBatch);
+                        button.Draw(spriteBatch, Color.Green);
                     }
                 }
             }          
@@ -132,14 +132,15 @@ namespace Active
                 string tempName = sr.ReadLine();
                 string tempInfo = sr.ReadLine();
                 string tempCord = sr.ReadLine();
+                int btnSize = 50;
 
                 string[] tempCord2 = tempCord.Split(',');
 
                 Vector2 cord = new Vector2(int.Parse(tempCord2[0]), int.Parse(tempCord2[1]));
 
                 cities[counter] = new City(tempName, tempInfo, cord);
-                cityButtons[counter] = new Button((int)cord.X, (int)cord.Y, 75, 75, tempName, TextureManager.texBox);
-                travelButtons[counter] = new Button((int)cord.X, (int)cord.Y + 80, 75, 30, tempName, TextureManager.texBox);
+                cityButtons[counter] = new Button((int)cord.X, (int)cord.Y, btnSize, btnSize, tempName, TextureManager.texBox);
+                travelButtons[counter] = new Button((int)cord.X, (int)cord.Y + btnSize + 5, btnSize, 20, tempName, TextureManager.texBox);
                 //CityManager.CreateCity(tempName,tempInfo,cord);//
                 counter++;
             }

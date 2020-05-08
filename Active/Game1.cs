@@ -284,7 +284,7 @@ namespace Active
             }
             else if (gameState == GameState.MapMenu)
             {
-                WorldMapMenu.Draw(spriteBatch);               
+                WorldMapMenu.Draw(spriteBatch);              
             }
             else if (gameState == GameState.TradeMenu)
             {

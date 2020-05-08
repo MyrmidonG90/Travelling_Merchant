@@ -73,6 +73,13 @@ namespace Active
             }
         }
 
+        public void Draw(SpriteBatch spriteBatch, Color color)
+        {
+            {
+                spriteBatch.Draw(tex, hitBox, color);
+            }
+        }
+
         public Rectangle HitBox
         {
             get
