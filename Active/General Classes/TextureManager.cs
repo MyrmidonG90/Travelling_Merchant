@@ -40,7 +40,7 @@ namespace Active
             fontHeader = content.Load<SpriteFont>("fontHeader");
 
             texBox = content.Load<Texture2D>("box");
-            texMap = content.Load<Texture2D>("merchant_map_with_nothing");
+            texMap = content.Load<Texture2D>("merchant_map");
             texWhite = content.Load<Texture2D>("White");
             texSelect = content.Load<Texture2D>("select");
             texTab = content.Load<Texture2D>("Tab");

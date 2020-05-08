@@ -40,19 +40,35 @@ namespace Active
             }
             sr.Close();
         }
-      
+
         static public string CheckNewTravel()
         {
+            string destination = "";
             int counter = 0;
             foreach (Button button in travelButtons)
             {
                 if (button.Click())
                 {
-                    return cities[counter].Name;
+                    destination = cities[counter].Name;
                 }
                 counter++;
             }
+
+            foreach (City tempCity in Cities)
+            {
+                if (tempCity.Name == Player.Location)
+                {
+                    foreach (string tempNeigh in tempCity.Neighbors)
+                    {
+                        if (destination == tempNeigh)
+                        {
+                            return destination;
+                        }
+                    }
+                }
+            }
             return null;
+
         }
 
         static public void Update(GameTime gameTime)
@@ -139,21 +155,29 @@ namespace Active
                 string tempName = sr.ReadLine();
                 string tempInfo = sr.ReadLine();
                 string tempCord = sr.ReadLine();
+                string tempNeigh = sr.ReadLine();
 
                 string[] tempCord2 = tempCord.Split(',');
+                string[] tempNeigh2 = tempNeigh.Split(',');
 
                 Vector2 cord = new Vector2(int.Parse(tempCord2[0]), int.Parse(tempCord2[1]));
+                List<string> neighData = new List<string>();
 
-                cities[counter] = new City(tempName, tempInfo, cord);
+                for (int i = 0; i < tempNeigh2.Length; i++)
+                {
+                    neighData.Add(tempNeigh2[i]);
+                }
+
+                cities[counter] = new City(tempName, tempInfo, cord, neighData);
                 cityButtons[counter] = new Button((int)cord.X, (int)cord.Y, 75, 75, tempName, TextureManager.texBox);
                 travelButtons[counter] = new Button((int)cord.X, (int)cord.Y + 80, 75, 30, tempName, TextureManager.texBox);
-                //CityManager.CreateCity(tempName,tempInfo,cord);//
+                //CityManager.CreateCity(tempName, tempInfo, cord, neighData);
                 counter++;
             }
             sr.Close();
 
             //CityManager.SaveCities();
-            CityManager.LoadCities();
+            //CityManager.LoadCities();
             /*CityManager.SaveCities();
             CityManager.LoadCities();*/
 

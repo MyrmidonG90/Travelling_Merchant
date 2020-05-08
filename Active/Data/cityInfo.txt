@@ -1,30 +1,40 @@
 Carrot Town
 Carrot Town is the great city of carrots.;Its agricultural roots can be traced ;thousands of years! There is no better ;place to buy fruits, vegetables ;and, of course, carrots.
 250,500
+Dryad's Grove,Mount Goblin,Steel Ville
 Steel Ville
 Lorem ipsum Lorem ipsum Lorem ipsum Lorem ;ipsum Lorem ipsum Lorem ipsum Lorem ipsum ;Lorem ipsum Lorem ipsum Lorem ipsum Lorem ;ipsum Lorem ipsum 
 690,670
+Carrot Town,Mount Goblin,The Tomb,Winghelm,Hymn Harbor,Sanctuary
 Tower Town
 Lorem ipsum Lorem ipsum Lorem ipsum Lorem ;ipsum Lorem ipsum Lorem ipsum Lorem ipsum ;Lorem ipsum Lorem ipsum Lorem ipsum Lorem ;ipsum Lorem ipsum Lorem ipsum Lorem ipsum
 1500,600
+Winghelm,Pyramaad,Sanctuary
 Hymn Harbor
 Lorem ipsum Lorem ipsum Lorem ipsum Lorem ;ipsum Lorem ipsum Lorem ipsum Lorem ipsum ;Lorem ipsum Lorem ipsum Lorem ipsum Lorem ;ipsum Lorem ipsum Lorem ipsum Lorem ipsum
 1125,350
+Winghelm,Steel Ville,Sanctuary
 Winghelm
 Lorem ipsum Lorem ipsum Lorem ipsum Lorem ;ipsum Lorem ipsum Lorem ipsum Lorem ipsum ;Lorem ipsum Lorem ipsum Lorem ipsum Lorem ;ipsum Lorem ipsum Lorem ipsum Lorem ipsum
 1400,450
+Pyramaad,Tower Town,Sanctuary,Hymn Harbor,Steel Ville
 Pyramaad
 In this desert city you can't buy ;any water. Fortunatly, you can't do ;that in any other city either. ;Here, however, one is able to find ;lots of magical items and artifacts.
 1600,200
+Tower Town,Winghelm
 Mount Goblin
 The greatest goblin city there is! ;Might also be the only goblin city ;there is. Placed on the mountain ;that is just a little bit taller ;than the less famous "Mount Human".
 100,700
+Carrot Town,Steel Ville,The Tomb
 Sanctuary
 This city was created by the cleric Henry the smitefull ;when he thought: "What would ;happen if every house in the ;city was a church?". Now we know.
 1230,900
+Tower Town,Winghelm,Hymn Harbor,Steel Ville
 Dryad's Grove
 16249 years ago the Elves and creatures ;of the forrest united to create ;this city of nature. Legends ;tell of a dragon that tried to ;burn down the city once but ;he got his ass whooped.
 80,280
+Carrot Town
 The Tomb
 The Tomb is a pretty cool place for ;everyone who loves ghouls, ;suffering and the everlasting void. ;Founded by Carl the Necromancer, ;the Tomb is the world hub of ;everything that concerns the dark arts.
 400,850
+Mount Goblin,Steel Ville

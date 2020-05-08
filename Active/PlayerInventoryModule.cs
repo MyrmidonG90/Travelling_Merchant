@@ -347,7 +347,7 @@ namespace Active
         {
             spriteBatch.Draw(TextureManager.texInvMenu, mainBox, Color.White);
 
-            spriteBatch.DrawString(TextureManager.fontButton, "Currency: " + Player.Inventory.Money.ToString(), new Vector2(380, 954), Color.Black);
+            spriteBatch.DrawString(TextureManager.fontButton, Player.Inventory.Money.ToString(), new Vector2(440, 958), Color.Black);
             //spriteBatch.Draw(TextureManager.texWhite, inventoryBox, Color.DarkGray);
 
 

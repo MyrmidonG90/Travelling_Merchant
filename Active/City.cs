@@ -21,10 +21,11 @@ namespace Active
         Inventory templateInv;
         int lastTraded;
         bool traded;
+        List<string> neighbors;
 
         float x, y;
 
-        public City(string name, string information, Vector2 coordinates)
+        public City(string name, string information, Vector2 coordinates, List<string> neighbors)
         {
             this.name = name;
             this.information = information;
@@ -33,6 +34,7 @@ namespace Active
             y = coordinates.Y;
             inv = new Inventory(100);
             templateInv = new Inventory(100);
+            this.neighbors = neighbors;
         }
 
         public void Update()
@@ -113,6 +115,11 @@ namespace Active
             {
                 traded = value;
             }
+        }
+
+        public List<string> Neighbors
+        {
+            get => neighbors;
         }
 
         public Inventory TemplateInv
