@@ -23,6 +23,7 @@ namespace Active
         Inventory activePlayerInv;
 
         List<string> CityControlList;
+        Random random;
 
         bool options;
         bool test;
@@ -85,6 +86,8 @@ namespace Active
             Calendar.PrepareCalendar();
             WorldEventManager.Init();
 
+            random = new Random();
+
             CityControlList = new List<string>();
             CityControlList.Add("Carrot Town");
             CityControlList.Add("Tower Town");
@@ -98,7 +101,7 @@ namespace Active
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Back))
                 Exit();
 
-            if (WorldEventManager.Update())
+            if (WorldEventManager.Update(random))
             {
                 test = true;
             }
