@@ -244,7 +244,7 @@ namespace Active
                             if (cityTarget == tempCity.Name)
                             {
                                 newWorldEvent.OldTemplateInv = new Inventory(tempCity.TemplateInv);
-                                Inventory newTemplateInv = new Inventory(100);
+                                Inventory newTemplateInv = new Inventory(tempCity.TemplateInv);
                                 for (int i = 0; i < newInv.AmountNegorPos.Count; i++)
                                 {
                                     Item fixedItem = newInv.Items[i];
@@ -262,16 +262,17 @@ namespace Active
 
                                     fixedItem.Amount = (int)(temp + 0.5f);
 
-                                    newTemplateInv = new Inventory(tempCity.TemplateInv);
-
-                                    if (newInv.AmountNegorPos[i])
+                                    if (fixedItem.Amount > 0)
                                     {
-                                        newTemplateInv.AddItem(fixedItem);
-                                    }
-                                    else
-                                    {
-                                        newTemplateInv.ReduceAmountOfItems(fixedItem);                                       
-                                    }                                   
+                                        if (newInv.AmountNegorPos[i])
+                                        {
+                                            newTemplateInv.AddItem(fixedItem);
+                                        }
+                                        else
+                                        {
+                                            newTemplateInv.ReduceAmountOfItems(fixedItem);
+                                        }
+                                    }                                                                     
                                 }
                                 int ih = 0;
                                 tempCity.TemplateInv = new Inventory(newTemplateInv);

@@ -83,7 +83,8 @@ namespace Active
                 data[0] = streamReader.ReadLine();
                 Calendar.TotalDays = int.Parse(streamReader.ReadLine());
 
-                ReadPlayerData(streamReader, tempInv);                
+                ReadPlayerData(streamReader, tempInv);
+                TravelMenu.Destination = Player.Location;
 
                 int check = int.Parse(streamReader.ReadLine());
                 if (check == 1)

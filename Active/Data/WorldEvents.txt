@@ -7,10 +7,17 @@ true;true;false;false
 ====
 Crop Failure
 Lotem Ipsum2
-false;true;false;false
-99;0;99;99
+true;true;false;false
+1;0;99;99
 30
 10
+====
+Good Harvest
+Lotus Ipsum
+true;true;false;false
+2;2;99;99
+40
+20
 --------
 0
 4
@@ -22,10 +29,27 @@ false;true;false;false
 1
 5
 1,5
+====
+1
+1
+1
+2
+====
+2
+1
+1
+-0,2
 --------
 0
-1
-0;800;-
+8
+0;80;-
+1;80;-
+20;40;-
+21;40;-
+23;60;-
+10;50;-
+11;50;-
+24;90;-
 ====
 1
 19
@@ -48,3 +72,11 @@ false;true;false;false
 17;50;-
 18;50;-
 19;50;-
+====
+2
+5
+0;100;+
+1;100;+
+20;50;+
+21;50;+
+23;40;+
