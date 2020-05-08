@@ -28,11 +28,6 @@ namespace Active
 
         //om du inte fattar vafan som händer här inne så ändrades det senast av My 6 maj
                 
-
-            
-        
-
-
         static public double GetModifier(string city, int category)
 
         {
@@ -137,8 +132,5 @@ namespace Active
             }
             sr2.Close();
         }
-
-        
-
     }
 }

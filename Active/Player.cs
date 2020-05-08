@@ -32,7 +32,6 @@ namespace Active
             skillLevels[2] = 3;
         }
 
-
         static public void Update()
         {
             //debug funktioner

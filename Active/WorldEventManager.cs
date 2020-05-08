@@ -110,41 +110,7 @@ namespace Active
                 }
             }
 
-            if (rnd.Next(1, 101) <= chance && counter != oldCounter)
-            {
-                int id = rnd.Next(0, eventDesList.Count);
-
-                int number = rnd.Next(1, WorldMapMenu.Cities.Length);
-                int[] protoTargets = new int[number];
-
-                for (int i = 0; i < number; i++)
-                {
-                    protoTargets[i] = rnd.Next(0, WorldMapMenu.Cities.Length);
-                }
-
-                for (int i = 1; i < number; i++)
-                {
-                    if (protoTargets[i - 1] == protoTargets[i] && protoTargets[i] != WorldMapMenu.Cities.Length - 1)
-                    {
-                        protoTargets[i]++;
-                    }
-                    else if(protoTargets[i - 1] == protoTargets[i])
-                    {
-                        protoTargets[i]--;
-                    }
-                }
-
-                List<string> targets = new List<string>();
-                for (int i = 0; i < protoTargets.Length; i++)
-                {
-                    targets.Add(WorldMapMenu.Cities[protoTargets[i]].Name);
-                }
-
-                targets = targets.Distinct().ToList();
-
-
-                EventFire(id, targets.ToArray(), rnd);
-            }
+            CheckNewWorldEvent(rnd);
 
             oldCounter = counter;
 
@@ -361,6 +327,45 @@ namespace Active
                         }
                     }
                 }
+            }
+        }
+
+        static private void CheckNewWorldEvent(Random rnd)
+        {
+            if (rnd.Next(1, 101) <= chance && counter != oldCounter)
+            {
+                int id = rnd.Next(0, eventDesList.Count);
+
+                int number = rnd.Next(1, WorldMapMenu.Cities.Length);
+                int[] protoTargets = new int[number];
+
+                for (int i = 0; i < number; i++)
+                {
+                    protoTargets[i] = rnd.Next(0, WorldMapMenu.Cities.Length);
+                }
+
+                for (int i = 1; i < number; i++)
+                {
+                    if (protoTargets[i - 1] == protoTargets[i] && protoTargets[i] != WorldMapMenu.Cities.Length - 1)
+                    {
+                        protoTargets[i]++;
+                    }
+                    else if (protoTargets[i - 1] == protoTargets[i])
+                    {
+                        protoTargets[i]--;
+                    }
+                }
+
+                List<string> targets = new List<string>();
+                for (int i = 0; i < protoTargets.Length; i++)
+                {
+                    targets.Add(WorldMapMenu.Cities[protoTargets[i]].Name);
+                }
+
+                targets = targets.Distinct().ToList();
+
+
+                EventFire(id, targets.ToArray(), rnd);
             }
         }
     }
