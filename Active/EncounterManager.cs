@@ -27,10 +27,11 @@ namespace Active
         internal static List<TravelEvent> Events { get => events;}
         public static bool EventOnGoing { get => eventOnGoing;}
 
-        static public void Initialize()
+        static public void Initialize() // Only needed to called once
         {
             LoadEncountInfo();
             LoadEncounters();
+            
             rand = new Random();
             if (CheckPercentageValue() == false) // Bugg check
             {
@@ -38,21 +39,29 @@ namespace Active
             }
         }
 
+        static public void NewTrip()
+        {
+            foreach (var item in encounters)
+            {
+                item.OccuredDuringTravel = false;
+            }
+        } // Called when a new trip is made
+
         static public bool Encountered()
         {
             if (eventOnGoing == false)
             {
-                if (rand.Next(0, 9) == 0) // If Encountered
+                if (rand.Next(0, 0) == 0) // If Encountered
                 {
                     eventOnGoing = true;
-                    InitiateEncounter(FindEID(RandomiseEncounter()));
+                    InitiateEncounter(FindID(RandomiseEncounter()));
                 }
             }
 
             return eventOnGoing;
-        }
+        } 
 
-        static int FindEID(int id) // Hittar Encounter ID
+        static int FindID(int id) // Hittar unika id för travel events
         {
             found = false;
             counter = 0;
@@ -71,7 +80,7 @@ namespace Active
             return events[counter].EID;
         }
 
-        static int FindEncounterID(int eID)
+        static int FindEncounterID(int eID) // Hittar Encounter ID
         {
             found = false;
             counter = 0;
@@ -93,8 +102,10 @@ namespace Active
         static void InitiateEncounter(int eID)
         {
             currentEncounter = encounters[FindEncounterID(eID)];
+            currentEncounter.OccuredDuringTravel = true;
             boolUpdate = false;
-        }
+
+        }        
 
         static int RandomiseEncounter()
         {
@@ -110,6 +121,12 @@ namespace Active
                 {
                     ++counter;
                 }
+            }
+            
+            // Ser till att under denna färden inte kommer upprepa samma encounter
+            if (encounters[FindEncounterID(FindID(counter))].OccuredDuringTravel) // Farlig kod!!!
+            {
+                counter = RandomiseEncounter();
             }
 
             return counter;
@@ -150,6 +167,7 @@ namespace Active
             }
 
         }
+
         static void LoadEncounters()
         {
             encounters = new List<Encounter>();
@@ -174,14 +192,17 @@ namespace Active
             encounters.Add(new Encounter(encounters.Count,tmpString));
             SaveEncounters();
         }
+
         static public void SaveEncounters() // Programmer tool
         {
 
         }
+
         static public void CreateTravelEvent() // Programmer tool
         {
             SaveTravelEvents();
         }
+
         static public void SaveTravelEvents() // Programmer tool
         {
 
@@ -217,6 +238,7 @@ namespace Active
             return boolUpdate;
 
         }
+
         static void Scenarios(int eID, int answer)
         {
             switch (eID)
