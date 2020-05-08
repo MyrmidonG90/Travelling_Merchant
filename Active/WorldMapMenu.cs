@@ -27,7 +27,7 @@ namespace Active
         static string cityInfo;
         static Vector2 cityCords;
 
-      static void ItemList()
+        static void ItemList()
         {
             StreamReader sr = new StreamReader("./Data/ItemList.txt");
 
@@ -42,7 +42,6 @@ namespace Active
         }
       
         static public string CheckNewTravel()
-
         {
             int counter = 0;
             foreach (Button button in travelButtons)

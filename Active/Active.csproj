@@ -56,7 +56,7 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Button.cs" />
+    <Compile Include="General Classes\Button.cs" />
     <Compile Include="Calendar.cs" />
     <Compile Include="City.cs" />
     <Compile Include="CityMenu.cs" />

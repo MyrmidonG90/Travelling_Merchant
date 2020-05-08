@@ -140,65 +140,20 @@ namespace Active
         static public bool Update()
         {
             block = false;
-            if (btnOptions.Click() && menuToggle == MenuToggle.Standard && !block)
+
+            CheckStandardMenu();
+
+            CheckDebugMenu();
+
+            if (menuToggle == MenuToggle.Debug || menuToggle == MenuToggle.Options)
             {
-                menuToggle = MenuToggle.Options;
-                block = true;
-            }
-            if (btnOptionsReturn.Click() && menuToggle != MenuToggle.Standard && !block)
-            {
-                menuToggle = MenuToggle.Standard;
-                block = true;
-            }
-            if (btnDebug.Click() && menuToggle == MenuToggle.Standard && !block)
-            {
-                menuToggle = MenuToggle.Debug;
-                block = true;
-            }
-            if (btnSkillCycle.Click() && menuToggle == MenuToggle.Debug && !block)
-            {
-                selectedSkill++;
-                if (selectedSkill == 3)
+                if (btnOptionsReturn.Click() && !block)
                 {
-                    selectedSkill = 0;
+                    menuToggle = MenuToggle.Standard;
+                    block = true;
                 }
             }
-            if (btnSkillIncrease.Click() && menuToggle == MenuToggle.Debug && !block)
-            {
-                if (selectedSkill == 0)
-                {
-                    Player.SetSkillLevel("Wisdom", 0);
-                }
-                else if (selectedSkill == 1)
-                {
-                    Player.SetSkillLevel("Intimidation", 0);
-                }
-                else if (selectedSkill == 2)
-                {
-                    Player.SetSkillLevel("Persuasion", 0);
-                }
-            }
-            if (btnSkillDecrease.Click() && menuToggle == MenuToggle.Debug && !block)
-            {
-                if (selectedSkill == 0)
-                {
-                    Player.SetSkillLevel("Wisdom", -1f);
-                }
-                else if (selectedSkill == 1)
-                {
-                    Player.SetSkillLevel("Intimidation", -1f);
-                }
-                else if (selectedSkill == 2)
-                {
-                    Player.SetSkillLevel("Persuasion", -1f);
-                }
-            }
-            if (btnWorldEventTest.Click() && menuToggle == MenuToggle.Debug && !block)
-            {
-                string[] test = new string[1];
-                test[0] = "Carrot Town";
-                WorldEventManager.EventFire(1, test, new Random());
-            }
+            
             if (btnClose.Click())
             {
                 menuToggle = MenuToggle.Standard;
@@ -239,6 +194,75 @@ namespace Active
             }
 
             btnMenu.Draw(spriteBatch);
+        }
+
+        static private void CheckStandardMenu()
+        {
+            if (menuToggle == MenuToggle.Standard)
+            {
+                if (btnOptions.Click() && !block)
+                {
+                    menuToggle = MenuToggle.Options;
+                    block = true;
+                }
+
+                if (btnDebug.Click() && !block)
+                {
+                    menuToggle = MenuToggle.Debug;
+                    block = true;
+                }
+            }
+        }
+
+        static private void CheckDebugMenu()
+        {
+            if (menuToggle == MenuToggle.Debug)
+            {
+                if (btnSkillCycle.Click() && !block)
+                {
+                    selectedSkill++;
+                    if (selectedSkill == 3)
+                    {
+                        selectedSkill = 0;
+                    }
+                }
+                if (btnSkillIncrease.Click() && !block)
+                {
+                    if (selectedSkill == 0)
+                    {
+                        Player.SetSkillLevel("Wisdom", 0);
+                    }
+                    else if (selectedSkill == 1)
+                    {
+                        Player.SetSkillLevel("Intimidation", 0);
+                    }
+                    else if (selectedSkill == 2)
+                    {
+                        Player.SetSkillLevel("Persuasion", 0);
+                    }
+                }
+                if (btnSkillDecrease.Click() && !block)
+                {
+                    if (selectedSkill == 0)
+                    {
+                        Player.SetSkillLevel("Wisdom", -1f);
+                    }
+                    else if (selectedSkill == 1)
+                    {
+                        Player.SetSkillLevel("Intimidation", -1f);
+                    }
+                    else if (selectedSkill == 2)
+                    {
+                        Player.SetSkillLevel("Persuasion", -1f);
+                    }
+                }
+                if (btnWorldEventTest.Click() && !block)
+                {
+                    string[] test = new string[1];
+                    test[0] = "Carrot Town";
+                    WorldEventManager.EventFire(1, test, new Random());
+                }
+            }
         }
     }
 }
