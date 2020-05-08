@@ -8,7 +8,7 @@ Tower Town
 Lorem ipsum Lorem ipsum Lorem ipsum Lorem ;ipsum Lorem ipsum Lorem ipsum Lorem ipsum ;Lorem ipsum Lorem ipsum Lorem ipsum Lorem ;ipsum Lorem ipsum Lorem ipsum Lorem ipsum
 1500,600
 Hymn Harbor
-Lorem ipsum Lorem ipsum Lorem ipsum Lorem ;ipsum Lorem ipsum Lorem ipsum Lorem ipsum ;Lorem ipsum Lorem ipsum Lorem ipsum Lorem ;ipsum Lorem ipsum Lorem ipsum Lorem ipsum
+Hymn Harbor has ships like you've never seen. ;Beeing at the center of the map with ;trade ships delivering goods all day, ;it's only natural that this city has a ;diverse collection of wares.
 1125,350
 Winghelm
 Lorem ipsum Lorem ipsum Lorem ipsum Lorem ;ipsum Lorem ipsum Lorem ipsum Lorem ipsum ;Lorem ipsum Lorem ipsum Lorem ipsum Lorem ;ipsum Lorem ipsum Lorem ipsum Lorem ipsum
