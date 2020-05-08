@@ -44,6 +44,7 @@ namespace Active
             stackLimit = 50;
             invLimit = 25;
         }
+
         public bool AddItem(Item newItem)
         {
             return AddItem(newItem.ID,newItem.Amount);
@@ -116,17 +117,66 @@ namespace Active
         {
             ReduceAmountOfItems(reduceItem.ID,reduceItem.Amount);
         }
+
         public void ReduceAmountOfItems(int itemID, int amount)
         {
             try
             {
-                itemList[FindIndexOf(itemID)].Amount -= amount; // Reducerar antalet man har sålt.
-                if (itemList[FindIndexOf(itemID)].Amount <= 0) // Har ej tillgång till item:et längre
+                int amountLeft = itemList[FindIndexOf(itemID)].Amount - amount;
+                if (amountLeft > 0) // Tar bort antalet varor från stacken
+                {
+                    itemList[FindIndexOf(itemID)].Amount -= amount;
+
+                }
+                else if (amountLeft == 0) // Om det tar bort exakt lika mycket som finns av den stacken
                 {
                     itemList.RemoveAt(FindIndexOf(itemID));
                 }
+                else if (amountLeft < 0)
+                {
+                    amountLeft *= -1;
+                    ReduceAmountOfItems(itemID,amountLeft);
+                }
+
+                /*
+                int amountLeft = itemList[FindIndexOf(itemID)].Amount - amount;
+                //itemList[FindIndexOf(itemID)].Amount -= amount; // Reducerar antalet man har sålt.
+                if (amountLeft > 0) // Tar bort antalet varor från stacken
+                {
+                    itemList[FindIndexOf(itemID)].Amount -= amount;
+
+                }
+                else if (amountLeft == 0) // Om det tar bort exakt lika mycket som finns av den stacken
+                {
+                    itemList.RemoveAt(FindIndexOf(itemID));
+                }
+
+                else if (amountLeft < 0) // 
+                {
+
+                    int tmp;
+                    amountLeft *= -1;
+                    itemList.RemoveAt(FindIndexOf(itemID));
+
+                    while (amountLeft != 0)
+                    {
+                        tmp = itemList[FindIndexOf(itemID)].Amount -= amountLeft;
+                        if (tmp > 0)
+                        {
+                            itemList[FindIndexOf(itemID)].Amount -= amount;
+                        }
+                        else if (tmp == 0)
+                        {
+                            itemList.RemoveAt(FindIndexOf(itemID));
+                        }
+                        else if (tmp < 0)
+                        {
+
+                        }
+                    }
+                }*/
             }
-            catch { }         
+            catch { }
         }
 
         int FindIndexOf(int itemID)
