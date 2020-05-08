@@ -51,7 +51,7 @@ namespace Active
         {
             if (eventOnGoing == false)
             {
-                if (rand.Next(0, 0) == 0) // If Encountered
+                if (rand.Next(0, 9) == 0) // If Encountered
                 {
                     eventOnGoing = true;
                     InitiateEncounter(FindID(RandomiseEncounter()));
