@@ -50,6 +50,7 @@ namespace Active
         public void InvReset()
         {
             inv = new Inventory(templateInv);
+            int i = 0;
         }
 
         public void InvInit()

@@ -197,7 +197,7 @@ namespace Active
             {
                 string[] test = new string[1];
                 test[0] = "Carrot Town";
-                WorldEventManager.EventFire(0, test);
+                WorldEventManager.EventFire(1, test, new Random());
             }
             if (btnClose.Click())
             {
