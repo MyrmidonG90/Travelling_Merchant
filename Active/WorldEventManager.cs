@@ -14,6 +14,7 @@ namespace Active
         static List<bool[]> effectIDList;
         static List<int[]> effectValList;
         static List<int> durationList;
+        static List<int> durationModList;
         static List<ItemModifierTemplate> itemModifierList;
         static List<InventoryTemplate> inventoryList;
         static List<WorldEvent> activeEvents;
@@ -21,7 +22,7 @@ namespace Active
         static int counter=0;
         static int oldCounter=0;
 
-        static float chance = 5f;
+        static float chance = 3f;
 
         static public void Init()
         {
@@ -30,6 +31,7 @@ namespace Active
             effectIDList = new List<bool[]>();
             effectValList = new List<int[]>();
             durationList = new List<int>();
+            durationModList = new List<int>();
             itemModifierList = new List<ItemModifierTemplate>();
             inventoryList = new List<InventoryTemplate>();
             activeEvents = new List<WorldEvent>();
@@ -59,9 +61,9 @@ namespace Active
             }
         }
 
-        static public void EventFire(int id, string[] target)
+        static public void EventFire(int id, string[] target, Random rnd)
         {
-            WorldEvent newWorldEvent = GenerateEvent(id, target);
+            WorldEvent newWorldEvent = GenerateEvent(id, target, rnd);
 
             if (newWorldEvent.EffectID[0])
             {
@@ -75,10 +77,19 @@ namespace Active
             activeEvents.Add(newWorldEvent);
         }
 
-        static private WorldEvent GenerateEvent(int id, string[] target)
+        static private WorldEvent GenerateEvent(int id, string[] target, Random rnd)
         {
             WorldEvent newWorldEvent;
             newWorldEvent = new WorldEvent(eventNameList[id], eventDesList[id], id, target, effectIDList[id], effectValList[id], durationList[id]);
+            int mod = rnd.Next(0, durationModList[id] + 1);
+            if (rnd.Next(0, 2) == 1)
+            {
+                newWorldEvent.DaysLeft += mod;
+            }
+            else
+            {
+                newWorldEvent.DaysLeft -= mod;
+            }
             return newWorldEvent;
         }
 
@@ -99,11 +110,11 @@ namespace Active
                 }
             }
 
-            if (rnd.Next(1, 101) > chance && counter != oldCounter)
+            if (rnd.Next(1, 101) <= chance && counter != oldCounter)
             {
                 int id = rnd.Next(0, eventDesList.Count);
 
-                int number = rnd.Next(0, WorldMapMenu.Cities.Length - 2);
+                int number = rnd.Next(1, WorldMapMenu.Cities.Length);
                 int[] protoTargets = new int[number];
 
                 for (int i = 0; i < number; i++)
@@ -113,7 +124,7 @@ namespace Active
 
                 for (int i = 1; i < number; i++)
                 {
-                    if (protoTargets[i - 1] == protoTargets[i] && protoTargets[i] != WorldMapMenu.Cities.Length)
+                    if (protoTargets[i - 1] == protoTargets[i] && protoTargets[i] != WorldMapMenu.Cities.Length - 1)
                     {
                         protoTargets[i]++;
                     }
@@ -132,7 +143,7 @@ namespace Active
                 targets = targets.Distinct().ToList();
 
 
-                EventFire(id, targets.ToArray());
+                EventFire(id, targets.ToArray(), rnd);
             }
 
             oldCounter = counter;
@@ -189,6 +200,7 @@ namespace Active
             }
             effectValList.Add(data2);
             durationList.Add(int.Parse(sr.ReadLine()));
+            durationModList.Add(int.Parse(sr.ReadLine()));
         }
 
         static private void LoadItemMod(StreamReader sr)
@@ -213,10 +225,12 @@ namespace Active
             List<Item> items = new List<Item>();
             for (int i = 0; i < counter; i++)
             {
-                int itemID = int.Parse(sr.ReadLine());
-                int amount = int.Parse(sr.ReadLine());
+                string protoData = sr.ReadLine();
+                string[] data = protoData.Split(';');
+                int itemID = int.Parse(data[0]);
+                int amount = int.Parse(data[1]);
                 items.Add(ItemCreator.CreateItem(itemID, amount));
-                if (sr.ReadLine() == "-")
+                if (data[2] == "-")
                 {
                     amountNegOrPos.Add(false);
                 }
@@ -264,19 +278,39 @@ namespace Active
                             if (cityTarget == tempCity.Name)
                             {
                                 newWorldEvent.OldTemplateInv = new Inventory(tempCity.TemplateInv);
+                                Inventory newTemplateInv = new Inventory(100);
                                 for (int i = 0; i < newInv.AmountNegorPos.Count; i++)
                                 {
+                                    Item fixedItem = newInv.Items[i];
+                                    int counter = 0;
+
+                                    for (int j = 0; j < tempCity.TemplateInv.ItemList.Count; j++)
+                                    {
+                                        if (fixedItem.ID == tempCity.TemplateInv.ItemList[j].ID)
+                                        {
+                                            counter += tempCity.TemplateInv.ItemList[j].Amount;
+                                        }
+                                    }
+
+                                    float temp = (fixedItem.Amount / 100f) * counter;
+
+                                    fixedItem.Amount = (int)(temp + 0.5f);
+
+                                    newTemplateInv = new Inventory(tempCity.TemplateInv);
+
                                     if (newInv.AmountNegorPos[i])
                                     {
-                                        tempCity.TemplateInv.AddItem(newInv.Items[i]);
+                                        newTemplateInv.AddItem(fixedItem);
                                     }
                                     else
                                     {
-                                        tempCity.TemplateInv.ReduceAmountOfItems(newInv.Items[i]);
-                                        tempCity.Traded = true;
-                                        tempCity.CheckDate();
-                                    }
+                                        newTemplateInv.ReduceAmountOfItems(fixedItem);                                       
+                                    }                                   
                                 }
+                                int ih = 0;
+                                tempCity.TemplateInv = new Inventory(newTemplateInv);
+                                tempCity.Traded = true;
+                                tempCity.CheckDate();
                             }
                         }
                     }
