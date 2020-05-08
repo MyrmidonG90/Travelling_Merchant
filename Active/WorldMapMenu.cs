@@ -142,7 +142,7 @@ namespace Active
                 cities[counter] = new City(tempName, tempInfo, cord);
 
                 cityButtons[counter] = new Button((int)cord.X, (int)cord.Y, btnSize, btnSize, tempName, TextureManager.texBox);
-                travelButtons[counter] = new Button((int)cord.X, (int)cord.Y + btnSize + 5, btnSize, 20, tempName, TextureManager.texBox);
+                travelButtons[counter] = new Button((int)cord.X, (int)cord.Y + btnSize + 6, btnSize, 20, tempName, TextureManager.texBox);
 
                 //CityManager.CreateCity(tempName,tempInfo,cord);//
                 counter++;
