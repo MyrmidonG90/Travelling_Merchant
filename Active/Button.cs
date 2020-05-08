@@ -75,9 +75,15 @@ namespace Active
 
         public void Draw(SpriteBatch spriteBatch, Color color)
         {
+<<<<<<< Updated upstream:Active/Button.cs
             {
                 spriteBatch.Draw(tex, hitBox, color);
             }
+=======
+            
+                spriteBatch.Draw(tex, hitBox, color);
+            
+>>>>>>> Stashed changes:Active/General Classes/Button.cs
         }
 
         public Rectangle HitBox

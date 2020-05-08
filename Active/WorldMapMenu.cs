@@ -107,7 +107,11 @@ namespace Active
 
             if (showText)
             {
+<<<<<<< Updated upstream
                 spriteBatch.DrawString(TextureManager.fontInventory, cityName, new Vector2(cityCords.X + 50, cityCords.Y), Color.White);
+=======
+                spriteBatch.DrawString(TextureManager.fontInventory, cityName, new Vector2(cityCords.X + 55, cityCords.Y), Color.White);
+>>>>>>> Stashed changes
                 spriteBatch.DrawString(TextureManager.font, cityInfo, new Vector2(cityCords.X + 55, cityCords.Y + 45), Color.White);
             
                 foreach (Button button in travelButtons)
@@ -139,8 +143,13 @@ namespace Active
                 Vector2 cord = new Vector2(int.Parse(tempCord2[0]), int.Parse(tempCord2[1]));
 
                 cities[counter] = new City(tempName, tempInfo, cord);
+<<<<<<< Updated upstream
                 cityButtons[counter] = new Button((int)cord.X, (int)cord.Y, btnSize, btnSize, tempName, TextureManager.texBox);
                 travelButtons[counter] = new Button((int)cord.X, (int)cord.Y + btnSize + 5, btnSize, 20, tempName, TextureManager.texBox);
+=======
+                cityButtons[counter] = new Button((int)cord.X, (int)cord.Y, 50, 50, tempName, TextureManager.texBox);
+                travelButtons[counter] = new Button((int)cord.X, (int)cord.Y + 55, 50, 20, tempName, TextureManager.texBox);
+>>>>>>> Stashed changes
                 //CityManager.CreateCity(tempName,tempInfo,cord);//
                 counter++;
             }
