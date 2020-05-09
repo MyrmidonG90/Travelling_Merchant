@@ -51,7 +51,7 @@ namespace Active
         {
             if (eventOnGoing == false)
             {
-                if (rand.Next(0, 1) == 0) // If Encountered //Change this one to increase/decrease encounters!!!
+                if (rand.Next(0, 9) == 0) // If Encountered //Change this one to increase/decrease encounters!!!
                 {
                     eventOnGoing = true;
                     InitiateEncounter(FindID(RandomiseEncounter()));
@@ -99,9 +99,27 @@ namespace Active
             return travelEvents[counter].EID;
         }
 
-        static void InitiateEncounter(int eID)
+        static int FindIndex(int id)
         {
-            currentEncounter = encounters[FindEncounterID(eID)];
+            found = false;
+            counter = 0;
+            while (found == false && travelEvents.Count > counter)
+            {
+                if (travelEvents[counter].Id == id)
+                {
+                    found = true;
+                }
+                else
+                {
+                    ++counter;
+                }
+            }
+            return counter;
+        }
+        static void InitiateEncounter(int id)
+        {
+            currentEncounter = encounters[FindEncounterID(id)];
+            currentTravelEvent = travelEvents[FindIndex(id)];
             currentEncounter.OccuredDuringTravel = true;
             boolUpdate = false;
 
@@ -264,8 +282,9 @@ namespace Active
 
         static public void Draw(SpriteBatch sb) // Bör endast hända i TravelMenu
         {
+            currentTravelEvent.Draw(sb);
             currentEncounter.Draw(sb);
-           // currentTravelEvent.Draw(sb);
+            
         }
         
     }

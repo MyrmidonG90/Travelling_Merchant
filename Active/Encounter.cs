@@ -70,8 +70,11 @@ namespace Active
         public void Draw(SpriteBatch sb)
         {            
             for (int i = 0; i < btnOptions.Count; i++)
-            {
-                sb.Draw(TextureManager.texBox, btnOptions[i].HitBox,Color.Gray);
+            {                
+                foreach (var item in btnOptions)
+                {
+                    item.Draw(sb);
+                }
             }            
         }
     }
