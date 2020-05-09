@@ -10,7 +10,6 @@ namespace Active
     {
         int money, stackLimit, invLimit;
         List<Item> itemList;
-        
         public Inventory(int m, List<Item> iL)
         {
             money = m;
@@ -29,7 +28,6 @@ namespace Active
         public Inventory(Inventory inv)
         {
             money = inv.Money;
-            
             itemList = new List<Item>();
             foreach (Item item in inv.ItemList)
             {               
@@ -47,7 +45,7 @@ namespace Active
 
         public bool AddItem(Item newItem)
         {
-            return AddItem(newItem.ID,newItem.Amount);
+            return AddItem(newItem.ID, newItem.Amount);
         }
 
         public bool AddItem(int itemID, int amount)
@@ -115,7 +113,7 @@ namespace Active
 
         public void ReduceAmountOfItems(Item reduceItem)
         {
-            ReduceAmountOfItems(reduceItem.ID,reduceItem.Amount);
+            ReduceAmountOfItems(reduceItem.ID, reduceItem.Amount);
         }
 
         public void ReduceAmountOfItems(int itemID, int amount)
@@ -135,7 +133,7 @@ namespace Active
                 else if (amountLeft < 0)
                 {
                     amountLeft *= -1;
-                    ReduceAmountOfItems(itemID,amountLeft);
+                    ReduceAmountOfItems(itemID, amountLeft);
                 }
 
                 /*
@@ -144,13 +142,11 @@ namespace Active
                 if (amountLeft > 0) // Tar bort antalet varor från stacken
                 {
                     itemList[FindIndexOf(itemID)].Amount -= amount;
-
                 }
                 else if (amountLeft == 0) // Om det tar bort exakt lika mycket som finns av den stacken
                 {
                     itemList.RemoveAt(FindIndexOf(itemID));
                 }
-
                 else if (amountLeft < 0) // 
                 {
 

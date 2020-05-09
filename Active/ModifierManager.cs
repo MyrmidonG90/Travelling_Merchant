@@ -112,6 +112,7 @@ namespace Active
                 string tempName = sr.ReadLine();
                 string skip1 = sr.ReadLine();
                 string skip2 = sr.ReadLine();
+                sr.ReadLine();
 
                 cities.Add(tempName);
 
