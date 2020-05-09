@@ -44,6 +44,7 @@ namespace Active
 
         static public void StartTravel(string newDestination)
         {
+<<<<<<< HEAD
             destination = newDestination;
             EncounterManager.NewTrip();
             paused = false;
@@ -51,6 +52,27 @@ namespace Active
             turnsToTravel = 5;
             turnsLeft = turnsToTravel;
             turnTimer = timerLength;
+=======
+            foreach (City tempCity in WorldMapMenu.Cities)
+            {
+                if (tempCity.Name == Player.Location)
+                {
+                    foreach (string tempNeigh in tempCity.Neighbors)
+                    {
+                        if (newDestination == tempNeigh)
+                        {
+                            destination = newDestination;
+                            paused = false;
+
+                            turnsToTravel = 5;
+                            turnsLeft = turnsToTravel;
+                            turnTimer = timerLength;
+                        }
+                    }
+                }
+            }
+            EncounterManager.Initialize();
+>>>>>>> master
         }
 
         static public bool CheckInvbutton()
