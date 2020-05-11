@@ -123,13 +123,13 @@ namespace Active
                 // Checkar om man har klickat på inventory:n
                 else
                 {
-                    if (CheckSlotClick(slotsLeft, Participant.Left) == false)
+                    if (CheckSlotClick(slotsLeft, Participant.Left) == false) // Checkar om man har klickat på den vänstra inventorium
                     {
-                        if (CheckSlotClick(slotsRight, Participant.Right) == false)
+                        if (CheckSlotClick(slotsRight, Participant.Right) == false) //Checkar om man har klickat på den högra inventorium
                         {
-                            if (CheckSlotClick(tradeSlotsLeft, Participant.TradeSlotsLeft) == false)
+                            if (CheckSlotClick(tradeSlotsLeft, Participant.TradeSlotsLeft) == false) // Checkar om man har klickat på den vänstra trade inventorium
                             {
-                                CheckSlotClick(tradeSlotsRight, Participant.TradeSlotsRight);
+                                CheckSlotClick(tradeSlotsRight, Participant.TradeSlotsRight); // Checkar om man har klickat på den högra trade inventorium
                             }
                         }
                     }                    
@@ -224,7 +224,7 @@ namespace Active
             {
                 if (participant == Participant.Left) // Inventory to the left aka Player
                 {
-                    tradeLeft.AddItem(slots[counterCol, counterRow].Item.ID, 1);// Lägger till item till det vänstra trade fältet   // Error Finns inte
+                    tradeLeft.AddItem(slots[counterCol, counterRow].Item.ID, 1);// Lägger till item till det vänstra trade fältet
                     invLeft.ReduceAmountOfItems(slots[counterCol, counterRow].Item.ID, 1);
                 }
                 else if (participant == Participant.Right) // Inventoty to the right aka Merchant
