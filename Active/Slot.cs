@@ -23,7 +23,7 @@ namespace Active
 
         public void Draw(SpriteBatch sb)
         {
-            sb.Draw(TextureManager.texBox,hitbox,Color.White);
+            //sb.Draw(TextureManager.texBox,hitbox,Color.White);
             if (Item != null)
             {
                 Item.Draw(sb, hitbox);

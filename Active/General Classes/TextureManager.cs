@@ -27,6 +27,9 @@ namespace Active
         static public Texture2D texSkillMenu;
         static public Texture2D texInvTab;
         static public Texture2D texSkillTab;
+        static public Texture2D texTradeMenu;
+        static public Texture2D texMoneyArrowLeft;
+        static public Texture2D texMoneyArrowRight;
 
         static public Texture2D texArmourFine, texArmourMagic, texArmourNormal, texCarrot, texCotton, texDragonScale, texFur, texGoldIngot, texGoldOre, texGryphonMeat, texIronIngot, texIronOre, texDiamond, texEmerald, texRuby, texLumber, texPotato, texPotion, texSilk, texSpices, texStone, texWeaponFine, texWeaponMagic, texWeaponNormal, texWhaleMeat;
         static public List<Texture2D> texItems;
@@ -47,10 +50,13 @@ namespace Active
             texBackArrow = content.Load<Texture2D>("backarrow");
             texOptions = content.Load<Texture2D>("options");
             texButton = content.Load<Texture2D>("btn");
-            texInvMenu = content.Load<Texture2D>("inventory_menu");
+            texInvMenu = content.Load<Texture2D>("inventory_menu"); 
             texSkillMenu = content.Load<Texture2D>("skill_menu");
             texInvTab = content.Load<Texture2D>("inventory_tab");
             texSkillTab = content.Load<Texture2D>("skill_tab");
+            texTradeMenu = content.Load<Texture2D>("trading_menu");
+            texMoneyArrowLeft = content.Load<Texture2D>("arrow_money_left");
+            texMoneyArrowRight = content.Load<Texture2D>("arrow_money_right");
 
             //RESOURCE SPRITES
             texArmourFine = content.Load<Texture2D>("armour_fine");

@@ -58,7 +58,7 @@ namespace Active
                 for (int j = 0; j < 5; j++)
                 {
                     slotsLeft[i, j] = new Slot(245 + 60 * j, 200 + 60 * i, 50, 50);
-                    slotsRight[i, j] = new Slot(1385 + 60 * j, 200 + 60 * i, 50, 50);
+                    slotsRight[i, j] = new Slot(1375 + 60 * j, 200 + 60 * i, 50, 50);
                     try
                     {
                         slotsLeft[i, j].AddItem(invLeft.ItemList[i * 5 + j]);
@@ -81,8 +81,8 @@ namespace Active
             {
                 for (int j = 0; j < 3; j++)
                 {
-                    tradeSlotsRight[i, j] = new Slot(1045 + 60 * j, 320 + 60 * i, 50, 50);
-                    tradeSlotsLeft[i, j] = new Slot(705 + 60 * j, 320 + 60 * i, 50, 50);
+                    tradeSlotsRight[i, j] = new Slot(1020 + 60 * j, 334 + 60 * i, 50, 50);
+                    tradeSlotsLeft[i, j] = new Slot(720 + 60 * j, 334 + 60 * i, 50, 50);
                 }
             }
         }
@@ -90,8 +90,8 @@ namespace Active
         // Klar
         static void CreateButtons() // Initialiserar knapparna
         {
-            accept = new Button(830, 600, 260, 120, "accept", "Accept Trade", TextureManager.texButton);
-            reset = new Button(830, 740, 260, 120, "reset", "Reset Trade", TextureManager.texButton);
+            accept = new Button(830, 620, 260, 120, "accept", "Accept Trade", TextureManager.texButton);
+            reset = new Button(830, 760, 260, 120, "reset", "Reset Trade", TextureManager.texButton);
             back = new Button(20, 20, 80, 80, TextureManager.texBackArrow);
         }
 
@@ -403,6 +403,7 @@ namespace Active
         // Klar
         static public void Draw(SpriteBatch sb)
         {
+            sb.Draw(TextureManager.texTradeMenu, new Vector2(190, 144), Color.White);
             foreach (var item in slotsLeft)
             {
                 item.Draw(sb);
@@ -422,18 +423,27 @@ namespace Active
             accept.Draw(sb);
             reset.Draw(sb);
             back.Draw(sb);
-            sb.DrawString(TextureManager.fontButton,"Player money: " + invLeft.Money, new Vector2(245, 520),Color.White);
-            sb.DrawString(TextureManager.fontButton, "Merchant money: " + invRight.Money, new Vector2(1385, 520), Color.White);
+            sb.DrawString(TextureManager.fontButton, invLeft.Money.ToString(), new Vector2(315, 530),Color.Black);
+            sb.DrawString(TextureManager.fontButton, invRight.Money.ToString(), new Vector2(1520, 530), Color.Black);
+            Vector2 arrowPos = new Vector2(867, 502);
+            Vector2 moneyPos = new Vector2(920, 535);
+            
             if (priceDifference < 0)
             {
-                sb.DrawString(TextureManager.fontButton, "Cost: " + priceDifference*-1, new Vector2(900, 520), Color.White);
+                sb.Draw(TextureManager.texMoneyArrowRight, arrowPos, Color.White);
+                sb.DrawString(TextureManager.fontButton, (priceDifference*-1).ToString(), moneyPos, Color.Black);
             }
-            else
+            else if (priceDifference > 0)
             {
-                sb.DrawString(TextureManager.fontButton, "Gain: " + priceDifference, new Vector2(900, 520), Color.White);
+                sb.Draw(TextureManager.texMoneyArrowLeft, arrowPos, Color.White);
+                sb.DrawString(TextureManager.fontButton, priceDifference.ToString(), moneyPos, Color.Black);
             }
-            
-            
+            else if (priceDifference == 0)
+            {
+                sb.DrawString(TextureManager.fontButton, priceDifference.ToString(), moneyPos, Color.Black);
+            }
+
+
         }
     }
 }

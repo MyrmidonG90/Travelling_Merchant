@@ -123,6 +123,10 @@ namespace Active
             foreach (Button button in cityButtons)
             {
                 button.Draw(spriteBatch);
+                if (button.Name == Player.Location)
+                {
+                    spriteBatch.Draw(TextureManager.texSelect, button.HitBox, Color.White);
+                }
             }
             
             inventoryButton.Draw(spriteBatch);
