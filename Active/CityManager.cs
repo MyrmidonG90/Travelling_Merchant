@@ -63,7 +63,7 @@ namespace Active
             for (int i = 0; i < splitter.Length-1; i++)
             {
                 secondSplitter = SplitText(';', splitter[i]); // Splits the text per data structure
-                cities.Add(new City(secondSplitter[0], secondSplitter[1], new Vector2(float.Parse(secondSplitter[2]), float.Parse(secondSplitter[3]))));// Error
+                //cities.Add(new City(secondSplitter[0], secondSplitter[1], new Vector2(float.Parse(secondSplitter[2]), float.Parse(secondSplitter[3]))));// Error
                 inv = new Inventory(int.Parse(secondSplitter[4])); 
                 thirdSplitter = SplitText(',',secondSplitter[5]); // Splits data structure inventory
                 if (thirdSplitter[0] != "")
@@ -89,18 +89,18 @@ namespace Active
             for (int i = 0; i < nrOfItems; i++)
             {
                 Vector2 vector = new Vector2(float.Parse(SplitText(';',readPerLine[2 + i * 6])[0]), float.Parse(SplitText(';', readPerLine[2 + i * 6])[1]));
-                cities.Add(new City(readPerLine[i*6], readPerLine[1+i*6], vector));
+                //cities.Add(new City(readPerLine[i*6], readPerLine[1+i*6], vector));
 
             }
 
         }
         public static void CreateCity(string name, string information, Vector2 coordinates) 
         {
-            cities.Add(new City(name,information, coordinates));
+            //cities.Add(new City(name,information, coordinates));
         }
         public static void CreateCity(string name, string information, Vector2 coordinates,Inventory inv)
         {
-            cities.Add(new City(name, information, coordinates));
+            //cities.Add(new City(name, information, coordinates));
             cities[cities.Count-1].AddInventory(inv);
         }
 

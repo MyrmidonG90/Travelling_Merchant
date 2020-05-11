@@ -22,7 +22,7 @@ namespace Active
         static int counter=0;
         static int oldCounter=0;
 
-        static float chance = 3f;
+        static float chance = 4f;
 
         static public void Init()
         {

@@ -260,7 +260,7 @@ namespace Active
                 {
                     string[] test = new string[1];
                     test[0] = "Carrot Town";
-                    WorldEventManager.EventFire(2, test, new Random());
+                    WorldEventManager.EventFire(0, test, new Random());
                 }
             }
         }

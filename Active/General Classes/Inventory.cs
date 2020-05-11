@@ -75,11 +75,30 @@ namespace Active
                                 }
                                 else
                                 {
-                                    int tmp = itemList[FindStackNotFull(itemID)].Amount + amount - stackLimit;
-                                    itemList[FindStackNotFull(itemID)].Amount += amount - tmp;
-                                    ItemList.Add(ItemCreator.CreateItem(itemID, tmp));
-                                    working = true;
+                                    while (amount > 0)
+                                    {
+                                        if (amount > 50)
+                                        {
+                                            ItemList.Add(ItemCreator.CreateItem(itemID, 50));
+                                            amount -= 50;
+                                        }
+                                        else
+                                        {
+                                            ItemList.Add(ItemCreator.CreateItem(itemID, amount));
+                                            amount -= 50;
+                                        }
+
+                                    }
                                 }
+
+                                //spara denna för referens
+                                //else 
+                                //{
+                                //    int tmp = itemList[FindStackNotFull(itemID)].Amount + amount - stackLimit;
+                                //    itemList[FindStackNotFull(itemID)].Amount += amount - tmp;
+                                //    ItemList.Add(ItemCreator.CreateItem(itemID, tmp));
+                                //    working = true;
+                                //}
                             }
                             else
                             {
