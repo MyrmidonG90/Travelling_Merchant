@@ -14,6 +14,7 @@ namespace Active
         int id;
         int eID;
         List<string> text;
+        List<Vector2> textPos;
         int percentage;
         Rectangle rectMessage;
         public TravelEvent(int id, int eID, List<string> text, int percentage)
@@ -21,6 +22,11 @@ namespace Active
             this.id = id;
             this.eID = eID;
             this.text = new List<string>(text);
+            textPos = new List<Vector2>();
+            for (int i = 0; i < text.Count; i++)
+            {
+                textPos.Add(new Vector2(300,200+i*10));
+            }
             this.percentage = percentage;
             rectMessage = new Rectangle(0,0,500,500);
         }
@@ -33,6 +39,10 @@ namespace Active
         public void Draw(SpriteBatch sb)
         {
             sb.Draw(TextureManager.texBox, rectMessage, Color.LightGray);
+            for (int i = 0; i < text.Count; i++)
+            {
+                sb.DrawString(TextureManager.font,text[i],textPos[i],Color.Black);
+            }            
         }
     }
 }

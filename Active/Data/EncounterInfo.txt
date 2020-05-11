@@ -1,4 +1,20 @@
 ﻿0
 0
 Halt! Road toll, 20gp to pass.
-100
+20
+1
+1
+Fancy meeting you here, traveller! Now, hand over your money before someone gets hurt!
+20
+2
+1
+Halt, citizen! We are the knights of this kingdom and we demand tribute to our noble causes!
+20
+3
+2
+Oh no! Your wagon broke down!
+20
+4
+2
+The road in front of you is submerged in water
+20

@@ -14,7 +14,7 @@ namespace Active
     {
         static Random rand;
         static StreamReader sr;
-        static List<TravelEvent> events;
+        static List<TravelEvent> travelEvents;
         static List<Encounter> encounters;
         static bool eventOnGoing;
         static List<string> tmpString;
@@ -24,7 +24,7 @@ namespace Active
         static bool boolUpdate;
         static Encounter currentEncounter;
         static TravelEvent currentTravelEvent;
-        internal static List<TravelEvent> Events { get => events;}
+        internal static List<TravelEvent> Events { get => travelEvents;}
         public static bool EventOnGoing { get => eventOnGoing;}
 
         static public void Initialize() // Only needed to called once
@@ -51,7 +51,7 @@ namespace Active
         {
             if (eventOnGoing == false)
             {
-                if (rand.Next(0, 9) == 0) // If Encountered
+                if (rand.Next(0, 9) == 0) // If Encountered //Change this one to increase/decrease encounters!!!
                 {
                     eventOnGoing = true;
                     InitiateEncounter(FindID(RandomiseEncounter()));
@@ -61,13 +61,13 @@ namespace Active
             return eventOnGoing;
         } 
 
-        static int FindID(int id) // Hittar unika id för travel events
+        static int FindID(int id) // Hittar travel events id
         {
             found = false;
             counter = 0;
-            while (found == false && events.Count > counter)
+            while (found == false && travelEvents.Count > counter)
             {
-                if (events[counter].Id == id)
+                if (travelEvents[counter].Id == id)
                 {
                     found = true;
                 }
@@ -77,14 +77,14 @@ namespace Active
                 }
             }
 
-            return events[counter].EID;
+            return travelEvents[counter].Id;
         }
 
         static int FindEncounterID(int eID) // Hittar Encounter ID
         {
             found = false;
             counter = 0;
-            while (found == false && events.Count > counter)
+            while (found == false && travelEvents.Count > counter)
             {
                 if (encounters[counter].Id == eID)
                 {
@@ -96,17 +96,36 @@ namespace Active
                 }
             }
 
-            return events[counter].EID;
+            return travelEvents[counter].EID;
         }
 
-        static void InitiateEncounter(int eID)
+        static int FindIndex(int id)
         {
-            currentEncounter = encounters[FindEncounterID(eID)];
+            found = false;
+            counter = 0;
+            while (found == false && travelEvents.Count > counter)
+            {
+                if (travelEvents[counter].Id == id)
+                {
+                    found = true;
+                }
+                else
+                {
+                    ++counter;
+                }
+            }
+            return counter;
+        }
+        static void InitiateEncounter(int id)
+        {
+            currentEncounter = encounters[FindEncounterID(id)];
+            currentTravelEvent = travelEvents[FindIndex(id)];
             currentEncounter.OccuredDuringTravel = true;
             boolUpdate = false;
 
         }        
 
+        // Works fine
         static int RandomiseEncounter()
         {
             int chance = rand.Next(1,100);
@@ -115,16 +134,17 @@ namespace Active
             while (chance > 0)
             {
 
-                chance -= events[counter].Percentage;
+                chance -= travelEvents[counter].Percentage;
 
-                if (chance > 0)
+                if (chance >= 0)
                 {
                     ++counter;
                 }
             }
             
             // Ser till att under denna färden inte kommer upprepa samma encounter
-            if (encounters[FindEncounterID(FindID(counter))].OccuredDuringTravel) // Farlig kod!!!
+            
+            if (encounters[FindEncounterID(FindID(counter))].OccuredDuringTravel) // Stackoverflow Farlig kod!!!
             {
                 counter = RandomiseEncounter();
             }
@@ -141,7 +161,7 @@ namespace Active
 
         static void LoadEncountInfo() // Laddar in alla events från en textfil
         {
-            events = new List<TravelEvent>();
+            travelEvents = new List<TravelEvent>();
             
             FileManager.ReadFilePerLine("./Data/EncounterInfo.txt"); // Läser in filen där alla events är
 
@@ -262,8 +282,9 @@ namespace Active
 
         static public void Draw(SpriteBatch sb) // Bör endast hända i TravelMenu
         {
+            currentTravelEvent.Draw(sb);
             currentEncounter.Draw(sb);
-           // currentTravelEvent.Draw(sb);
+            
         }
         
     }

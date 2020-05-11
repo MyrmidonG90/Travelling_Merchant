@@ -38,12 +38,21 @@ namespace Active
             pauseButton = new Button(830, 900, 260, 120, "paused", "Pause/Unpause", TextureManager.texButton);
             invButton = new Button(330, 900, 260, 120, "inv", "Inventory", TextureManager.texButton);
             mapButton = new Button(1330, 900, 260, 120, "map", "Map", TextureManager.texButton);
-
+            EncounterManager.Initialize();
             test = false;
         }
 
         static public void StartTravel(string newDestination)
         {
+<<<<<<< HEAD
+            destination = newDestination;
+            EncounterManager.NewTrip();
+            paused = false;
+
+            turnsToTravel = 5;
+            turnsLeft = turnsToTravel;
+            turnTimer = timerLength;
+=======
             foreach (City tempCity in WorldMapMenu.Cities)
             {
                 if (tempCity.Name == Player.Location)
@@ -63,6 +72,7 @@ namespace Active
                 }
             }
             EncounterManager.Initialize();
+>>>>>>> master
         }
 
         static public bool CheckInvbutton()
