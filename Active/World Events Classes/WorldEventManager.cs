@@ -19,10 +19,10 @@ namespace Active
         static List<InventoryTemplate> inventoryList;
         static List<WorldEvent> activeEvents;
         static int stage;
-        static int counter=0;
-        static int oldCounter=0;
+        static int counter = 0;
+        static int oldCounter = 0;
 
-        static float chance = 4f;
+        static float chance = 30f;
 
         static public void Init()
         {
@@ -98,7 +98,7 @@ namespace Active
             counter = Calendar.TotalDays;
             if (counter != oldCounter)
             {
-                
+
                 int dif = counter - oldCounter;
                 foreach (WorldEvent tempWorldEvent in activeEvents)
                 {
@@ -272,7 +272,7 @@ namespace Active
                                         {
                                             newTemplateInv.ReduceAmountOfItems(fixedItem);
                                         }
-                                    }                                                                     
+                                    }
                                 }
                                 int ih = 0;
                                 tempCity.TemplateInv = new Inventory(newTemplateInv);
@@ -365,9 +365,56 @@ namespace Active
 
                 targets = targets.Distinct().ToList();
 
+                CheckNotNeighbors(targets); //doesnt work as intended men har inte tid eller ork att fixa atm /my
 
                 EventFire(id, targets.ToArray(), rnd);
             }
         }
+
+        static private void CheckNotNeighbors(List<string> targets)
+        {
+            bool exit = false;
+            bool exitCheck = true;
+            while (exit)
+            {
+                exitCheck = true;
+                foreach (string tempTarget in targets)
+                {
+                    bool check = false;
+                    foreach (City tempCity in WorldMapMenu.Cities)
+                    {
+                        if (tempCity.Name == tempTarget)
+                        {
+                            foreach (string tempNeighbor in tempCity.Neighbors)
+                            {
+                                foreach (string tempTarget2 in targets)
+                                {
+                                    if (tempNeighbor == tempTarget2)
+                                    {
+                                        check = true;
+                                        exitCheck = false;
+                                    }
+                                }
+                            }
+                            if (!check)
+                            {
+                                targets.Remove(tempTarget);
+                                exitCheck = false;
+                                break;
+                            }
+                        }
+                    }
+                    if (check)
+                    {
+                        exitCheck = false;
+                        break;
+                    }
+                }
+                if (exitCheck)
+                {
+                    exit = true;
+                }
+            }
+        } 
     }
 }
