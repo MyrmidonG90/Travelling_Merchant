@@ -1,4 +1,4 @@
-﻿666
+﻿6660
 18
 Potato;8
 Iron Ingot;12

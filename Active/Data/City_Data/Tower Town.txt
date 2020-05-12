@@ -1,4 +1,4 @@
-1600
+16000
 14
 Iron Ore;8
 Gold Ingot;10
