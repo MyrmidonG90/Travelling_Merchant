@@ -53,13 +53,15 @@ namespace Active
         public bool AddItem(int itemID, int amount)
         {
             bool working = false;
+            int index = FindIndexOf(itemID);
+
             if (itemList.Count <= invLimit) // Om det finns plats i listan för en ny item
             {
-                if (FindIndexOf(itemID) != -1) // Om den redan finns i listan
+                if (index != -1) // Om den redan finns i listan
                 {
-                    if (itemList[FindIndexOf(itemID)].Amount + amount <= stackLimit ) // Om stacken som item:et är med i har plats
+                    if (itemList[index].Amount + amount <= stackLimit ) // Om stacken som item:et är med i har plats
                     {
-                        itemList[FindIndexOf(itemID)].Amount += amount; // Ändrar summan av totala antalet av den item:et
+                        itemList[index].Amount += amount; // Ändrar summan av totala antalet av den item:et
                         working = true;
                     }
                     else // Om stacken som item:et är med i inte har plats
@@ -75,19 +77,9 @@ namespace Active
                                 }
                                 else
                                 {
-                                    while (amount > 0)
-                                    {
-                                        if (amount > 50)
-                                        {
-                                            ItemList.Add(ItemCreator.CreateItem(itemID, 50));
-                                            amount -= 50;
-                                        }
-                                        else
-                                        {
-                                            ItemList.Add(ItemCreator.CreateItem(itemID, amount));
-                                            amount -= 50;
-                                        }
-                                    }
+                                    amount = itemList[FindStackNotFull(itemID)].Amount + amount - 50;
+                                    itemList[FindStackNotFull(itemID)].Amount += amount;
+                                    ItemList.Add(ItemCreator.CreateItem(itemID, amount));                                    
                                     working = true;
                                 }
 
