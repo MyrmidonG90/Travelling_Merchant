@@ -420,7 +420,7 @@ namespace Active
         {
             bool full = false;
             Inventory left = new Inventory(invLeft.Money);
-            Inventory right = new Inventory(invLeft.Money);
+            Inventory right = new Inventory(invRight.Money);
             foreach (var item in invLeft.ItemList)
             {
                 left.AddItem(item);

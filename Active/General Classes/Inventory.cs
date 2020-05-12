@@ -87,8 +87,8 @@ namespace Active
                                             ItemList.Add(ItemCreator.CreateItem(itemID, amount));
                                             amount -= 50;
                                         }
-
                                     }
+                                    working = true;
                                 }
 
                                 //spara denna för referens
