@@ -21,6 +21,12 @@ namespace Active
         string currentCity;
         string currentCityInfo;
 
+        bool activeEvent;
+        string eventDes;
+
+        int date;
+        int oldDate;
+
         public CityMenu()
         {
             inventoryButton = new Button(60, 920, 260, 120, "inv", "Inventory", TextureManager.texButton);
@@ -35,6 +41,29 @@ namespace Active
             {
                 Calendar.AddDays(1);
             }
+
+            date = Calendar.TotalDays;
+
+
+            bool check = false;
+            foreach (WorldEvent tempEvent in WorldEventManager.ActiveEvents)
+            {
+                foreach (string tempTarget in tempEvent.Target)
+                {
+                    if (tempTarget == currentCity)
+                    {
+                        activeEvent = true;
+                        eventDes = tempEvent.EventDes;
+                        check = true;
+                    }
+                }
+            }
+            if (!check)
+            {
+                activeEvent = false;
+                eventDes = "";
+            }
+
         }
 
         public bool CheckInvButton()
@@ -81,10 +110,11 @@ namespace Active
             nextTurnButton.Draw(spriteBatch);
             spriteBatch.DrawString(TextureManager.fontHeader, currentCity, new Vector2(30, 100), Color.Black, 0, Vector2.Zero, 1, SpriteEffects.None, 1);
             spriteBatch.DrawString(TextureManager.fontInventory, currentCityInfo, new Vector2(40, 180), Color.Black, 0, Vector2.Zero, 1, SpriteEffects.None, 1);
-            //spriteBatch.DrawString(TextureManager.font, "Population: ", new Vector2(40, 160), Color.Black, 0, Vector2.Zero, 2, SpriteEffects.None, 1);
-            //spriteBatch.DrawString(TextureManager.font, "Races: ", new Vector2(40, 200), Color.Black, 0, Vector2.Zero, 2, SpriteEffects.None, 1);
-            //spriteBatch.DrawString(TextureManager.font, "Kingdom: ", new Vector2(40, 240), Color.Black, 0, Vector2.Zero, 2, SpriteEffects.None, 1);
-            //spriteBatch.DrawString(TextureManager.font, "Resources: ", new Vector2(40, 280), Color.Black, 0, Vector2.Zero, 2, SpriteEffects.None, 1);
+
+            if (activeEvent)
+            {
+                spriteBatch.DrawString(TextureManager.fontInventory, eventDes, new Vector2(1300, 180), Color.Black);
+            }
         }
     }
 }

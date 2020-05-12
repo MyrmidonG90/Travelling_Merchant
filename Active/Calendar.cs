@@ -26,6 +26,7 @@ namespace Active
         static int dayOfMonth;
 
         static Vector2 pos = new Vector2(820, 14);
+        static Button eventLog = new Button(1080, 10, 195, 90, "event", "Open log", TextureManager.texButton);
 
         static public void PrepareCalendar()
         {
@@ -104,6 +105,19 @@ namespace Active
                 dayFollowUp = "th";
             }
 
+            
+        }
+
+        static public bool CheckEventClick()
+        {
+            if (eventLog.Click())
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         static public void Draw(SpriteBatch spriteBatch)
@@ -111,6 +125,7 @@ namespace Active
             spriteBatch.DrawString(TextureManager.fontButton, currentDay, pos, Color.Black);
             spriteBatch.DrawString(TextureManager.fontButton, dayOfMonth.ToString() + dayFollowUp + " " + currentMonth, new Vector2(pos.X, pos.Y + 30), Color.Black);
             spriteBatch.DrawString(TextureManager.fontButton, "Total days: " + totalDays.ToString(), new Vector2(pos.X, pos.Y + 60), Color.Black);
+            eventLog.Draw(spriteBatch);
         }
 
         public static int TotalDays
