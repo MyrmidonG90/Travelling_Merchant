@@ -258,9 +258,10 @@ namespace Active
                 }
                 if (btnWorldEventTest.Click() && !block)
                 {
-                    string[] test = new string[1];
+                    string[] test = new string[2];
                     test[0] = "Carrot Town";
-                    WorldEventManager.EventFire(0, test, new Random());
+                    test[1] = "Steel Ville";
+                    WorldEventManager.EventFire(2, test, new Random());
                 }
             }
         }

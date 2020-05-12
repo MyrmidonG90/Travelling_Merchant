@@ -14,6 +14,9 @@ namespace Active
         static string location;
         static string[] skillNames;
         static int[] skillLevels;
+        static List<string> eventCities;
+        static List<string> eventNames;
+        static List<int> activeEventID;
 
         static public void Init()
         {
@@ -30,6 +33,10 @@ namespace Active
             skillLevels[0] = 3;
             skillLevels[1] = 3;
             skillLevels[2] = 3;
+
+            eventCities = new List<string>();
+            eventNames = new List<string>();
+            activeEventID = new List<int>();
         }
 
         static public void Update()
@@ -51,6 +58,28 @@ namespace Active
                 }
             }
         }
+
+        static public void AddEventLogEntry(string target, string type, int id)
+        {
+            bool check = false;
+            foreach (string tempName in eventCities)
+            {
+                foreach (int tempID in activeEventID)
+                {
+                    if (tempName == target && tempID == id)
+                    {
+                        check = true;
+                    }
+                }
+            }
+            if (!check)
+            {
+                eventCities.Add(target);
+                eventNames.Add(type);
+                activeEventID.Add(id);
+            }
+        }
+        
 
         static public int ReturnSkillLevel(string skillName)
         {
@@ -132,6 +161,16 @@ namespace Active
             {
                 skillLevels = value;
             }
+        }
+
+        static public List<string> EventCities
+        {
+            get => eventCities;
+        }
+
+        static public List<string> EventNames
+        {
+            get => eventNames;
         }
     }
 }

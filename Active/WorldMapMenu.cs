@@ -27,6 +27,9 @@ namespace Active
         static string cityInfo;
         static Vector2 cityCords;
 
+        static int date;
+        static int oldDate;
+
         static void ItemList()
         {
             StreamReader sr = new StreamReader("./Data/ItemList.txt");
@@ -105,7 +108,29 @@ namespace Active
 
                     }
                 }
-            }          
+            }
+
+            date = Calendar.TotalDays;          
+        }
+
+        static public void CheckPlayerEventLog()
+        {
+            foreach (City tempCity in cities)
+            {
+                if (tempCity.Name == Player.Location)
+                {
+                    foreach (WorldEvent tempEvent in WorldEventManager.ActiveEvents)
+                    {
+                        foreach (string temptarget in tempEvent.Target)
+                        {
+                            if (temptarget == tempCity.Name)
+                            {
+                                Player.AddEventLogEntry(temptarget, tempEvent.EventName, tempEvent.InstanceID);
+                            }
+                        }
+                    }
+                }
+            }
         }
 
         static public void UpdateCities()

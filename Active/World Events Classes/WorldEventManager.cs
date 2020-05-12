@@ -21,6 +21,7 @@ namespace Active
         static int stage;
         static int counter = 0;
         static int oldCounter = 0;
+        static int eventCounter = 0;
 
         static float chance = 30f;
 
@@ -59,6 +60,11 @@ namespace Active
                     stage++;
                 }
             }
+
+            for (int i = 0; i < eventDesList.Count; i++)
+            {
+                eventDesList[i] = eventDesList[i].Replace(";", "\n");
+            }
         }
 
         static public void EventFire(int id, string[] target, Random rnd)
@@ -80,7 +86,8 @@ namespace Active
         static private WorldEvent GenerateEvent(int id, string[] target, Random rnd)
         {
             WorldEvent newWorldEvent;
-            newWorldEvent = new WorldEvent(eventNameList[id], eventDesList[id], id, target, effectIDList[id], effectValList[id], durationList[id]);
+            newWorldEvent = new WorldEvent(eventNameList[id], eventDesList[id], id, eventCounter, target, effectIDList[id], effectValList[id], durationList[id]);
+            eventCounter++;
             int mod = rnd.Next(0, durationModList[id] + 1);
             if (rnd.Next(0, 2) == 1)
             {
@@ -415,6 +422,16 @@ namespace Active
                     exit = true;
                 }
             }
-        } 
+        }
+
+        static public List<string> EventDesList
+        {
+            get => eventDesList;           
+        }
+
+        static public List<WorldEvent> ActiveEvents
+        {
+            get => activeEvents;
+        }
     }
 }

@@ -25,6 +25,7 @@ namespace Active
         List<string> CityControlList;
         Random random;
 
+        bool eventLog;
         bool options;
         bool test;
 
@@ -73,6 +74,7 @@ namespace Active
             CityManager.Initialize();
             TravelMenu.Init();
             WorldEventManager.Init();
+            EventLog.Init();
             WorldMapMenu.LoadCities();
 
             ModifierManager.LoadCityAndCategoryLists();
@@ -114,6 +116,10 @@ namespace Active
 
             KMReader.Update();
             Calendar.Update();
+            if (Calendar.CheckEventClick())
+            {
+                eventLog = !eventLog;
+            }
 
             if (gameState == GameState.CityMenu)
             {
@@ -166,6 +172,7 @@ namespace Active
                 options = !options;
             }
 
+            WorldMapMenu.CheckPlayerEventLog();
             WorldMapMenu.UpdateCities();
             Player.Update();
 
@@ -215,6 +222,12 @@ namespace Active
             {
                 Calendar.Draw(spriteBatch);
             }
+
+            if (eventLog)
+            {
+                EventLog.Draw(spriteBatch);
+            }
+
             OptionsMenu.Draw(spriteBatch, options);          
 
             spriteBatch.End();

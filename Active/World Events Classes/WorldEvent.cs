@@ -11,17 +11,19 @@ namespace Active
         string eventName;
         string eventDes;
         int eventID;
+        int instanceID;
         string[] target;
         bool[] effectID;
         int[] effectVal;
         int daysLeft;
         Inventory oldTemplateInv;
 
-        public WorldEvent(string n, string d, int id, string[] target, bool[] ei, int[] ev, int days)
+        public WorldEvent(string n, string d, int id, int id2, string[] target, bool[] ei, int[] ev, int days)
         {
             eventName = n;
             eventDes = d;
             eventID = id;
+            instanceID = id2;
             this.target = target;
             effectID = ei;
             effectVal = ev;
@@ -51,6 +53,11 @@ namespace Active
         public int EventID
         {
             get => eventID;
+        }
+
+        public int InstanceID
+        {
+            get => instanceID;
         }
 
         public string[] Target

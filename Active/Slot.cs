@@ -27,7 +27,7 @@ namespace Active
             if (Item != null)
             {
                 Item.Draw(sb, hitbox);
-                sb.DrawString(TextureManager.font,item.Amount.ToString(), textPos, Color.Black);
+                sb.DrawString(TextureManager.font,item.Amount.ToString(), textPos, Color.White);
             }
         }
 
