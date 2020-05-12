@@ -134,6 +134,8 @@ namespace Active
             {
                 DrawSkills(spriteBatch);
             }
+            spriteBatch.DrawString(TextureManager.fontInventory, Player.EventNames.Count.ToString(), new Vector2(300, 300), Color.White);
+
         }
 
         private void LoadGrid()

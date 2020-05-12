@@ -4,9 +4,9 @@ Food
 Metal
 2
 Raw Materials
-2
+1,4
 Textiles
-0,5
+0,8
 Gear
 1
 Magic
@@ -14,31 +14,31 @@ Magic
 Valuables
 1
 Manufactured
-2
+1,3
 Steel Ville
 Food
-2
+1,4
 Metal
-0,5
+0,6
 Raw Materials
-2
+1,4
 Textiles
-2
+1,4
 Gear
-0,3
+0,7
 Magic
 1,5
 Valuables
-1,7
+1,3
 Manufactured
-0,5
+0,8
 Tower Town
 Food
-1,6
+1,3
 Metal
 1,6
 Raw Materials
-1,8
+1,4
 Textiles
 0,5
 Gear
@@ -51,7 +51,7 @@ Manufactured
 1,7
 Pyramaad
 Food
-2
+1,7
 Metal
 1
 Raw Materials
@@ -85,7 +85,7 @@ Manufactured
 1
 Hymn Harbor
 Food
-1,8
+1,5
 Metal
 1,5
 Raw Materials
@@ -129,7 +129,7 @@ Textiles
 Gear
 0,5
 Magic
-0,75
+0,7
 Valuables
 1,5
 Manufactured
@@ -161,7 +161,7 @@ Raw Materials
 Textiles
 0,5
 Gear
-0,3
+0,5
 Magic
 2
 Valuables
