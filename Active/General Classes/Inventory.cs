@@ -10,6 +10,8 @@ namespace Active
     {
         int money, stackLimit, invLimit;
         List<Item> itemList;
+        int surrogateKey;
+        string surrogateKeyName;
         public Inventory(int m, List<Item> iL)
         {
             money = m;
@@ -143,7 +145,6 @@ namespace Active
                 if (amountLeft > 0) // Tar bort antalet varor från stacken
                 {
                     itemList[FindIndexOf(itemID)].Amount -= amount;
-
                 }
                 else if (amountLeft == 0) // Om det tar bort exakt lika mycket som finns av den stacken
                 {
@@ -154,47 +155,11 @@ namespace Active
                     amountLeft *= -1;
                     ReduceAmountOfItems(itemID, amountLeft);
                 }
-
-                /*
-                int amountLeft = itemList[FindIndexOf(itemID)].Amount - amount;
-                //itemList[FindIndexOf(itemID)].Amount -= amount; // Reducerar antalet man har sålt.
-                if (amountLeft > 0) // Tar bort antalet varor från stacken
-                {
-                    itemList[FindIndexOf(itemID)].Amount -= amount;
-                }
-                else if (amountLeft == 0) // Om det tar bort exakt lika mycket som finns av den stacken
-                {
-                    itemList.RemoveAt(FindIndexOf(itemID));
-                }
-                else if (amountLeft < 0) // 
-                {
-
-                    int tmp;
-                    amountLeft *= -1;
-                    itemList.RemoveAt(FindIndexOf(itemID));
-
-                    while (amountLeft != 0)
-                    {
-                        tmp = itemList[FindIndexOf(itemID)].Amount -= amountLeft;
-                        if (tmp > 0)
-                        {
-                            itemList[FindIndexOf(itemID)].Amount -= amount;
-                        }
-                        else if (tmp == 0)
-                        {
-                            itemList.RemoveAt(FindIndexOf(itemID));
-                        }
-                        else if (tmp < 0)
-                        {
-
-                        }
-                    }
-                }*/
             }
             catch { }
         }
 
-        int FindIndexOf(int itemID)
+        public int FindIndexOf(int itemID)
         {
             bool found = false;
             int tmpCounter = 0;
@@ -265,5 +230,8 @@ namespace Active
                 itemList = value;
             }
         }
+
+        public int SurrogateKey { get => surrogateKey; set => surrogateKey = value; }
+        public string SurrogateKeyName { get => surrogateKeyName; set => surrogateKeyName = value; }
     }
 }

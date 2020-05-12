@@ -28,7 +28,6 @@ namespace Active
 
         static int counterCol, counterRow, leftPrice, rightPrice, priceDifference;
 
-        // Klart
         static public void StartTrade(Inventory player, Inventory trader, string zone) 
         {
             invLeft = player;
@@ -46,7 +45,6 @@ namespace Active
             zoneName = zone;
         }
 
-        // Klar
         static void CreateSlots() // Skapar slots
         {
             slotsLeft = new Slot[5, 5];
@@ -87,7 +85,6 @@ namespace Active
             }
         }
 
-        // Klar
         static void CreateButtons() // Initialiserar knapparna
         {
             accept = new Button(830, 620, 260, 120, "accept", "Accept Trade", TextureManager.texButton);
@@ -95,7 +92,6 @@ namespace Active
             back = new Button(20, 20, 80, 80, TextureManager.texBackArrow);
         }
 
-        // Klar
         static public bool Update(ref Inventory participantLeft, ref Inventory participantRight)
         {
             //När ett mussklick händer
@@ -105,7 +101,7 @@ namespace Active
                 if (accept.Click())
                 {
                     //AcceptTrade(ref participantLeft, ref participantRight);
-                    if (AcceptTrade(ref participantLeft, ref participantRight)) //Debuff
+                    if (AcceptTrade(ref participantLeft, ref participantRight)) //Debugg
                     {
                         
                     }
@@ -123,13 +119,13 @@ namespace Active
                 // Checkar om man har klickat på inventory:n
                 else
                 {
-                    if (CheckSlotClick(slotsLeft, Participant.Left) == false)
+                    if (CheckSlotClick(slotsLeft, Participant.Left) == false) // Checkar om man har klickat på den vänstra inventorium
                     {
-                        if (CheckSlotClick(slotsRight, Participant.Right) == false)
+                        if (CheckSlotClick(slotsRight, Participant.Right) == false) //Checkar om man har klickat på den högra inventorium
                         {
-                            if (CheckSlotClick(tradeSlotsLeft, Participant.TradeSlotsLeft) == false)
+                            if (CheckSlotClick(tradeSlotsLeft, Participant.TradeSlotsLeft) == false) // Checkar om man har klickat på den vänstra trade inventorium
                             {
-                                CheckSlotClick(tradeSlotsRight, Participant.TradeSlotsRight);
+                                CheckSlotClick(tradeSlotsRight, Participant.TradeSlotsRight); // Checkar om man har klickat på den högra trade inventorium
                             }
                         }
                     }                    
@@ -139,8 +135,6 @@ namespace Active
             return false;
         }
        
-        // Klar
-        //Uppdaterar Slots
         static void UpdateSlots()
         {
             for (int i = 0; i < 3; i++)
@@ -189,7 +183,6 @@ namespace Active
             }
         }
 
-        //Klar
         static void UpdatePrices()
         {
             leftPrice = CheckValue(tradeLeft);
@@ -197,12 +190,11 @@ namespace Active
             priceDifference = leftPrice - rightPrice;
         }
 
-        //Klar
         static bool CheckSlotClick(Slot[,] slots, Participant participant)
         {
             counterCol = 0;
-            counterRow = 0;         
-
+            counterRow = 0;
+            
             while (counterCol <= slots.GetLength(1)-1 && slots[counterCol, counterRow].Clicked() == false) 
             {
                 while (counterRow < slots.GetLength(1) - 1 && slots[counterCol, counterRow].Clicked() == false)
@@ -222,9 +214,10 @@ namespace Active
             }
             if (slots[counterCol, counterRow].Clicked() == true && slots[counterCol, counterRow].Item != null) // Om Slots:en som tillhör inventory:n har blivit klickat
             {
-                if (participant == Participant.Left) // Inventory to the left aka Player
+                SlotClick(slots, participant);
+               /* if (participant == Participant.Left) // Inventory to the left aka Player
                 {
-                    tradeLeft.AddItem(slots[counterCol, counterRow].Item.ID, 1);// Lägger till item till det vänstra trade fältet   // Error Finns inte
+                    tradeLeft.AddItem(slots[counterCol, counterRow].Item.ID, 1);// Lägger till item till det vänstra trade fältet
                     invLeft.ReduceAmountOfItems(slots[counterCol, counterRow].Item.ID, 1);
                 }
                 else if (participant == Participant.Right) // Inventoty to the right aka Merchant
@@ -243,13 +236,153 @@ namespace Active
                     invRight.AddItem(slots[counterCol, counterRow].Item.ID, 1);
                 }
                 UpdateSlots();
-                UpdatePrices();
+                UpdatePrices();*/
                 return true;
             }
             return false;
         }
+
+        static void SlotClick(Slot[,] slots, Participant participant)
+        {
+            if (participant == Participant.Left)
+            {
+                if (tradeLeft.ItemList.Count < 9)
+                {
+                    if (CheckShiftClick())
+                    {
+                        ShiftAndMouseClick(slots, participant);
+                    }
+                    else
+                    {
+                        MouseSlotClick(slots, participant);
+                    }
+                }
+            }
+            else if (participant == Participant.Right)
+            {
+                if (tradeRight.ItemList.Count < 9)
+                {
+                    if (CheckShiftClick())
+                    {
+                        ShiftAndMouseClick(slots, participant);
+                    }
+                    else
+                    {
+                        MouseSlotClick(slots, participant);
+                    }
+                }
+            }
+            else if (participant == Participant.TradeSlotsLeft)
+            {
+                if (CheckShiftClick())
+                {
+                    ShiftAndMouseClick(slots, participant);
+                }
+                else
+                {
+                    MouseSlotClick(slots, participant);
+                }                
+            }
+            else if (participant == Participant.TradeSlotsRight)
+            {
+                if (CheckShiftClick())
+                {
+                    ShiftAndMouseClick(slots, participant);
+                }
+                else
+                {
+                    MouseSlotClick(slots, participant);
+                }                
+            }            
+            UpdateSlots();
+            UpdatePrices();
+        }
+
+        static void MouseSlotClick(Slot[,] slots, Participant participant)
+        {
+            if (participant == Participant.Left)
+            {
+                tradeLeft.AddItem(slots[counterCol, counterRow].Item.ID, 1);// Lägger till item till det vänstra trade fältet
+                invLeft.ReduceAmountOfItems(slots[counterCol, counterRow].Item.ID, 1);
+            }
+            else if (participant == Participant.Right)
+            {
+                tradeRight.AddItem(slots[counterCol, counterRow].Item.ID, 1);// Lägger till item till det vänstra trade fältet
+                invRight.ReduceAmountOfItems(slots[counterCol, counterRow].Item.ID, 1);
+            }
+            else if (participant == Participant.TradeSlotsLeft)
+            {
+                invLeft.AddItem(slots[counterCol, counterRow].Item.ID, 1);// Lägger till item till det vänstra trade fältet
+                tradeLeft.ReduceAmountOfItems(slots[counterCol, counterRow].Item.ID, 1);
+            }
+            else if (participant == Participant.TradeSlotsLeft)
+            {
+                invRight.AddItem(slots[counterCol, counterRow].Item.ID, 1);// Lägger till item till det vänstra trade fältet
+                tradeRight.ReduceAmountOfItems(slots[counterCol, counterRow].Item.ID, 1);
+            }
+        }
+
+        static void ShiftAndMouseClick(Slot[,] slots, Participant participant)
+        {
+            if (participant == Participant.Left)
+            {
+                if (invLeft.ItemList[invLeft.FindIndexOf(slots[counterCol, counterRow].Item.ID)].Amount >= 5)
+                {
+                    tradeLeft.AddItem(slots[counterCol, counterRow].Item.ID, 5);// Lägger till item till det vänstra trade fältet
+                    invLeft.ReduceAmountOfItems(slots[counterCol, counterRow].Item.ID, 5);
+                }
+                else
+                {
+                    tradeLeft.AddItem(slots[counterCol, counterRow].Item.ID, invLeft.ItemList[invLeft.FindIndexOf(slots[counterCol, counterRow].Item.ID)].Amount);// Lägger till item till det vänstra trade fältet
+                    invLeft.ReduceAmountOfItems(slots[counterCol, counterRow].Item.ID, invLeft.ItemList[invLeft.FindIndexOf(slots[counterCol, counterRow].Item.ID)].Amount);
+                }
+            }
+            else if (participant == Participant.Right)
+            {
+                if (invRight.ItemList[invRight.FindIndexOf(slots[counterCol, counterRow].Item.ID)].Amount >= 5)
+                {
+                    tradeRight.AddItem(slots[counterCol, counterRow].Item.ID, 5);// Lägger till item till det vänstra trade fältet
+                    invRight.ReduceAmountOfItems(slots[counterCol, counterRow].Item.ID, 5);
+                }
+                else
+                {
+                    tradeRight.AddItem(slots[counterCol, counterRow].Item.ID, invRight.ItemList[invRight.FindIndexOf(slots[counterCol, counterRow].Item.ID)].Amount);// Lägger till item till det vänstra trade fältet
+                    invRight.ReduceAmountOfItems(slots[counterCol, counterRow].Item.ID, invRight.ItemList[invRight.FindIndexOf(slots[counterCol, counterRow].Item.ID)].Amount);
+                }
+            }
+            else if (participant == Participant.TradeSlotsLeft)
+            {
+                if (tradeLeft.ItemList[tradeLeft.FindIndexOf(slots[counterCol, counterRow].Item.ID)].Amount >= 5)
+                {
+                    invLeft.AddItem(slots[counterCol, counterRow].Item.ID, 5);// Lägger till item till det vänstra trade fältet
+                    tradeLeft.ReduceAmountOfItems(slots[counterCol, counterRow].Item.ID, 5);
+                }
+                else
+                {
+                    invLeft.AddItem(slots[counterCol, counterRow].Item.ID, tradeLeft.ItemList[tradeLeft.FindIndexOf(slots[counterCol, counterRow].Item.ID)].Amount);// Lägger till item till det vänstra trade fältet
+                    tradeLeft.ReduceAmountOfItems(slots[counterCol, counterRow].Item.ID, tradeLeft.ItemList[tradeLeft.FindIndexOf(slots[counterCol, counterRow].Item.ID)].Amount);
+                }
+            }
+            else if (participant == Participant.TradeSlotsRight)
+            {
+                if (tradeRight.ItemList[tradeRight.FindIndexOf(slots[counterCol, counterRow].Item.ID)].Amount >= 5)
+                {
+                    invRight.AddItem(slots[counterCol, counterRow].Item.ID, 5);// Lägger till item till det vänstra trade fältet
+                    tradeRight.ReduceAmountOfItems(slots[counterCol, counterRow].Item.ID, 5);
+                }
+                else
+                {
+                    invRight.AddItem(slots[counterCol, counterRow].Item.ID, tradeRight.ItemList[tradeRight.FindIndexOf(slots[counterCol, counterRow].Item.ID)].Amount);// Lägger till item till det vänstra trade fältet
+                    tradeRight.ReduceAmountOfItems(slots[counterCol, counterRow].Item.ID, tradeRight.ItemList[tradeRight.FindIndexOf(slots[counterCol, counterRow].Item.ID)].Amount);
+                }
+            }
+        }
         
-        //Klar
+        static bool CheckShiftClick()
+        {
+            return KMReader.IsKeyDown(Keys.LeftShift);
+        }
+
         static bool AcceptTrade(ref Inventory participantLeft, ref Inventory participantRight)
         {
             //If nothing is presented
@@ -283,7 +416,6 @@ namespace Active
             return true;
         }
 
-        //Klar
         static bool CheckInvFull()
         {
             bool full = false;
@@ -315,7 +447,6 @@ namespace Active
             return full;
         }
 
-        //Klar
         static void ChangeInv()
         {
             invLeft.Money += leftPrice - rightPrice;
@@ -332,7 +463,6 @@ namespace Active
             tradeRight.ItemList.Clear();
         }
 
-        // Klar
         static int CheckValue(Inventory inv)
         {
             double sum = 0;
@@ -343,7 +473,6 @@ namespace Active
             return (int)sum; // Avrundas nedåt
         }
         
-        // Klar
         static void ResetTrade()
         {
             foreach (var item in tradeSlotsLeft)
@@ -382,7 +511,6 @@ namespace Active
             UpdatePrices();
         }
 
-        //Klar
         static bool Exit()
         {
             invLeft = null;
@@ -400,7 +528,6 @@ namespace Active
             return true;
         }
 
-        // Klar
         static public void Draw(SpriteBatch sb)
         {
             sb.Draw(TextureManager.texTradeMenu, new Vector2(190, 144), Color.White);
