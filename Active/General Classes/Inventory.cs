@@ -154,7 +154,7 @@ namespace Active
                 {
                     amountLeft *= -1;
                     ReduceAmountOfItems(itemID, amountLeft);
-                }               
+                }
             }
             catch { }
         }
