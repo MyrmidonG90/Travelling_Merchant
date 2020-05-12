@@ -1,4 +1,4 @@
-﻿1200
+﻿12000
 13
 Potato;30
 Iron Ingot;21

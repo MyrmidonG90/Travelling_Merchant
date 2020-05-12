@@ -27,7 +27,7 @@ namespace Active
             while (!streamReader.EndOfStream)
             {
                 string tempData = streamReader.ReadLine();
-                string[] tempData2 = tempData.Split(',');
+                string[] tempData2 = tempData.Split('|');
                 for (int j = 0; j < tempData2.Length; j++)
                 {
                     itemData[counter, j] = tempData2[j];
