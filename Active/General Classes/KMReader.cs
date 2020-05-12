@@ -62,5 +62,14 @@ namespace Active
             return false;
         }
 
+        public static bool IsKeyDown(Keys key)
+        {
+            tmp = false;
+            if (keyState.IsKeyDown(key))
+            {
+                tmp = true;
+            }
+            return tmp;
+        }
     }
 }
