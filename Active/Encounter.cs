@@ -47,7 +47,7 @@ namespace Active
         int CheckClick()
         {
             click = -1;
-            if (KMReader.MouseClick())
+            if (KMReader.LeftMouseClick())
             {
                 found = false;
                 counter = 0;
