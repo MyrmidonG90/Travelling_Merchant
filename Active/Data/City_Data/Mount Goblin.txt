@@ -11,7 +11,7 @@ Fur;24
 Silk;12
 Lumber;11
 Stone;33
-Gryphon Meat;9
+Gryphon Meat;3
 Dragon Scale;5
 Spices;18
 Potions;4
