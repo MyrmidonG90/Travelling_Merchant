@@ -14,6 +14,7 @@ namespace Active
         static string location;
         static string[] skillNames;
         static int[] skillLevels;
+        static int[] skillXP;
         static List<string> eventCities;
         static List<string> eventNames;
         static List<int> activeEventID;
@@ -33,9 +34,15 @@ namespace Active
             skillNames[2] = "Persuasion";
 
             skillLevels = new int[3];
-            skillLevels[0] = 3;
-            skillLevels[1] = 3;
-            skillLevels[2] = 3;
+            skillLevels[0] = 1;
+            skillLevels[1] = 1;
+            skillLevels[2] = 1;
+
+            skillXP = new int[3];
+            skillXP[0] = 0;
+            skillXP[1] = 0;
+            skillXP[2] = 0;
+
 
             eventCities = new List<string>();
             eventNames = new List<string>();
@@ -45,6 +52,24 @@ namespace Active
 
         static public void Update()
         {
+            int count = 0;
+            foreach (string s in skillNames)
+            {
+                if(skillXP[count] < 100)
+                {
+                    skillLevels[count] = 1;
+                }
+                else if(skillXP[count] >= 100 && skillXP[count] < 200)
+                {
+                    skillLevels[count] = 2;
+                }
+                else if (skillXP[count] >= 200)
+                {
+                    skillLevels[count] = 3;
+                }
+                count++;
+            }
+
             //debug funktioner
             if (test)
             {
@@ -131,37 +156,22 @@ namespace Active
             return 50;
         }
 
-        static public bool SetSkillLevel(string skillName, float level)
+        static public bool SetSkillLevel(string skillName, int level)
         {
             int counter = 0;
             foreach (string tempString in skillNames)
             {
                 if (skillName == tempString)
                 {
-                    if (level == 0)
-                    {
-                        skillLevels[counter]++;
-                    }
-                    else
-                    {
-                        if (level < 0)
-                        {
-                            while (level != 0)
-                            {
-                                skillLevels[counter]--;
-                                level++;
-                            }
-                        }
-                        else
-                        {
-                            skillLevels[counter] += (int)level;
-                        }
-                    }
+                        skillXP[counter]+= level;
+                    
                 }
                 counter++;
             }
             return false;
         }
+
+
 
         static public Inventory Inventory
         {
