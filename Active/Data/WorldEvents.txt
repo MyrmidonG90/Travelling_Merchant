@@ -2,8 +2,8 @@ War
 This city is currently at war!
 true;true;false;false
 0;1;99;99
-60
-20
+10
+2
 ====
 Crop Failure
 This city is suffering from;large scale crop failure.

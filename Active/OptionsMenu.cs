@@ -261,7 +261,7 @@ namespace Active
                     string[] test = new string[2];
                     test[0] = "Carrot Town";
                     test[1] = "Steel Ville";
-                    WorldEventManager.EventFire(2, test, new Random());
+                    WorldEventManager.EventFire(0, test, new Random());
                 }
             }
         }

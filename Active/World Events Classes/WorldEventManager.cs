@@ -23,7 +23,7 @@ namespace Active
         static int oldCounter = 0;
         static int eventCounter = 0;
 
-        static float chance = 30f;
+        static float chance = 1f;
 
         static public void Init()
         {
