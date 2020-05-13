@@ -80,46 +80,47 @@ namespace Active
             }
             else // The amount of stacks does not fit inside of the itemList
             {
-                if (itemList.Count + amountOfStacks < invLimit+1) // Does not exceed itemList+1
+                StacksDoNotAddUp(amountOfStacks,index,itemID,amount);
+            }
+            return working;
+        }
+        void StacksDoNotAddUp(int amountOfStacks, int index, int itemID, int amount)
+        {
+            if (itemList.Count + amountOfStacks < invLimit + 1) // Does not exceed itemList+1
+            {
+                if (index != -1) // There are other stacks with same Id
                 {
-                    if (index != -1) // There are other stacks with same Id
+                    if (FindStackNotFull(itemID) != -1) // There are stacks not filled
                     {
-                        if (FindStackNotFull(itemID)!= -1) // There are stacks not filled
-                        {
-                            FillStacks(itemID, ref amount);
-                            AddStacks(itemID, amount);
-                            working = true;
-                        }
-                        else
-                        {
-                            AddStacks(itemID, amount);
-                            working = true;
-                        }
+                        FillStacks(itemID, ref amount);
+                        AddStacks(itemID, amount);                        
                     }
-                    else if (itemList.Count < 25)
+                    else
                     {
-                        AddStacks(itemID, amount);
-                        working = true;
+                        AddStacks(itemID, amount);                        
                     }
                 }
-                else if (itemList.Count + amountOfStacks == 26) 
+                else if (itemList.Count < 25)
                 {
-                    if (index != -1) // There are other stacks with same Id
+                    AddStacks(itemID, amount);                    
+                }
+            }
+            else if (itemList.Count + amountOfStacks == 26)
+            {
+                if (index != -1) // There are other stacks with same Id
+                {
+                    if (FindStackNotFull(itemID) != -1) // There are stacks not filled
                     {
-                        if (FindStackNotFull(itemID) != -1) // There are stacks not filled
+                        int amountToFill = 50 - itemList[FindStackNotFull(itemID)].Amount;
+                        if (amount <= amountToFill)
                         {
-                            int amountToFill = 50 - itemList[FindStackNotFull(itemID)].Amount;
-                            if (amount <= amountToFill)
-                            {
-                                FillStacks(itemID, ref amount);
-                                working = true;
-                            }                            
+                            FillStacks(itemID, ref amount);
+                            // Nu bör amountOfStacks vara 25 istället för 25
+                            AddStacks(itemID,amount);
                         }
                     }
                 }
             }
-            return working;
-            //här ska det läggas till någon prompt att det inte går att lägga till pga plats
         }
         void AddStacks(int itemID, int amount)
         {            
@@ -359,3 +360,40 @@ namespace Active
 
                 }
             }*/
+/*if (itemList.Count + amountOfStacks < invLimit+1) // Does not exceed itemList+1
+    {
+        if (index != -1) // There are other stacks with same Id
+        {
+            if (FindStackNotFull(itemID)!= -1) // There are stacks not filled
+            {
+                FillStacks(itemID, ref amount);
+                AddStacks(itemID, amount);
+                working = true;
+            }
+            else
+            {
+                AddStacks(itemID, amount);
+                working = true;
+            }
+        }
+        else if (itemList.Count < 25)
+        {
+            AddStacks(itemID, amount);
+            working = true;
+        }
+    }
+    else if (itemList.Count + amountOfStacks == 26) 
+    {
+        if (index != -1) // There are other stacks with same Id
+        {
+            if (FindStackNotFull(itemID) != -1) // There are stacks not filled
+            {
+                int amountToFill = 50 - itemList[FindStackNotFull(itemID)].Amount;
+                if (amount <= amountToFill)
+                {
+                    FillStacks(itemID, ref amount);
+                    working = true;
+                }                            
+            }
+        }
+    }*/
