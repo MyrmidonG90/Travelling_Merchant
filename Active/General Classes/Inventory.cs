@@ -70,7 +70,7 @@ namespace Active
                     {
                         AddStacks(itemID, amount);
                         working = true;
-                    }                    
+                    }
                 }
                 else // Creates enough stacks so that amount == 0
                 {
@@ -100,6 +100,21 @@ namespace Active
                     {
                         AddStacks(itemID, amount);
                         working = true;
+                    }
+                }
+                else if (itemList.Count + amountOfStacks == 26) 
+                {
+                    if (index != -1) // There are other stacks with same Id
+                    {
+                        if (FindStackNotFull(itemID) != -1) // There are stacks not filled
+                        {
+                            int amountToFill = 50 - itemList[FindStackNotFull(itemID)].Amount;
+                            if (amount <= amountToFill)
+                            {
+                                FillStacks(itemID, ref amount);
+                                working = true;
+                            }                            
+                        }
                     }
                 }
             }
@@ -146,7 +161,7 @@ namespace Active
             return (int)amountOfStacks;
         }
 
-        bool FillStacks(int itemID, ref int amount) // Fill Stacks úntil they're full or amount == 0
+        bool FillStacks(int itemID, ref int amount) // Fill Stacks until they're full or amount == 0
         {
             bool answer = false;
             int amountToFill;
