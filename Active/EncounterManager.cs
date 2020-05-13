@@ -45,19 +45,22 @@ namespace Active
             {
                 item.OccuredDuringTravel = false;
             }
+            currentEncounter = null;
         } // Called when a new trip is made
 
         static public bool Encountered()
         {
-            if (eventOnGoing == false)
+            if (currentEncounter == null)
             {
-                if (rand.Next(0, 9) == 0) // If Encountered //Change this one to increase/decrease encounters!!!
+                if (eventOnGoing == false)
                 {
-                    eventOnGoing = true;
-                    InitiateEncounter(FindID(RandomiseEncounter()));
+                    if (rand.Next(0, 9) == 0) // If Encountered //Change this one to increase/decrease encounters!!!
+                    {
+                        eventOnGoing = true;
+                        InitiateEncounter(FindID(RandomiseEncounter()));
+                    }
                 }
-            }
-
+            }          
             return eventOnGoing;
         } 
 
@@ -144,7 +147,7 @@ namespace Active
             
             // Ser till att under denna färden inte kommer upprepa samma encounter
             
-            if (encounters[FindEncounterID(FindID(counter))].OccuredDuringTravel) // Stackoverflow Farlig kod!!!
+            if (encounters[FindEncounterID(FindID(counter))].OccuredDuringTravel) // Stackoverflow Farlig kod!!! //buggen då inte hemsidan /My
             {
                 counter = RandomiseEncounter();
             }
@@ -251,33 +254,70 @@ namespace Active
             tmpInt = currentEncounter.Update();
             if (tmpInt != -1)
             {
-                Scenarios(currentEncounter.Id,tmpInt);
-                eventOnGoing = false;
-                boolUpdate = true;
+                if (Scenarios(currentEncounter.Id, tmpInt))
+                {
+                    eventOnGoing = false;
+                    boolUpdate = true;
+                }             
             }
             return boolUpdate;
 
         }
 
-        static void Scenarios(int eID, int answer)
+        static bool Scenarios(int eID, int answer)
         {
             switch (eID)
             {
                 case 0:
                     if (answer == 0)
                     {
-
+                        Player.Inventory.Money -= 20;
+                        return true;
                     }
-                    else if (answer == 1)
+                    else if (answer == 1 && Player.ReturnSkillLevel("Persuasion") >= 2)
                     {
-
+                        Player.Inventory.Money -= 10;
+                        return true;
                     }
                     else if (answer == 2)
                     {
-
+                        TravelMenu.AbortTravel();
+                        return true;
                     }
                     break;
-            }            
+                case 1:
+                    if (answer == 0)
+                    {
+                        Player.Inventory.Money -= (int)((Player.Inventory.Money * 0.3f) + 0.5f);
+                        return true;
+                    }
+                    else if (answer == 1)
+                    {
+                        //My pallar inte atm
+                        return false;
+                    }
+                    else if (answer == 2 && Player.ReturnSkillLevel("Intimidation") >= 3)
+                    {
+                        return true;
+                    }
+                    break;
+                case 2:
+                    if (answer == 0)
+                    {
+                        TravelMenu.TurnsLeft += 3;
+                        return true;
+                    }
+                    else if (answer == 1)
+                    {
+                        return true;
+                    }
+                    else if (answer == 2)
+                    {
+                        return true;
+                    }
+                    break;
+            }
+            return false;
         }
 
         static public void Draw(SpriteBatch sb) // Bör endast hända i TravelMenu
