@@ -45,7 +45,7 @@ namespace Active
         {
             if (KMReader.mouseState.LeftButton == ButtonState.Pressed && KMReader.prevMouseState.LeftButton == ButtonState.Released) //för att "hitta" exakt när kanppen trycks på
             {
-                if (KMReader.MouseClick())
+                if (KMReader.LeftMouseClick())
                 {
                     if (hitBox.Contains(KMReader.GetMousePoint()))
                     {

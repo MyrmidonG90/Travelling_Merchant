@@ -156,7 +156,7 @@ namespace Active
 
         private void CheckSelect()
         {
-            if (KMReader.MouseClick())
+            if (KMReader.LeftMouseClick())
             {
                 int counter = 0;
                 foreach (Rectangle tempRectangle in inventoryGrid)

@@ -31,9 +31,21 @@ namespace Active
             }
         }
 
-        public bool Clicked()
+        public bool LeftClicked()
         {
-            if (KMReader.MouseClick())
+            if (KMReader.LeftMouseClick())
+            {
+                if (hitbox.Contains(KMReader.GetMousePoint()))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public bool RightClicked()
+        {
+            if (KMReader.RightMouseClick())
             {
                 if (hitbox.Contains(KMReader.GetMousePoint()))
                 {
