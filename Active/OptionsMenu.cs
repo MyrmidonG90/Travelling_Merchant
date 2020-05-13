@@ -230,30 +230,30 @@ namespace Active
                 {
                     if (selectedSkill == 0)
                     {
-                        Player.SetSkillLevel("Wisdom", 0);
+                        Player.SetSkillLevel("Wisdom", 100);
                     }
                     else if (selectedSkill == 1)
                     {
-                        Player.SetSkillLevel("Intimidation", 0);
+                        Player.SetSkillLevel("Intimidation", 100);
                     }
                     else if (selectedSkill == 2)
                     {
-                        Player.SetSkillLevel("Persuasion", 0);
+                        Player.SetSkillLevel("Persuasion", 100);
                     }
                 }
                 if (btnSkillDecrease.Click() && !block)
                 {
                     if (selectedSkill == 0)
                     {
-                        Player.SetSkillLevel("Wisdom", -1f);
+                        Player.SetSkillLevel("Wisdom", -100);
                     }
                     else if (selectedSkill == 1)
                     {
-                        Player.SetSkillLevel("Intimidation", -1f);
+                        Player.SetSkillLevel("Intimidation", -100);
                     }
                     else if (selectedSkill == 2)
                     {
-                        Player.SetSkillLevel("Persuasion", -1f);
+                        Player.SetSkillLevel("Persuasion", -100);
                     }
                 }
                 if (btnWorldEventTest.Click() && !block)
