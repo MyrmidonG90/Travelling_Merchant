@@ -185,15 +185,16 @@ namespace Active
                 }
 
                 int counter = 0;
+                List<string> newTmpString = new List<string>();
                 foreach (string tempString in tmpString)
                 {
-                    tmpString[counter] = tempString.Replace("|", "\n");
+                    newTmpString.Add(tempString.Replace("|", "\n"));
                     counter++;
                 }
 
                 int tmpPercentage = int.Parse(FileManager.ReadPerLine[3+i*4]); // Får event procent
 
-                Events.Add(new TravelEvent(tmpID,tmpEID,tmpString,tmpPercentage)); // Skapar events
+                Events.Add(new TravelEvent(tmpID,tmpEID,newTmpString,tmpPercentage)); // Skapar events
             }
 
         }
