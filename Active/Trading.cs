@@ -98,7 +98,7 @@ namespace Active
             if (KMReader.MouseClick())
             {
                 // Om knappen accept klickas
-                if (accept.Click())
+                if (accept.LeftClick())
                 {
                     //AcceptTrade(ref participantLeft, ref participantRight);
                     if (AcceptTrade(ref participantLeft, ref participantRight)) //Debugg
@@ -107,12 +107,12 @@ namespace Active
                     }
                 }
                 // Om knappen reset klickas
-                else if (reset.Click())
+                else if (reset.LeftClick())
                 {
                     ResetTrade();
                 }
                 // Om knappen back klickas
-                else if (back.Click())
+                else if (back.LeftClick())
                 {
                     return Exit();
                 }

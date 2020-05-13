@@ -347,12 +347,12 @@ namespace Active
                 ChangeGameState(GameState.TravelMenu);
             }
 
-            if (WorldMapMenu.inventoryButton.Click())
+            if (WorldMapMenu.inventoryButton.LeftClick())
             {
                 ChangeGameState(GameState.InventoryMenu);
             }
 
-            if (WorldMapMenu.returnButton.Click())
+            if (WorldMapMenu.returnButton.LeftClick())
             {
                 RevertGameState();
             }
