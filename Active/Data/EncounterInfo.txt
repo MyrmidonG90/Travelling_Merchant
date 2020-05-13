@@ -1,6 +1,6 @@
 ﻿0
 0
-Halt! Road toll, 20gp to pass.
+Your journey towards the next city was going in a great pace until down the road you spot some sort of roadblock. | Your worries about it being a trap is quickly quelled as a guard wearing the armor of the lord of the lands approaches you from the blockade. | He informs you that the road on which you travel is built for military use and if civilian wishes to use it then that person needs to pay a toll of 20gp. 
 20
 1
 1
