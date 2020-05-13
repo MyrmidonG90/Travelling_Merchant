@@ -125,7 +125,7 @@ namespace Active
                         {
                             if (temptarget == tempCity.Name)
                             {
-                                Player.AddEventLogEntry(temptarget, tempEvent.EventName, tempEvent.InstanceID);
+                                Player.AddEventLogEntry(temptarget, tempEvent.EventName, tempEvent.InstanceID, tempEvent.DaysLeft);
                             }
                         }
                     }

@@ -17,6 +17,9 @@ namespace Active
         static List<string> eventCities;
         static List<string> eventNames;
         static List<int> activeEventID;
+        static List<int> eventDaysLeft;
+        static int date;
+        static int oldDate;
 
         static public void Init()
         {
@@ -37,6 +40,7 @@ namespace Active
             eventCities = new List<string>();
             eventNames = new List<string>();
             activeEventID = new List<int>();
+            eventDaysLeft = new List<int>();
         }
 
         static public void Update()
@@ -57,9 +61,40 @@ namespace Active
                     inventory.AddItem(ItemCreator.CreateItem(2, 10));
                 }
             }
+
+            date = Calendar.TotalDays;
+            int counter = 0;
+            bool check = false;
+            if (date != oldDate)
+            {
+                for (int i = 0; i < eventDaysLeft.Count; i++)
+                {
+                    eventDaysLeft[i] -= date - oldDate;
+                }
+
+                foreach (string tempTarget in eventCities)
+                {
+                    if (eventDaysLeft[counter] <= 0)
+                    {
+                        if (location == tempTarget)
+                        {
+                            eventCities.RemoveAt(counter);
+                            eventNames.RemoveAt(counter);
+                            activeEventID.RemoveAt(counter);
+                            check = true;
+                        }                        
+                    }
+                    counter++;
+                    if (check)
+                    {
+                        break;
+                    }
+                }
+            }
+            oldDate = date;
         }
 
-        static public void AddEventLogEntry(string target, string type, int id)
+        static public void AddEventLogEntry(string target, string type, int id, int days)
         {
             bool check = false;
             foreach (string tempName in eventCities)
@@ -77,6 +112,7 @@ namespace Active
                 eventCities.Add(target);
                 eventNames.Add(type);
                 activeEventID.Add(id);
+                eventDaysLeft.Add(days);
             }
         }
         
