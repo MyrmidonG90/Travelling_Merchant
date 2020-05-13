@@ -184,6 +184,13 @@ namespace Active
                     tmpString.Add(FileManager.splitter[j]); // Lägger in event text
                 }
 
+                int counter = 0;
+                foreach (string tempString in tmpString)
+                {
+                    tmpString[counter] = tempString.Replace("|", "\n");
+                    counter++;
+                }
+
                 int tmpPercentage = int.Parse(FileManager.ReadPerLine[3+i*4]); // Får event procent
 
                 Events.Add(new TravelEvent(tmpID,tmpEID,tmpString,tmpPercentage)); // Skapar events
