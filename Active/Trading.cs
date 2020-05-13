@@ -33,8 +33,8 @@ namespace Active
             invLeft = player;
             invRight = trader;
 
-            tradeLeft = new Inventory(player.Money);
-            tradeRight = new Inventory(trader.Money);
+            tradeLeft = new Inventory(player.Money,true);
+            tradeRight = new Inventory(trader.Money,true);
 
             priceDifference = 0;
             origLeftInv = player;
@@ -244,56 +244,14 @@ namespace Active
 
         static void SlotClick(Slot[,] slots, Participant participant)
         {
-            if (participant == Participant.Left)
+            if (CheckShiftClick())
             {
-                if (tradeLeft.ItemList.Count < 9)
-                {
-                    if (CheckShiftClick())
-                    {
-                        ShiftAndMouseClick(slots, participant);
-                    }
-                    else
-                    {
-                        MouseSlotClick(slots, participant);
-                    }
-                }
+                ShiftAndMouseClick(slots, participant);
             }
-            else if (participant == Participant.Right)
+            else
             {
-                if (tradeRight.ItemList.Count < 9)
-                {
-                    if (CheckShiftClick())
-                    {
-                        ShiftAndMouseClick(slots, participant);
-                    }
-                    else
-                    {
-                        MouseSlotClick(slots, participant);
-                    }
-                }
+                MouseSlotClick(slots, participant);
             }
-            else if (participant == Participant.TradeSlotsLeft)
-            {
-                if (CheckShiftClick())
-                {
-                    ShiftAndMouseClick(slots, participant);
-                }
-                else
-                {
-                    MouseSlotClick(slots, participant);
-                }                
-            }
-            else if (participant == Participant.TradeSlotsRight)
-            {
-                if (CheckShiftClick())
-                {
-                    ShiftAndMouseClick(slots, participant);
-                }
-                else
-                {
-                    MouseSlotClick(slots, participant);
-                }                
-            }            
             UpdateSlots();
             UpdatePrices();
         }
@@ -315,7 +273,7 @@ namespace Active
                 invLeft.AddItem(slots[counterCol, counterRow].Item.ID, 1);// Lägger till item till det vänstra trade fältet
                 tradeLeft.ReduceAmountOfItems(slots[counterCol, counterRow].Item.ID, 1);
             }
-            else if (participant == Participant.TradeSlotsLeft)
+            else if (participant == Participant.TradeSlotsRight)
             {
                 invRight.AddItem(slots[counterCol, counterRow].Item.ID, 1);// Lägger till item till det vänstra trade fältet
                 tradeRight.ReduceAmountOfItems(slots[counterCol, counterRow].Item.ID, 1);
@@ -341,8 +299,12 @@ namespace Active
             {
                 if (invRight.ItemList[invRight.FindIndexOf(slots[counterCol, counterRow].Item.ID)].Amount >= 5)
                 {
-                    tradeRight.AddItem(slots[counterCol, counterRow].Item.ID, 5);// Lägger till item till det vänstra trade fältet
-                    invRight.ReduceAmountOfItems(slots[counterCol, counterRow].Item.ID, 5);
+                    if (tradeRight.AddItem(slots[counterCol, counterRow].Item.ID, 5))
+                    {
+                        invRight.ReduceAmountOfItems(slots[counterCol, counterRow].Item.ID, 5);
+                    }
+                   ;// Lägger till item till det vänstra trade fältet
+                    
                 }
                 else
                 {
@@ -574,3 +536,40 @@ namespace Active
         }
     }
 }
+/* if (participant == Participant.Left)
+            {
+                             
+            }
+            else if (participant == Participant.Right)
+            {
+                if (CheckShiftClick())
+                {
+                    ShiftAndMouseClick(slots, participant);
+                }
+                else
+                {
+                    MouseSlotClick(slots, participant);
+                }                
+            }
+            else if (participant == Participant.TradeSlotsLeft)
+            {
+                if (CheckShiftClick())
+                {
+                    ShiftAndMouseClick(slots, participant);
+                }
+                else
+                {
+                    MouseSlotClick(slots, participant);
+                }                
+            }
+            else if (participant == Participant.TradeSlotsRight)
+            {
+                if (CheckShiftClick())
+                {
+                    ShiftAndMouseClick(slots, participant);
+                }
+                else
+                {
+                    MouseSlotClick(slots, participant);
+                }                
+            }            */

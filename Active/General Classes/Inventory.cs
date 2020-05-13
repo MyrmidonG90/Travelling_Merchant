@@ -26,6 +26,14 @@ namespace Active
             Initialize();
         }
 
+        public Inventory(int money,bool trading)
+        {
+            this.money = money;
+            itemList = new List<Item>();
+            stackLimit = 50;
+            invLimit = 9;
+        }
+
         //skum jag vet men fixade problem med referenser som pekar på samma objekt i minnet
         public Inventory(Inventory inv)
         {
@@ -44,6 +52,7 @@ namespace Active
             stackLimit = 50;
             invLimit = 25;
         }
+        
 
         public bool AddItem(Item newItem)
         {
@@ -56,7 +65,7 @@ namespace Active
             int index = FindIndexOf(itemID);
             int amountOfStacks = HowManyStacks(amount);            
 
-            if (itemList.Count + amountOfStacks < invLimit)// The amount of stacks fit inside of the itemList
+            if (itemList.Count + amountOfStacks < InvLimit)// The amount of stacks fit inside of the itemList
             {
                 if (index != -1) // // There are other stacks with same Id
                 {
@@ -80,47 +89,53 @@ namespace Active
             }
             else // The amount of stacks does not fit inside of the itemList
             {
-                StacksDoNotAddUp(amountOfStacks,index,itemID,amount);
+                working = StacksDoNotAddUp(amountOfStacks,index,itemID,amount);
             }
             return working;
         }
-        void StacksDoNotAddUp(int amountOfStacks, int index, int itemID, int amount)
+        bool StacksDoNotAddUp(int amountOfStacks, int index, int itemID, int amount)
         {
-            if (itemList.Count + amountOfStacks < invLimit + 1) // Does not exceed itemList+1
+            bool answer = false;
+            if (itemList.Count + amountOfStacks < InvLimit + 1) // Does not exceed itemList+1
             {
                 if (index != -1) // There are other stacks with same Id
                 {
                     if (FindStackNotFull(itemID) != -1) // There are stacks not filled
                     {
                         FillStacks(itemID, ref amount);
-                        AddStacks(itemID, amount);                        
+                        AddStacks(itemID, amount);
+                        answer = true;
                     }
                     else
                     {
-                        AddStacks(itemID, amount);                        
+                        AddStacks(itemID, amount);
+                        answer = true;
                     }
                 }
-                else if (itemList.Count < invLimit)
+                else if (itemList.Count < InvLimit)
                 {
-                    AddStacks(itemID, amount);                    
+                    AddStacks(itemID, amount);
+                    answer = true;
                 }
             }
-            else if (itemList.Count + amountOfStacks == invLimit+1)
+            else if (itemList.Count + amountOfStacks == InvLimit+1)
             {
                 if (index != -1) // There are other stacks with same Id
                 {
                     if (FindStackNotFull(itemID) != -1) // There are stacks not filled
                     {
-                        int amountToFill = stackLimit - itemList[FindStackNotFull(itemID)].Amount;
+                        int amountToFill = StackLimit - itemList[FindStackNotFull(itemID)].Amount;
                         if (amount <= amountToFill)
                         {
                             FillStacks(itemID, ref amount);
                             // Nu bör amountOfStacks vara 25 istället för 25
                             AddStacks(itemID,amount);
+                            answer = true;
                         }
                     }
                 }
             }
+            return answer;
         }
         void AddStacks(int itemID, int amount)
         {            
@@ -129,7 +144,7 @@ namespace Active
                 int amountOfStacks = HowManyStacks(amount);
                 while (amountOfStacks > 0)
                 {
-                    int tmp = stackLimit - amount;
+                    int tmp = StackLimit - amount;
                     if (tmp > 0)
                     {
                         itemList.Add(ItemCreator.CreateItem(itemID, amount));
@@ -138,12 +153,12 @@ namespace Active
                     }
                     else if (tmp == 0)
                     {
-                        itemList.Add(ItemCreator.CreateItem(itemID, stackLimit));
+                        itemList.Add(ItemCreator.CreateItem(itemID, StackLimit));
                         --amountOfStacks;
                     }
                     else
                     {
-                        itemList.Add(ItemCreator.CreateItem(itemID, stackLimit));
+                        itemList.Add(ItemCreator.CreateItem(itemID, StackLimit));
                         amount -= 50;
                         --amountOfStacks;
                     }
@@ -153,7 +168,7 @@ namespace Active
 
         int HowManyStacks(int amount)
         {
-            double amountOfStacks = (double)amount / stackLimit;
+            double amountOfStacks = (double)amount / StackLimit;
 
             if ((amountOfStacks % 1.0) > 0) // Calculate how many stacks it will create
             {
@@ -174,7 +189,7 @@ namespace Active
             {
                 while (FindStackNotFull(itemID) != -1 && amount != 0)
                 {
-                    amountToFill = stackLimit - itemList[FindStackNotFull(itemID)].Amount;
+                    amountToFill = StackLimit - itemList[FindStackNotFull(itemID)].Amount;
                     if (amount - amountToFill >= 0)
                     {
                         amount -= amountToFill;
@@ -247,7 +262,7 @@ namespace Active
             {
                 if (itemList[tmpCounter].ID == itemID)
                 {
-                    if (itemList[tmpCounter].Amount != stackLimit)
+                    if (itemList[tmpCounter].Amount != StackLimit)
                     {
                         found = true;
                         answer = tmpCounter;
@@ -291,6 +306,8 @@ namespace Active
 
         public int SurrogateKey { get => surrogateKey; set => surrogateKey = value; }
         public string SurrogateKeyName { get => surrogateKeyName; set => surrogateKeyName = value; }
+        public int StackLimit { get => stackLimit;}
+        public int InvLimit { get => invLimit;}
     }
 }
 /*
