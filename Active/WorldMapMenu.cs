@@ -88,7 +88,7 @@ namespace Active
 
             if (!temp)
             {
-                if (KMReader.MouseClick())
+                if (KMReader.LeftMouseClick())
                 {
                     showText = false;
                 }
