@@ -26,7 +26,7 @@ namespace Active
 
         static public bool CheckNewGame()
         {
-            if (newGame.Click())
+            if (newGame.LeftClick())
             {
                 return true;
             }
@@ -38,7 +38,7 @@ namespace Active
 
         static public bool CheckLoadGame()
         {
-            if (loadGame.Click())
+            if (loadGame.LeftClick())
             {
                 return true;
             }
@@ -50,7 +50,7 @@ namespace Active
 
         static public bool CheckExitGame()
         {
-            if (exitGame.Click())
+            if (exitGame.LeftClick())
             {
                 return true;
             }

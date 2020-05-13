@@ -293,7 +293,14 @@ namespace Active
                     }
                     else if (answer == 1)
                     {
-                        //My pallar inte atm
+                        foreach (Item tempitem in Player.Inventory.ItemList)
+                        {
+                            if (tempitem.Rarity == 2)
+                            {
+                                Player.Inventory.ReduceAmountOfItems(tempitem.ID, 1);
+                                return true;
+                            }
+                        }
                         return false;
                     }
                     else if (answer == 2 && Player.ReturnSkillLevel("Intimidation") >= 3)
