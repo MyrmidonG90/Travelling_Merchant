@@ -15,18 +15,20 @@ namespace Active
         int basePrice;
         Texture2D tex;
         int id;
+        int rarity;
         int primaryCategory;
         int secondaryCategory;
         int tertiaryCategory;
         int amount;
         string description;
 
-        public Item(string n, int bp, Texture2D tex, int id, int c1, int c2, int c3, int a, string d)
+        public Item(string n, int bp, Texture2D tex, int id, int r, int c1, int c2, int c3, int a, string d)
         {
             name = n;
             basePrice = bp;
             this.tex = tex;
             this.id = id;
+            rarity = r;
             primaryCategory = c1;
             secondaryCategory = c2;
             tertiaryCategory = c3;
@@ -72,6 +74,11 @@ namespace Active
                 return id;
             }
         }
+        public int Rarity
+        {
+            get => rarity;
+        }
+
         public int PrimaryCategory
         {
             get

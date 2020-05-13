@@ -184,6 +184,13 @@ namespace Active
                     tmpString.Add(FileManager.splitter[j]); // Lägger in event text
                 }
 
+                int counter = 0;
+                foreach (string tempString in tmpString)
+                {
+                    tmpString[counter] = tempString.Replace("|", "\n");
+                    counter++;
+                }
+
                 int tmpPercentage = int.Parse(FileManager.ReadPerLine[3+i*4]); // Får event procent
 
                 Events.Add(new TravelEvent(tmpID,tmpEID,tmpString,tmpPercentage)); // Skapar events
@@ -293,7 +300,14 @@ namespace Active
                     }
                     else if (answer == 1)
                     {
-                        //My pallar inte atm
+                        foreach (Item tempitem in Player.Inventory.ItemList)
+                        {
+                            if (tempitem.Rarity == 2)
+                            {
+                                Player.Inventory.ReduceAmountOfItems(tempitem.ID, 1);
+                                return true;
+                            }
+                        }
                         return false;
                     }
                     else if (answer == 2 && Player.ReturnSkillLevel("Intimidation") >= 3)

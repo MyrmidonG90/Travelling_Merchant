@@ -41,11 +41,26 @@ namespace Active
 
         }
 
-        public bool Click()
+        public bool LeftClick()
         {
             if (KMReader.mouseState.LeftButton == ButtonState.Pressed && KMReader.prevMouseState.LeftButton == ButtonState.Released) //för att "hitta" exakt när kanppen trycks på
             {
                 if (KMReader.MouseClick())
+                {
+                    if (hitBox.Contains(KMReader.GetMousePoint()))
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
+        public bool RightClick()
+        {
+            if (KMReader.mouseState.RightButton == ButtonState.Pressed && KMReader.prevMouseState.RightButton == ButtonState.Released) //för att "hitta" exakt när kanppen trycks på
+            {
+                if (KMReader.RightMouseClick())
                 {
                     if (hitBox.Contains(KMReader.GetMousePoint()))
                     {

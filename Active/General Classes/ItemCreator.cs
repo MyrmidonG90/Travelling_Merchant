@@ -22,7 +22,7 @@ namespace Active
             StreamReader streamReader = new StreamReader("./Data/Items.txt");
 
             length = int.Parse(streamReader.ReadLine());
-            itemData = new string[length, 6];
+            itemData = new string[length, 7];
             int counter = 0;
             while (!streamReader.EndOfStream)
             {
@@ -38,7 +38,7 @@ namespace Active
 
             for (int i = 0; i < length; i++)
             {
-                itemData[i, 5] = itemData[i, 5].Replace(";", "\n");
+                itemData[i, 6] = itemData[i, 6].Replace(";", "\n");
 
                 //for safekeeping /my
 
@@ -63,7 +63,7 @@ namespace Active
         {
             Item newItem;
 
-            newItem = new Item(itemData[id, 0], int.Parse(itemData[id, 1]), TextureManager.texItems[id], id, int.Parse(itemData[id, 2]), int.Parse(itemData[id, 3]), int.Parse(itemData[id, 4]), amount, itemData[id, 5]);
+            newItem = new Item(itemData[id, 0], int.Parse(itemData[id, 1]), TextureManager.texItems[id], id, int.Parse(itemData[id, 2]), int.Parse(itemData[id, 3]), int.Parse(itemData[id, 4]), int.Parse(itemData[id, 5]), amount, itemData[id, 6]);
           
             return newItem;
         }
