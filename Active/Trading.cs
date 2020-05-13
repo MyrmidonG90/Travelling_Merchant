@@ -412,7 +412,7 @@ namespace Active
             origLeftInv = invLeft;
             origRightInv = invRight;
             ResetTrade();
-            //Exit();
+            //Exit();S
             return true;
         }
 

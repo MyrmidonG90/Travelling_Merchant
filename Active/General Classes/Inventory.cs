@@ -100,18 +100,18 @@ namespace Active
                         AddStacks(itemID, amount);                        
                     }
                 }
-                else if (itemList.Count < 25)
+                else if (itemList.Count < invLimit)
                 {
                     AddStacks(itemID, amount);                    
                 }
             }
-            else if (itemList.Count + amountOfStacks == 26)
+            else if (itemList.Count + amountOfStacks == invLimit+1)
             {
                 if (index != -1) // There are other stacks with same Id
                 {
                     if (FindStackNotFull(itemID) != -1) // There are stacks not filled
                     {
-                        int amountToFill = 50 - itemList[FindStackNotFull(itemID)].Amount;
+                        int amountToFill = stackLimit - itemList[FindStackNotFull(itemID)].Amount;
                         if (amount <= amountToFill)
                         {
                             FillStacks(itemID, ref amount);
@@ -129,7 +129,7 @@ namespace Active
                 int amountOfStacks = HowManyStacks(amount);
                 while (amountOfStacks > 0)
                 {
-                    int tmp = 50 - amount;
+                    int tmp = stackLimit - amount;
                     if (tmp > 0)
                     {
                         itemList.Add(ItemCreator.CreateItem(itemID, amount));
@@ -138,12 +138,12 @@ namespace Active
                     }
                     else if (tmp == 0)
                     {
-                        itemList.Add(ItemCreator.CreateItem(itemID, 50));
+                        itemList.Add(ItemCreator.CreateItem(itemID, stackLimit));
                         --amountOfStacks;
                     }
                     else
                     {
-                        itemList.Add(ItemCreator.CreateItem(itemID, 50));
+                        itemList.Add(ItemCreator.CreateItem(itemID, stackLimit));
                         amount -= 50;
                         --amountOfStacks;
                     }
@@ -153,7 +153,7 @@ namespace Active
 
         int HowManyStacks(int amount)
         {
-            double amountOfStacks = (double)amount / 50.0;
+            double amountOfStacks = (double)amount / stackLimit;
 
             if ((amountOfStacks % 1.0) > 0) // Calculate how many stacks it will create
             {
@@ -174,7 +174,7 @@ namespace Active
             {
                 while (FindStackNotFull(itemID) != -1 && amount != 0)
                 {
-                    amountToFill = 50 - itemList[FindStackNotFull(itemID)].Amount;
+                    amountToFill = stackLimit - itemList[FindStackNotFull(itemID)].Amount;
                     if (amount - amountToFill >= 0)
                     {
                         amount -= amountToFill;
