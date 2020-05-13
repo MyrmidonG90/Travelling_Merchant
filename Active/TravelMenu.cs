@@ -18,8 +18,10 @@ namespace Active
         static string turnDisplay;
 
         static string destination;
+        static string oldLocation;
         static bool paused;
         static bool test;
+        static public bool travelling;
 
         static Button invButton;
         static Button pauseButton;
@@ -38,21 +40,11 @@ namespace Active
             pauseButton = new Button(830, 900, 260, 120, "paused", "Pause/Unpause", TextureManager.texButton);
             invButton = new Button(330, 900, 260, 120, "inv", "Inventory", TextureManager.texButton);
             mapButton = new Button(1330, 900, 260, 120, "map", "Map", TextureManager.texButton);
-            EncounterManager.Initialize();
             test = false;
         }
 
         static public void StartTravel(string newDestination)
         {
-
-            destination = newDestination;
-            EncounterManager.NewTrip();
-            paused = false;
-
-            turnsToTravel = 5;
-            turnsLeft = turnsToTravel;
-            turnTimer = timerLength;
-
             foreach (City tempCity in WorldMapMenu.Cities)
             {
                 if (tempCity.Name == Player.Location)
@@ -63,16 +55,29 @@ namespace Active
                         {
                             destination = newDestination;
                             paused = false;
+                            travelling = true;
 
                             turnsToTravel = 5;
                             turnsLeft = turnsToTravel;
                             turnTimer = timerLength;
+
+                            EncounterManager.NewTrip();
                         }
                     }
                 }
             }
-            EncounterManager.Initialize();
+        }
 
+        static public void AbortTravel()
+        {
+            destination = Player.Location;
+            paused = false;
+
+            turnsToTravel = 5;
+            turnsLeft = turnsToTravel - turnsLeft;
+            turnTimer = timerLength;
+
+            EncounterManager.NewTrip();
         }
 
         static public bool CheckInvbutton()
@@ -125,6 +130,7 @@ namespace Active
                 turnTimer = timerLength;
                 if (turnsLeft == 0)
                 {
+                    travelling = false;
                     return true;
                 }
                 else
@@ -167,6 +173,11 @@ namespace Active
             {
                 destination = value;
             }
+        }
+
+        static public string OldLocation
+        {
+            get => oldLocation;
         }
 
         static public int TurnsLeft

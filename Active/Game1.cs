@@ -76,6 +76,7 @@ namespace Active
             WorldEventManager.Init();
             EventLog.Init();
             WorldMapMenu.LoadCities();
+            EncounterManager.Initialize();
 
             ModifierManager.LoadCityAndCategoryLists();
             ModifierManager.LoadItemModifiers();
@@ -185,7 +186,7 @@ namespace Active
 
             spriteBatch.Begin();
 
-            if (gameState != GameState.MainMenu && Player.Location == TravelMenu.Destination)
+            if (gameState != GameState.MainMenu && !TravelMenu.travelling)
             {
                 DrawBackground(spriteBatch);
             }
