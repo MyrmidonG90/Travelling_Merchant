@@ -25,10 +25,10 @@ namespace Active
             textPos = new List<Vector2>();
             for (int i = 0; i < text.Count; i++)
             {
-                textPos.Add(new Vector2(300,200+i*10));
+                textPos.Add(new Vector2(450,300+i*10));
             }
             this.percentage = percentage;
-            rectMessage = new Rectangle(0,0,500,500);
+            rectMessage = new Rectangle(400,120,1100,750);
         }
 
         public int Percentage { get => percentage;}
@@ -41,7 +41,7 @@ namespace Active
             sb.Draw(TextureManager.texBox, rectMessage, Color.LightGray);
             for (int i = 0; i < text.Count; i++)
             {
-                sb.DrawString(TextureManager.font,text[i],textPos[i],Color.Black);
+                sb.DrawString(TextureManager.fontButton,text[i],textPos[i],Color.Black);
             }            
         }
     }
