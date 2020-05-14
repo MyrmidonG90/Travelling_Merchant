@@ -27,6 +27,8 @@ namespace Active
         static string cityInfo;
         static Vector2 cityCords;
 
+        static Vector2 posArrowDown;
+
         static int date;
         static int oldDate;
 
@@ -103,8 +105,8 @@ namespace Active
                         showText = true;
                         cityName = city.Name;
                         cityInfo = city.Information;
-
                         cityCords = city.Coordinates;
+                        posArrowDown.Y = cityCords.Y - TextureManager.texArrowDown.Bounds.Y;
 
                     }
                 }
@@ -151,6 +153,7 @@ namespace Active
                 if (button.Name == Player.Location)
                 {
                     spriteBatch.Draw(TextureManager.texSelect, button.HitBox, Color.White);
+                    //spriteBatch.Draw(TextureManager.texArrowDown,,Color.White);
                 }
             }
             
@@ -178,7 +181,7 @@ namespace Active
         {
             ItemList();
             StreamReader sr = new StreamReader("./Data/cityInfo.txt");
-
+            //posArrowDown = new Vector2(cities[0].Coordinates.X, cities[0].Coordinates.Y);
             int counter = 0;
             while (!sr.EndOfStream)
             {
@@ -268,6 +271,7 @@ namespace Active
                 return cityName;
             }
         }
+
         static public string CityInfo
         {
             get
