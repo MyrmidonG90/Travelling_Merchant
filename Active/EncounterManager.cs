@@ -54,7 +54,7 @@ namespace Active
             {
                 if (eventOnGoing == false)
                 {
-                    if (rand.Next(0, 9) == 0) // If Encountered //Change this one to increase/decrease encounters!!!
+                    if (rand.Next(0, 1) == 0) // If Encountered //Change this one to increase/decrease encounters!!!
                     {
                         eventOnGoing = true;
                         InitiateEncounter(FindID(RandomiseEncounter()));
@@ -184,9 +184,17 @@ namespace Active
                     tmpString.Add(FileManager.splitter[j]); // Lägger in event text
                 }
 
+                int counter = 0;
+                List<string> newTmpString = new List<string>();
+                foreach (string tempString in tmpString)
+                {
+                    newTmpString.Add(tempString.Replace("|", "\n"));
+                    counter++;
+                }
+
                 int tmpPercentage = int.Parse(FileManager.ReadPerLine[3+i*4]); // Får event procent
 
-                Events.Add(new TravelEvent(tmpID,tmpEID,tmpString,tmpPercentage)); // Skapar events
+                Events.Add(new TravelEvent(tmpID,tmpEID,newTmpString,tmpPercentage)); // Skapar events
             }
 
         }
@@ -293,7 +301,14 @@ namespace Active
                     }
                     else if (answer == 1)
                     {
-                        //My pallar inte atm
+                        foreach (Item tempitem in Player.Inventory.ItemList)
+                        {
+                            if (tempitem.Rarity == 2)
+                            {
+                                Player.Inventory.ReduceAmountOfItems(tempitem.ID, 1);
+                                return true;
+                            }
+                        }
                         return false;
                     }
                     else if (answer == 2 && Player.ReturnSkillLevel("Intimidation") >= 3)

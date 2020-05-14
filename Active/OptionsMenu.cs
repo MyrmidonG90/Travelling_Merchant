@@ -75,7 +75,7 @@ namespace Active
 
         static public bool CheckMainMenu()
         {
-            if (btnMain.Click() && menuToggle == MenuToggle.Standard)
+            if (btnMain.LeftClick() && menuToggle == MenuToggle.Standard)
             {
                 return true;
             }
@@ -87,7 +87,7 @@ namespace Active
 
         static public bool CheckSaveGame()
         {
-            if (btnSave.Click() && menuToggle == MenuToggle.Standard)
+            if (btnSave.LeftClick() && menuToggle == MenuToggle.Standard)
             {
                 return true;
             }
@@ -99,7 +99,7 @@ namespace Active
 
         static public bool CheckLoadGame()
         {
-            if (btnLoad.Click() && menuToggle == MenuToggle.Standard)
+            if (btnLoad.LeftClick() && menuToggle == MenuToggle.Standard)
             {
                 return true;
             }
@@ -113,7 +113,7 @@ namespace Active
         {
             if (menuToggle == MenuToggle.Options)
             {
-                if (btnFullscreen.Click())
+                if (btnFullscreen.LeftClick())
                 {
                     return true;
                 }
@@ -127,7 +127,7 @@ namespace Active
 
         static public bool CheckMenuToggle()
         {
-            if (btnMenu.Click())
+            if (btnMenu.LeftClick())
             {
                 return true;
             }
@@ -147,14 +147,14 @@ namespace Active
 
             if (menuToggle == MenuToggle.Debug || menuToggle == MenuToggle.Options)
             {
-                if (btnOptionsReturn.Click() && !block)
+                if (btnOptionsReturn.LeftClick() && !block)
                 {
                     menuToggle = MenuToggle.Standard;
                     block = true;
                 }
             }
             
-            if (btnClose.Click())
+            if (btnClose.LeftClick())
             {
                 menuToggle = MenuToggle.Standard;
                 return true;
@@ -200,13 +200,13 @@ namespace Active
         {
             if (menuToggle == MenuToggle.Standard)
             {
-                if (btnOptions.Click() && !block)
+                if (btnOptions.LeftClick() && !block)
                 {
                     menuToggle = MenuToggle.Options;
                     block = true;
                 }
 
-                if (btnDebug.Click() && !block)
+                if (btnDebug.LeftClick() && !block)
                 {
                     menuToggle = MenuToggle.Debug;
                     block = true;
@@ -218,7 +218,7 @@ namespace Active
         {
             if (menuToggle == MenuToggle.Debug)
             {
-                if (btnSkillCycle.Click() && !block)
+                if (btnSkillCycle.LeftClick() && !block)
                 {
                     selectedSkill++;
                     if (selectedSkill == 3)
@@ -226,42 +226,42 @@ namespace Active
                         selectedSkill = 0;
                     }
                 }
-                if (btnSkillIncrease.Click() && !block)
+                if (btnSkillIncrease.LeftClick() && !block)
                 {
                     if (selectedSkill == 0)
                     {
-                        Player.SetSkillLevel("Wisdom", 0);
+                        Player.SetSkillLevel("Wisdom", 100);
                     }
                     else if (selectedSkill == 1)
                     {
-                        Player.SetSkillLevel("Intimidation", 0);
+                        Player.SetSkillLevel("Intimidation", 100);
                     }
                     else if (selectedSkill == 2)
                     {
-                        Player.SetSkillLevel("Persuasion", 0);
+                        Player.SetSkillLevel("Persuasion", 100);
                     }
                 }
-                if (btnSkillDecrease.Click() && !block)
+                if (btnSkillDecrease.LeftClick() && !block)
                 {
                     if (selectedSkill == 0)
                     {
-                        Player.SetSkillLevel("Wisdom", -1f);
+                        Player.SetSkillLevel("Wisdom", -100);
                     }
                     else if (selectedSkill == 1)
                     {
-                        Player.SetSkillLevel("Intimidation", -1f);
+                        Player.SetSkillLevel("Intimidation", -100);
                     }
                     else if (selectedSkill == 2)
                     {
-                        Player.SetSkillLevel("Persuasion", -1f);
+                        Player.SetSkillLevel("Persuasion", -100);
                     }
                 }
-                if (btnWorldEventTest.Click() && !block)
+                if (btnWorldEventTest.LeftClick() && !block)
                 {
                     string[] test = new string[2];
                     test[0] = "Carrot Town";
                     test[1] = "Steel Ville";
-                    WorldEventManager.EventFire(0, test, new Random());
+                    WorldEventManager.EventFire(2, test, new Random());
                 }
             }
         }

@@ -134,7 +134,7 @@ namespace Active
             {
                 DrawSkills(spriteBatch);
             }
-            spriteBatch.DrawString(TextureManager.fontInventory, Player.EventNames.Count.ToString(), new Vector2(300, 300), Color.White);
+            //spriteBatch.DrawString(TextureManager.fontInventory, Player.EventNames.Count.ToString(), new Vector2(300, 300), Color.White);
 
         }
 
@@ -156,7 +156,7 @@ namespace Active
 
         private void CheckSelect()
         {
-            if (KMReader.MouseClick())
+            if (KMReader.LeftMouseClick())
             {
                 int counter = 0;
                 foreach (Rectangle tempRectangle in inventoryGrid)
@@ -180,15 +180,15 @@ namespace Active
 
         private void CheckTabClick()
         {
-            if (invTab.Click() && skillTab.Click())
+            if (invTab.LeftClick() && skillTab.LeftClick())
             {
                 alt = !alt;
             }
-            else if (invTab.Click())
+            else if (invTab.LeftClick())
             {
                 alt = false;
             }
-            else if (skillTab.Click())
+            else if (skillTab.LeftClick())
             {
                 alt = true;
             }
@@ -237,7 +237,7 @@ namespace Active
 
         private void CheckDisposeEnd()
         {
-            if (disposeOKButton.Click())
+            if (disposeOKButton.LeftClick())
             {
                 disposing = false;
                 dragging = false;
@@ -266,7 +266,7 @@ namespace Active
                 selectedSquare = 50;
                 return true;
             }
-            if (returnButton.Click())
+            if (returnButton.LeftClick())
             {
                 selected = null;
                 selectedSquare = 50;
@@ -281,7 +281,7 @@ namespace Active
             CheckSelect();
 
             //startar dispose processen
-            if (disposeButton.Click() && selected != null)
+            if (disposeButton.LeftClick() && selected != null)
             {
                 disposing = true;
             }
@@ -292,7 +292,7 @@ namespace Active
                 CheckDisposeEnd();
 
                 //startar slider 
-                if (disposeDragger.Click())
+                if (disposeDragger.LeftClick())
                 {
                     dragging = true;
                     fix = true;

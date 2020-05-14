@@ -16,6 +16,7 @@ namespace Active
         static Inventory invLeft, invRight, tradeLeft, tradeRight, origLeftInv, origRightInv, tmpInv;
         static Slot[,] slotsLeft, slotsRight, tradeSlotsLeft, tradeSlotsRight;
         static Button accept, reset, back;
+        static Item selected;
         static string zoneName;
         enum Participant
         {
@@ -87,32 +88,32 @@ namespace Active
 
         static void CreateButtons() // Initialiserar knapparna
         {
-            accept = new Button(830, 620, 260, 120, "accept", "Accept Trade", TextureManager.texButton);
-            reset = new Button(830, 760, 260, 120, "reset", "Reset Trade", TextureManager.texButton);
+            accept = new Button(1020, 200, 260, 120, "accept", "Accept Trade", TextureManager.texButton);
+            reset = new Button(720, 200, 260, 120, "reset", "Reset Trade", TextureManager.texButton);
             back = new Button(20, 20, 80, 80, TextureManager.texBackArrow);
         }
 
         static public bool Update(ref Inventory participantLeft, ref Inventory participantRight)
         {
             //När ett mussklick händer
-            if (KMReader.MouseClick())
+            if (KMReader.LeftMouseClick())
             {
                 // Om knappen accept klickas
-                if (accept.Click())
+                if (accept.LeftClick())
                 {
                     //AcceptTrade(ref participantLeft, ref participantRight);
                     if (AcceptTrade(ref participantLeft, ref participantRight)) //Debugg
                     {
-                        
+
                     }
                 }
                 // Om knappen reset klickas
-                else if (reset.Click())
+                else if (reset.LeftClick())
                 {
                     ResetTrade();
                 }
                 // Om knappen back klickas
-                else if (back.Click())
+                else if (back.LeftClick())
                 {
                     return Exit();
                 }
@@ -128,8 +129,43 @@ namespace Active
                                 CheckSlotClick(tradeSlotsRight, Participant.TradeSlotsRight); // Checkar om man har klickat på den högra trade inventorium
                             }
                         }
-                    }                    
+                    }
                 }
+            }
+            else if (KMReader.RightMouseClick())
+            {
+                foreach (Slot tempSlot in slotsLeft)
+                {
+                    if (tempSlot.RightClicked())
+                    {
+                        selected = tempSlot.Item;
+                    }
+                }
+
+                foreach (Slot tempSlot in slotsRight)
+                {
+                    if (tempSlot.RightClicked())
+                    {
+                        selected = tempSlot.Item;
+                    }
+                }
+
+                foreach (Slot tempSlot in tradeSlotsLeft)
+                {
+                    if (tempSlot.RightClicked())
+                    {
+                        selected = tempSlot.Item;
+                    }
+                }
+
+                foreach (Slot tempSlot in tradeSlotsRight)
+                {
+                    if (tempSlot.RightClicked())
+                    {
+                        selected = tempSlot.Item;
+                    }
+                }
+
             }
 
             return false;
@@ -195,14 +231,14 @@ namespace Active
             counterCol = 0;
             counterRow = 0;
             
-            while (counterCol <= slots.GetLength(1)-1 && slots[counterCol, counterRow].Clicked() == false) 
+            while (counterCol <= slots.GetLength(1)-1 && slots[counterCol, counterRow].LeftClicked() == false) 
             {
-                while (counterRow < slots.GetLength(1) - 1 && slots[counterCol, counterRow].Clicked() == false)
+                while (counterRow < slots.GetLength(1) - 1 && slots[counterCol, counterRow].LeftClicked() == false)
                 {
                     ++counterRow;
                 }
 
-                if (slots[counterCol, counterRow].Clicked() == false)
+                if (slots[counterCol, counterRow].LeftClicked() == false)
                 {
                     counterRow = 0;
                     ++counterCol;
@@ -212,7 +248,7 @@ namespace Active
             {
                 --counterCol;
             }
-            if (slots[counterCol, counterRow].Clicked() == true && slots[counterCol, counterRow].Item != null) // Om Slots:en som tillhör inventory:n har blivit klickat
+            if (slots[counterCol, counterRow].LeftClicked() == true && slots[counterCol, counterRow].Item != null) // Om Slots:en som tillhör inventory:n har blivit klickat
             {
                 SlotClick(slots, participant);
                /* if (participant == Participant.Left) // Inventory to the left aka Player
@@ -532,6 +568,26 @@ namespace Active
                 sb.DrawString(TextureManager.fontButton, priceDifference.ToString(), moneyPos, Color.Black);
             }
 
+            if (selected != null)
+            {
+                Vector2 temp = TextureManager.fontButton.MeasureString(selected.Name);
+                Vector2 namePos = new Vector2(((1920 - temp.X) / 2), 640);
+                sb.DrawString(TextureManager.fontButton, selected.Name, namePos, Color.Black);
+                sb.DrawString(TextureManager.fontButton, "Standard Price: " + selected.BasePrice.ToString(), new Vector2(820, 680), Color.Black);
+
+                if (selected.PrimaryCategory != 999)
+                {
+                    sb.DrawString(TextureManager.fontInventory, "test", new Vector2(820, 740), Color.White);
+                }
+                if (selected.SecondaryCategory != 999)
+                {
+                    sb.DrawString(TextureManager.fontInventory, "test", new Vector2(910, 740), Color.White);
+                }
+                if (selected.TertiaryCategory != 999)
+                {
+                    sb.DrawString(TextureManager.fontInventory, "test", new Vector2(1000, 740), Color.White);
+                }
+            }
 
         }
     }

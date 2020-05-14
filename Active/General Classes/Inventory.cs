@@ -225,6 +225,7 @@ namespace Active
                 }
                 else if (amountLeft < 0)
                 {
+                    itemList.RemoveAt(FindIndexOf(itemID));
                     amountLeft *= -1;
                     ReduceAmountOfItems(itemID, amountLeft);
                 }

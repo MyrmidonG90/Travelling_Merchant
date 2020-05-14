@@ -33,7 +33,7 @@ namespace Active
             btnOptions = new List<Button>();
             for (int i = 0; i < optionTexts.Count; i++)
             {
-                btnOptions.Add(new Button(500+270*i,600,260,120,"something",optionTexts[i],TextureManager.texBox));
+                btnOptions.Add(new Button(560+270*i,700,260,120,"something",optionTexts[i],TextureManager.texBox));
                 
             }
             occuredDuringTravel = false;
@@ -47,7 +47,7 @@ namespace Active
         int CheckClick()
         {
             click = -1;
-            if (KMReader.MouseClick())
+            if (KMReader.LeftMouseClick())
             {
                 found = false;
                 counter = 0;

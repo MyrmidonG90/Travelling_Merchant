@@ -50,7 +50,7 @@ namespace Active
             int counter = 0;
             foreach (Button button in travelButtons)
             {
-                if (button.Click())
+                if (button.LeftClick())
                 {
                     destination = cities[counter].Name;
                 }
@@ -80,7 +80,7 @@ namespace Active
 
             foreach (Button button in cityButtons)
             {
-                if (button.Click())
+                if (button.LeftClick())
                 {
                     temp = true;
                 }
@@ -88,7 +88,7 @@ namespace Active
 
             if (!temp)
             {
-                if (KMReader.MouseClick())
+                if (KMReader.LeftMouseClick())
                 {
                     showText = false;
                 }
@@ -98,7 +98,7 @@ namespace Active
             {
                 foreach (City city in cities)
                 {
-                    if (button.Click() && button.Name == city.Name)
+                    if (button.LeftClick() && button.Name == city.Name)
                     {
                         showText = true;
                         cityName = city.Name;

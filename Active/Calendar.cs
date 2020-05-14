@@ -110,7 +110,7 @@ namespace Active
 
         static public bool CheckEventClick()
         {
-            if (eventLog.Click())
+            if (eventLog.LeftClick())
             {
                 return true;
             }

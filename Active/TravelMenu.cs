@@ -82,7 +82,7 @@ namespace Active
 
         static public bool CheckInvbutton()
         {
-            if (invButton.Click() && paused)
+            if (invButton.LeftClick() && paused)
             {
                 return true;
             }
@@ -92,7 +92,7 @@ namespace Active
 
         static public bool CheckMapButton()
         {
-            if (mapButton.Click() && paused)
+            if (mapButton.LeftClick() && paused)
             {
                 return true;
             }
@@ -113,7 +113,7 @@ namespace Active
                 }
             }
 
-            if (pauseButton.Click())
+            if (pauseButton.LeftClick())
             {
                 paused = !paused; 
             }

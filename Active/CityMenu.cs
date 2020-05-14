@@ -37,7 +37,7 @@ namespace Active
 
         public void Update(GameTime gameTime)
         {
-            if (nextTurnButton.Click())
+            if (nextTurnButton.LeftClick())
             {
                 Calendar.AddDays(1);
             }
@@ -68,7 +68,7 @@ namespace Active
 
         public bool CheckInvButton()
         {
-            if (inventoryButton.Click())
+            if (inventoryButton.LeftClick())
             {
                 return true;
             }
@@ -76,7 +76,7 @@ namespace Active
         }
         public bool CheckTradeButton()
         {
-            if (tradeButton.Click())
+            if (tradeButton.LeftClick())
             {
                 return true;
             }
@@ -84,7 +84,7 @@ namespace Active
         }
         public bool CheckMapButton()
         {
-            if (mapButton.Click())
+            if (mapButton.LeftClick())
             {
                 return true;
             }

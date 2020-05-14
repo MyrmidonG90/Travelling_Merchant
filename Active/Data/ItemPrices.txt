@@ -78,7 +78,7 @@ Textiles
 Gear
 1
 Magic
-0,5
+0,8
 Valuables
 1,7
 Manufactured
