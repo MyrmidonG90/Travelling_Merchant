@@ -251,28 +251,6 @@ namespace Active
             if (slots[counterCol, counterRow].LeftClicked() == true && slots[counterCol, counterRow].Item != null) // Om Slots:en som tillhör inventory:n har blivit klickat
             {
                 SlotClick(slots, participant);
-               /* if (participant == Participant.Left) // Inventory to the left aka Player
-                {
-                    tradeLeft.AddItem(slots[counterCol, counterRow].Item.ID, 1);// Lägger till item till det vänstra trade fältet
-                    invLeft.ReduceAmountOfItems(slots[counterCol, counterRow].Item.ID, 1);
-                }
-                else if (participant == Participant.Right) // Inventoty to the right aka Merchant
-                {
-                    tradeRight.AddItem(slots[counterCol, counterRow].Item.ID, 1); // Lägger till item till det högra trade fältet
-                    invRight.ReduceAmountOfItems(slots[counterCol, counterRow].Item.ID, 1);
-                }
-                else if (participant == Participant.TradeSlotsLeft)
-                {
-                    tradeLeft.ReduceAmountOfItems(slots[counterCol, counterRow].Item.ID, 1);
-                    invLeft.AddItem(slots[counterCol, counterRow].Item.ID, 1);
-                }
-                else if (participant == Participant.TradeSlotsRight)
-                {
-                     tradeRight.ReduceAmountOfItems(slots[counterCol, counterRow].Item.ID, 1);
-                    invRight.AddItem(slots[counterCol, counterRow].Item.ID, 1);
-                }
-                UpdateSlots();
-                UpdatePrices();*/
                 return true;
             }
             return false;
@@ -391,8 +369,8 @@ namespace Active
 
         static bool AcceptTrade(ref Inventory participantLeft, ref Inventory participantRight)
         {
-            EndCredits.Start();
-            LevelUp.Start(0);
+            EndCredits.Start();///////////////////////////////////////////////////////////////////////////////
+
             //If nothing is presented
             if (tradeLeft.ItemList.Count == 0 && tradeRight.ItemList.Count == 0)
             {
@@ -420,7 +398,6 @@ namespace Active
             origLeftInv = invLeft;
             origRightInv = invRight;
             ResetTrade();
-            //Exit();S
             return true;
         }
 

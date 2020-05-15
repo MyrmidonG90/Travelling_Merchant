@@ -108,13 +108,12 @@ namespace Active
                         cityName = city.Name;
                         cityInfo = city.Information;
                         cityCords = city.Coordinates;
-                        posArrowDown.Y = cityCords.Y - TextureManager.texArrowDown.Bounds.Y;
-
+                        posArrowDown.X = city.Coordinates.X;
+                        posArrowDown.Y = cityCords.Y -TextureManager.texArrowDown.Bounds.Y- 110;
                     }
                 }
             }
-
-            date = Calendar.TotalDays;          
+            date = Calendar.TotalDays;
         }
 
         static public void CheckPlayerEventLog()
@@ -155,12 +154,12 @@ namespace Active
                 if (button.Name == Player.Location)
                 {
                     spriteBatch.Draw(TextureManager.texSelect, button.HitBox, Color.White);
-                    //spriteBatch.Draw(TextureManager.texArrowDown,,Color.White);
                 }
             }
             
             inventoryButton.Draw(spriteBatch);
             returnButton.Draw(spriteBatch);
+            spriteBatch.Draw(TextureManager.texArrowDown, posArrowDown,Color.White);
 
             if (showText)
             {
@@ -182,6 +181,7 @@ namespace Active
         static public void LoadCities()
         {
             ItemList();
+            
             StreamReader sr = new StreamReader("./Data/cityInfo.txt");
             //posArrowDown = new Vector2(cities[0].Coordinates.X, cities[0].Coordinates.Y);
             int counter = 0;
@@ -211,6 +211,9 @@ namespace Active
                 counter++;
             }
             sr.Close();
+            posArrowDown = new Vector2(-100, -100);
+            posArrowDown.X = cities[0].Coordinates.X;
+            posArrowDown.Y = cities[0].Coordinates.Y - TextureManager.texArrowDown.Bounds.Y - 110;
 
             //CityManager.SaveCities();
             //CityManager.LoadCities();
