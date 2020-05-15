@@ -55,6 +55,7 @@ namespace Active
             base.Initialize();
             graphics.PreferredBackBufferWidth = 1920;
             graphics.PreferredBackBufferHeight = 1080;
+            EndCredits.Initialize();
             //graphics.IsFullScreen = true;
             //väldigt svårt att debugga i fullscreen så rekomenderar att lämna det av förutom när det behövs /My
             graphics.ApplyChanges();
@@ -92,6 +93,7 @@ namespace Active
             options = false;
             activeInv = new Inventory(100);
             random = new Random();
+            
 
             CityControlList = new List<string>();
             CityControlList.Add("Carrot Town");
@@ -105,6 +107,8 @@ namespace Active
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Back))
                 Exit();
+
+            EndCredits.Update(gameTime.ElapsedGameTime.TotalMilliseconds);//////////////////////////////////////
 
             if (WorldEventManager.Update(random))
             {
@@ -229,8 +233,8 @@ namespace Active
                 EventLog.Draw(spriteBatch);
             }
 
-            OptionsMenu.Draw(spriteBatch, options);          
-
+            OptionsMenu.Draw(spriteBatch, options);
+            EndCredits.Draw(spriteBatch);//////////////////////////////
             spriteBatch.End();
 
             Window.Title = "Press F6 for debug menu          " + Player.SkillLevels[0].ToString() + Player.SkillLevels[1].ToString() + Player.SkillLevels[2].ToString() + "    " + OptionsMenu.selectedSkill;
@@ -239,6 +243,7 @@ namespace Active
             {
                 Window.Title = "WAAAAR";
             }
+            
 
             base.Draw(gameTime);
         }

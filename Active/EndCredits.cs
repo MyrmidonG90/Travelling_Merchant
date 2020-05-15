@@ -35,7 +35,7 @@ namespace Active
             onGoing = false;
             currentStage = Stage.Start;
             texts = new List<RollText>();
-            for (int i = 0; i < (int)Stage.End; i++)
+            for (int i = 0; i < (int)Stage.End+1; i++)
             {
                 texts.Add(new RollText(5));
             }
@@ -44,6 +44,54 @@ namespace Active
             IniTesters();
             IniSpecialThanks();
             IniEnd();
+        }
+
+        static public void Start()
+        {
+            onGoing = true;
+        }
+
+        static void Reset()
+        {
+            onGoing = false;
+            currentStage = Stage.Start;
+            foreach (var item in texts)
+            {
+                item.Reset();
+            }
+        }
+
+        static public void Update(double timePassed)
+        {
+            if (onGoing)
+            {
+                timer -= timePassed;
+                if (timer < 0)
+                {
+                    if (texts[(int)currentStage].MoveTextVertical() == true)
+                    {
+
+                        if (currentStage != Stage.End)
+                        {
+                            ++currentStage;
+                        }
+                        else
+                        {
+                            Reset();
+                            
+                        }
+                    }
+                    timer = 10;
+                }
+            }
+        }
+
+        static public void Draw(SpriteBatch sb)
+        {
+            if (onGoing)
+            {
+                texts[(int)currentStage].Draw(sb);
+            }
         }
 
         static void IniStart()
@@ -79,48 +127,8 @@ namespace Active
             texts[(int)Stage.End].AddText("The End");
         }
 
-        static public void Start()
-        {
-            onGoing = true;
-        }
+       
 
-        static void Reset()
-        {
-            onGoing = false;
-            currentStage = Stage.Start;
-        }
 
-        static public void Update(double timePassed)
-        {            
-            if (onGoing)
-            {
-                timer -= timePassed;
-                if (timer < 0)
-                {
-                    if (texts[(int)currentStage].MoveTextVertical() == true)
-                    {
-                        
-                        if (currentStage != Stage.End)
-                        {
-                            ++currentStage;
-                        }
-                        else
-                        {
-                            Reset();                            
-                        }
-                        
-                    }
-                    timer = 100;
-                }                
-            }
-        }
-        
-        static public void Draw(SpriteBatch sb)
-        {
-            if (onGoing)
-            {
-                texts[(int)currentStage].Draw(sb);
-            }
-        }
     }
 }

@@ -39,13 +39,15 @@ namespace Active
             {
                 for (int i = 0; i < textPos.Count; i++)
                 {
-                    textPos[i] = new Vector2(textPos[i].X + velocity, textPos[i].Y + velocity);
+                    textPos[i] = new Vector2(textPos[i].X , textPos[i].Y - velocity);
                 }
             }
             return finished;
         }
-        void Reset()
+        public void Reset()
         {
+            finished = false;
+            textPos = new List<Vector2>();
             for (int i = 0; i < texts.Count; i++)
             {
                 textPos.Add(new Vector2(1920 / 2 - TextureManager.font.MeasureString(texts[texts.Count - 1]).X / 2, 1080 + 5 + textPos.Count * TextureManager.font.MeasureString("I").Y));
