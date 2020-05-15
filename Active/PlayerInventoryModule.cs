@@ -52,16 +52,12 @@ namespace Active
             mainBox = new Rectangle(260, 150, 1400, 880);
             inventoryBox = new Rectangle(300, 170, 720, 720);
 
-            priCategoryBox = new Rectangle(1100, 760, 120, 120);
-            secCategoryBox = new Rectangle(1240, 760, 120, 120);
-            terCategoryBox = new Rectangle(1380, 760, 120, 120);
+            priCategoryBox = new Rectangle(1130, 760, 120, 120);
+            secCategoryBox = new Rectangle(1310, 760, 120, 120);
+            terCategoryBox = new Rectangle(1490, 760, 120, 120);
 
             invTab = new Button(280, 90, 200, 60, TextureManager.texInvTab);
             skillTab = new Button(470, 90, 200, 60, TextureManager.texSkillTab);
-
-            posPriCategoryString = new Vector2(1110, 795);
-            posSecCategoryString = new Vector2(1250, 795);
-            posTerCategoryString = new Vector2(1390, 795);
 
             disposeButton = new Button(1560, 930, 70, 70, TextureManager.texWhite);
             returnButton = new Button(20, 20, 80, 80, TextureManager.texBackArrow);
@@ -357,24 +353,34 @@ namespace Active
 
             if (selected != null)
             {
-                spriteBatch.DrawString(TextureManager.fontHeader, selected.Name, new Vector2(1100, 200), Color.White);
+                if (selected.Rarity == 0)
+                {
+                    spriteBatch.Draw(TextureManager.texIconCommon, new Vector2(1110, 180), Color.White);
+                }
+                if (selected.Rarity == 1)
+                {
+                    spriteBatch.Draw(TextureManager.texIconUncommon, new Vector2(1110, 180), Color.White);
+                }
+                if (selected.Rarity == 2)
+                {
+                    spriteBatch.Draw(TextureManager.texIconRare, new Vector2(1110, 180), Color.White);
+                }
+                spriteBatch.DrawString(TextureManager.fontHeader, selected.Name, new Vector2(1220, 200), Color.White);
                 spriteBatch.DrawString(TextureManager.fontInventory, "Info: \n" + selected.Description, new Vector2(1100, 310), Color.White);
                 spriteBatch.DrawString(TextureManager.fontInventory, "Standard Price: " + selected.BasePrice.ToString() + "c", new Vector2(1100, 660), Color.White);
 
                 if (selected.PrimaryCategory != 999)
                 {
-                    spriteBatch.Draw(TextureManager.texBox, priCategoryBox, colors[selected.PrimaryCategory - 1]);
-                    spriteBatch.DrawString(TextureManager.fontInventory, cats[selected.PrimaryCategory - 1], posPriCategoryString, Color.White);
+                    spriteBatch.Draw(TextureManager.texCategories[selected.PrimaryCategory - 1], priCategoryBox, Color.White);
                 }
                 if (selected.SecondaryCategory != 999)
                 {
-                    spriteBatch.Draw(TextureManager.texBox, secCategoryBox, colors[selected.SecondaryCategory - 1]);
-                    spriteBatch.DrawString(TextureManager.fontInventory, cats[selected.SecondaryCategory - 1], posSecCategoryString, Color.White);
+                    spriteBatch.Draw(TextureManager.texCategories[selected.SecondaryCategory - 1], secCategoryBox, Color.White);
+
                 }
                 if (selected.TertiaryCategory != 999)
                 {
-                    spriteBatch.Draw(TextureManager.texBox, terCategoryBox, colors[selected.TertiaryCategory - 1]);
-                    spriteBatch.DrawString(TextureManager.fontInventory, cats[selected.TertiaryCategory - 1], posTerCategoryString, Color.White);
+                    spriteBatch.Draw(TextureManager.texCategories[selected.TertiaryCategory - 1], terCategoryBox, Color.White);
                 }
 
                 disposeButton.Draw(spriteBatch);
