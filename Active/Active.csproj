@@ -160,6 +160,9 @@
     <Content Include="Data\City_Data\Steel Ville.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Data\routeInfo.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Data\test.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

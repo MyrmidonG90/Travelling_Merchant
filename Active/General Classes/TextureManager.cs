@@ -68,6 +68,7 @@ namespace Active
 
         static public List<Texture2D> texItems;
         static public List<Texture2D> texCities;
+        static public List<Texture2D> texCategories;
 
         static public void LoadContent(ContentManager content)
         {
@@ -209,6 +210,16 @@ namespace Active
             texCities = new List<Texture2D>();
             texCities.Add(texCarrotTown);
             texCities.Add(texTowerTown);
+
+            texCategories = new List<Texture2D>();
+            texCategories.Add(texCatFood);
+            texCategories.Add(texCatMetals);
+            texCategories.Add(texCatRawMaterials);
+            texCategories.Add(texCatTextiles);
+            texCategories.Add(texCatGear);
+            texCategories.Add(texCatMagic);
+            texCategories.Add(texCatValuables);
+            texCategories.Add(texCatManufactured);
         }
     }
 }

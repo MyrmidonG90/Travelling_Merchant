@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,6 +28,9 @@ namespace Active
         static Button pauseButton;
         static Button mapButton;
 
+        static string[,] routeNames;
+        static int[] routes;
+
         static public void Init()
         {
             turnsToTravel = 5;
@@ -41,17 +45,41 @@ namespace Active
             invButton = new Button(330, 900, 260, 120, "inv", "Inventory", TextureManager.texButton);
             mapButton = new Button(1330, 900, 260, 120, "map", "Map", TextureManager.texButton);
             test = false;
+
+            LoadRoutes();
+            int i = 0;
         }
 
         static public void StartTravel(string newDestination)
         {
-            foreach (City tempCity in WorldMapMenu.Cities)
+            for (int i = 0; i < 14; i++)
             {
-                if (tempCity.Name == Player.Location)
+                if (routeNames[i, 0] == Player.Location)
                 {
-                    foreach (string tempNeigh in tempCity.Neighbors)
+                    for (int j = 0; j < 14; j++)
                     {
-                        if (newDestination == tempNeigh)
+                        if (routeNames[j, 1] == newDestination)
+                        {
+                            destination = newDestination;
+                            paused = false;
+                            travelling = true;
+
+                            turnsToTravel = 5;
+                            turnsLeft = turnsToTravel;
+                            turnTimer = timerLength;
+
+                            EncounterManager.NewTrip();
+                        }
+                    }
+                }
+            }
+            for (int i = 0; i < 14; i++)
+            {
+                if (routeNames[i, 0] == newDestination)
+                {
+                    for (int j = 0; j < 14; j++)
+                    {
+                        if (routeNames[j, 1] == Player.Location)
                         {
                             destination = newDestination;
                             paused = false;
@@ -160,6 +188,26 @@ namespace Active
             if (EncounterManager.EventOnGoing)
             {
                 EncounterManager.Draw(spriteBatch);
+            }
+        }
+
+        static private void LoadRoutes()
+        {
+            StreamReader streamReader;
+            streamReader = new StreamReader("./Data/routeInfo.txt");
+            routes = new int[14];
+            routeNames = new string[14, 2];
+
+            int counter = 0;
+            while (!streamReader.EndOfStream)
+            {
+                string temp = streamReader.ReadLine();
+                string[] data = temp.Split('|');
+
+                routeNames[counter, 0] = data[0];
+                routeNames[counter, 1] = data[1];
+                routes[counter] = int.Parse(data[2]);
+                counter++;
             }
         }
 
