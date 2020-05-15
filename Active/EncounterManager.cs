@@ -54,7 +54,7 @@ namespace Active
             {
                 if (eventOnGoing == false)
                 {
-                    if (rand.Next(0, 90) == 0) // If Encountered //Change this one to increase/decrease encounters!!!
+                    if (rand.Next(0, 9) == 0) // If Encountered //Change this one to increase/decrease encounters!!!
                     {
                         eventOnGoing = true;
                         InitiateEncounter(FindID(RandomiseEncounter()));
