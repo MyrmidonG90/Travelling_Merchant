@@ -37,7 +37,7 @@ namespace Active
             texts = new List<RollText>();
             for (int i = 0; i < (int)Stage.End+1; i++)
             {
-                texts.Add(new RollText(5));
+                texts.Add(new RollText(3));
             }
             IniStart();
             IniDevelopers();
@@ -81,7 +81,7 @@ namespace Active
                             
                         }
                     }
-                    timer = 10;
+                    timer = 15;
                 }
             }
         }

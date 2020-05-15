@@ -27,7 +27,7 @@ namespace Active
         public void AddText(string text)
         {
             texts.Add(text);
-            textPos.Add( new Vector2(1920 / 2 - TextureManager.font.MeasureString(texts[texts.Count - 1]).X/2, 1080 + textPos.Count * TextureManager.font.MeasureString("I").Y));
+            textPos.Add( new Vector2(1920 / 2 - TextureManager.fontHeader.MeasureString(texts[texts.Count - 1]).X/2, 1080 + textPos.Count * TextureManager.fontHeader.MeasureString("I").Y));
         }
         public bool MoveTextVertical()
         {            
@@ -50,7 +50,7 @@ namespace Active
             textPos = new List<Vector2>();
             for (int i = 0; i < texts.Count; i++)
             {
-                textPos.Add(new Vector2(1920 / 2 - TextureManager.font.MeasureString(texts[texts.Count - 1]).X / 2, 1080 + 5 + textPos.Count * TextureManager.font.MeasureString("I").Y));
+                textPos.Add(new Vector2(1920 / 2 - TextureManager.fontHeader.MeasureString(texts[texts.Count - 1]).X / 2, 1080 + 5 + textPos.Count * TextureManager.fontHeader.MeasureString("I").Y));
             }
         }
 
@@ -58,7 +58,7 @@ namespace Active
         {
             for (int i = 0; i < texts.Count; i++)
             {
-                sb.DrawString(TextureManager.font,texts[i],textPos[i], Color.White);
+                sb.DrawString(TextureManager.fontHeader,texts[i],textPos[i], Color.White);
             }
         }
     }
