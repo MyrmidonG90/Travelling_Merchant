@@ -52,6 +52,9 @@ namespace Active
 
         static public void Update()
         {
+
+            AchievementManager.currentCoins = inventory.Money;
+
             int count = 0;
             foreach (string s in skillNames)
             {

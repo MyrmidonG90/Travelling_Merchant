@@ -56,6 +56,8 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Achievement.cs" />
+    <Compile Include="AchievementManager.cs" />
     <Compile Include="EventLog.cs" />
     <Compile Include="General Classes\Button.cs" />
     <Compile Include="Calendar.cs" />
