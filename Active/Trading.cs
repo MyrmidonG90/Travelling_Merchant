@@ -571,7 +571,7 @@ namespace Active
             if (selected != null)
             {
                 Vector2 temp = TextureManager.fontButton.MeasureString(selected.Name);
-                Vector2 namePos = new Vector2(((1920 - temp.X) / 2), 610);
+                Vector2 namePos = new Vector2(((1920 - temp.X) / 2)-5, 610);
                 sb.DrawString(TextureManager.fontButton, selected.Name, namePos, Color.Black);
                 if (selected.Rarity == 0)
                 {
@@ -585,20 +585,19 @@ namespace Active
                 {
                     sb.Draw(TextureManager.texIconRare, new Rectangle(930, 650, 60, 60), Color.White);
                 }
-                sb.DrawString(TextureManager.fontButton, "Standard Price: " + selected.BasePrice.ToString(), new Vector2(820, 740), Color.Black);
+                sb.DrawString(TextureManager.fontButton, "Standard Price: " + selected.BasePrice.ToString(), new Vector2(800, 730), Color.Black);
 
                 if (selected.PrimaryCategory != 999)
                 {
-                    sb.Draw(TextureManager.texCategories[selected.PrimaryCategory-1], new Vector2(820, 800), Color.White);
-                    sb.DrawString(TextureManager.fontInventory, "test", new Vector2(820, 800), Color.White);
+                    sb.Draw(TextureManager.texCategories[selected.PrimaryCategory-1], new Rectangle(800, 780, 80, 80), Color.White);
                 }
                 if (selected.SecondaryCategory != 999)
                 {
-                    sb.DrawString(TextureManager.fontInventory, "test", new Vector2(910, 800), Color.White);
+                    sb.Draw(TextureManager.texCategories[selected.SecondaryCategory - 1], new Rectangle(915, 780, 80, 80), Color.White);
                 }
                 if (selected.TertiaryCategory != 999)
                 {
-                    sb.DrawString(TextureManager.fontInventory, "test", new Vector2(1000, 800), Color.White);
+                    sb.Draw(TextureManager.texCategories[selected.TertiaryCategory - 1], new Rectangle(1030, 780, 80, 80), Color.White);
                 }
             }
 
