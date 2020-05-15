@@ -156,14 +156,14 @@ namespace Active
             return 50;
         }
 
-        static public bool SetSkillLevel(string skillName, int level)
+        static public bool AddXP(string skillName, int xp)
         {
             int counter = 0;
             foreach (string tempString in skillNames)
             {
                 if (skillName == tempString)
                 {
-                        skillXP[counter]+= level;
+                        skillXP[counter]+= xp;
                     
                 }
                 counter++;
