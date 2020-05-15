@@ -55,6 +55,7 @@ namespace Active
                 if (button.LeftClick())
                 {
                     destination = cities[counter].Name;
+                    AchievementManager.travelCounter++;
                 }
                 counter++;
             }
