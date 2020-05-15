@@ -21,13 +21,32 @@ namespace Active
         //==================================================================================
         //OM DU ÄNDRAR HUR SPELET SPARAR SÅ ***MÅSTE*** DU ÄNDRA VÄRDET I ver
         //==================================================================================
-        static string ver = "1.2.2";
+        static string ver = "1.3.0";
         static public bool GenerateSave(Inventory inventory, string location, string gameState)
         {
             string path = Path.Combine("./Saves/", "Save-" + DateTime.Now.ToString() + ".ptmsave");
             StreamWriter streamWriter = new StreamWriter(ToSafeFileName(path), false);
 
             streamWriter.WriteLine(ver);
+
+            streamWriter.WriteLine(AchievementManager.boughtCarrots.ToString());
+            streamWriter.WriteLine(AchievementManager.totalCoins.ToString());
+            streamWriter.WriteLine(AchievementManager.travelCounter.ToString());
+            streamWriter.WriteLine(AchievementManager.spentMoney.ToString());
+
+            foreach (Achievement achievement in AchievementManager.achievements)
+            {
+                if (achievement.complete)
+                {
+                    streamWriter.WriteLine('1');
+                }
+                else
+                {
+                    streamWriter.WriteLine('0');
+                }
+            }
+
+
             streamWriter.WriteLine(gameState);
             streamWriter.WriteLine(Calendar.TotalDays);
             streamWriter.WriteLine(location);
@@ -79,6 +98,25 @@ namespace Active
 
             if (streamReader.ReadLine() == ver)
             {
+
+                AchievementManager.boughtCarrots = int.Parse(streamReader.ReadLine());
+                AchievementManager.totalCoins = int.Parse(streamReader.ReadLine());
+                AchievementManager.travelCounter = int.Parse(streamReader.ReadLine());
+                AchievementManager.spentMoney = int.Parse(streamReader.ReadLine());
+
+                foreach (Achievement achievement in AchievementManager.achievements)
+                {
+                    string temp = streamReader.ReadLine();
+                    if (temp == "1")
+                    {
+                        achievement.complete = true;
+                    }
+                    else if(temp == "0")
+                    {
+                        achievement.complete = false;
+                    }
+                }
+
                 string[] data = new string[3];
                 data[0] = streamReader.ReadLine();
                 Calendar.TotalDays = int.Parse(streamReader.ReadLine());

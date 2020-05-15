@@ -11,14 +11,14 @@ namespace Active
 
         
         string name, description;
-        public bool compleate;
+        public bool complete;
 
 
-        public Achievement(string name, string description, bool compleate)
+        public Achievement(string name, string description, bool complete)
         {
             this.name = name;
             this.description = description;
-            this.compleate = compleate;
+            this.complete = complete;
         }
 
 

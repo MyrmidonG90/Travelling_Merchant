@@ -9,17 +9,17 @@ namespace Active
     static class AchievementManager
     {
 
-        static Achievement[] achievements = new Achievement[10];
+        public static Achievement[] achievements = new Achievement[10];
 
 
 
-        public static int boughtCarrots;
+        public static int boughtCarrots = 0;
 
-        public static int totalCoins;
+        public static int totalCoins = 0;
 
-        public static int travelCounter;
+        public static int travelCounter = 0;
 
-        public static int spentMoney;
+        public static int spentMoney = 0;
 
         public static bool hasDragonscale, hasGryphonMeat, hasDiamond, hasRuby, hasEmerald;
 
@@ -50,52 +50,52 @@ namespace Active
         {
             if (boughtCarrots >= 100)
             {
-                achievements[0].compleate = true;
+                achievements[0].complete = true;
             }
 
             if (currentCoins >= 100000)
             {
-                achievements[1].compleate = true;
+                achievements[1].complete = true;
             }
 
             if (travelCounter >= 10)
             {
-                achievements[2].compleate = true;
+                achievements[2].complete = true;
             }
 
             if (spentMoney >= 1000000)
             {
-                achievements[3].compleate = true;
+                achievements[3].complete = true;
             }
 
             if (hasDragonscale || hasGryphonMeat || hasDiamond)
             {
-                achievements[4].compleate = true;
+                achievements[4].complete = true;
             }
 
             if (hasDragonscale && hasGryphonMeat && hasDiamond)
             {
-                achievements[5].compleate = true;
+                achievements[5].complete = true;
             }
 
             if (fullInventory)
             {
-                achievements[6].compleate = true;
+                achievements[6].complete = true;
             }
 
             if (hasRuby && hasEmerald && hasDiamond)
             {
-                achievements[7].compleate = true;
+                achievements[7].complete = true;
             }
 
             if (currentCoins >= 1000000)
             {
-                achievements[8].compleate = true;
+                achievements[8].complete = true;
             }
 
             if (totalCoins >= 10000000)
             {
-                achievements[9].compleate = true;
+                achievements[9].complete = true;
             }
 
         }
