@@ -69,6 +69,7 @@ namespace Active
             TextureManager.LoadContent(Content);
             ItemCreator.LoadItemData();
 
+            AchievementManager.LoadAchievements();
             Player.Init();
             MainMenuManager.Init();
             OptionsMenu.Init();
