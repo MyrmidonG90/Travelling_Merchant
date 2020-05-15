@@ -110,6 +110,7 @@ namespace Active
                 Exit();
 
             EndCredits.Update(gameTime.ElapsedGameTime.TotalMilliseconds);//////////////////////////////////////
+            LevelUp.Update(gameTime.ElapsedGameTime.TotalMilliseconds); ///////////////////////////////////////
 
             if (WorldEventManager.Update(random))
             {
@@ -236,6 +237,7 @@ namespace Active
 
             OptionsMenu.Draw(spriteBatch, options);
             EndCredits.Draw(spriteBatch);//////////////////////////////
+            LevelUp.Draw(spriteBatch);/////////////////////////////////
             spriteBatch.End();
 
             Window.Title = "Press F6 for debug menu          " + Player.SkillLevels[0].ToString() + Player.SkillLevels[1].ToString() + Player.SkillLevels[2].ToString() + "    " + OptionsMenu.selectedSkill;

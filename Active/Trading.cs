@@ -392,6 +392,7 @@ namespace Active
         static bool AcceptTrade(ref Inventory participantLeft, ref Inventory participantRight)
         {
             EndCredits.Start();
+            LevelUp.Start(0);
             //If nothing is presented
             if (tradeLeft.ItemList.Count == 0 && tradeRight.ItemList.Count == 0)
             {

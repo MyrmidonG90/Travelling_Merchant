@@ -53,25 +53,7 @@ namespace Active
         static public void Update()
         {
 
-            AchievementManager.currentCoins = inventory.Money;
-
-            int count = 0;
-            foreach (string s in skillNames)
-            {
-                if(skillXP[count] < 100)
-                {
-                    skillLevels[count] = 1;
-                }
-                else if(skillXP[count] >= 100 && skillXP[count] < 200)
-                {
-                    skillLevels[count] = 2;
-                }
-                else if (skillXP[count] >= 200)
-                {
-                    skillLevels[count] = 3;
-                }
-                count++;
-            }
+            AchievementManager.currentCoins = inventory.Money;            
 
             //debug funktioner
             if (test)
@@ -143,8 +125,7 @@ namespace Active
                 eventDaysLeft.Add(days);
             }
         }
-        
-
+       
         static public int ReturnSkillLevel(string skillName)
         {
             int counter = 0;
@@ -160,16 +141,32 @@ namespace Active
         }
 
         static public bool AddXP(string skillName, int xp)
-        {
-            int counter = 0;
-            foreach (string tempString in skillNames)
+        {            
+            for (int i = 0; i < skillNames.Length; i++)
             {
-                if (skillName == tempString)
+                if (skillName == skillNames[i])
                 {
-                        skillXP[counter]+= xp;
-                    
+                    skillXP[i] += xp;
                 }
-                counter++;
+            }
+
+            for (int i = 0; i < skillNames.Length; i++)
+            {
+                if (skillXP[i] < 100)
+                {
+                    skillLevels[i] = 1;
+                    LevelUp.Start(skillNames[i]);
+                }
+                else if (skillXP[i] >= 100 && skillXP[i] < 200)
+                {
+                    skillLevels[i] = 2;
+                    LevelUp.Start(skillNames[i]);
+                }
+                else if (skillXP[i] >= 200)
+                {
+                    skillLevels[i] = 3;
+                    LevelUp.Start(skillNames[i]);
+                }
             }
             return false;
         }
