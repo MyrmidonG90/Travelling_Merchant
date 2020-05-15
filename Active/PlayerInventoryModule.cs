@@ -357,7 +357,19 @@ namespace Active
 
             if (selected != null)
             {
-                spriteBatch.DrawString(TextureManager.fontHeader, selected.Name, new Vector2(1100, 200), Color.White);
+                if (selected.Rarity == 0)
+                {
+                    spriteBatch.Draw(TextureManager.texIconCommon, new Vector2(1110, 180), Color.White);
+                }
+                if (selected.Rarity == 1)
+                {
+                    spriteBatch.Draw(TextureManager.texIconUncommon, new Vector2(1110, 180), Color.White);
+                }
+                if (selected.Rarity == 2)
+                {
+                    spriteBatch.Draw(TextureManager.texIconRare, new Vector2(1110, 180), Color.White);
+                }
+                spriteBatch.DrawString(TextureManager.fontHeader, selected.Name, new Vector2(1220, 200), Color.White);
                 spriteBatch.DrawString(TextureManager.fontInventory, "Info: \n" + selected.Description, new Vector2(1100, 310), Color.White);
                 spriteBatch.DrawString(TextureManager.fontInventory, "Standard Price: " + selected.BasePrice.ToString() + "c", new Vector2(1100, 660), Color.White);
 

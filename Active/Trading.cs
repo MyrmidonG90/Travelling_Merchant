@@ -571,21 +571,34 @@ namespace Active
             if (selected != null)
             {
                 Vector2 temp = TextureManager.fontButton.MeasureString(selected.Name);
-                Vector2 namePos = new Vector2(((1920 - temp.X) / 2), 640);
+                Vector2 namePos = new Vector2(((1920 - temp.X) / 2), 610);
                 sb.DrawString(TextureManager.fontButton, selected.Name, namePos, Color.Black);
-                sb.DrawString(TextureManager.fontButton, "Standard Price: " + selected.BasePrice.ToString(), new Vector2(820, 680), Color.Black);
+                if (selected.Rarity == 0)
+                {
+                    sb.Draw(TextureManager.texIconCommon, new Rectangle(930, 650, 60, 60), Color.White);
+                }
+                if (selected.Rarity == 1)
+                {
+                    sb.Draw(TextureManager.texIconUncommon, new Rectangle(930, 650, 60, 60), Color.White);
+                }
+                if (selected.Rarity == 2)
+                {
+                    sb.Draw(TextureManager.texIconRare, new Rectangle(930, 650, 60, 60), Color.White);
+                }
+                sb.DrawString(TextureManager.fontButton, "Standard Price: " + selected.BasePrice.ToString(), new Vector2(820, 740), Color.Black);
 
                 if (selected.PrimaryCategory != 999)
                 {
-                    sb.DrawString(TextureManager.fontInventory, "test", new Vector2(820, 740), Color.White);
+                    sb.Draw(TextureManager.texCategories[selected.PrimaryCategory-1], new Vector2(820, 800), Color.White);
+                    sb.DrawString(TextureManager.fontInventory, "test", new Vector2(820, 800), Color.White);
                 }
                 if (selected.SecondaryCategory != 999)
                 {
-                    sb.DrawString(TextureManager.fontInventory, "test", new Vector2(910, 740), Color.White);
+                    sb.DrawString(TextureManager.fontInventory, "test", new Vector2(910, 800), Color.White);
                 }
                 if (selected.TertiaryCategory != 999)
                 {
-                    sb.DrawString(TextureManager.fontInventory, "test", new Vector2(1000, 740), Color.White);
+                    sb.DrawString(TextureManager.fontInventory, "test", new Vector2(1000, 800), Color.White);
                 }
             }
 
