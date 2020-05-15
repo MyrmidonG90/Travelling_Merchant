@@ -296,23 +296,31 @@ namespace Active
         {
             if (participant == Participant.Left)
             {
-                tradeLeft.AddItem(slots[counterCol, counterRow].Item.ID, 1);// Lägger till item till det vänstra trade fältet
-                invLeft.ReduceAmountOfItems(slots[counterCol, counterRow].Item.ID, 1);
+                if (tradeLeft.AddItem(slots[counterCol, counterRow].Item.ID, 1))
+                {
+                    invLeft.ReduceAmountOfItems(slots[counterCol, counterRow].Item.ID, 1);
+                }                               
             }
             else if (participant == Participant.Right)
             {
-                tradeRight.AddItem(slots[counterCol, counterRow].Item.ID, 1);// Lägger till item till det vänstra trade fältet
-                invRight.ReduceAmountOfItems(slots[counterCol, counterRow].Item.ID, 1);
+                if (tradeRight.AddItem(slots[counterCol, counterRow].Item.ID, 1))
+                {
+                    invRight.ReduceAmountOfItems(slots[counterCol, counterRow].Item.ID, 1);
+                }                
             }
             else if (participant == Participant.TradeSlotsLeft)
             {
-                invLeft.AddItem(slots[counterCol, counterRow].Item.ID, 1);// Lägger till item till det vänstra trade fältet
-                tradeLeft.ReduceAmountOfItems(slots[counterCol, counterRow].Item.ID, 1);
+                if (invLeft.AddItem(slots[counterCol, counterRow].Item.ID, 1))
+                {
+                    tradeLeft.ReduceAmountOfItems(slots[counterCol, counterRow].Item.ID, 1);
+                }                
             }
             else if (participant == Participant.TradeSlotsRight)
             {
-                invRight.AddItem(slots[counterCol, counterRow].Item.ID, 1);// Lägger till item till det vänstra trade fältet
-                tradeRight.ReduceAmountOfItems(slots[counterCol, counterRow].Item.ID, 1);
+                if (invRight.AddItem(slots[counterCol, counterRow].Item.ID, 1))
+                {
+                    tradeRight.ReduceAmountOfItems(slots[counterCol, counterRow].Item.ID, 1);
+                }                
             }
         }
 
