@@ -488,7 +488,7 @@ namespace Active
             }
             if (!drawn)
             {
-                spriteBatch.Draw(TextureManager.texDefaultTown, Vector2.Zero, Color.White);
+                spriteBatch.Draw(TextureManager.texBGDefaultTown, Vector2.Zero, Color.White);
                 drawn = true;
             }
         }

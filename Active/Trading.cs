@@ -565,12 +565,12 @@ namespace Active
             
             if (priceDifference < 0)
             {
-                sb.Draw(TextureManager.texMoneyArrowRight, arrowPos, Color.White);
+                sb.Draw(TextureManager.texArrowMoneyRight, arrowPos, Color.White);
                 sb.DrawString(TextureManager.fontButton, (priceDifference*-1).ToString(), moneyPos, Color.Black);
             }
             else if (priceDifference > 0)
             {
-                sb.Draw(TextureManager.texMoneyArrowLeft, arrowPos, Color.White);
+                sb.Draw(TextureManager.texArrowMoneyLeft, arrowPos, Color.White);
                 sb.DrawString(TextureManager.fontButton, priceDifference.ToString(), moneyPos, Color.Black);
             }
             else if (priceDifference == 0)

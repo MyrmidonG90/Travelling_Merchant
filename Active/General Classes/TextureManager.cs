@@ -14,10 +14,10 @@ namespace Active
 
         //Backgrounds
         static public Texture2D texBGTravelScreen;
-        static public Texture2D texCarrotTown;
-        static public Texture2D texTowerTown;
-        static public Texture2D texDefaultTown;
-        static public Texture2D texMap;
+        static public Texture2D texBGCarrotTown;
+        static public Texture2D texBGTowerTown;
+        static public Texture2D texBGDefaultTown;
+        static public Texture2D texBGMap;
 
 
         // Category
@@ -60,8 +60,8 @@ namespace Active
         static public Texture2D texInvTab;
         static public Texture2D texSkillTab;
         static public Texture2D texTradeMenu;
-        static public Texture2D texMoneyArrowLeft;
-        static public Texture2D texMoneyArrowRight;
+        static public Texture2D texArrowMoneyLeft;
+        static public Texture2D texArrowMoneyRight;
 
         //Items
         static public Texture2D texArmourFine, texArmourMagic, texArmourNormal, texCarrot, texCotton, texDragonScale, texFur, texGoldIngot, texGoldOre, texGryphonMeat, texIronIngot, texIronOre, texDiamond, texEmerald, texRuby, texLumber, texPotato, texPotion, texSilk, texSpices, texStone, texWeaponFine, texWeaponMagic, texWeaponNormal, texWhaleMeat;
@@ -79,7 +79,6 @@ namespace Active
             LoadIcons(content);
             LoadItems(content);
             LoadBackGrounds(content);
-
             LoadLists();
         }
 
@@ -89,8 +88,8 @@ namespace Active
             texRankUpPersuasion = content.Load<Texture2D>("rank_up_persuasion");
             texRankUpWisdom = content.Load<Texture2D>("rank_up_wisdom");
             texArrowDown = content.Load<Texture2D>("arrow_down");
-            texMoneyArrowLeft = content.Load<Texture2D>("arrow_money_left");
-            texMoneyArrowRight = content.Load<Texture2D>("arrow_money_right");
+            texArrowMoneyLeft = content.Load<Texture2D>("arrow_money_left");
+            texArrowMoneyRight = content.Load<Texture2D>("arrow_money_right");
             texBox = content.Load<Texture2D>("box");
             texWhite = content.Load<Texture2D>("White");
             texSelect = content.Load<Texture2D>("select");
@@ -143,10 +142,10 @@ namespace Active
         static void LoadBackGrounds(ContentManager content)
         {
             texBGTravelScreen = content.Load<Texture2D>("travel_screen");
-            texCarrotTown = content.Load<Texture2D>("Carrot Town");
-            texTowerTown = content.Load<Texture2D>("Tower Town");
-            texDefaultTown = content.Load<Texture2D>("Default");
-            texMap = content.Load<Texture2D>("merchant_map");
+            texBGCarrotTown = content.Load<Texture2D>("Carrot Town");
+            texBGTowerTown = content.Load<Texture2D>("Tower Town");
+            texBGDefaultTown = content.Load<Texture2D>("Default");
+            texBGMap = content.Load<Texture2D>("merchant_map");
         }
         static void LoadFonts(ContentManager content)
         {
@@ -208,8 +207,8 @@ namespace Active
             texItems.Add(texPotion);
 
             texCities = new List<Texture2D>();
-            texCities.Add(texCarrotTown);
-            texCities.Add(texTowerTown);
+            texCities.Add(texBGCarrotTown);
+            texCities.Add(texBGTowerTown);
 
             texCategories = new List<Texture2D>();
             texCategories.Add(texCatFood);

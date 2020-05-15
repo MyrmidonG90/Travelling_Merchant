@@ -26,6 +26,7 @@ namespace Active
         static string cityName;
         static string cityInfo;
         static Vector2 cityCords;
+        static City selectedCity;
 
         static Vector2 posArrowDown;
 
@@ -146,7 +147,7 @@ namespace Active
 
         static public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(TextureManager.texMap, new Vector2(0, 0), Color.White);
+            spriteBatch.Draw(TextureManager.texBGMap, new Vector2(0, 0), Color.White);
 
             foreach (Button button in cityButtons)
             {
