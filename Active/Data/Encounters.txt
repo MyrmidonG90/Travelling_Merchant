@@ -5,13 +5,13 @@ Pay 30% of your money|Give them a rare item|Back off!
 2
 Add 3 days to your travel
 3
-Run away!(Nothing happens)|Wait and see what happens
+Run away!|Wait and see what happens
 4
 Take the item|Leave the item
 5
 Nothing happens
 6
-Take the shortcut(Wisdom)|Don't take the shortcut(Nothing Happens)
+Take the shortcut(Wisdom)|Don't take the shortcut
 7
 Donate 100gp|No thanks
 8
