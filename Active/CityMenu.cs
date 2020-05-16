@@ -40,6 +40,7 @@ namespace Active
             if (nextTurnButton.LeftClick())
             {
                 Calendar.AddDays(1);
+                Player.Inventory.Money -= 5;
             }
 
             date = Calendar.TotalDays;
