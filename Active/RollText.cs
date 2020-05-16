@@ -93,7 +93,7 @@ namespace Active
                 }
                 else
                 {
-                    if (textPos[textPos.Count - 1].Y < 0)
+                    if (textPos[textPos.Count - 1].Y + font.MeasureString("I").Y< 0)
                     {
                         finished = true;
                     }

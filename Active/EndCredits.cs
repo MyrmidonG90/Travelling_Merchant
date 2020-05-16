@@ -16,7 +16,6 @@ namespace Active
     {
 
         static List<RollText> texts;
-        static double timer;
         static bool onGoing;
         enum Stage
         {
@@ -62,7 +61,7 @@ namespace Active
         static public void Update(double timePassed)
         {
             if (onGoing)
-            {                
+            {
                 if (texts[(int)currentStage].MoveTextVertical(timePassed) == true)
                 {
                     if (currentStage != Stage.End)
@@ -72,13 +71,7 @@ namespace Active
                     else
                     {
                         Reset();
-
                     }
-                }
-                if (timer < 0)
-                {
-                    
-                    timer = 15;
                 }
             }
         }
