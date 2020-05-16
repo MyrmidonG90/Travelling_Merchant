@@ -34,9 +34,9 @@ namespace Active
             skillNames[2] = "Persuasion";
 
             skillLevels = new int[3];
-            skillLevels[0] = 1;
-            skillLevels[1] = 1;
-            skillLevels[2] = 1;
+            skillLevels[0] = 1; // Wisdom
+            skillLevels[1] = 1; // Intimidation
+            skillLevels[2] = 1; // Persuasion
 
             skillXP = new int[3];
             skillXP[0] = 0;
@@ -147,27 +147,14 @@ namespace Active
                 if (skillName == skillNames[i])
                 {
                     skillXP[i] += xp;
+                    if (skillXP[i]>= 100 * skillLevels[i] && skillLevels[i] <5) // !!!!!!!!!!!!!!!!!!!!!!!!!!ÄNDRA MAX ANTAL LVL!!!!!!!!!!!!!!!!!!!!!!
+                    {
+                        ++skillLevels[i];
+                        LevelUp.Start(skillName);
+                    }
                 }
             }
 
-            for (int i = 0; i < skillNames.Length; i++)
-            {
-                if (skillXP[i] < 100)
-                {
-                    skillLevels[i] = 1;
-                    LevelUp.Start(skillNames[i]);
-                }
-                else if (skillXP[i] >= 100 && skillXP[i] < 200)
-                {
-                    skillLevels[i] = 2;
-                    LevelUp.Start(skillNames[i]);
-                }
-                else if (skillXP[i] >= 200)
-                {
-                    skillLevels[i] = 3;
-                    LevelUp.Start(skillNames[i]);
-                }
-            }
             return false;
         }
 

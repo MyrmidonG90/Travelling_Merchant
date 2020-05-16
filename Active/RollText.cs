@@ -15,50 +15,126 @@ namespace Active
     {
         List<string> texts;
         List<Vector2> textPos;
+        SpriteFont font;
         bool finished;
+        bool onGoing;
         int velocity;
+        bool timed;
+        double timeAlive;
+        double timeStart;
+        double timer;
+        Vector2 startPos;
+
+        public bool Finished { get => finished;}
+        public bool OnGoing { get => onGoing; }
+        public SpriteFont Font { get => font; set => font = value; }
+
         public RollText(int velocity)
         {
             this.velocity = velocity;
             texts = new List<string>();
             textPos = new List<Vector2>();
             finished = false;
+            timer = 0;
+            timed = false;
+            font = TextureManager.fontHeader;
         }
+        public RollText(int velocity, double timeAlive)
+        {
+            this.velocity = velocity;
+            this.timeAlive = timeAlive;
+            timeStart = timeAlive;
+            texts = new List<string>();
+            textPos = new List<Vector2>();
+            onGoing = false;
+            finished = false;
+            timer = 0;
+            timed = true;
+            font = TextureManager.fontHeader;
+        }
+        public void Start()
+        {
+            onGoing = true;
+        }
+
         public void AddText(string text)
         {
             texts.Add(text);
-            textPos.Add( new Vector2(1920 / 2 - TextureManager.fontHeader.MeasureString(texts[texts.Count - 1]).X/2, 1080 + textPos.Count * TextureManager.fontHeader.MeasureString("I").Y));
+            textPos.Add( new Vector2(1920 / 2 - font.MeasureString(texts[texts.Count - 1]).X/2, 1080 + textPos.Count * font.MeasureString("I").Y));
         }
-        public bool MoveTextVertical()
-        {            
-            if (textPos[textPos.Count-1].Y < 0)
+        public void AddText(string text,Vector2 startPos)
+        {
+            texts.Add(text);
+            this.startPos = startPos;
+            textPos.Add(startPos);
+        }
+
+        public bool MoveTextVertical(double timePassed)
+        {
+            timer -= timePassed;
+            if (timer < 0)
             {
-                finished = true;
-            }
-            else
-            {
-                for (int i = 0; i < textPos.Count; i++)
+                if (timed)
                 {
-                    textPos[i] = new Vector2(textPos[i].X , textPos[i].Y - velocity);
+                    timeAlive -= timePassed;
+                    if (timeAlive < 0)
+                    {
+                        finished = true;
+                        onGoing = false;
+                    }
+                    else
+                    {
+                        for (int i = 0; i < textPos.Count; i++)
+                        {
+                            textPos[i] = new Vector2(textPos[i].X, textPos[i].Y - velocity);
+                        }
+                    }
+                    timer = 15;
+                }
+                else
+                {
+                    if (textPos[textPos.Count - 1].Y < 0)
+                    {
+                        finished = true;
+                    }
+                    else
+                    {
+                        for (int i = 0; i < textPos.Count; i++)
+                        {
+                            textPos[i] = new Vector2(textPos[i].X, textPos[i].Y - velocity);
+                        }
+                    }
+                    timer = 15;
                 }
             }
+            
             return finished;
         }
         public void Reset()
         {
             finished = false;
+            onGoing = false;
             textPos = new List<Vector2>();
-            for (int i = 0; i < texts.Count; i++)
+            if (timed)
             {
-                textPos.Add(new Vector2(1920 / 2 - TextureManager.fontHeader.MeasureString(texts[texts.Count - 1]).X / 2, 1080 + 5 + textPos.Count * TextureManager.fontHeader.MeasureString("I").Y));
+                textPos.Add(startPos);
+                timeAlive = timeStart;
             }
+            else
+            {
+                for (int i = 0; i < texts.Count; i++)
+                {
+                    textPos.Add(new Vector2(1920 / 2 - font.MeasureString(texts[texts.Count - 1]).X / 2, 1080 + 5 + textPos.Count * font.MeasureString("I").Y));
+                }
+            }
+            
         }
 
         public void Draw(SpriteBatch sb)
         {
             for (int i = 0; i < texts.Count; i++)
             {
-                sb.DrawString(TextureManager.fontHeader,texts[i],textPos[i], Color.White);
+                sb.DrawString(font,texts[i],textPos[i], Color.White);
             }
         }
     }

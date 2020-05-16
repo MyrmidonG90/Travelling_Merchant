@@ -24,21 +24,11 @@ namespace Active
             Persuasion,
             Wisdom
         }
+        static Skill skill;
 
-        static public void Start(int skill)
+        static public void Start(int skillNr)
         {
-            if ((Skill)skill ==  Skill.Intimidation)
-            {
-                currentTexture = TextureManager.texRankUpIntimidation;
-            }
-            else if ((Skill)skill == Skill.Persuasion)
-            {
-                currentTexture = TextureManager.texRankUpPersuasion;
-            }
-            else if ((Skill)skill == Skill.Wisdom)
-            {
-                currentTexture = TextureManager.texRankUpWisdom;
-            }
+            FindTexture(skillNr);
 
             onGoing = true;
             imagePos = new Vector2(0 - currentTexture.Width, 1080 / 2 - currentTexture.Height / 2);
@@ -46,17 +36,19 @@ namespace Active
         }
         static public void Start(string skillName)
         {
-            if (skillName == "Intimidation")
+            bool found = false;
+            skill = 0;
+            while (found == false) // Stuck in loop == input is wrong!
             {
-                currentTexture = TextureManager.texRankUpIntimidation;
-            }
-            else if (skillName == "Persuasion")
-            {
-                currentTexture = TextureManager.texRankUpPersuasion;
-            }
-            else if (skillName == "Wisdom")
-            {
-                currentTexture = TextureManager.texRankUpWisdom;
+                if (skill.ToString() == skillName)
+                {
+                    found = true;
+                    FindTexture((int)skill);
+                }
+                else
+                {
+                    ++skill;
+                }
             }
 
             onGoing = true;
@@ -64,22 +56,15 @@ namespace Active
             imagePos = new Vector2(0 - currentTexture.Width, 1080 / 2 - currentTexture.Height / 2);
             hitBox = new Rectangle((int)imagePos.X + currentTexture.Width / 2, (int)imagePos.Y + currentTexture.Height / 2, 30, 30);
         }
-        static int FindSkill(string skillName)
+        static void FindTexture(int index)
         {
-            int answer = -1;
-            if (skillName == "Intimidation")
-            {
-                answer = 0;
-            }
-            else if (skillName == "Persuasion")
-            {
-                answer = 1;
-            }
-            else if (skillName == "Wisdom")
-            {
-                answer = 2;
-            }
-            return answer;
+            List<Texture2D> textures = new List<Texture2D>();
+            textures.Add(TextureManager.texRankUpIntimidation);
+            textures.Add(TextureManager.texRankUpPersuasion);
+            textures.Add(TextureManager.texRankUpWisdom);
+
+
+            currentTexture = textures[index];
         }
 
         static public void Update(double timePassed)

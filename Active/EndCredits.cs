@@ -14,9 +14,7 @@ namespace Active
 {
     static class EndCredits
     {
-        static List<string> developers;
-        static List<string> specialThanks;
-        static List<string> testers;
+
         static List<RollText> texts;
         static double timer;
         static bool onGoing;
@@ -64,23 +62,22 @@ namespace Active
         static public void Update(double timePassed)
         {
             if (onGoing)
-            {
-                timer -= timePassed;
+            {                
+                if (texts[(int)currentStage].MoveTextVertical(timePassed) == true)
+                {
+                    if (currentStage != Stage.End)
+                    {
+                        ++currentStage;
+                    }
+                    else
+                    {
+                        Reset();
+
+                    }
+                }
                 if (timer < 0)
                 {
-                    if (texts[(int)currentStage].MoveTextVertical() == true)
-                    {
-
-                        if (currentStage != Stage.End)
-                        {
-                            ++currentStage;
-                        }
-                        else
-                        {
-                            Reset();
-                            
-                        }
-                    }
+                    
                     timer = 15;
                 }
             }
