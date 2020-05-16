@@ -126,8 +126,7 @@ namespace Active
                 {
                     textPos.Add(new Vector2(1920 / 2 - font.MeasureString(texts[texts.Count - 1]).X / 2, 1080 + 5 + textPos.Count * font.MeasureString("I").Y));
                 }
-            }
-            
+            }            
         }
 
         public void Draw(SpriteBatch sb)

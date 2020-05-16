@@ -17,6 +17,7 @@ namespace Active
         readonly string name;
         string information;
         Vector2 coordinates;
+        List<Vector2> modifiers;
         Inventory inv;
         Inventory templateInv;
         int lastTraded;
@@ -130,31 +131,38 @@ namespace Active
 
         public Inventory Inv { get => inv; set => inv = value; }
 
-        public override string ToString()
+        public string[] ToStringArray()
         {
-            string total, items;
-            items = "";
+            //string items;
+            string[] total = new string[6];
+            //items = "";
 
-            if (inv != null)
+            total[0] = name;
+            total[1] = information;
+            total[2] = coordinates.X +"," + coordinates.Y;
+            for (int i = 0; i < neighbors.Count; i++)
             {
-                if (Inv.ItemList.Count != 0)
-            {
-                for (int i = 0; i < Inv.ItemList.Count; i++)
+                if (i == 0)
                 {
-                    items = Inv.ItemList[i].ID.ToString() + ':' + Inv.ItemList[i].Amount.ToString() + ',';
+                    total[3] = neighbors[i];
                 }
-                total = name + ';' + information + ';' + x + ';' + y + ';' + Inv.Money + ';' + items + '|';
+                else
+                {
+                    total[3] += ";" + neighbors[i];
+                }
             }
-            else
+            total[4] = inv.Money.ToString();
+            for (int i = 0; i < inv.ItemList.Count; i++)
             {
-                total = name + ';' + information + ';' + x + ';' + y + ';' + Inv.Money + ';' + '|';
+                if (i == 0)
+                {
+                    total[3] = inv.ItemList[i].ID + "," + inv.ItemList[i].Amount;
+                }
+                else
+                {
+                    total[3] += ";" + inv.ItemList[i].ID + "," + inv.ItemList[i].Amount;
+                }
             }
-            }
-            else
-            {
-                total = name + ';' + information + ';' + x + ';' + y + ';' + 0 + ';' + '|';
-            }
-            
             return total;
         }      
     }

@@ -50,9 +50,21 @@ namespace Active
             }
         }
 
-        public static void SaveFile()
+        public static void SaveCityFile(string pathway)
         {
-
+            if (File.Exists(pathway))
+            {
+                EmptyFile(pathway);
+                sw = new StreamWriter(pathway);
+                for (int i = 0; i < CityManager.Cities.Count; i++)
+                {
+                    for (int j = 0; j < CityManager.Cities[i].ToStringArray().Length; j++)
+                    {
+                        sw.WriteLine(CityManager.Cities[i].ToStringArray()[j]);
+                    }
+                }
+                sw.Close();
+            }
         }
 
         static void Reset()
