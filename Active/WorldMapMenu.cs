@@ -163,7 +163,6 @@ namespace Active
 
             if (showText)
             {
-
                 foreach (Button button in travelButtons)
                 {
                     if(button.Name == cityName)
@@ -171,7 +170,6 @@ namespace Active
                         button.Draw(spriteBatch);
                     }
                 }
-
                 spriteBatch.DrawString(TextureManager.fontInventory, cityName, new Vector2(cityCords.X + 80, cityCords.Y), Color.White);
                 spriteBatch.DrawString(TextureManager.font, cityInfo, new Vector2(cityCords.X + 80, cityCords.Y + 40), Color.Black);
 

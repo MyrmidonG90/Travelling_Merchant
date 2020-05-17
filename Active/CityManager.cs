@@ -11,18 +11,20 @@ namespace Active
     {
         static string pathway;
         static List<City> cities;
-        static public List<City> Cities { get => cities;}
+
+        internal static List<City> Cities { get => cities; set => cities = value; }
+
 
         /*
         Data structure for cities:
 
-        String Name
-        String Description
-        Vector2 coordinates
-        List<string> neighbors
-        int money
-        Item items
-        Vector2 modifiers
+        0 String Name
+        1 String Description
+        2 Vector2 coordinates
+        3 List<string> neighbors
+        4 int money
+        5 Item items
+        6 Vector2 modifiers
 
         Example
 
@@ -32,12 +34,15 @@ namespace Active
         Exempel Byn, Alpha stad, Beta stad
         500
         0,50;1,50;0,50
-        0,0.5;
+        0:0,5;
         */
+
         static public void Initialize()
         {
             pathway = "./Data/CityStructure.txt";
-           // LoadCities();
+            
+            LoadCities();
+            int checkpoint = 0; // används bara vid debug
         }
 
         static void LoadCities()
@@ -45,27 +50,37 @@ namespace Active
             cities = new List<City>();
             FileManager.ReadFilePerLine(pathway);
             List<string> info = FileManager.ReadPerLine ;
-            int nrOfItems = FileManager.ReadPerLine.Count / 6;
-
+            int nrOfItems = FileManager.ReadPerLine.Count / 7;
+            
             for (int i = 0; i < nrOfItems; i++)
             {
                 //Vector2 vector = new Vector2(float.Parse(SplitText(';',readPerLine[2 + i * 6])[0]), float.Parse(SplitText(';', readPerLine[2 + i * 6])[1]));
                 List<string> tmpNeighbors = new List<string>();
                 List<Item> tmpItems = new List<Item>();
-                for (int j = 0; j < info[(i + 5)].Split(',').Length; j++)
+                List<Vector2> tmpModifiers = new List<Vector2>();
+
+                for (int j = 0; j < info[(i*7 + 3)].Split(',').Length; j++) // Add neighbors
                 {
-                    tmpNeighbors.Add(info[(i + 5)].Split(',')[j]);
+                    tmpNeighbors.Add(info[(i*7 + 3)].Split(',')[j]);
                 }
-                cities.Add(new City(info[i], info[i+1],new Vector2(float.Parse(info[i+2].Split(',')[0]),float.Parse(info[i+2].Split(',')[1])),tmpNeighbors));
-                for (int j = 0; j < info[i+5].Split(';').Length; j++)
+
+                cities.Add(new City(info[i*7], info[i*7 + 1], new Vector2(float.Parse(info[i*7 + 2].Split(',')[0]), float.Parse(info[i*7 + 2].Split(',')[1])), tmpNeighbors)); // Creates a new city based on name,description,map location and neighbors
+                
+                for (int j = 0; j < info[i + 5].Split(';').Length; j++) // Adding Inventory
                 {
-                    tmpItems.Add(ItemCreator.CreateItem(int.Parse(info[i + 5].Split(';')[0]), int.Parse(info[i + 5].Split(';')[1])));
+                    tmpItems.Add(ItemCreator.CreateItem(int.Parse(info[i*7 + 5].Split(';')[j].Split(',')[0]), int.Parse(info[i*7 + 5].Split(';')[j].Split(',')[1])));
                 }
-                cities[i].AddInventory(new Inventory(int.Parse(info[i+4]),tmpItems));
+                cities[i].AddInventory(new Inventory(int.Parse(info[i*7 + 4]), tmpItems)); // Added Inventory
+
+                for (int j = 0; j < info[i*7+6].Split(';').Length; j++) // Adding Modifiers
+                {
+
+                    tmpModifiers.Add(new Vector2(float.Parse(info[i*7+6].Split(';')[j].Split(':')[0]), float.Parse(info[i * 7 + 6].Split(';')[j].Split(':')[1])));
+                }
+                cities[i].AddModifiers(tmpModifiers); // Added Modifiers
             }
         }
-
-        static int FindCityIndex(string cityName)
+        static public int FindCityIndex(string cityName)
         {
             bool found = false;
             int counter = 0;
@@ -80,15 +95,7 @@ namespace Active
                     ++counter;
                 }
             }
-            return counter; 
-        }
-        
-        static void EmptyFile(string fileName)
-        {
-            if (File.Exists(fileName))
-            {
-                File.WriteAllText(fileName, String.Empty);
-            }
+            return counter;
         }
     }
 

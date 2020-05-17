@@ -83,7 +83,11 @@ namespace Active
 
         public void AddInventory(Inventory inv)
         {
-            this.inv = inv;
+            this.inv = new Inventory(inv);
+        }
+        public void AddModifiers(List<Vector2> modifiers)
+        {
+            this.modifiers = new List<Vector2>(modifiers);
         }
 
         public string Information
@@ -134,7 +138,7 @@ namespace Active
         public string[] ToStringArray()
         {
             //string items;
-            string[] total = new string[6];
+            string[] total = new string[7];
             //items = "";
 
             total[0] = name;
@@ -156,13 +160,25 @@ namespace Active
             {
                 if (i == 0)
                 {
-                    total[3] = inv.ItemList[i].ID + "," + inv.ItemList[i].Amount;
+                    total[5] = inv.ItemList[i].ID + "," + inv.ItemList[i].Amount;
                 }
                 else
                 {
-                    total[3] += ";" + inv.ItemList[i].ID + "," + inv.ItemList[i].Amount;
+                    total[5] += ";" + inv.ItemList[i].ID + "," + inv.ItemList[i].Amount;
                 }
             }
+            for (int i = 0; i < modifiers.Count; i++)
+            {
+                if (i==0)
+                {
+                    total[6] = i + ':'+modifiers[i].ToString();
+                }
+                else
+                {
+                    total[6] += ';'+i + ':' + modifiers[i].ToString();
+                }
+            }
+
             return total;
         }      
     }

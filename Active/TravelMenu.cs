@@ -19,7 +19,7 @@ namespace Active
         static string turnDisplay;
 
         static string destination;
-        static string oldLocation;
+        static string oldLocation;  // Never declared and never used?
         static bool paused;
         static bool test;
         static public bool travelling;
@@ -37,7 +37,7 @@ namespace Active
             turnsLeft = 0;
             turnTimer = timerLength;
             timerLength = 1;
-            destination = "Carrot Town";
+            destination = Player.Location;
 
             turnDisplay = turnsLeft.ToString() + "/" + turnsToTravel.ToString();
 
@@ -63,7 +63,8 @@ namespace Active
                             destination = newDestination;
                             paused = false;
                             travelling = true;
-
+                            float tmp= Vector2.Distance(CityManager.Cities[CityManager.FindCityIndex(Player.Location)].Coordinates, CityManager.Cities[CityManager.FindCityIndex(newDestination)].Coordinates);
+                            
                             turnsToTravel = 5;
                             turnsLeft = turnsToTravel;
                             turnTimer = timerLength;
