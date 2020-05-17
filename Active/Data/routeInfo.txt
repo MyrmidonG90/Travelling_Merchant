@@ -1,4 +1,4 @@
-Carrot Town|Steel Ville|5
+Carrot Town|Steel Ville|10
 Carrot Town|Mount Goblin|5
 Carrot Town|Dryad's Grove|5
 Steel Ville|Tower Town|5
