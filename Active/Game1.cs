@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
 
 namespace Active
 {
@@ -68,7 +69,8 @@ namespace Active
 
             TextureManager.LoadContent(Content);
             ItemCreator.LoadItemData();
-
+            SoundManager.LoadSounds(Content);
+            SoundManager.PlayMusic();
             AchievementManager.LoadAchievements();
             Player.Init();
             MainMenuManager.Init();

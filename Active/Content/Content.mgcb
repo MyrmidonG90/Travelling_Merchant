@@ -329,6 +329,18 @@
 /processorParam:TextureFormat=Color
 /build:fur.png
 
+#begin Game_RPG_Music_1-AudioTrimmer.com.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Game_RPG_Music_1-AudioTrimmer.com.mp3
+
+#begin Game_RPG_Music_2-AudioTrimmer.com.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Game_RPG_Music_2-AudioTrimmer.com.mp3
+
 #begin go_button.png
 /importer:TextureImporter
 /processor:TextureProcessor

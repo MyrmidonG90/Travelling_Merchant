@@ -68,6 +68,7 @@
     <Compile Include="Encounter.cs" />
     <Compile Include="LevelUp.cs" />
     <Compile Include="RollText.cs" />
+    <Compile Include="SoundManager.cs" />
     <Compile Include="TravelEvent.cs" />
     <Compile Include="EncounterManager.cs" />
     <Compile Include="General Classes\FileManager.cs" />
