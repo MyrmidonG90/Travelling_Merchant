@@ -58,23 +58,7 @@ namespace Active
                 }
                 counter++;
             }
-
-
-            foreach (City tempCity in Cities)
-            {
-                if (tempCity.Name == Player.Location)
-                {
-                    foreach (string tempNeigh in tempCity.Neighbors)
-                    {
-                        if (destination == tempNeigh)
-                        {
-                            return destination;
-                        }
-                    }
-                }
-            }
-            return null;
-
+            return destination;
         }
 
         static public void Update(GameTime gameTime)
@@ -208,19 +192,27 @@ namespace Active
                 string tempInfo = sr.ReadLine();
                 string tempCord = sr.ReadLine();
                 string tempNeigh = sr.ReadLine();
+                string tempbad = sr.ReadLine();
 
                 string[] tempCord2 = tempCord.Split(',');
                 string[] tempNeigh2 = tempNeigh.Split(',');
+                string[] tempbad2 = tempbad.Split(','); 
 
                 Vector2 cord = new Vector2(int.Parse(tempCord2[0]), int.Parse(tempCord2[1]));
-                List<string> neighData = new List<string>();
+                List<int> good = new List<int>();
+                List<int> bad = new List<int>();
 
                 for (int i = 0; i < tempNeigh2.Length; i++)
                 {
-                    neighData.Add(tempNeigh2[i]);
+                    good.Add(int.Parse(tempNeigh2[i]));
                 }
 
-                cities[counter] = new City(tempName, tempInfo, cord, neighData);
+                for (int i = 0; i < tempbad2.Length; i++)
+                {
+                    bad.Add(int.Parse(tempbad2[i]));
+                }
+
+                cities[counter] = new City(tempName, tempInfo, cord, good, bad);
                 cityButtons[counter] = new Button((int)cord.X, (int)cord.Y, 68, 68, tempName, TextureManager.texIconCity);
                 travelButtons[counter] = new Button((int)cord.X, (int)cord.Y + 75, 68, 36, tempName, TextureManager.texButtonGo);
                 infoButtons[counter] = new Button((int)cord.X + 80, (int)cord.Y + 42, 30, 30, tempName, TextureManager.texWhite);
