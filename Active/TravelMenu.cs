@@ -56,9 +56,8 @@ namespace Active
             {
                 if (routeNames[i, 0] == Player.Location)
                 {
-                    if (routeNames[i, 1] == newDestination)
+                    for (int j = 0; j < 14; j++)
                     {
-<<<<<<< HEAD
                         if (routeNames[j, 1] == newDestination)
                         {
                             destination = newDestination;
@@ -69,36 +68,30 @@ namespace Active
                             turnsToTravel = 5;
                             turnsLeft = turnsToTravel;
                             turnTimer = timerLength;
-=======
-                        destination = newDestination;
-                        paused = false;
-                        travelling = true;
 
-                        turnsToTravel = routes[i];
-                        turnsLeft = turnsToTravel;
-                        turnTimer = timerLength;
->>>>>>> master
-
-                        EncounterManager.NewTrip();
-                    }                   
+                            EncounterManager.NewTrip();
+                        }
+                    }
                 }
             }
             for (int i = 0; i < 14; i++)
             {
                 if (routeNames[i, 0] == newDestination)
                 {
-                    if (routeNames[i, 1] == Player.Location)
+                    for (int j = 0; j < 14; j++)
                     {
-                        destination = newDestination;
+                        if (routeNames[j, 1] == Player.Location)
+                        {
+                            destination = newDestination;
                             paused = false;
                             travelling = true;
 
-                            turnsToTravel = routes[i];
+                            turnsToTravel = 5;
                             turnsLeft = turnsToTravel;
                             turnTimer = timerLength;
 
                             EncounterManager.NewTrip();
-                        
+                        }
                     }
                 }
             }
