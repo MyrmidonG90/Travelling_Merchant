@@ -239,5 +239,9 @@ namespace Active
                 turnsLeft = value;
             }
         }
+        static public string[,] RouteNames
+        {
+            get => routeNames;
+        }
     }
 }

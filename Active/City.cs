@@ -22,11 +22,12 @@ namespace Active
         Inventory templateInv;
         int lastTraded;
         bool traded;
-        List<string> neighbors;
+        List<int> goodTrade;
+        List<int> badTrade;
 
         float x, y;
 
-        public City(string name, string information, Vector2 coordinates, List<string> neighbors)
+        public City(string name, string information, Vector2 coordinates, List<int> good, List<int> bad)
         {
             this.name = name;
             this.information = information;
@@ -35,7 +36,8 @@ namespace Active
             y = coordinates.Y;
             inv = new Inventory(100);
             templateInv = new Inventory(100);
-            this.neighbors = neighbors;
+            goodTrade = good;
+            badTrade = bad;
         }
 
         public void Update()
@@ -122,9 +124,14 @@ namespace Active
             }
         }
 
-        public List<string> Neighbors
+        public List<int> GoodTrade
         {
-            get => neighbors;
+            get => goodTrade;
+        }
+
+        public List<int> BadTrade
+        {
+            get => badTrade;
         }
 
         public Inventory TemplateInv
@@ -144,15 +151,15 @@ namespace Active
             total[0] = name;
             total[1] = information;
             total[2] = coordinates.X +"," + coordinates.Y;
-            for (int i = 0; i < neighbors.Count; i++)
+            for (int i = 0; i < goodTrade.Count; i++)
             {
                 if (i == 0)
                 {
-                    total[3] = neighbors[i];
+                    total[3] = goodTrade[i].ToString();
                 }
                 else
                 {
-                    total[3] += ";" + neighbors[i];
+                    total[3] += ";" + goodTrade[i];
                 }
             }
             total[4] = inv.Money.ToString();
