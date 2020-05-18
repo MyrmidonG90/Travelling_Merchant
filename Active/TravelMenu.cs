@@ -56,45 +56,45 @@ namespace Active
             {
                 if (routeNames[i, 0] == Player.Location)
                 {
-                    for (int j = 0; j < 14; j++)
+                    if (routeNames[i, 1] == newDestination)
                     {
-                        if (routeNames[j, 1] == newDestination)
-                        {
-                            destination = newDestination;
-                            paused = false;
-                            travelling = true;
-                            float tmp= Vector2.Distance(CityManager.Cities[CityManager.FindCityIndex(Player.Location)].Coordinates, CityManager.Cities[CityManager.FindCityIndex(newDestination)].Coordinates);
-                            
-                            turnsToTravel = 5;
-                            turnsLeft = turnsToTravel;
-                            turnTimer = timerLength;
+                        destination = newDestination;
+                        paused = false;
+                        travelling = true;
+                        //float tmp = Vector2.Distance(CityManager.Cities[CityManager.FindCityIndex(Player.Location)].Coordinates, CityManager.Cities[CityManager.FindCityIndex(newDestination)].Coordinates);
 
-                            EncounterManager.NewTrip();
-                        }
+
+                        turnsToTravel = routes[i];
+                        turnsLeft = turnsToTravel;
+                        turnTimer = timerLength;
+
+                        EncounterManager.NewTrip();
                     }
                 }
             }
+
             for (int i = 0; i < 14; i++)
             {
                 if (routeNames[i, 0] == newDestination)
                 {
-                    for (int j = 0; j < 14; j++)
+                    if (routeNames[i, 1] == Player.Location)
                     {
-                        if (routeNames[j, 1] == Player.Location)
-                        {
-                            destination = newDestination;
-                            paused = false;
-                            travelling = true;
+                        destination = newDestination;
+                        paused = false;
+                        travelling = true;
 
-                            turnsToTravel = 5;
-                            turnsLeft = turnsToTravel;
-                            turnTimer = timerLength;
+                        turnsToTravel = routes[i];
+                        turnsLeft = turnsToTravel;
+                        turnTimer = timerLength;
 
-                            EncounterManager.NewTrip();
-                        }
+                        EncounterManager.NewTrip();
+
                     }
                 }
             }
+
+            
+            
         }
 
         static public void AbortTravel()
