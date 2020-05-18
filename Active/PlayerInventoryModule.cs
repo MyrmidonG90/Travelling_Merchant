@@ -419,7 +419,7 @@ namespace Active
             foreach (Achievement achievement in AchievementManager.achievements)
             {
                 
-                spriteBatch.DrawString(TextureManager.font24, achievement.name , new Vector2(300, 200 + temp), Color.Black);
+                spriteBatch.DrawString(TextureManager.font24, achievement.name +"  "+ achievement.progress , new Vector2(300, 200 + temp), Color.Black);
                 spriteBatch.DrawString(TextureManager.font24, achievement.description, new Vector2(800, 200 + temp), Color.Black);
                 temp += 60;
             }
