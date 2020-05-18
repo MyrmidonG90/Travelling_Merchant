@@ -1,70 +1,80 @@
 ﻿Carrot Town
 Carrot Town is the great city of carrots.;Its agricultural roots can be traced thousands of years!; There is no better place to buy fruits, vegetables and, of course, carrots.
-250,500
-Dryad's Grove,Mount Goblin,Steel Ville
+280,480
+0,3
+1,5
 4000
 0,50;0,50;0,50;0,36;1,50;1,21;2,33;10,17;11,33;14,9;15,13;9,19;12,19;5,17;13,28;18,18;19,6;22,9;24,24
 0:0,5;1:2;2:1,4;3:0,8;4:1;5:2;6:1;7:1,3
 Steel Ville
 Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum ;500;750;0;|TowerTown;Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum yughhgLorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum
 1500,600
-Carrot Town,Mount Goblin,The Tomb,Winghelm,Hymn Harbor,Sanctuary
+1,4
+5,0
 25500
 0,23;1,12;2,50;3,50;4,33;5,28;11,18;12,26;12,26;13,36;14,17;15,32;16,13;17,11;18,2;19,5;24,4
 0:1,4;1:0,6;2:1,4;3:1,4;4:0,7;5:1,5;6:3;7:0,8
 Tower Town
 Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum yughhgLorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum
 1500,600
-Winghelm,Pyramaad,Sanctuary
+5,3
+7,1
 16000
 3,8;4,10;5,5;9,13;10,32;11,17;14,17;15,6;21,4;22,5;18,32;17,23;24,23;23,44
 0:1,3;1:1,6;2:1,4;3:0,5;4:1;5:0,3;6:1;7:1,7
 Hymn Harbor
 Hymn Harbor has ships like you've never seen. ;Beeing at the center of the map with ;trade ships delivering goods all day, ;it's only natural that this city has a ;diverse collection of wares.
-1125,350
-Winghelm,Steel Ville,Sanctuary
+1170,310
+4,6
+7,0
 12000
 0,10;1,24;2,35;3,23;4,10;5,5;8,2;9,32;10,10;12,18;13,17;14,15;15,6;16,8;23,24;17,3;19,5;18,6;20,15;24,10
 0:1,5;1:1,5;2:1;3:1,2;4:0,9;5:1,2;6:0,8;7:1,8
 Winghelm
 The city got it's name after the ;great gryphons that roam the ;surrounding lands. They are however, ;starting to die out because of the ;increased demand for "Gryphon McNuggets".
 1400,450
-Pyramaad,Tower Town,Sanctuary,Hymn Harbor,Steel Ville
+3,4
+5
 12000
 1,30;2,21;3,22;7,4;8,3;10,12;11,22;20,2;21,13;22,2;23,21;24,8
 0:1;1:1;2:1;3:0,5;4:0,5;5:2;6:0,8;7:0,6
 Pyramaad
 In this desert city you can't buy ;any water. Fortunatly, you can't do ;that in any other city either. ;Here, however, one is able to find ;lots of magical items and artifacts.
-1550,200
-Tower Town,Winghelm
+1580,180
+5,6
+0,4
 13000
 0,17;1,20;4,46;5,20;6,13;7,11;8,4;10,26;16,6;17,5;18,16;19,13;22,7;23,46;24,13;21,12
 0:1,7;1:1;2:1;3:0,8;4:1,6;5:0,4;6:0,7;7:1
 Mount Goblin
 The greatest goblin city there is! ;Might also be the only goblin city ;there is. Placed on the mountain ;that is just a little bit taller ;than the less famous "Mount Human".
-100,700
-Carrot Town,Steel Ville,The Tomb
+120,700
+2
+6,3
 5000
 0,20;1,30;2,20;3,8;4,10;5,23;6,4;9,21;10,12;12,11;13,33;21,3;22,5;23,18;24,4
 0:1;1:1;2:0,5;3:1,5;4:1,5;5:1;6:2;7:1
 Sanctuary
 This city was created by the cleric Henry the smitefull ;when he thought: "What would ;happen if every house in the ;city was a church?". Now we know.
-1230,900
-Tower Town,Winghelm,Hymn Harbor,Steel Ville
+1270,880
+4,5
+0,6
 53000
 0,12;1,43;2,23;3,33;4,35;5,5;6,2;7,3;8,6;9,7;13,22;14,23;15,33;16,19;17,18;21,5;22,13;24,19
 0:1,6;1:1;2:1;3:1;4:0,5;5:0,7;6:1,5;7:1
 Dryad's Grove
 16249 years ago the Elves and creatures ;of the forrest united to create ;this city of nature. Legends ;tell of a dragon that tried to ;burn down the city once but ;he got his ass whooped.
-80,280
-Carrot Town
+110,250
+2,5
+1,6
 5000
 0,27;1,32;5,5;7,12;9,23;10,19;11,5;12,50;13,40;18,8;19,6;22,9;24,24
 0:1;1:1,7;2:0,7;3:1,5;4:1;5:0,8;6:1,7;7:1
 The Tomb
 The Tomb is a pretty cool place for ;everyone who loves ghouls, ;suffering and the everlasting void. ;Founded by Carl the Necromancer, ;the Tomb is the world hub of ;everything that concerns the dark arts.
-400,850
-Mount Goblin,Steel Ville
+340,860
+5,3
+1,7
 6660
 1,8;2,12;3,31;4,24;5,8;6,13;7,7;8,4;13,33;14,14;15,2;16,4;17,2;18,13;19,15;20,21;21,14;22,22
 0:1,7;1:2;2:1,2;3:0,8;4:0,8;5:0,3;6:0,8;7:2
