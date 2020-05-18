@@ -19,6 +19,7 @@ namespace Active
         static List<string> eventNames;
         static List<int> activeEventID;
         static List<int> eventDaysLeft;
+        static bool[] visitedCities;
         static int date;
         static int oldDate;
 
@@ -43,6 +44,10 @@ namespace Active
             skillXP[1] = 0;
             skillXP[2] = 0;
 
+            //OM DU ÄNDRADE ANTAL STÄDER I WOLRDMAPMENU ÄNDRA HÄR OCKSÅ
+            visitedCities = new bool[10];
+            visitedCities[0] = true;
+            //OM DU ÄNDRADE ANTAL STÄDER I WOLRDMAPMENU ÄNDRA HÄR OCKSÅ
 
             eventCities = new List<string>();
             eventNames = new List<string>();
@@ -76,7 +81,7 @@ namespace Active
             int counter = 0;
             bool check = false;
             if (date != oldDate)
-            {
+            {               
                 for (int i = 0; i < eventDaysLeft.Count; i++)
                 {
                     eventDaysLeft[i] -= date - oldDate;
@@ -99,6 +104,19 @@ namespace Active
                     {
                         break;
                     }
+                }
+            }
+
+            if (date != oldDate)
+            {
+                counter = 0;
+                foreach (bool tempVisit in visitedCities)
+                {
+                    if (location == WorldMapMenu.Cities[counter].Name)
+                    {
+                        visitedCities[counter] = true;
+                    }
+                    counter++;
                 }
             }
             oldDate = date;
@@ -204,6 +222,12 @@ namespace Active
         static public List<string> EventNames
         {
             get => eventNames;
+        }
+
+        static public bool[] VisitedCities
+        {
+            get => visitedCities;
+            set => visitedCities = value;
         }
     }
 }

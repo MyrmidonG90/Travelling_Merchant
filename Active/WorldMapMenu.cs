@@ -11,7 +11,10 @@ namespace Active
 {
     static class WorldMapMenu
     {
+        //OM DU ÄNDRAR VÄRDET HÄR SÅ BEHVÖER DU ÄNDRA SAMMA VÄRDE I PLAYER FÖR JAG SUGER PÅ PROGRAMMERING
         static int nrCities = 10;
+        //OM DU ÄNDRAR VÄRDET HÄR SÅ BEHVÖER DU ÄNDRA SAMMA VÄRDE I PLAYER FÖR JAG SUGER PÅ PROGRAMMERING
+
         static City[] cities = new City[nrCities];
         static Button[] cityButtons = new Button[nrCities];
         static Button[] travelButtons = new Button[nrCities];
@@ -94,15 +97,21 @@ namespace Active
 
             foreach (Button button in cityButtons)
             {
+                int counter = 0;
                 foreach (City city in cities)
                 {
                     if (button.LeftClick() && button.Name == city.Name)
                     {
                         showText = true;
                         cityName = city.Name;
-                        cityInfo = city.Information;
                         cityCords = city.Coordinates;
+                        cityInfo = " ";
+                        if (Player.VisitedCities[counter])
+                        {
+                            cityInfo = city.Information;
+                        }
                     }
+                    counter++;
                 }
             }
         }

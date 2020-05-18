@@ -47,6 +47,11 @@ namespace Active
         static public Texture2D texBackArrow;
         static public Texture2D texOptions;
         static public Texture2D texButton;
+        static public Texture2D texDisposeDragger;
+        static public Texture2D texDisposeBar;
+        static public Texture2D texDisposeBox;
+        static public Texture2D texButtonOptions;
+        static public Texture2D texOptionsBox;
 
         // HUD
         static public Texture2D texRankUpIntimidation;
@@ -107,6 +112,12 @@ namespace Active
             texInvTab = content.Load<Texture2D>("inventory_tab");
             texSkillTab = content.Load<Texture2D>("skill_tab");
             texOptions = content.Load<Texture2D>("options");
+            texDisposeBar = content.Load<Texture2D>("dispose_bar");
+            texDisposeBox = content.Load<Texture2D>("dispose_box");
+            texDisposeDragger = content.Load<Texture2D>("dispose_dragger");
+            texButtonOptions = content.Load<Texture2D>("options_button");
+            texOptionsBox = content.Load<Texture2D>("options_box");
+
         }
         static void LoadItems(ContentManager content)
         {
