@@ -81,6 +81,7 @@ namespace Active
             EventLog.Init();
             WorldMapMenu.LoadCities();
             EncounterManager.Initialize();
+            CityInfoMenu.Init();
 
             ModifierManager.LoadCityAndCategoryLists();
             ModifierManager.LoadItemModifiers();
@@ -205,7 +206,8 @@ namespace Active
             }
             else if (gameState == GameState.MapMenu)
             {
-                WorldMapMenu.Draw(spriteBatch);               
+                WorldMapMenu.Draw(spriteBatch);
+                CityInfoMenu.Draw(spriteBatch);
             }
             else if (gameState == GameState.TradeMenu)
             {
@@ -225,7 +227,7 @@ namespace Active
             }
             else if (gameState == GameState.Debug)
             {
-                spriteBatch.DrawString(TextureManager.fontInventory, "Press F1 for City Menu, F2 for Map Menu, F3 for Inv. Menu,\nF4 for Trading Menu or F5 for Travelling Menu \nand you can always press F6 to return here\nF11 loads and F12 saves", new Vector2(200, 200), Color.White);
+                spriteBatch.DrawString(TextureManager.font32, "Press F1 for City Menu, F2 for Map Menu, F3 for Inv. Menu,\nF4 for Trading Menu or F5 for Travelling Menu \nand you can always press F6 to return here\nF11 loads and F12 saves", new Vector2(200, 200), Color.White);
             }
             if (gameState != GameState.MainMenu)
             {
@@ -358,7 +360,11 @@ namespace Active
                     ChangeGameState(GameState.TravelMenu);
                 }
             }
-            
+
+            if (CityInfoMenu.Update())
+            {
+                ChangeGameState(GameState.TravelMenu);
+            }
 
             if (WorldMapMenu.inventoryButton.LeftClick())
             {

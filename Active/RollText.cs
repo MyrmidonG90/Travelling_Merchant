@@ -37,7 +37,7 @@ namespace Active
             finished = false;
             timer = 0;
             timed = false;
-            font = TextureManager.fontHeader;
+            font = TextureManager.font48;
         }
         public RollText(int velocity, double timeAlive)
         {
@@ -50,7 +50,7 @@ namespace Active
             finished = false;
             timer = 0;
             timed = true;
-            font = TextureManager.fontHeader;
+            font = TextureManager.font48;
         }
         public void Start()
         {

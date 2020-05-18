@@ -41,7 +41,7 @@ namespace Active
             sb.Draw(TextureManager.texBox, rectMessage, Color.LightGray);
             for (int i = 0; i < text.Count; i++)
             {
-                sb.DrawString(TextureManager.fontButton,text[i],textPos[i],Color.Black);
+                sb.DrawString(TextureManager.font24,text[i],textPos[i],Color.Black);
             }            
         }
     }

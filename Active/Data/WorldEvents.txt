@@ -5,8 +5,8 @@ true;true;false;false
 35
 20
 ====
-Crop Failure
-This city is suffering from;large scale crop failure.
+Plague
+The Plague!
 true;true;false;false
 1;0;99;99
 30

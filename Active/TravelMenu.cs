@@ -172,12 +172,12 @@ namespace Active
 
         static public void Draw (SpriteBatch spriteBatch)
         {
-            Vector2 temp = TextureManager.fontHeader.MeasureString(turnDisplay);
-            spriteBatch.DrawString(TextureManager.fontHeader, turnDisplay, new Vector2((1920 - temp.X)/2, 200), Color.White);
+            Vector2 temp = TextureManager.font48.MeasureString(turnDisplay);
+            spriteBatch.DrawString(TextureManager.font48, turnDisplay, new Vector2((1920 - temp.X)/2, 200), Color.White);
             //for debugging i guess
             if (test)
             {
-                spriteBatch.DrawString(TextureManager.font, " " + turnTimer, new Vector2(50, 150), Color.White);
+                spriteBatch.DrawString(TextureManager.font13, " " + turnTimer, new Vector2(50, 150), Color.White);
             }
             pauseButton.Draw(spriteBatch);
             if (paused)

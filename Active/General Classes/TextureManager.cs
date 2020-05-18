@@ -7,10 +7,11 @@ namespace Active
     static class TextureManager
     {
         //Font
-        static public SpriteFont font;
-        static public SpriteFont fontInventory;
-        static public SpriteFont fontHeader;
-        static public SpriteFont fontButton;
+        static public SpriteFont font13;
+        static public SpriteFont font32;
+        static public SpriteFont font48;
+        static public SpriteFont font24;
+        static public SpriteFont font18;
 
         //Backgrounds
         static public Texture2D texBGTravelScreen;
@@ -47,6 +48,11 @@ namespace Active
         static public Texture2D texBackArrow;
         static public Texture2D texOptions;
         static public Texture2D texButton;
+        static public Texture2D texDisposeDragger;
+        static public Texture2D texDisposeBar;
+        static public Texture2D texDisposeBox;
+        static public Texture2D texButtonOptions;
+        static public Texture2D texOptionsBox;
 
         // HUD
         static public Texture2D texRankUpIntimidation;
@@ -107,6 +113,12 @@ namespace Active
             texInvTab = content.Load<Texture2D>("inventory_tab");
             texSkillTab = content.Load<Texture2D>("skill_tab");
             texOptions = content.Load<Texture2D>("options");
+            texDisposeBar = content.Load<Texture2D>("dispose_bar");
+            texDisposeBox = content.Load<Texture2D>("dispose_box");
+            texDisposeDragger = content.Load<Texture2D>("dispose_dragger");
+            texButtonOptions = content.Load<Texture2D>("options_button");
+            texOptionsBox = content.Load<Texture2D>("options_box");
+
         }
         static void LoadItems(ContentManager content)
         {
@@ -151,10 +163,11 @@ namespace Active
         }
         static void LoadFonts(ContentManager content)
         {
-            font = content.Load<SpriteFont>("File");
-            fontButton = content.Load<SpriteFont>("fontButton");
-            fontInventory = content.Load<SpriteFont>("fontInventory");
-            fontHeader = content.Load<SpriteFont>("fontHeader");
+            font13 = content.Load<SpriteFont>("File");
+            font24 = content.Load<SpriteFont>("fontButton");
+            font32 = content.Load<SpriteFont>("fontInventory");
+            font48 = content.Load<SpriteFont>("fontHeader");
+            font18 = content.Load<SpriteFont>("font18");
         }
         static void LoadIcons(ContentManager content)
         {

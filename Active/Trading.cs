@@ -535,31 +535,31 @@ namespace Active
             accept.Draw(sb);
             reset.Draw(sb);
             back.Draw(sb);
-            sb.DrawString(TextureManager.fontButton, invLeft.Money.ToString(), new Vector2(315, 530),Color.Black);
-            sb.DrawString(TextureManager.fontButton, invRight.Money.ToString(), new Vector2(1520, 530), Color.Black);
+            sb.DrawString(TextureManager.font24, invLeft.Money.ToString(), new Vector2(315, 530),Color.Black);
+            sb.DrawString(TextureManager.font24, invRight.Money.ToString(), new Vector2(1520, 530), Color.Black);
             Vector2 arrowPos = new Vector2(867, 502);
             Vector2 moneyPos = new Vector2(920, 535);
             
             if (priceDifference < 0)
             {
                 sb.Draw(TextureManager.texArrowMoneyRight, arrowPos, Color.White);
-                sb.DrawString(TextureManager.fontButton, (priceDifference*-1).ToString(), moneyPos, Color.Black);
+                sb.DrawString(TextureManager.font24, (priceDifference*-1).ToString(), moneyPos, Color.Black);
             }
             else if (priceDifference > 0)
             {
                 sb.Draw(TextureManager.texArrowMoneyLeft, arrowPos, Color.White);
-                sb.DrawString(TextureManager.fontButton, priceDifference.ToString(), moneyPos, Color.Black);
+                sb.DrawString(TextureManager.font24, priceDifference.ToString(), moneyPos, Color.Black);
             }
             else if (priceDifference == 0)
             {
-                sb.DrawString(TextureManager.fontButton, priceDifference.ToString(), moneyPos, Color.Black);
+                sb.DrawString(TextureManager.font24, priceDifference.ToString(), moneyPos, Color.Black);
             }
 
             if (selected != null)
             {
-                Vector2 temp = TextureManager.fontButton.MeasureString(selected.Name);
+                Vector2 temp = TextureManager.font24.MeasureString(selected.Name);
                 Vector2 namePos = new Vector2(((1920 - temp.X) / 2)-5, 610);
-                sb.DrawString(TextureManager.fontButton, selected.Name, namePos, Color.Black);
+                sb.DrawString(TextureManager.font24, selected.Name, namePos, Color.Black);
                 if (selected.Rarity == 0)
                 {
                     sb.Draw(TextureManager.texIconCommon, new Rectangle(930, 650, 60, 60), Color.White);
@@ -572,7 +572,7 @@ namespace Active
                 {
                     sb.Draw(TextureManager.texIconRare, new Rectangle(930, 650, 60, 60), Color.White);
                 }
-                sb.DrawString(TextureManager.fontButton, "Standard Price: " + selected.BasePrice.ToString(), new Vector2(800, 730), Color.Black);
+                sb.DrawString(TextureManager.font24, "Standard Price: " + selected.BasePrice.ToString(), new Vector2(800, 730), Color.Black);
 
                 if (selected.PrimaryCategory != 999)
                 {

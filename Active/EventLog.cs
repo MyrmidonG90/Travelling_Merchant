@@ -26,13 +26,13 @@ namespace Active
             int counter = 0;
             foreach (string tempstring in Player.EventCities)
             {
-                spritebatch.DrawString(TextureManager.fontButton, tempstring, new Vector2(720, 120 + (44 * counter)), Color.Black);
+                spritebatch.DrawString(TextureManager.font24, tempstring, new Vector2(720, 120 + (44 * counter)), Color.Black);
                 counter++;
             }
             counter = 0;
             foreach (string tempstring in Player.EventNames)
             {
-                spritebatch.DrawString(TextureManager.fontButton, tempstring, new Vector2(970, 120 + (44 * counter)), Color.Black);
+                spritebatch.DrawString(TextureManager.font24, tempstring, new Vector2(970, 120 + (44 * counter)), Color.Black);
                 counter++;
             }
         }
