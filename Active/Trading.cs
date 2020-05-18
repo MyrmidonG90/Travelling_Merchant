@@ -392,6 +392,15 @@ namespace Active
             }
 
             // Update both player and merchant's inventory
+
+            foreach (Item item in tradeRight.ItemList)
+            {
+                if(item.Name == "Carrot")
+                {
+                    AchievementManager.boughtCarrots++;
+                }
+            }
+
             ChangeInv();
             participantLeft = invLeft;
             participantRight = invRight;

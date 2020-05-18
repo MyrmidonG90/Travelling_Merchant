@@ -10,14 +10,15 @@ namespace Active
     {
 
         
-        public string name, description;
+        public string name, description, progress;
         public bool complete;
 
 
-        public Achievement(string name, string description, bool complete)
+        public Achievement(string name, string description, string progress, bool complete)
         {
             this.name = name;
             this.description = description;
+            this.progress = progress;
             this.complete = complete;
         }
 
