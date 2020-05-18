@@ -10,7 +10,7 @@ namespace Active
     {
 
         
-        string name, description;
+        public string name, description;
         public bool complete;
 
 

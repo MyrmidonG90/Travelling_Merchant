@@ -12,10 +12,19 @@ namespace Active
 {
     class PlayerInventoryModule
     {
+
+        enum TabState
+        {
+            Inventory,
+            Skills,
+            Achievements
+        }
+
+        TabState tab;
+
         bool disposing;
         bool dragging;
         bool fix;
-        bool alt;
         Item selected;
         int selectedSquare;
         int numberToDispose;
@@ -24,6 +33,7 @@ namespace Active
 
         Button invTab;
         Button skillTab;
+        Button ashievementTab;
 
         Rectangle priCategoryBox;
         Rectangle secCategoryBox;
@@ -40,7 +50,8 @@ namespace Active
         public PlayerInventoryModule()
         {
             disposing = false;
-            alt = false;
+
+            tab = TabState.Inventory;
 
             mainBox = new Rectangle(260, 150, 1400, 880);
             inventoryBox = new Rectangle(300, 170, 720, 720);
@@ -51,6 +62,7 @@ namespace Active
 
             invTab = new Button(280, 90, 200, 60, TextureManager.texInvTab);
             skillTab = new Button(470, 90, 200, 60, TextureManager.texSkillTab);
+            ashievementTab = new Button(660, 90, 200, 60, TextureManager.texSkillTab);
 
             disposeButton = new Button(1560, 930, 70, 70, TextureManager.texIconTrashCan);
             returnButton = new Button(20, 20, 80, 80, TextureManager.texBackArrow);
@@ -68,37 +80,55 @@ namespace Active
         {
             CheckTabClick();
 
-            if (!alt)
+            if (tab == TabState.Inventory)
             {
                 UpdateInventory();
             }
-            if (alt)
+            else if (tab == TabState.Skills)
             {
                 UpdateSkills();
-            }         
+            }
+            else if (tab == TabState.Achievements)
+            {
+                UpdateAchievements();
+            }
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
             returnButton.Draw(spriteBatch);
-            if (!alt)
+            if (tab == TabState.Inventory)
             {
+                ashievementTab.Draw(spriteBatch);
                 skillTab.Draw(spriteBatch);
                 invTab.Draw(spriteBatch);
+                
             }
-            if (alt)
+            else if (tab == TabState.Skills)
             {
                 invTab.Draw(spriteBatch);
+                ashievementTab.Draw(spriteBatch);
                 skillTab.Draw(spriteBatch);
+                
+            }
+            else if (tab == TabState.Achievements)
+            {
+                skillTab.Draw(spriteBatch);
+                invTab.Draw(spriteBatch);
+                ashievementTab.Draw(spriteBatch);
             }
 
-            if (!alt)
+            if (tab == TabState.Inventory)
             {
                 DrawInventory(spriteBatch);
             }
-            if (alt)
+            else if (tab == TabState.Skills)
             {
                 DrawSkills(spriteBatch);
+            }
+            else if (tab == TabState.Achievements)
+            {
+                DrawAchievements(spriteBatch);
             }
             //spriteBatch.DrawString(TextureManager.fontInventory, Player.EventNames.Count.ToString(), new Vector2(300, 300), Color.White);
 
@@ -148,15 +178,19 @@ namespace Active
         {
             if (invTab.LeftClick() && skillTab.LeftClick())
             {
-                alt = !alt;
+                tab = TabState.Inventory;
             }
             else if (invTab.LeftClick())
             {
-                alt = false;
+                tab = TabState.Inventory;
             }
             else if (skillTab.LeftClick())
             {
-                alt = true;
+                tab = TabState.Skills;
+            }
+            else if (ashievementTab.LeftClick())
+            {
+                tab = TabState.Achievements;
             }
         }
 
@@ -273,6 +307,11 @@ namespace Active
 
         }
 
+        private void UpdateAchievements()
+        {
+
+        }
+
         private void DrawDisposing(SpriteBatch spriteBatch)
         {
             if (disposing)
@@ -371,5 +410,21 @@ namespace Active
             spriteBatch.DrawString(TextureManager.font32, "Intimidation: " + Player.ReturnSkillLevel("Intimidation"), new Vector2(400, 400), Color.Black);
             spriteBatch.DrawString(TextureManager.font32, "Persuasion: " + Player.ReturnSkillLevel("Persuasion"), new Vector2(400, 500), Color.Black);
         }
+
+
+        private void DrawAchievements(SpriteBatch spriteBatch)
+        {
+            spriteBatch.Draw(TextureManager.texSkillMenu, mainBox, Color.White);
+            int temp = 0;
+            foreach (Achievement achievement in AchievementManager.achievements)
+            {
+                
+                spriteBatch.DrawString(TextureManager.font24, achievement.name , new Vector2(300, 200 + temp), Color.Black);
+                spriteBatch.DrawString(TextureManager.font24, achievement.description, new Vector2(800, 200 + temp), Color.Black);
+                temp += 60;
+            }
+            
+        }
+
     }
 }
