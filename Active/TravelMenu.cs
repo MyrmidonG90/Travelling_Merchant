@@ -50,7 +50,7 @@ namespace Active
             int i = 0;
         }
 
-        static public void StartTravel(string newDestination)
+        static public bool StartTravel(string newDestination)
         {
             for (int i = 0; i < 14; i++)
             {
@@ -69,6 +69,7 @@ namespace Active
                         turnTimer = timerLength;
 
                         EncounterManager.NewTrip();
+                        return true;
                     }
                 }
             }
@@ -88,13 +89,11 @@ namespace Active
                         turnTimer = timerLength;
 
                         EncounterManager.NewTrip();
-
+                        return true;
                     }
                 }
             }
-
-            
-            
+            return false;
         }
 
         static public void AbortTravel()

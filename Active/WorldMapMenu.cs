@@ -28,8 +28,6 @@ namespace Active
         static Vector2 cityCords;
         static City selectedCity;
 
-        static Vector2 posArrowDown;
-
         static int date;
         static int oldDate;
 
@@ -108,8 +106,6 @@ namespace Active
                         cityName = city.Name;
                         cityInfo = city.Information;
                         cityCords = city.Coordinates;
-                        posArrowDown.X = city.Coordinates.X;
-                        posArrowDown.Y = cityCords.Y -TextureManager.texArrowDown.Bounds.Y- 110;
                     }
                 }
             }
@@ -147,19 +143,20 @@ namespace Active
         static public void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(TextureManager.texBGMap, new Vector2(0, 0), Color.White);
+            spriteBatch.Draw(TextureManager.texBGMapRoads, Vector2.Zero, Color.White);
 
             foreach (Button button in cityButtons)
             {
                 button.Draw(spriteBatch);
                 if (button.Name == Player.Location)
                 {
-                    spriteBatch.Draw(TextureManager.texSelect, button.HitBox, Color.White);
+                    Vector2 temp = new Vector2(button.HitBox.X, button.HitBox.Y - 110);
+                    spriteBatch.Draw(TextureManager.texArrowDown, temp, Color.White);
                 }
             }
             
             inventoryButton.Draw(spriteBatch);
             returnButton.Draw(spriteBatch);
-            spriteBatch.Draw(TextureManager.texArrowDown, posArrowDown,Color.White);
 
             if (showText)
             {
@@ -172,8 +169,7 @@ namespace Active
                 }
                 spriteBatch.DrawString(TextureManager.fontInventory, cityName, new Vector2(cityCords.X + 80, cityCords.Y), Color.White);
                 spriteBatch.DrawString(TextureManager.font, cityInfo, new Vector2(cityCords.X + 80, cityCords.Y + 40), Color.Black);
-
-            }          
+            }
         }
 
         static public void LoadCities()
@@ -203,15 +199,12 @@ namespace Active
                 }
 
                 cities[counter] = new City(tempName, tempInfo, cord, neighData);
-                cityButtons[counter] = new Button((int)cord.X, (int)cord.Y, 68, 68, tempName, TextureManager.texBox);
-                travelButtons[counter] = new Button((int)cord.X, (int)cord.Y + 75, 68, 36, tempName, TextureManager.texBox);
+                cityButtons[counter] = new Button((int)cord.X, (int)cord.Y, 68, 68, tempName, TextureManager.texIconCity);
+                travelButtons[counter] = new Button((int)cord.X, (int)cord.Y + 75, 68, 36, tempName, TextureManager.texButtonGo);
                 //CityManager.CreateCity(tempName, tempInfo, cord, neighData);
                 counter++;
             }
             sr.Close();
-            posArrowDown = new Vector2(-100, -100);
-            posArrowDown.X = cities[0].Coordinates.X;
-            posArrowDown.Y = cities[0].Coordinates.Y - TextureManager.texArrowDown.Bounds.Y - 110;
 
             //CityManager.SaveCities();
             //CityManager.LoadCities();

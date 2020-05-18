@@ -18,6 +18,7 @@ namespace Active
         static public Texture2D texBGTowerTown;
         static public Texture2D texBGDefaultTown;
         static public Texture2D texBGMap;
+        static public Texture2D texBGMapRoads;
 
 
         // Category
@@ -38,7 +39,7 @@ namespace Active
         static public Texture2D texIconIntimidation;
         static public Texture2D texIconPersuasion;
         static public Texture2D texIconWisdom;
-        static public Texture2D texIconMerchantCity;
+        static public Texture2D texIconCity;
 
         // GUI
         static public Texture2D texButtonGo;
@@ -146,6 +147,7 @@ namespace Active
             texBGTowerTown = content.Load<Texture2D>("Tower Town");
             texBGDefaultTown = content.Load<Texture2D>("Default");
             texBGMap = content.Load<Texture2D>("merchant_map");
+            texBGMapRoads = content.Load<Texture2D>("merchant_map_roads");
         }
         static void LoadFonts(ContentManager content)
         {
@@ -163,7 +165,7 @@ namespace Active
             texIconTrashCan = content.Load<Texture2D>("trash_can");
             texIconUncommon = content.Load<Texture2D>("uncommon_icon");
             texIconWisdom = content.Load<Texture2D>("skill_icon_wisdom");
-            texIconMerchantCity = content.Load<Texture2D>("merchant_city_icon");
+            texIconCity = content.Load<Texture2D>("merchant_city_icon");
         }
         static void LoadCategories(ContentManager content)
         {

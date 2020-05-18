@@ -29,10 +29,6 @@ namespace Active
         Rectangle secCategoryBox;
         Rectangle terCategoryBox;
 
-        Vector2 posPriCategoryString;
-        Vector2 posSecCategoryString;
-        Vector2 posTerCategoryString;
-
         Button disposeButton;
         Button disposeOKButton;
         Button disposeDragger;
