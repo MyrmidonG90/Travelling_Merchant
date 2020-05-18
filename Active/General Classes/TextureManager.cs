@@ -7,10 +7,11 @@ namespace Active
     static class TextureManager
     {
         //Font
-        static public SpriteFont font;
-        static public SpriteFont fontInventory;
-        static public SpriteFont fontHeader;
-        static public SpriteFont fontButton;
+        static public SpriteFont font13;
+        static public SpriteFont font32;
+        static public SpriteFont font48;
+        static public SpriteFont font24;
+        static public SpriteFont font18;
 
         //Backgrounds
         static public Texture2D texBGTravelScreen;
@@ -162,10 +163,11 @@ namespace Active
         }
         static void LoadFonts(ContentManager content)
         {
-            font = content.Load<SpriteFont>("File");
-            fontButton = content.Load<SpriteFont>("fontButton");
-            fontInventory = content.Load<SpriteFont>("fontInventory");
-            fontHeader = content.Load<SpriteFont>("fontHeader");
+            font13 = content.Load<SpriteFont>("File");
+            font24 = content.Load<SpriteFont>("fontButton");
+            font32 = content.Load<SpriteFont>("fontInventory");
+            font48 = content.Load<SpriteFont>("fontHeader");
+            font18 = content.Load<SpriteFont>("font18");
         }
         static void LoadIcons(ContentManager content)
         {

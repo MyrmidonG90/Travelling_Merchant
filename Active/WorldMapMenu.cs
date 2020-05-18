@@ -18,6 +18,7 @@ namespace Active
         static City[] cities = new City[nrCities];
         static Button[] cityButtons = new Button[nrCities];
         static Button[] travelButtons = new Button[nrCities];
+        static Button[] infoButtons = new Button[nrCities];
 
         static public Button inventoryButton = new Button(70, 920, 260, 120, "inv", "Inventory", TextureManager.texButton);
         static public Button returnButton = new Button(20, 20, 80, 80, TextureManager.texBackArrow);
@@ -58,6 +59,7 @@ namespace Active
                 counter++;
             }
 
+
             foreach (City tempCity in Cities)
             {
                 if (tempCity.Name == Player.Location)
@@ -92,6 +94,15 @@ namespace Active
                 if (KMReader.LeftMouseClick())
                 {
                     showText = false;
+                }
+            }
+
+            foreach (Button tempButton in infoButtons)
+            {
+                if (tempButton.LeftClick())
+                {
+                    CityInfoMenu.Active = true;
+                    CityInfoMenu.Selected = tempButton.Name;
                 }
             }
 
@@ -171,8 +182,15 @@ namespace Active
                         button.Draw(spriteBatch);
                     }
                 }
-                spriteBatch.DrawString(TextureManager.fontInventory, cityName, new Vector2(cityCords.X + 80, cityCords.Y), Color.White);
-                spriteBatch.DrawString(TextureManager.font, cityInfo, new Vector2(cityCords.X + 80, cityCords.Y + 40), Color.Black);
+                foreach (Button tempButton in infoButtons)
+                {
+                    if (tempButton.Name == cityName)
+                    {
+                        tempButton.Draw(spriteBatch);
+                    }
+                }
+                spriteBatch.DrawString(TextureManager.font32, cityName, new Vector2(cityCords.X + 80, cityCords.Y - 5), Color.White);
+                spriteBatch.DrawString(TextureManager.font13, cityInfo, new Vector2(cityCords.X + 80, cityCords.Y + 40), Color.Black);
             }
         }
 
@@ -205,6 +223,7 @@ namespace Active
                 cities[counter] = new City(tempName, tempInfo, cord, neighData);
                 cityButtons[counter] = new Button((int)cord.X, (int)cord.Y, 68, 68, tempName, TextureManager.texIconCity);
                 travelButtons[counter] = new Button((int)cord.X, (int)cord.Y + 75, 68, 36, tempName, TextureManager.texButtonGo);
+                infoButtons[counter] = new Button((int)cord.X + 80, (int)cord.Y + 42, 30, 30, tempName, TextureManager.texWhite);
                 //CityManager.CreateCity(tempName, tempInfo, cord, neighData);
                 counter++;
             }

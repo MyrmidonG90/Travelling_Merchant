@@ -45,6 +45,7 @@ namespace Active
             skillXP[2] = 0;
 
             //OM DU ÄNDRADE ANTAL STÄDER I WOLRDMAPMENU ÄNDRA HÄR OCKSÅ
+            //DU BEHÖVER OCKSÅ ÄNDRA I SaveModule.ReadPlayerData
             visitedCities = new bool[10];
             visitedCities[0] = true;
             //OM DU ÄNDRADE ANTAL STÄDER I WOLRDMAPMENU ÄNDRA HÄR OCKSÅ

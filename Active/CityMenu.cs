@@ -16,8 +16,7 @@ namespace Active
         Button inventoryButton;
         Button tradeButton;
         Button mapButton;
-        Button nextTurnButton;
-        
+        Button nextTurnButton;       
 
         string currentCity;
         string currentCityInfo;
@@ -124,12 +123,12 @@ namespace Active
             tradeButton.Draw(spriteBatch);
             mapButton.Draw(spriteBatch);
             nextTurnButton.Draw(spriteBatch);
-            spriteBatch.DrawString(TextureManager.fontHeader, currentCity, new Vector2(30, 100), Color.Black, 0, Vector2.Zero, 1, SpriteEffects.None, 1);
-            spriteBatch.DrawString(TextureManager.fontInventory, currentCityInfo, new Vector2(40, 180), Color.Black, 0, Vector2.Zero, 1, SpriteEffects.None, 1);
+            spriteBatch.DrawString(TextureManager.font48, currentCity, new Vector2(30, 100), Color.Black, 0, Vector2.Zero, 1, SpriteEffects.None, 1);
+            spriteBatch.DrawString(TextureManager.font32, currentCityInfo, new Vector2(40, 180), Color.Black, 0, Vector2.Zero, 1, SpriteEffects.None, 1);
 
             if (activeEvent)
             {
-                spriteBatch.DrawString(TextureManager.fontInventory, eventDes, new Vector2(1300, 180), Color.Black);
+                spriteBatch.DrawString(TextureManager.font32, eventDes, new Vector2(1300, 180), Color.Black);
             }
             if (loseMoneyText.OnGoing)
             {

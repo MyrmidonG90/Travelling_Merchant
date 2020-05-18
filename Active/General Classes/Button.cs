@@ -77,10 +77,10 @@ namespace Active
             if (text != null)
             {
                 spriteBatch.Draw(tex, hitBox, Color.White);
-                Vector2 temp = TextureManager.fontButton.MeasureString(text);
+                Vector2 temp = TextureManager.font24.MeasureString(text);
                 Vector2 temp2 = new Vector2(hitBox.X + ((HitBox.Width - (int)temp.X)/2), hitBox.Y + ((HitBox.Height - (int)temp.Y) / 2));
 
-                spriteBatch.DrawString(TextureManager.fontButton, text, temp2, Color.Black);
+                spriteBatch.DrawString(TextureManager.font24, text, temp2, Color.Black);
             }
             else
             {

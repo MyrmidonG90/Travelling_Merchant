@@ -278,11 +278,11 @@ namespace Active
             if (disposing)
             {
                 spriteBatch.Draw(TextureManager.texDisposeBox, disposeBox, Color.White);
-                Vector2 temp = TextureManager.fontInventory.MeasureString("Select amount to remove");
-                spriteBatch.DrawString(TextureManager.fontInventory, "Select amount to remove", new Vector2((1920 - temp.X) / 2, 270), Color.Black);
+                Vector2 temp = TextureManager.font32.MeasureString("Select amount to remove");
+                spriteBatch.DrawString(TextureManager.font32, "Select amount to remove", new Vector2((1920 - temp.X) / 2, 270), Color.Black);
 
-                temp = TextureManager.fontInventory.MeasureString(numberToDispose.ToString());
-                spriteBatch.DrawString(TextureManager.fontInventory, numberToDispose.ToString(), new Vector2((1920 - temp.X) / 2, 370), Color.Black);
+                temp = TextureManager.font32.MeasureString(numberToDispose.ToString());
+                spriteBatch.DrawString(TextureManager.font32, numberToDispose.ToString(), new Vector2((1920 - temp.X) / 2, 370), Color.Black);
 
                 spriteBatch.Draw(TextureManager.texDisposeBar, disposeBar, Color.White);
 
@@ -306,7 +306,7 @@ namespace Active
                 {
                     temp = new Vector2(inventoryGrid[counter].X + 60, inventoryGrid[counter].Y + 70);
                 }
-                spriteBatch.DrawString(TextureManager.fontInventory, tempItem.Amount.ToString(), temp, Color.White);
+                spriteBatch.DrawString(TextureManager.font32, tempItem.Amount.ToString(), temp, Color.White);
                 counter++;
             }
         }
@@ -315,7 +315,7 @@ namespace Active
         {
             spriteBatch.Draw(TextureManager.texInvMenu, mainBox, Color.White);
 
-            spriteBatch.DrawString(TextureManager.fontButton, Player.Inventory.Money.ToString(), new Vector2(440, 958), Color.Black);
+            spriteBatch.DrawString(TextureManager.font24, Player.Inventory.Money.ToString(), new Vector2(440, 958), Color.Black);
             //spriteBatch.Draw(TextureManager.texWhite, inventoryBox, Color.DarkGray);
 
 
@@ -335,9 +335,9 @@ namespace Active
                 {
                     spriteBatch.Draw(TextureManager.texIconRare, new Vector2(1110, 180), Color.White);
                 }
-                spriteBatch.DrawString(TextureManager.fontHeader, selected.Name, new Vector2(1220, 200), Color.White);
-                spriteBatch.DrawString(TextureManager.fontInventory, "Info: \n" + selected.Description, new Vector2(1100, 310), Color.White);
-                spriteBatch.DrawString(TextureManager.fontInventory, "Standard Price: " + selected.BasePrice.ToString() + "c", new Vector2(1100, 660), Color.White);
+                spriteBatch.DrawString(TextureManager.font48, selected.Name, new Vector2(1220, 200), Color.White);
+                spriteBatch.DrawString(TextureManager.font32, "Info: \n" + selected.Description, new Vector2(1100, 310), Color.White);
+                spriteBatch.DrawString(TextureManager.font32, "Standard Price: " + selected.BasePrice.ToString() + "c", new Vector2(1100, 660), Color.White);
 
                 if (selected.PrimaryCategory != 999)
                 {
@@ -367,9 +367,9 @@ namespace Active
         private void DrawSkills(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(TextureManager.texSkillMenu, mainBox, Color.White);
-            spriteBatch.DrawString(TextureManager.fontInventory, "Wisdom: " + Player.ReturnSkillLevel("Wisdom"), new Vector2(400, 300), Color.Black);
-            spriteBatch.DrawString(TextureManager.fontInventory, "Intimidation: " + Player.ReturnSkillLevel("Intimidation"), new Vector2(400, 400), Color.Black);
-            spriteBatch.DrawString(TextureManager.fontInventory, "Persuasion: " + Player.ReturnSkillLevel("Persuasion"), new Vector2(400, 500), Color.Black);
+            spriteBatch.DrawString(TextureManager.font32, "Wisdom: " + Player.ReturnSkillLevel("Wisdom"), new Vector2(400, 300), Color.Black);
+            spriteBatch.DrawString(TextureManager.font32, "Intimidation: " + Player.ReturnSkillLevel("Intimidation"), new Vector2(400, 400), Color.Black);
+            spriteBatch.DrawString(TextureManager.font32, "Persuasion: " + Player.ReturnSkillLevel("Persuasion"), new Vector2(400, 500), Color.Black);
         }
     }
 }
