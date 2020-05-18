@@ -26,10 +26,6 @@ namespace Active
         static string cityName;
         static string cityInfo;
         static Vector2 cityCords;
-        static City selectedCity;
-
-        static int date;
-        static int oldDate;
 
         static void ItemList()
         {
@@ -109,7 +105,6 @@ namespace Active
                     }
                 }
             }
-            date = Calendar.TotalDays;
         }
 
         static public void CheckPlayerEventLog()
