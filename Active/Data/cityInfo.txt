@@ -1,40 +1,45 @@
 Carrot Town
 Carrot Town is the great city of carrots.;Its agricultural roots can be traced ;thousands of years! There is no better ;place to buy fruits, vegetables ;and, of course, carrots.
 280,480
-Dryad's Grove,Mount Goblin,Steel Ville
-Steel Ville
-Jag kanner att vi borde byta ut den ;har staden one of these days
-700,670
-Carrot Town,Mount Goblin,The Tomb,Winghelm,Hymn Harbor,Sanctuary
+1,4
+5,0
 Tower Town
 If you don't like heights then Tower Town ;might not be the place for you. The city ;has towers and tall building everywhere ;and of course they had to place every ;shop at the top. ;Sigh...
 1500,600
-Winghelm,Pyramaad,Sanctuary
+5,3
+7,1
 Hymn Harbor
 Hymn Harbor has ships like you've never seen. ;Beeing at the center of the map with ;trade ships delivering goods all day, ;it's only natural that this city has a ;diverse collection of wares.
 1170,310
-Winghelm,Steel Ville,Sanctuary
+4,6
+7,0
 Winghelm
 The city got it's name after the ;great gryphons that roam the ;surrounding lands. They are however, ;starting to die out because of the ;increased demand for "Gryphon McNuggets".
-1480,350
-Pyramaad,Tower Town,Sanctuary,Hymn Harbor,Steel Ville
+1400,450
+3,4
+5
 Pyramaad
-In this desert city you can't buy ;any water. Fortunatly, you can't do ;that in any other city either. ;Here, however, one is able to find ;lots of magical items and artifacts.
+In this desert city you can't buy ;any water. Fortunatly, you can't do ;that in any other city either. ;Here, however, one is able to find ;lots of 5al items and artifacts.
 1580,180
-Tower Town,Winghelm
+5,6
+0,4
 Mount Goblin
 The greatest goblin city there is! ;Might also be the only goblin city ;there is. Placed on the mountain ;that is just a little bit taller ;than the less famous "Mount Human".
 120,700
-Carrot Town,Steel Ville,The Tomb
+2
+6,3
 Sanctuary
 This city was created by the cleric Henry the smitefull ;when he thought: "What would ;happen if every house in the ;city was a church?". Now we know.
 1270,880
-Tower Town,Winghelm,Hymn Harbor,Steel Ville
+4,5
+0,6
 Dryad's Grove
 16249 years ago the Elves and creatures ;of the forrest united to create ;this city of nature. Legends ;tell of a dragon that tried to ;burn down the city once but ;he got his ass whooped.
 110,250
-Carrot Town
+2,5
+1,6
 The Tomb
 The Tomb is a pretty cool place for ;everyone who loves ghouls, ;suffering and the everlasting void. ;Founded by Carl the Necromancer, ;the Tomb is the world hub of ;everything that concerns the dark arts.
 340,860
-Mount Goblin,Steel Ville
+5,3
+1,7

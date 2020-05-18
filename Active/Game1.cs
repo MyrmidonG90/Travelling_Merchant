@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
 
 namespace Active
 {
@@ -55,6 +56,7 @@ namespace Active
             base.Initialize();
             graphics.PreferredBackBufferWidth = 1920;
             graphics.PreferredBackBufferHeight = 1080;
+            EndCredits.Initialize();
             //graphics.IsFullScreen = true;
             //väldigt svårt att debugga i fullscreen så rekomenderar att lämna det av förutom när det behövs /My
             graphics.ApplyChanges();
@@ -67,7 +69,8 @@ namespace Active
 
             TextureManager.LoadContent(Content);
             ItemCreator.LoadItemData();
-
+            SoundManager.LoadSounds(Content);
+            //SoundManager.PlayMusic();
             AchievementManager.LoadAchievements();
             Player.Init();
             MainMenuManager.Init();
@@ -78,6 +81,7 @@ namespace Active
             EventLog.Init();
             WorldMapMenu.LoadCities();
             EncounterManager.Initialize();
+            CityInfoMenu.Init();
 
             ModifierManager.LoadCityAndCategoryLists();
             ModifierManager.LoadItemModifiers();
@@ -93,6 +97,7 @@ namespace Active
             options = false;
             activeInv = new Inventory(100);
             random = new Random();
+            
 
             CityControlList = new List<string>();
             CityControlList.Add("Carrot Town");
@@ -106,6 +111,9 @@ namespace Active
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Back))
                 Exit();
+
+            EndCredits.Update(gameTime.ElapsedGameTime.TotalMilliseconds);//////////////////////////////////////
+            LevelUp.Update(gameTime.ElapsedGameTime.TotalMilliseconds); ///////////////////////////////////////
 
             if (WorldEventManager.Update(random))
             {
@@ -198,7 +206,8 @@ namespace Active
             }
             else if (gameState == GameState.MapMenu)
             {
-                WorldMapMenu.Draw(spriteBatch);               
+                WorldMapMenu.Draw(spriteBatch);
+                CityInfoMenu.Draw(spriteBatch);
             }
             else if (gameState == GameState.TradeMenu)
             {
@@ -218,7 +227,7 @@ namespace Active
             }
             else if (gameState == GameState.Debug)
             {
-                spriteBatch.DrawString(TextureManager.fontInventory, "Press F1 for City Menu, F2 for Map Menu, F3 for Inv. Menu,\nF4 for Trading Menu or F5 for Travelling Menu \nand you can always press F6 to return here\nF11 loads and F12 saves", new Vector2(200, 200), Color.White);
+                spriteBatch.DrawString(TextureManager.font32, "Press F1 for City Menu, F2 for Map Menu, F3 for Inv. Menu,\nF4 for Trading Menu or F5 for Travelling Menu \nand you can always press F6 to return here\nF11 loads and F12 saves", new Vector2(200, 200), Color.White);
             }
             if (gameState != GameState.MainMenu)
             {
@@ -230,8 +239,9 @@ namespace Active
                 EventLog.Draw(spriteBatch);
             }
 
-            OptionsMenu.Draw(spriteBatch, options);          
-
+            OptionsMenu.Draw(spriteBatch, options);
+            EndCredits.Draw(spriteBatch);//////////////////////////////
+            LevelUp.Draw(spriteBatch);/////////////////////////////////
             spriteBatch.End();
 
             Window.Title = "Press F6 for debug menu          " + Player.SkillLevels[0].ToString() + Player.SkillLevels[1].ToString() + Player.SkillLevels[2].ToString() + "    " + OptionsMenu.selectedSkill;
@@ -240,6 +250,7 @@ namespace Active
             {
                 Window.Title = "WAAAAR";
             }
+            
 
             base.Draw(gameTime);
         }
@@ -344,7 +355,14 @@ namespace Active
             string temp = WorldMapMenu.CheckNewTravel();
             if (temp != null && TravelMenu.TurnsLeft == 0)
             {
-                TravelMenu.StartTravel(temp);
+                if (TravelMenu.StartTravel(temp))
+                {
+                    ChangeGameState(GameState.TravelMenu);
+                }
+            }
+
+            if (CityInfoMenu.Update())
+            {
                 ChangeGameState(GameState.TravelMenu);
             }
 
@@ -481,7 +499,7 @@ namespace Active
             }
             if (!drawn)
             {
-                spriteBatch.Draw(TextureManager.texDefaultTown, Vector2.Zero, Color.White);
+                spriteBatch.Draw(TextureManager.texBGDefaultTown, Vector2.Zero, Color.White);
                 drawn = true;
             }
         }

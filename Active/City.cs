@@ -17,15 +17,17 @@ namespace Active
         readonly string name;
         string information;
         Vector2 coordinates;
+        List<Vector2> modifiers;
         Inventory inv;
         Inventory templateInv;
         int lastTraded;
         bool traded;
-        List<string> neighbors;
+        List<int> goodTrade;
+        List<int> badTrade;
 
         float x, y;
 
-        public City(string name, string information, Vector2 coordinates, List<string> neighbors)
+        public City(string name, string information, Vector2 coordinates, List<int> good, List<int> bad)
         {
             this.name = name;
             this.information = information;
@@ -34,7 +36,8 @@ namespace Active
             y = coordinates.Y;
             inv = new Inventory(100);
             templateInv = new Inventory(100);
-            this.neighbors = neighbors;
+            goodTrade = good;
+            badTrade = bad;
         }
 
         public void Update()
@@ -82,7 +85,11 @@ namespace Active
 
         public void AddInventory(Inventory inv)
         {
-            this.inv = inv;
+            this.inv = new Inventory(inv);
+        }
+        public void AddModifiers(List<Vector2> modifiers)
+        {
+            this.modifiers = new List<Vector2>(modifiers);
         }
 
         public string Information
@@ -117,9 +124,14 @@ namespace Active
             }
         }
 
-        public List<string> Neighbors
+        public List<int> GoodTrade
         {
-            get => neighbors;
+            get => goodTrade;
+        }
+
+        public List<int> BadTrade
+        {
+            get => badTrade;
         }
 
         public Inventory TemplateInv
@@ -130,31 +142,50 @@ namespace Active
 
         public Inventory Inv { get => inv; set => inv = value; }
 
-        public override string ToString()
+        public string[] ToStringArray()
         {
-            string total, items;
-            items = "";
+            //string items;
+            string[] total = new string[7];
+            //items = "";
 
-            if (inv != null)
+            total[0] = name;
+            total[1] = information;
+            total[2] = coordinates.X +"," + coordinates.Y;
+            for (int i = 0; i < goodTrade.Count; i++)
             {
-                if (Inv.ItemList.Count != 0)
-            {
-                for (int i = 0; i < Inv.ItemList.Count; i++)
+                if (i == 0)
                 {
-                    items = Inv.ItemList[i].ID.ToString() + ':' + Inv.ItemList[i].Amount.ToString() + ',';
+                    total[3] = goodTrade[i].ToString();
                 }
-                total = name + ';' + information + ';' + x + ';' + y + ';' + Inv.Money + ';' + items + '|';
+                else
+                {
+                    total[3] += ";" + goodTrade[i];
+                }
             }
-            else
+            total[4] = inv.Money.ToString();
+            for (int i = 0; i < inv.ItemList.Count; i++)
             {
-                total = name + ';' + information + ';' + x + ';' + y + ';' + Inv.Money + ';' + '|';
+                if (i == 0)
+                {
+                    total[5] = inv.ItemList[i].ID + "," + inv.ItemList[i].Amount;
+                }
+                else
+                {
+                    total[5] += ";" + inv.ItemList[i].ID + "," + inv.ItemList[i].Amount;
+                }
             }
-            }
-            else
+            for (int i = 0; i < modifiers.Count; i++)
             {
-                total = name + ';' + information + ';' + x + ';' + y + ';' + 0 + ';' + '|';
+                if (i==0)
+                {
+                    total[6] = i + ':'+modifiers[i].ToString();
+                }
+                else
+                {
+                    total[6] += ';'+i + ':' + modifiers[i].ToString();
+                }
             }
-            
+
             return total;
         }      
     }

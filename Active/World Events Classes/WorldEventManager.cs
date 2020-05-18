@@ -392,17 +392,30 @@ namespace Active
                     {
                         if (tempCity.Name == tempTarget)
                         {
-                            foreach (string tempNeighbor in tempCity.Neighbors)
+                            for (int i = 0; i < 14; i++)
                             {
-                                foreach (string tempTarget2 in targets)
+                                if (TravelMenu.RouteNames[i, 0] == tempCity.Name)
                                 {
-                                    if (tempNeighbor == tempTarget2)
+                                    if (TravelMenu.RouteNames[i, 1] == tempTarget)
                                     {
                                         check = true;
                                         exitCheck = false;
                                     }
                                 }
                             }
+
+                            for (int i = 0; i < 14; i++)
+                            {
+                                if (TravelMenu.RouteNames[i, 0] == tempTarget)
+                                {
+                                    if (TravelMenu.RouteNames[i, 1] == tempCity.Name)
+                                    {
+                                        check = true;
+                                        exitCheck = false;
+                                    }
+                                }
+                            }
+
                             if (!check)
                             {
                                 targets.Remove(tempTarget);

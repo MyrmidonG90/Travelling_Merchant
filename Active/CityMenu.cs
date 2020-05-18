@@ -16,7 +16,7 @@ namespace Active
         Button inventoryButton;
         Button tradeButton;
         Button mapButton;
-        Button nextTurnButton;
+        Button nextTurnButton;       
 
         string currentCity;
         string currentCityInfo;
@@ -24,6 +24,9 @@ namespace Active
         bool activeEvent;
         string eventDes;
 
+        RollText loseMoneyText;
+
+        int loseMoneyPerTurn;
         int date;
         int oldDate;
 
@@ -33,17 +36,29 @@ namespace Active
             tradeButton = new Button(400, 920, 260, 120, "trade", "Trade", TextureManager.texButton);
             nextTurnButton = new Button(1260, 920, 260, 120, "turn", "Next Turn", TextureManager.texButton);
             mapButton = new Button(1600, 920, 260, 120, "map", "Map", TextureManager.texButton);
+            loseMoneyText = new RollText(5,500);
+            loseMoneyPerTurn = 5;
+            string inputLoseMoneyText = "-" + loseMoneyPerTurn + "GP"; 
+            loseMoneyText.AddText(inputLoseMoneyText, new Vector2(1260+tradeButton.HitBox.Width/2-loseMoneyText.Font.MeasureString(inputLoseMoneyText).X/2,920 - loseMoneyText.Font.MeasureString(inputLoseMoneyText).Y));
+
+            
         }
 
         public void Update(GameTime gameTime)
         {
             if (nextTurnButton.LeftClick())
-            {
+            {                
                 Calendar.AddDays(1);
+                Player.Inventory.Money -= 5;
+                loseMoneyText.Reset();
+                loseMoneyText.Start();
             }
 
             date = Calendar.TotalDays;
-
+            if (loseMoneyText.OnGoing)
+            {
+                loseMoneyText.MoveTextVertical(gameTime.ElapsedGameTime.TotalMilliseconds);
+            }
 
             bool check = false;
             foreach (WorldEvent tempEvent in WorldEventManager.ActiveEvents)
@@ -108,12 +123,16 @@ namespace Active
             tradeButton.Draw(spriteBatch);
             mapButton.Draw(spriteBatch);
             nextTurnButton.Draw(spriteBatch);
-            spriteBatch.DrawString(TextureManager.fontHeader, currentCity, new Vector2(30, 100), Color.Black, 0, Vector2.Zero, 1, SpriteEffects.None, 1);
-            spriteBatch.DrawString(TextureManager.fontInventory, currentCityInfo, new Vector2(40, 180), Color.Black, 0, Vector2.Zero, 1, SpriteEffects.None, 1);
+            spriteBatch.DrawString(TextureManager.font48, currentCity, new Vector2(30, 100), Color.Black, 0, Vector2.Zero, 1, SpriteEffects.None, 1);
+            spriteBatch.DrawString(TextureManager.font32, currentCityInfo, new Vector2(40, 180), Color.Black, 0, Vector2.Zero, 1, SpriteEffects.None, 1);
 
             if (activeEvent)
             {
-                spriteBatch.DrawString(TextureManager.fontInventory, eventDes, new Vector2(1300, 180), Color.Black);
+                spriteBatch.DrawString(TextureManager.font32, eventDes, new Vector2(1300, 180), Color.Black);
+            }
+            if (loseMoneyText.OnGoing)
+            {
+                loseMoneyText.Draw(spriteBatch);
             }
         }
     }

@@ -25,13 +25,7 @@ namespace Active
         static Button btnWorldEventTest;
 
         static Rectangle box;
-        static Rectangle ring;
-
-        static bool alt;
-        static bool full;
         static bool block;
-        static bool debug;
-
         static public int selectedSkill;
 
         enum MenuToggle
@@ -45,31 +39,28 @@ namespace Active
 
         static public void Init()
         {
-            btnMain = new Button(830, 160, 260, 80, "main", "Main Menu", TextureManager.texWhite);
-            btnFullscreen = new Button(830, 160, 260, 80, "full", "Fullscreen", TextureManager.texWhite);
-            btnSkillCycle = new Button(830, 160, 260, 80, "skills", "Cycle Skill", TextureManager.texWhite);
+            btnMain = new Button(830, 160, 260, 80, "main", "Main Menu", TextureManager.texButtonOptions);
+            btnFullscreen = new Button(830, 160, 260, 80, "full", "Fullscreen", TextureManager.texButtonOptions);
+            btnSkillCycle = new Button(830, 160, 260, 80, "skills", "Cycle Skill", TextureManager.texButtonOptions);
 
-            btnSave = new Button(830, 260, 260, 80, "save", "Save Game", TextureManager.texWhite);
-            btnSkillIncrease = new Button(830, 260, 260, 80, "inc", "+1 Skill", TextureManager.texWhite);
+            btnSave = new Button(830, 260, 260, 80, "save", "Save Game", TextureManager.texButtonOptions);
+            btnSkillIncrease = new Button(830, 260, 260, 80, "inc", "+1 Skill", TextureManager.texButtonOptions);
 
-            btnLoad = new Button(830, 360, 260, 80, "load", "Load Game", TextureManager.texWhite);
-            btnSkillDecrease = new Button(830, 360, 260, 80, "dec", "-1 Skill", TextureManager.texWhite);
+            btnLoad = new Button(830, 360, 260, 80, "load", "Load Game", TextureManager.texButtonOptions);
+            btnSkillDecrease = new Button(830, 360, 260, 80, "dec", "-1 Skill", TextureManager.texButtonOptions);
 
-            btnDebug = new Button(830, 460, 260, 80, "debug", "Debug", TextureManager.texWhite);
-            btnWorldEventTest = new Button(830, 460, 260, 80, "we", "Test", TextureManager.texWhite);
+            btnDebug = new Button(830, 460, 260, 80, "debug", "Debug", TextureManager.texButtonOptions);
+            btnWorldEventTest = new Button(830, 460, 260, 80, "we", "Test", TextureManager.texButtonOptions);
 
-            btnOptions = new Button(830, 560, 260, 80, "options", "Options", TextureManager.texWhite);
-            btnOptionsReturn = new Button(830, 560, 260, 80, "options", "Return", TextureManager.texWhite);
+            btnOptions = new Button(830, 560, 260, 80, "options", "Options", TextureManager.texButtonOptions);
+            btnOptionsReturn = new Button(830, 560, 260, 80, "options", "Return", TextureManager.texButtonOptions);
 
-            btnClose = new Button(830, 660, 260, 80, "close", "Close", TextureManager.texWhite);
+            btnClose = new Button(830, 660, 260, 80, "close", "Close", TextureManager.texButtonOptions);
 
             btnMenu = new Button(1820, 20, 80, 80, TextureManager.texOptions);
 
             box = new Rectangle(810, 140, 300, 620);
 
-            alt = false;
-            full = false;
-            debug = false;
             menuToggle = MenuToggle.Standard;
         }
 
@@ -166,7 +157,7 @@ namespace Active
         {
             if (mode)
             {
-                spriteBatch.Draw(TextureManager.texWhite, box, Color.DarkGray);
+                spriteBatch.Draw(TextureManager.texOptionsBox, box, Color.White);
                 
                 btnClose.Draw(spriteBatch);
             }

@@ -19,6 +19,7 @@ namespace Active
         static List<string> eventNames;
         static List<int> activeEventID;
         static List<int> eventDaysLeft;
+        static bool[] visitedCities;
         static int date;
         static int oldDate;
 
@@ -34,15 +35,20 @@ namespace Active
             skillNames[2] = "Persuasion";
 
             skillLevels = new int[3];
-            skillLevels[0] = 1;
-            skillLevels[1] = 1;
-            skillLevels[2] = 1;
+            skillLevels[0] = 1; // Wisdom
+            skillLevels[1] = 1; // Intimidation
+            skillLevels[2] = 1; // Persuasion
 
             skillXP = new int[3];
             skillXP[0] = 0;
             skillXP[1] = 0;
             skillXP[2] = 0;
 
+            //OM DU ÄNDRADE ANTAL STÄDER I WOLRDMAPMENU ÄNDRA HÄR OCKSÅ
+            //DU BEHÖVER OCKSÅ ÄNDRA I SaveModule.ReadPlayerData
+            visitedCities = new bool[10];
+            visitedCities[0] = true;
+            //OM DU ÄNDRADE ANTAL STÄDER I WOLRDMAPMENU ÄNDRA HÄR OCKSÅ
 
             eventCities = new List<string>();
             eventNames = new List<string>();
@@ -53,25 +59,7 @@ namespace Active
         static public void Update()
         {
 
-            AchievementManager.currentCoins = inventory.Money;
-
-            int count = 0;
-            foreach (string s in skillNames)
-            {
-                if(skillXP[count] < 100)
-                {
-                    skillLevels[count] = 1;
-                }
-                else if(skillXP[count] >= 100 && skillXP[count] < 200)
-                {
-                    skillLevels[count] = 2;
-                }
-                else if (skillXP[count] >= 200)
-                {
-                    skillLevels[count] = 3;
-                }
-                count++;
-            }
+            AchievementManager.currentCoins = inventory.Money;            
 
             //debug funktioner
             if (test)
@@ -94,7 +82,7 @@ namespace Active
             int counter = 0;
             bool check = false;
             if (date != oldDate)
-            {
+            {               
                 for (int i = 0; i < eventDaysLeft.Count; i++)
                 {
                     eventDaysLeft[i] -= date - oldDate;
@@ -117,6 +105,19 @@ namespace Active
                     {
                         break;
                     }
+                }
+            }
+
+            if (date != oldDate)
+            {
+                counter = 0;
+                foreach (bool tempVisit in visitedCities)
+                {
+                    if (location == WorldMapMenu.Cities[counter].Name)
+                    {
+                        visitedCities[counter] = true;
+                    }
+                    counter++;
                 }
             }
             oldDate = date;
@@ -143,8 +144,7 @@ namespace Active
                 eventDaysLeft.Add(days);
             }
         }
-        
-
+       
         static public int ReturnSkillLevel(string skillName)
         {
             int counter = 0;
@@ -160,17 +160,20 @@ namespace Active
         }
 
         static public bool AddXP(string skillName, int xp)
-        {
-            int counter = 0;
-            foreach (string tempString in skillNames)
+        {            
+            for (int i = 0; i < skillNames.Length; i++)
             {
-                if (skillName == tempString)
+                if (skillName == skillNames[i])
                 {
-                        skillXP[counter]+= xp;
-                    
+                    skillXP[i] += xp;
+                    if (skillXP[i]>= 100 * skillLevels[i] && skillLevels[i] <5) // !!!!!!!!!!!!!!!!!!!!!!!!!!ÄNDRA MAX ANTAL LVL!!!!!!!!!!!!!!!!!!!!!!
+                    {
+                        ++skillLevels[i];
+                        LevelUp.Start(skillName);
+                    }
                 }
-                counter++;
             }
+
             return false;
         }
 
@@ -220,6 +223,12 @@ namespace Active
         static public List<string> EventNames
         {
             get => eventNames;
+        }
+
+        static public bool[] VisitedCities
+        {
+            get => visitedCities;
+            set => visitedCities = value;
         }
     }
 }

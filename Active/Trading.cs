@@ -251,28 +251,6 @@ namespace Active
             if (slots[counterCol, counterRow].LeftClicked() == true && slots[counterCol, counterRow].Item != null) // Om Slots:en som tillhör inventory:n har blivit klickat
             {
                 SlotClick(slots, participant);
-               /* if (participant == Participant.Left) // Inventory to the left aka Player
-                {
-                    tradeLeft.AddItem(slots[counterCol, counterRow].Item.ID, 1);// Lägger till item till det vänstra trade fältet
-                    invLeft.ReduceAmountOfItems(slots[counterCol, counterRow].Item.ID, 1);
-                }
-                else if (participant == Participant.Right) // Inventoty to the right aka Merchant
-                {
-                    tradeRight.AddItem(slots[counterCol, counterRow].Item.ID, 1); // Lägger till item till det högra trade fältet
-                    invRight.ReduceAmountOfItems(slots[counterCol, counterRow].Item.ID, 1);
-                }
-                else if (participant == Participant.TradeSlotsLeft)
-                {
-                    tradeLeft.ReduceAmountOfItems(slots[counterCol, counterRow].Item.ID, 1);
-                    invLeft.AddItem(slots[counterCol, counterRow].Item.ID, 1);
-                }
-                else if (participant == Participant.TradeSlotsRight)
-                {
-                     tradeRight.ReduceAmountOfItems(slots[counterCol, counterRow].Item.ID, 1);
-                    invRight.AddItem(slots[counterCol, counterRow].Item.ID, 1);
-                }
-                UpdateSlots();
-                UpdatePrices();*/
                 return true;
             }
             return false;
@@ -296,23 +274,31 @@ namespace Active
         {
             if (participant == Participant.Left)
             {
-                tradeLeft.AddItem(slots[counterCol, counterRow].Item.ID, 1);// Lägger till item till det vänstra trade fältet
-                invLeft.ReduceAmountOfItems(slots[counterCol, counterRow].Item.ID, 1);
+                if (tradeLeft.AddItem(slots[counterCol, counterRow].Item.ID, 1))
+                {
+                    invLeft.ReduceAmountOfItems(slots[counterCol, counterRow].Item.ID, 1);
+                }                               
             }
             else if (participant == Participant.Right)
             {
-                tradeRight.AddItem(slots[counterCol, counterRow].Item.ID, 1);// Lägger till item till det vänstra trade fältet
-                invRight.ReduceAmountOfItems(slots[counterCol, counterRow].Item.ID, 1);
+                if (tradeRight.AddItem(slots[counterCol, counterRow].Item.ID, 1))
+                {
+                    invRight.ReduceAmountOfItems(slots[counterCol, counterRow].Item.ID, 1);
+                }                
             }
             else if (participant == Participant.TradeSlotsLeft)
             {
-                invLeft.AddItem(slots[counterCol, counterRow].Item.ID, 1);// Lägger till item till det vänstra trade fältet
-                tradeLeft.ReduceAmountOfItems(slots[counterCol, counterRow].Item.ID, 1);
+                if (invLeft.AddItem(slots[counterCol, counterRow].Item.ID, 1))
+                {
+                    tradeLeft.ReduceAmountOfItems(slots[counterCol, counterRow].Item.ID, 1);
+                }                
             }
             else if (participant == Participant.TradeSlotsRight)
             {
-                invRight.AddItem(slots[counterCol, counterRow].Item.ID, 1);// Lägger till item till det vänstra trade fältet
-                tradeRight.ReduceAmountOfItems(slots[counterCol, counterRow].Item.ID, 1);
+                if (invRight.AddItem(slots[counterCol, counterRow].Item.ID, 1))
+                {
+                    tradeRight.ReduceAmountOfItems(slots[counterCol, counterRow].Item.ID, 1);
+                }                
             }
         }
 
@@ -383,6 +369,8 @@ namespace Active
 
         static bool AcceptTrade(ref Inventory participantLeft, ref Inventory participantRight)
         {
+            EndCredits.Start();///////////////////////////////////////////////////////////////////////////////
+
             //If nothing is presented
             if (tradeLeft.ItemList.Count == 0 && tradeRight.ItemList.Count == 0)
             {
@@ -410,7 +398,6 @@ namespace Active
             origLeftInv = invLeft;
             origRightInv = invRight;
             ResetTrade();
-            //Exit();S
             return true;
         }
 
@@ -548,44 +535,56 @@ namespace Active
             accept.Draw(sb);
             reset.Draw(sb);
             back.Draw(sb);
-            sb.DrawString(TextureManager.fontButton, invLeft.Money.ToString(), new Vector2(315, 530),Color.Black);
-            sb.DrawString(TextureManager.fontButton, invRight.Money.ToString(), new Vector2(1520, 530), Color.Black);
+            sb.DrawString(TextureManager.font24, invLeft.Money.ToString(), new Vector2(315, 530),Color.Black);
+            sb.DrawString(TextureManager.font24, invRight.Money.ToString(), new Vector2(1520, 530), Color.Black);
             Vector2 arrowPos = new Vector2(867, 502);
             Vector2 moneyPos = new Vector2(920, 535);
             
             if (priceDifference < 0)
             {
-                sb.Draw(TextureManager.texMoneyArrowRight, arrowPos, Color.White);
-                sb.DrawString(TextureManager.fontButton, (priceDifference*-1).ToString(), moneyPos, Color.Black);
+                sb.Draw(TextureManager.texArrowMoneyRight, arrowPos, Color.White);
+                sb.DrawString(TextureManager.font24, (priceDifference*-1).ToString(), moneyPos, Color.Black);
             }
             else if (priceDifference > 0)
             {
-                sb.Draw(TextureManager.texMoneyArrowLeft, arrowPos, Color.White);
-                sb.DrawString(TextureManager.fontButton, priceDifference.ToString(), moneyPos, Color.Black);
+                sb.Draw(TextureManager.texArrowMoneyLeft, arrowPos, Color.White);
+                sb.DrawString(TextureManager.font24, priceDifference.ToString(), moneyPos, Color.Black);
             }
             else if (priceDifference == 0)
             {
-                sb.DrawString(TextureManager.fontButton, priceDifference.ToString(), moneyPos, Color.Black);
+                sb.DrawString(TextureManager.font24, priceDifference.ToString(), moneyPos, Color.Black);
             }
 
             if (selected != null)
             {
-                Vector2 temp = TextureManager.fontButton.MeasureString(selected.Name);
-                Vector2 namePos = new Vector2(((1920 - temp.X) / 2), 640);
-                sb.DrawString(TextureManager.fontButton, selected.Name, namePos, Color.Black);
-                sb.DrawString(TextureManager.fontButton, "Standard Price: " + selected.BasePrice.ToString(), new Vector2(820, 680), Color.Black);
+                Vector2 temp = TextureManager.font24.MeasureString(selected.Name);
+                Vector2 namePos = new Vector2(((1920 - temp.X) / 2)-5, 610);
+                sb.DrawString(TextureManager.font24, selected.Name, namePos, Color.Black);
+                if (selected.Rarity == 0)
+                {
+                    sb.Draw(TextureManager.texIconCommon, new Rectangle(930, 650, 60, 60), Color.White);
+                }
+                if (selected.Rarity == 1)
+                {
+                    sb.Draw(TextureManager.texIconUncommon, new Rectangle(930, 650, 60, 60), Color.White);
+                }
+                if (selected.Rarity == 2)
+                {
+                    sb.Draw(TextureManager.texIconRare, new Rectangle(930, 650, 60, 60), Color.White);
+                }
+                sb.DrawString(TextureManager.font24, "Standard Price: " + selected.BasePrice.ToString(), new Vector2(800, 730), Color.Black);
 
                 if (selected.PrimaryCategory != 999)
                 {
-                    sb.DrawString(TextureManager.fontInventory, "test", new Vector2(820, 740), Color.White);
+                    sb.Draw(TextureManager.texCategories[selected.PrimaryCategory-1], new Rectangle(800, 780, 80, 80), Color.White);
                 }
                 if (selected.SecondaryCategory != 999)
                 {
-                    sb.DrawString(TextureManager.fontInventory, "test", new Vector2(910, 740), Color.White);
+                    sb.Draw(TextureManager.texCategories[selected.SecondaryCategory - 1], new Rectangle(915, 780, 80, 80), Color.White);
                 }
                 if (selected.TertiaryCategory != 999)
                 {
-                    sb.DrawString(TextureManager.fontInventory, "test", new Vector2(1000, 740), Color.White);
+                    sb.Draw(TextureManager.texCategories[selected.TertiaryCategory - 1], new Rectangle(1030, 780, 80, 80), Color.White);
                 }
             }
 

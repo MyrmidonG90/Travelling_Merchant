@@ -21,7 +21,7 @@ namespace Active
         //==================================================================================
         //OM DU ÄNDRAR HUR SPELET SPARAR SÅ ***MÅSTE*** DU ÄNDRA VÄRDET I ver
         //==================================================================================
-        static string ver = "1.3.0";
+        static string ver = "1.4.0";
         static public bool GenerateSave(Inventory inventory, string location, string gameState)
         {
             string path = Path.Combine("./Saves/", "Save-" + DateTime.Now.ToString() + ".ptmsave");
@@ -50,6 +50,18 @@ namespace Active
             streamWriter.WriteLine(gameState);
             streamWriter.WriteLine(Calendar.TotalDays);
             streamWriter.WriteLine(location);
+
+            foreach (bool tempVisit in Player.VisitedCities)
+            {
+                if (tempVisit)
+                {
+                    streamWriter.WriteLine("true");
+                }
+                else
+                {
+                    streamWriter.WriteLine("false");
+                }
+            }
 
             int[] temp = Player.SkillLevels;
             for (int i = 0; i < 3; i++)
@@ -201,6 +213,21 @@ namespace Active
         static private void ReadPlayerData(StreamReader streamReader, Inventory tempInv)
         {
             Player.Location = streamReader.ReadLine();
+
+            //ÄNDRA SIFFRAN I FOR LOOPEN HÄR OCKSÅ OM DU HAR PILLAT MED ANTAL STÄDER
+            for (int i = 0; i < 10; i++)
+            {
+                string temp = streamReader.ReadLine();
+                if (temp == "true")
+                {
+                    Player.VisitedCities[i] = true;
+                }
+                else if (temp == "false")
+                {
+                    Player.VisitedCities[i] = false;
+                }
+            }
+
             int[] tempLevels = new int[3];
             for (int i = 0; i < 3; i++)
             {

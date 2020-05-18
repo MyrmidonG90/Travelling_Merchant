@@ -277,12 +277,12 @@ namespace Active
             switch (eID)
             {
                 case 0:
-                    if (answer == 0)
+                    if (answer == 0 && Player.Inventory.Money >= 20)
                     {
                         Player.Inventory.Money -= 20;
                         return true;
                     }
-                    else if (answer == 1 && Player.ReturnSkillLevel("Persuasion") >= 2)
+                    else if (answer == 1 && Player.ReturnSkillLevel("Persuasion") >= 2 && Player.Inventory.Money >= 10)
                     {
                         Player.Inventory.Money -= 10;
                         return true;
@@ -294,7 +294,7 @@ namespace Active
                     }
                     break;
                 case 1:
-                    if (answer == 0)
+                    if (answer == 0 && Player.Inventory.Money >= 3)
                     {
                         Player.Inventory.Money -= (int)((Player.Inventory.Money * 0.3f) + 0.5f);
                         return true;

@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,7 +19,7 @@ namespace Active
         static string turnDisplay;
 
         static string destination;
-        static string oldLocation;
+        static string oldLocation;  // Never declared and never used?
         static bool paused;
         static bool test;
         static public bool travelling;
@@ -27,13 +28,16 @@ namespace Active
         static Button pauseButton;
         static Button mapButton;
 
+        static string[,] routeNames;
+        static int[] routes;
+
         static public void Init()
         {
             turnsToTravel = 5;
             turnsLeft = 0;
             turnTimer = timerLength;
             timerLength = 1;
-            destination = "Carrot Town";
+            destination = Player.Location;
 
             turnDisplay = turnsLeft.ToString() + "/" + turnsToTravel.ToString();
 
@@ -41,31 +45,55 @@ namespace Active
             invButton = new Button(330, 900, 260, 120, "inv", "Inventory", TextureManager.texButton);
             mapButton = new Button(1330, 900, 260, 120, "map", "Map", TextureManager.texButton);
             test = false;
+
+            LoadRoutes();
+            int i = 0;
         }
 
-        static public void StartTravel(string newDestination)
+        static public bool StartTravel(string newDestination)
         {
-            foreach (City tempCity in WorldMapMenu.Cities)
+            for (int i = 0; i < 14; i++)
             {
-                if (tempCity.Name == Player.Location)
+                if (routeNames[i, 0] == Player.Location)
                 {
-                    foreach (string tempNeigh in tempCity.Neighbors)
+                    if (routeNames[i, 1] == newDestination)
                     {
-                        if (newDestination == tempNeigh)
-                        {
-                            destination = newDestination;
-                            paused = false;
-                            travelling = true;
+                        destination = newDestination;
+                        paused = false;
+                        travelling = true;
+                        //float tmp = Vector2.Distance(CityManager.Cities[CityManager.FindCityIndex(Player.Location)].Coordinates, CityManager.Cities[CityManager.FindCityIndex(newDestination)].Coordinates);
 
-                            turnsToTravel = 5;
-                            turnsLeft = turnsToTravel;
-                            turnTimer = timerLength;
 
-                            EncounterManager.NewTrip();
-                        }
+                        turnsToTravel = routes[i];
+                        turnsLeft = turnsToTravel;
+                        turnTimer = timerLength;
+
+                        EncounterManager.NewTrip();
+                        return true;
                     }
                 }
             }
+
+            for (int i = 0; i < 14; i++)
+            {
+                if (routeNames[i, 0] == newDestination)
+                {
+                    if (routeNames[i, 1] == Player.Location)
+                    {
+                        destination = newDestination;
+                        paused = false;
+                        travelling = true;
+
+                        turnsToTravel = routes[i];
+                        turnsLeft = turnsToTravel;
+                        turnTimer = timerLength;
+
+                        EncounterManager.NewTrip();
+                        return true;
+                    }
+                }
+            }
+            return false;
         }
 
         static public void AbortTravel()
@@ -144,12 +172,12 @@ namespace Active
 
         static public void Draw (SpriteBatch spriteBatch)
         {
-            Vector2 temp = TextureManager.fontHeader.MeasureString(turnDisplay);
-            spriteBatch.DrawString(TextureManager.fontHeader, turnDisplay, new Vector2((1920 - temp.X)/2, 200), Color.White);
+            Vector2 temp = TextureManager.font48.MeasureString(turnDisplay);
+            spriteBatch.DrawString(TextureManager.font48, turnDisplay, new Vector2((1920 - temp.X)/2, 200), Color.White);
             //for debugging i guess
             if (test)
             {
-                spriteBatch.DrawString(TextureManager.font, " " + turnTimer, new Vector2(50, 150), Color.White);
+                spriteBatch.DrawString(TextureManager.font13, " " + turnTimer, new Vector2(50, 150), Color.White);
             }
             pauseButton.Draw(spriteBatch);
             if (paused)
@@ -160,6 +188,26 @@ namespace Active
             if (EncounterManager.EventOnGoing)
             {
                 EncounterManager.Draw(spriteBatch);
+            }
+        }
+
+        static private void LoadRoutes()
+        {
+            StreamReader streamReader;
+            streamReader = new StreamReader("./Data/routeInfo.txt");
+            routes = new int[14];
+            routeNames = new string[14, 2];
+
+            int counter = 0;
+            while (!streamReader.EndOfStream)
+            {
+                string temp = streamReader.ReadLine();
+                string[] data = temp.Split('|');
+
+                routeNames[counter, 0] = data[0];
+                routeNames[counter, 1] = data[1];
+                routes[counter] = int.Parse(data[2]);
+                counter++;
             }
         }
 
@@ -190,6 +238,10 @@ namespace Active
             {
                 turnsLeft = value;
             }
+        }
+        static public string[,] RouteNames
+        {
+            get => routeNames;
         }
     }
 }

@@ -56,6 +56,8 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="CityInfoMenu.cs" />
+    <Compile Include="EndCredits.cs" />
     <Compile Include="Achievement.cs" />
     <Compile Include="AchievementManager.cs" />
     <Compile Include="EventLog.cs" />
@@ -65,6 +67,9 @@
     <Compile Include="CityMenu.cs" />
     <Compile Include="CityManager.cs" />
     <Compile Include="Encounter.cs" />
+    <Compile Include="LevelUp.cs" />
+    <Compile Include="RollText.cs" />
+    <Compile Include="SoundManager.cs" />
     <Compile Include="TravelEvent.cs" />
     <Compile Include="EncounterManager.cs" />
     <Compile Include="General Classes\FileManager.cs" />
@@ -153,6 +158,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Data\City_Data\Steel Ville.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\routeInfo.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Data\test.txt">

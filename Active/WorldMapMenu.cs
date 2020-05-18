@@ -11,10 +11,14 @@ namespace Active
 {
     static class WorldMapMenu
     {
+        //OM DU ÄNDRAR VÄRDET HÄR SÅ BEHVÖER DU ÄNDRA SAMMA VÄRDE I PLAYER FÖR JAG SUGER PÅ PROGRAMMERING
         static int nrCities = 10;
+        //OM DU ÄNDRAR VÄRDET HÄR SÅ BEHVÖER DU ÄNDRA SAMMA VÄRDE I PLAYER FÖR JAG SUGER PÅ PROGRAMMERING
+
         static City[] cities = new City[nrCities];
         static Button[] cityButtons = new Button[nrCities];
         static Button[] travelButtons = new Button[nrCities];
+        static Button[] infoButtons = new Button[nrCities];
 
         static public Button inventoryButton = new Button(70, 920, 260, 120, "inv", "Inventory", TextureManager.texButton);
         static public Button returnButton = new Button(20, 20, 80, 80, TextureManager.texBackArrow);
@@ -26,11 +30,6 @@ namespace Active
         static string cityName;
         static string cityInfo;
         static Vector2 cityCords;
-
-        static Vector2 posArrowDown;
-
-        static int date;
-        static int oldDate;
 
         static void ItemList()
         {
@@ -59,22 +58,7 @@ namespace Active
                 }
                 counter++;
             }
-
-            foreach (City tempCity in Cities)
-            {
-                if (tempCity.Name == Player.Location)
-                {
-                    foreach (string tempNeigh in tempCity.Neighbors)
-                    {
-                        if (destination == tempNeigh)
-                        {
-                            return destination;
-                        }
-                    }
-                }
-            }
-            return null;
-
+            return destination;
         }
 
         static public void Update(GameTime gameTime)
@@ -97,23 +81,34 @@ namespace Active
                 }
             }
 
+            foreach (Button tempButton in infoButtons)
+            {
+                if (tempButton.LeftClick())
+                {
+                    CityInfoMenu.Active = true;
+                    CityInfoMenu.Selected = tempButton.Name;
+                }
+            }
+
             foreach (Button button in cityButtons)
             {
+                int counter = 0;
                 foreach (City city in cities)
                 {
                     if (button.LeftClick() && button.Name == city.Name)
                     {
                         showText = true;
                         cityName = city.Name;
-                        cityInfo = city.Information;
                         cityCords = city.Coordinates;
-                        posArrowDown.Y = cityCords.Y - TextureManager.texArrowDown.Bounds.Y;
-
+                        cityInfo = " ";
+                        if (Player.VisitedCities[counter])
+                        {
+                            cityInfo = city.Information;
+                        }
                     }
+                    counter++;
                 }
             }
-
-            date = Calendar.TotalDays;          
         }
 
         static public void CheckPlayerEventLog()
@@ -146,15 +141,16 @@ namespace Active
 
         static public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(TextureManager.texMap, new Vector2(0, 0), Color.White);
+            spriteBatch.Draw(TextureManager.texBGMap, new Vector2(0, 0), Color.White);
+            spriteBatch.Draw(TextureManager.texBGMapRoads, Vector2.Zero, Color.White);
 
             foreach (Button button in cityButtons)
             {
                 button.Draw(spriteBatch);
                 if (button.Name == Player.Location)
                 {
-                    spriteBatch.Draw(TextureManager.texSelect, button.HitBox, Color.White);
-                    //spriteBatch.Draw(TextureManager.texArrowDown,,Color.White);
+                    Vector2 temp = new Vector2(button.HitBox.X, button.HitBox.Y - 110);
+                    spriteBatch.Draw(TextureManager.texArrowDown, temp, Color.White);
                 }
             }
             
@@ -163,7 +159,6 @@ namespace Active
 
             if (showText)
             {
-
                 foreach (Button button in travelButtons)
                 {
                     if(button.Name == cityName)
@@ -171,16 +166,22 @@ namespace Active
                         button.Draw(spriteBatch);
                     }
                 }
-
-                spriteBatch.DrawString(TextureManager.fontInventory, cityName, new Vector2(cityCords.X + 80, cityCords.Y), Color.White);
-                spriteBatch.DrawString(TextureManager.font, cityInfo, new Vector2(cityCords.X + 80, cityCords.Y + 40), Color.Black);
-
-            }          
+                foreach (Button tempButton in infoButtons)
+                {
+                    if (tempButton.Name == cityName)
+                    {
+                        tempButton.Draw(spriteBatch);
+                    }
+                }
+                spriteBatch.DrawString(TextureManager.font32, cityName, new Vector2(cityCords.X + 80, cityCords.Y - 5), Color.White);
+                spriteBatch.DrawString(TextureManager.font13, cityInfo, new Vector2(cityCords.X + 80, cityCords.Y + 40), Color.Black);
+            }
         }
 
         static public void LoadCities()
         {
             ItemList();
+            
             StreamReader sr = new StreamReader("./Data/cityInfo.txt");
             //posArrowDown = new Vector2(cities[0].Coordinates.X, cities[0].Coordinates.Y);
             int counter = 0;
@@ -191,21 +192,30 @@ namespace Active
                 string tempInfo = sr.ReadLine();
                 string tempCord = sr.ReadLine();
                 string tempNeigh = sr.ReadLine();
+                string tempbad = sr.ReadLine();
 
                 string[] tempCord2 = tempCord.Split(',');
                 string[] tempNeigh2 = tempNeigh.Split(',');
+                string[] tempbad2 = tempbad.Split(','); 
 
                 Vector2 cord = new Vector2(int.Parse(tempCord2[0]), int.Parse(tempCord2[1]));
-                List<string> neighData = new List<string>();
+                List<int> good = new List<int>();
+                List<int> bad = new List<int>();
 
                 for (int i = 0; i < tempNeigh2.Length; i++)
                 {
-                    neighData.Add(tempNeigh2[i]);
+                    good.Add(int.Parse(tempNeigh2[i]));
                 }
 
-                cities[counter] = new City(tempName, tempInfo, cord, neighData);
-                cityButtons[counter] = new Button((int)cord.X, (int)cord.Y, 68, 68, tempName, TextureManager.texBox);
-                travelButtons[counter] = new Button((int)cord.X, (int)cord.Y + 75, 68, 36, tempName, TextureManager.texBox);
+                for (int i = 0; i < tempbad2.Length; i++)
+                {
+                    bad.Add(int.Parse(tempbad2[i]));
+                }
+
+                cities[counter] = new City(tempName, tempInfo, cord, good, bad);
+                cityButtons[counter] = new Button((int)cord.X, (int)cord.Y, 68, 68, tempName, TextureManager.texIconCity);
+                travelButtons[counter] = new Button((int)cord.X, (int)cord.Y + 75, 68, 36, tempName, TextureManager.texButtonGo);
+                infoButtons[counter] = new Button((int)cord.X + 80, (int)cord.Y + 42, 30, 30, tempName, TextureManager.texWhite);
                 //CityManager.CreateCity(tempName, tempInfo, cord, neighData);
                 counter++;
             }
