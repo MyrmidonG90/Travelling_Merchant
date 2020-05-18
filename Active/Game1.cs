@@ -70,7 +70,7 @@ namespace Active
             TextureManager.LoadContent(Content);
             ItemCreator.LoadItemData();
             SoundManager.LoadSounds(Content);
-            SoundManager.PlayMusic();
+            //SoundManager.PlayMusic();
             AchievementManager.LoadAchievements();
             Player.Init();
             MainMenuManager.Init();
@@ -353,9 +353,12 @@ namespace Active
             string temp = WorldMapMenu.CheckNewTravel();
             if (temp != null && TravelMenu.TurnsLeft == 0)
             {
-                TravelMenu.StartTravel(temp);
-                ChangeGameState(GameState.TravelMenu);
+                if (TravelMenu.StartTravel(temp))
+                {
+                    ChangeGameState(GameState.TravelMenu);
+                }
             }
+            
 
             if (WorldMapMenu.inventoryButton.LeftClick())
             {
