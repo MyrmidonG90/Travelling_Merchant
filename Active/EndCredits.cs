@@ -14,7 +14,13 @@ namespace Active
 {
     static class EndCredits
     {
-
+        /*
+         How to add more titles and texts.
+         1. Add Title to enum Stage
+         2. Create Initializing method with "Ini" + title
+         3. Add it appropiately in Initialize() at the correct index
+             
+             */
         static List<RollText> texts;
         static bool onGoing;
         enum Stage
@@ -22,6 +28,7 @@ namespace Active
             Start,
             Developers,
             Testers,
+            Music,
             SpecialThanks,
             End
         }
@@ -39,6 +46,7 @@ namespace Active
             IniStart();
             IniDevelopers();
             IniTesters();
+            IniMusic();
             IniSpecialThanks();
             IniEnd();
         }
@@ -101,10 +109,17 @@ namespace Active
             texts[(int)Stage.Developers].AddText("Jacob Larsson");
             texts[(int)Stage.Developers].AddText("Kevin Tang");
         }
+        static void IniMusic()
+        {
+            texts[(int)Stage.Music].AddText("Music");
+            texts[(int)Stage.Music].AddText("Keman Nguyen");
+        }
 
         static void IniTesters()
         {
             texts[(int)Stage.Testers].AddText("Testers");
+            texts[(int)Stage.Testers].AddText("Grupp 21");
+            texts[(int)Stage.Testers].AddText("Kevin Tangs kusin");
         }
 
         static void IniSpecialThanks()
