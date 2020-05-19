@@ -72,7 +72,7 @@ namespace Active
                 for (int j = 0; j < amountOfCategories; j++)
                 {
                     category--;
-                    if (city == cities[i] && j == category) // Söker efter stadens kategori modifiers.
+                    if (city == cities[i] && j == category) // Söker efter stadens kategori modifiers. ///Error! Hände en gång vid resa från Carrot till Steel. Kan ej reproducera
                     {
                         itemModifiers[counter] += modifier;
                     }
