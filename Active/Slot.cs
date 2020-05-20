@@ -57,7 +57,7 @@ namespace Active
 
         public void AddItem(Item item)
         {
-            this.Item = item;
+            Item = item;
 
         }
 

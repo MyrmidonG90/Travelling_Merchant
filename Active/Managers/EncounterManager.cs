@@ -18,8 +18,9 @@ namespace Active
         static List<Encounter> encounters;
         static bool eventOnGoing;
         static List<string> tmpString;
-        static List<int> encountersLeft;
-        static List<int> encountersOccured;
+        static List<int> travelEncountersLeft;
+        static List<int> travelEncountersOccured;
+        static int chance;
         static int tmpInt;
         static int counter;
         static bool found;
@@ -43,11 +44,14 @@ namespace Active
 
         static public void NewTrip()
         {
-            encountersLeft = new List<int>();
-            encountersOccured = new List<int>();
-            for (int i = 0; i < encounters.Count; i++)
+            travelEncountersLeft = new List<int>();
+            travelEncountersOccured = new List<int>();
+            for (int i = 0; i < travelEvents.Count; i++)
             {
-                encountersLeft.Add(i);
+                travelEncountersLeft.Add(i);
+            }
+            for (int i = 0; i < encounters.Count; i++)
+            {                
                 encounters[i].OccuredDuringTravel = false;
             }
             
@@ -60,7 +64,7 @@ namespace Active
             {
                 if (eventOnGoing == false)
                 {
-                    if (encountersLeft.Count != 0)
+                    if (travelEncountersLeft.Count != 0)
                     {
                         if (rand.Next(0, 9) == 0) // If Encountered //Change this one to increase/decrease encounters!!!
                         {
@@ -141,26 +145,41 @@ namespace Active
         // Works fine
         static int RandomiseEncounter()
         {
-            int chance = 100;//rand.Next(1,100);
-            int odds = 0;
-            counter = 0;
+            chance = 0;
+            for (int i = 0; i < travelEncountersLeft.Count; i++)
+            {
+                chance += travelEvents[i].Percentage;
+            }
 
+            int chosen = rand.Next(1, chance);
+
+            counter = 0;            
             while (chance > 0)
             {
-                chance -= travelEvents[counter].Percentage;
-
+                chance -= travelEvents[travelEncountersLeft[counter]].Percentage;
                 if (chance >= 0)
                 {
                     ++counter;
                 }
             }
+            counter = travelEncountersLeft[counter];
 
-            encountersLeft.RemoveAt(counter);
-            encountersOccured.Add(counter);
+            int tmp = 0;
+            bool found = false;
+            while (found != false)
+            {
+                if (travelEncountersLeft[tmp] == 0)
+                {
 
+                }
+                ++tmp;
+            }
+            
+            
             return counter;
         }
 
+        
         /*TextFil Events.txt
              ID
              Händelse ID
