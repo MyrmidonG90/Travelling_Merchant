@@ -18,6 +18,8 @@ namespace Active
         static List<Encounter> encounters;
         static bool eventOnGoing;
         static List<string> tmpString;
+        static List<int> encountersLeft;
+        static List<int> encountersOccured;
         static int tmpInt;
         static int counter;
         static bool found;
@@ -41,10 +43,14 @@ namespace Active
 
         static public void NewTrip()
         {
-            foreach (var item in encounters)
+            encountersLeft = new List<int>();
+            encountersOccured = new List<int>();
+            for (int i = 0; i < encounters.Count; i++)
             {
-                item.OccuredDuringTravel = false;
+                encountersLeft.Add(i);
+                encounters[i].OccuredDuringTravel = false;
             }
+            
             currentEncounter = null;
         } // Called when a new trip is made
 
@@ -54,11 +60,15 @@ namespace Active
             {
                 if (eventOnGoing == false)
                 {
-                    if (rand.Next(0, 9) == 0) // If Encountered //Change this one to increase/decrease encounters!!!
+                    if (encountersLeft.Count != 0)
                     {
-                        eventOnGoing = true;
-                        InitiateEncounter(FindID(RandomiseEncounter()));
+                        if (rand.Next(0, 9) == 0) // If Encountered //Change this one to increase/decrease encounters!!!
+                        {
+                            eventOnGoing = true;
+                            InitiateEncounter(FindID(RandomiseEncounter()));
+                        }
                     }
+                    
                 }
             }          
             return eventOnGoing;
@@ -131,12 +141,12 @@ namespace Active
         // Works fine
         static int RandomiseEncounter()
         {
-            int chance = rand.Next(1,100);
+            int chance = 100;//rand.Next(1,100);
+            int odds = 0;
             counter = 0;
 
             while (chance > 0)
             {
-
                 chance -= travelEvents[counter].Percentage;
 
                 if (chance >= 0)
@@ -144,13 +154,9 @@ namespace Active
                     ++counter;
                 }
             }
-            
-            // Ser till att under denna färden inte kommer upprepa samma encounter
-            
-            if (encounters[FindEncounterID(FindID(counter))].OccuredDuringTravel) // Stackoverflow Farlig kod!!! //buggen då inte hemsidan /My
-            {
-                counter = RandomiseEncounter();
-            }
+
+            encountersLeft.RemoveAt(counter);
+            encountersOccured.Add(counter);
 
             return counter;
         }
