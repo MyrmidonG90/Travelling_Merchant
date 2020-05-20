@@ -16,7 +16,8 @@ namespace Active
         Button inventoryButton;
         Button tradeButton;
         Button mapButton;
-        Button nextTurnButton;       
+        Button nextTurnButton;
+        Button infoButton;
 
         string currentCity;
         string currentCityInfo;
@@ -36,6 +37,7 @@ namespace Active
             tradeButton = new Button(400, 920, 260, 120, "trade", "Trade", TextureManager.texButton);
             nextTurnButton = new Button(1260, 920, 260, 120, "turn", "Next Turn", TextureManager.texButton);
             mapButton = new Button(1600, 920, 260, 120, "map", "Map", TextureManager.texButton);
+            infoButton = new Button(830, 920, 260, 120, "info", "Info", TextureManager.texButton);
             loseMoneyText = new RollText(5,500);
             loseMoneyPerTurn = 5;
             string inputLoseMoneyText = "-" + loseMoneyPerTurn + "GP"; 
@@ -78,7 +80,11 @@ namespace Active
                 activeEvent = false;
                 eventDes = "";
             }
-
+            if (infoButton.LeftClick())
+            {
+                CityInfoMenu.Active = !CityInfoMenu.Active;
+                CityInfoMenu.Selected = currentCity;
+            }
         }
 
         public bool CheckInvButton()
@@ -123,8 +129,9 @@ namespace Active
             tradeButton.Draw(spriteBatch);
             mapButton.Draw(spriteBatch);
             nextTurnButton.Draw(spriteBatch);
-            spriteBatch.DrawString(TextureManager.font48, currentCity, new Vector2(30, 100), Color.Black, 0, Vector2.Zero, 1, SpriteEffects.None, 1);
-            spriteBatch.DrawString(TextureManager.font32, currentCityInfo, new Vector2(40, 180), Color.Black, 0, Vector2.Zero, 1, SpriteEffects.None, 1);
+            infoButton.Draw(spriteBatch);
+            spriteBatch.DrawString(TextureManager.font64, currentCity, new Vector2(30, 100), Color.Black, 0, Vector2.Zero, 1, SpriteEffects.None, 1);
+            //spriteBatch.DrawString(TextureManager.font32, currentCityInfo, new Vector2(40, 180), Color.Black, 0, Vector2.Zero, 1, SpriteEffects.None, 1);
 
             if (activeEvent)
             {
