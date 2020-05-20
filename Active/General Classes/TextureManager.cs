@@ -12,6 +12,7 @@ namespace Active
         static public SpriteFont font48;
         static public SpriteFont font24;
         static public SpriteFont font18;
+        static public SpriteFont font64;
 
         //Backgrounds
         static public Texture2D texBGTravelScreen;
@@ -53,6 +54,7 @@ namespace Active
         static public Texture2D texDisposeBox;
         static public Texture2D texButtonOptions;
         static public Texture2D texOptionsBox;
+        static public Texture2D texCalendar;
 
         // HUD
         static public Texture2D texRankUpIntimidation;
@@ -118,6 +120,7 @@ namespace Active
             texDisposeDragger = content.Load<Texture2D>("dispose_dragger");
             texButtonOptions = content.Load<Texture2D>("options_button");
             texOptionsBox = content.Load<Texture2D>("options_box");
+            texCalendar = content.Load<Texture2D>("calendar_box");
 
         }
         static void LoadItems(ContentManager content)
@@ -168,6 +171,7 @@ namespace Active
             font32 = content.Load<SpriteFont>("fontInventory");
             font48 = content.Load<SpriteFont>("fontHeader");
             font18 = content.Load<SpriteFont>("font18");
+            font64 = content.Load<SpriteFont>("font64");
         }
         static void LoadIcons(ContentManager content)
         {

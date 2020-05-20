@@ -174,7 +174,7 @@ namespace Active
                     }
                 }
                 spriteBatch.DrawString(TextureManager.font32, cityName, new Vector2(cityCords.X + 80, cityCords.Y - 5), Color.White);
-                spriteBatch.DrawString(TextureManager.font13, cityInfo, new Vector2(cityCords.X + 80, cityCords.Y + 40), Color.Black);
+                //spriteBatch.DrawString(TextureManager.font13, cityInfo, new Vector2(cityCords.X + 80, cityCords.Y + 40), Color.Black);
             }
         }
 

@@ -185,6 +185,11 @@ namespace Active
             WorldMapMenu.CheckPlayerEventLog();
             WorldMapMenu.UpdateCities();
             Player.Update();
+            if (CityInfoMenu.Update())
+            {
+                CityInfoMenu.Active = false;
+                ChangeGameState(GameState.TravelMenu);
+            }
 
             base.Update(gameTime);
         }
@@ -207,7 +212,6 @@ namespace Active
             else if (gameState == GameState.MapMenu)
             {
                 WorldMapMenu.Draw(spriteBatch);
-                CityInfoMenu.Draw(spriteBatch);
             }
             else if (gameState == GameState.TradeMenu)
             {
@@ -240,6 +244,7 @@ namespace Active
             }
 
             OptionsMenu.Draw(spriteBatch, options);
+            CityInfoMenu.Draw(spriteBatch);
             EndCredits.Draw(spriteBatch);//////////////////////////////
             LevelUp.Draw(spriteBatch);/////////////////////////////////
             spriteBatch.End();
@@ -361,10 +366,7 @@ namespace Active
                 }
             }
 
-            if (CityInfoMenu.Update())
-            {
-                ChangeGameState(GameState.TravelMenu);
-            }
+
 
             if (WorldMapMenu.inventoryButton.LeftClick())
             {

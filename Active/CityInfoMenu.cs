@@ -63,14 +63,16 @@ namespace Active
             {
                 spriteBatch.Draw(TextureManager.texWhite, mainBox, Color.LightGray);
                 exit.Draw(spriteBatch);
-                go.Draw(spriteBatch);
+                if (selected != Player.Location)
+                {
+                    go.Draw(spriteBatch);
+                }
                 spriteBatch.DrawString(TextureManager.font32, "Lore", loreHeaderPos, Color.Black);
                 int counter = 0;
                 foreach (City city in WorldMapMenu.Cities)
                 {
-                    if (button.LeftClick() && button.Name == city.Name)
+                    if (selected == city.Name)
                     {
-
                         if (Player.VisitedCities[counter])
                         {
                             spriteBatch.DrawString(TextureManager.font18, desc, lorePos, Color.Black);
@@ -106,9 +108,9 @@ namespace Active
 
                 for (int i = 0; i < 14; i++)
                 {
-                    if (TravelMenu.RouteNames[i, 0] == Player.Location)
+                    if (TravelMenu.RouteNames[i, 0] == selected)
                     {
-                        if (TravelMenu.RouteNames[i, 1] == selected)
+                        if (TravelMenu.RouteNames[i, 1] == Player.Location)
                         {
                             travelTime = TravelMenu.Routes[i];
                         }
@@ -117,7 +119,7 @@ namespace Active
 
                 if (travelTime != 0)
                 {
-                    spriteBatch.DrawString(TextureManager.font24, "Days:\n  " + travelTime.ToString(), new Vector2(800, 700), Color.Black);
+                    spriteBatch.DrawString(TextureManager.font24, "Travel time:\n   " + travelTime.ToString() + " days", new Vector2(680, 700), Color.Black);
                 }
 
                 Vector2 temp =  TextureManager.font48.MeasureString(selected);

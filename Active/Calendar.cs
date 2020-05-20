@@ -26,7 +26,8 @@ namespace Active
         static int dayOfMonth;
 
         static Vector2 pos = new Vector2(820, 14);
-        static Button eventLog = new Button(1080, 10, 195, 90, "event", "Open log", TextureManager.texButton);
+        static Button eventLog = new Button(1280, 10, 195, 90, "event", "Open log", TextureManager.texButton);
+        static Rectangle box = new Rectangle(730, 0, 460, 200);
 
         static public void PrepareCalendar()
         {
@@ -122,6 +123,7 @@ namespace Active
 
         static public void Draw(SpriteBatch spriteBatch)
         {
+            spriteBatch.Draw(TextureManager.texCalendar, box, Color.White);
             spriteBatch.DrawString(TextureManager.font24, currentDay, pos, Color.Black);
             spriteBatch.DrawString(TextureManager.font24, dayOfMonth.ToString() + dayFollowUp + " " + currentMonth, new Vector2(pos.X, pos.Y + 30), Color.Black);
             spriteBatch.DrawString(TextureManager.font24, "Total days: " + totalDays.ToString(), new Vector2(pos.X, pos.Y + 60), Color.Black);
