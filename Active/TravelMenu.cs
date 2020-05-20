@@ -61,8 +61,6 @@ namespace Active
                         destination = newDestination;
                         paused = false;
                         travelling = true;
-                        //float tmp = Vector2.Distance(CityManager.Cities[CityManager.FindCityIndex(Player.Location)].Coordinates, CityManager.Cities[CityManager.FindCityIndex(newDestination)].Coordinates);
-
 
                         turnsToTravel = routes[i];
                         turnsLeft = turnsToTravel;
@@ -242,6 +240,10 @@ namespace Active
         static public string[,] RouteNames
         {
             get => routeNames;
+        }
+        static public int[] Routes
+        {
+            get => routes;
         }
     }
 }
