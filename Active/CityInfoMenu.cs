@@ -68,7 +68,7 @@ namespace Active
                 int counter = 0;
                 foreach (City city in WorldMapMenu.Cities)
                 {
-                    if (button.LeftClick() && button.Name == city.Name)
+                    if (selected == city.Name)
                     {
 
                         if (Player.VisitedCities[counter])
