@@ -335,6 +335,21 @@ namespace Active
             return false;
         }
 
+        static bool SkillCheck(int difficulty, int skillLevel)
+        {
+            bool answer = false;
+            int modifiers = 95 - difficulty * 20 + skillLevel * 5 + 10;
+            if (modifiers > 95)
+            {
+                modifiers = 95;
+            }
+            if (rand.Next(0,100) < modifiers)
+            {
+                answer = true;
+            }
+            return answer;
+        }
+
         static public void Draw(SpriteBatch sb) // Bör endast hända i TravelMenu
         {
             currentTravelEvent.Draw(sb);

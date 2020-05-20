@@ -56,22 +56,22 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="CityInfoMenu.cs" />
-    <Compile Include="EndCredits.cs" />
+    <Compile Include="Menu\CityInfoMenu.cs" />
+    <Compile Include="Managers\EndCredits.cs" />
     <Compile Include="Achievement.cs" />
-    <Compile Include="AchievementManager.cs" />
+    <Compile Include="Managers\AchievementManager.cs" />
     <Compile Include="EventLog.cs" />
     <Compile Include="General Classes\Button.cs" />
     <Compile Include="Calendar.cs" />
     <Compile Include="City.cs" />
-    <Compile Include="CityMenu.cs" />
-    <Compile Include="CityManager.cs" />
+    <Compile Include="Menu\CityMenu.cs" />
+    <Compile Include="Managers\CityManager.cs" />
     <Compile Include="Encounter.cs" />
     <Compile Include="LevelUp.cs" />
-    <Compile Include="RollText.cs" />
-    <Compile Include="SoundManager.cs" />
+    <Compile Include="General Classes\RollText.cs" />
+    <Compile Include="General Classes\SoundManager.cs" />
     <Compile Include="TravelEvent.cs" />
-    <Compile Include="EncounterManager.cs" />
+    <Compile Include="Managers\EncounterManager.cs" />
     <Compile Include="General Classes\FileManager.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="General Classes\Inventory.cs" />
@@ -80,8 +80,8 @@
     <Compile Include="General Classes\ItemCreator.cs" />
     <Compile Include="World Events Classes\ItemModifierTemplate.cs" />
     <Compile Include="General Classes\KMReader.cs" />
-    <Compile Include="MainMenuManager.cs" />
-    <Compile Include="OptionsMenu.cs" />
+    <Compile Include="Managers\MainMenuManager.cs" />
+    <Compile Include="Menu\OptionsMenu.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="ModifierManager.cs" />
     <Compile Include="PlayerInventoryModule.cs" />
@@ -91,10 +91,10 @@
     <Compile Include="Slot.cs" />
     <Compile Include="General Classes\TextureManager.cs" />
     <Compile Include="Trading.cs" />
-    <Compile Include="TravelMenu.cs" />
+    <Compile Include="Menu\TravelMenu.cs" />
     <Compile Include="World Events Classes\WorldEvent.cs" />
     <Compile Include="World Events Classes\WorldEventManager.cs" />
-    <Compile Include="WorldMapMenu.cs" />
+    <Compile Include="Menu\WorldMapMenu.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">
