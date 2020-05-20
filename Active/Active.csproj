@@ -56,6 +56,7 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Managers\TravelScenarios.cs" />
     <Compile Include="Menu\CityInfoMenu.cs" />
     <Compile Include="Managers\EndCredits.cs" />
     <Compile Include="Achievement.cs" />
@@ -74,7 +75,7 @@
     <Compile Include="Managers\EncounterManager.cs" />
     <Compile Include="General Classes\FileManager.cs" />
     <Compile Include="Game1.cs" />
-    <Compile Include="General Classes\Inventory.cs" />
+    <Compile Include="Inventory.cs" />
     <Compile Include="World Events Classes\InventoryTemplate.cs" />
     <Compile Include="General Classes\Item.cs" />
     <Compile Include="General Classes\ItemCreator.cs" />

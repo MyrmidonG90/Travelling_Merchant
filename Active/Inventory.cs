@@ -290,6 +290,11 @@ namespace Active
             set
             {
                 money = value;
+                if (money<0)
+                {
+                    money = 0;
+                }
+                
             }
         }
 

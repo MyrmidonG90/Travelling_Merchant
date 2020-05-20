@@ -279,13 +279,17 @@ namespace Active
                 case 0:
                     if (answer == 0 && Player.Inventory.Money >= 20)
                     {
-                        Player.Inventory.Money -= 20;
+                        TravelScenarios.ChangeMoney(-20);
                         return true;
                     }
-                    else if (answer == 1 && Player.ReturnSkillLevel("Persuasion") >= 2 && Player.Inventory.Money >= 10)
+                    else if (answer == 1 &&  Player.Inventory.Money >= 10)
                     {
-                        Player.Inventory.Money -= 10;
-                        return true;
+                        if (TravelScenarios.SkillCheck(1, "Persuasion"))
+                        {
+                            Player.Inventory.Money -= 10;
+                            return true;
+                        }
+                        
                     }
                     else if (answer == 2)
                     {
@@ -296,7 +300,8 @@ namespace Active
                 case 1:
                     if (answer == 0 && Player.Inventory.Money >= 3)
                     {
-                        Player.Inventory.Money -= (int)((Player.Inventory.Money * 0.3f) + 0.5f);
+                        TravelScenarios.ChangeMoneyByModifier(2/3);
+                        //Player.Inventory.Money -= (int)((Player.Inventory.Money * 0.3f) + 0.5f);
                         return true;
                     }
                     else if (answer == 1)
@@ -311,7 +316,7 @@ namespace Active
                         }
                         return false;
                     }
-                    else if (answer == 2 && Player.ReturnSkillLevel("Intimidation") >= 3)
+                    else if (answer == 2 && TravelScenarios.SkillCheck(3,"Intimidation"))
                     {
                         return true;
                     }
@@ -319,7 +324,8 @@ namespace Active
                 case 2:
                     if (answer == 0)
                     {
-                        TravelMenu.TurnsLeft += 3;
+                        TravelScenarios.ChangeTravelTime(3);
+                        //TravelMenu.TurnsLeft += 3;
                         return true;
                     }
                     else if (answer == 1)
@@ -335,20 +341,7 @@ namespace Active
             return false;
         }
 
-        static bool SkillCheck(int difficulty, int skillLevel)
-        {
-            bool answer = false;
-            int modifiers = 95 - difficulty * 20 + skillLevel * 5 + 10;
-            if (modifiers > 95)
-            {
-                modifiers = 95;
-            }
-            if (rand.Next(0,100) < modifiers)
-            {
-                answer = true;
-            }
-            return answer;
-        }
+
 
         static public void Draw(SpriteBatch sb) // Bör endast hända i TravelMenu
         {
