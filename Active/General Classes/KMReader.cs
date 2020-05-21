@@ -88,6 +88,7 @@ namespace Active
         {
             return keyState.IsKeyUp(key) == prevKeyState.IsKeyDown(key) ? true:false;
         }
+
         public static bool IsKeyDown(Keys key)
         {
             tmp = false;
