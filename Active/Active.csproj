@@ -89,7 +89,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SaveModule.cs" />
-    <Compile Include="Slot.cs" />
+    <Compile Include="ItemSlot.cs" />
     <Compile Include="General Classes\TextureManager.cs" />
     <Compile Include="Trading.cs" />
     <Compile Include="Menu\TravelMenu.cs" />

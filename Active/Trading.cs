@@ -14,7 +14,7 @@ namespace Active
     {
 
         static Inventory invLeft, invRight, tradeLeft, tradeRight, origLeftInv, origRightInv, tmpInv;
-        static Slot[,] slotsLeft, slotsRight, tradeSlotsLeft, tradeSlotsRight;
+        static ItemSlot[,] slotsLeft, slotsRight, tradeSlotsLeft, tradeSlotsRight;
         static Button accept, reset, back;
         static Item selected;
         static string zoneName;
@@ -48,16 +48,16 @@ namespace Active
 
         static void CreateSlots() // Skapar slots
         {
-            slotsLeft = new Slot[5, 5];
-            slotsRight = new Slot[5, 5];
-            tradeSlotsLeft = new Slot[3, 3];
-            tradeSlotsRight = new Slot[3, 3];
+            slotsLeft = new ItemSlot[5, 5];
+            slotsRight = new ItemSlot[5, 5];
+            tradeSlotsLeft = new ItemSlot[3, 3];
+            tradeSlotsRight = new ItemSlot[3, 3];
             for (int i = 0; i < 5; i++)
             {
                 for (int j = 0; j < 5; j++)
                 {
-                    slotsLeft[i, j] = new Slot(245 + 60 * j, 200 + 60 * i, 50, 50);
-                    slotsRight[i, j] = new Slot(1375 + 60 * j, 200 + 60 * i, 50, 50);
+                    slotsLeft[i, j] = new ItemSlot(245 + 60 * j, 200 + 60 * i, 50, 50);
+                    slotsRight[i, j] = new ItemSlot(1375 + 60 * j, 200 + 60 * i, 50, 50);
                     try
                     {
                         slotsLeft[i, j].AddItem(invLeft.ItemList[i * 5 + j]);
@@ -80,8 +80,8 @@ namespace Active
             {
                 for (int j = 0; j < 3; j++)
                 {
-                    tradeSlotsRight[i, j] = new Slot(1020 + 60 * j, 334 + 60 * i, 50, 50);
-                    tradeSlotsLeft[i, j] = new Slot(720 + 60 * j, 334 + 60 * i, 50, 50);
+                    tradeSlotsRight[i, j] = new ItemSlot(1020 + 60 * j, 334 + 60 * i, 50, 50);
+                    tradeSlotsLeft[i, j] = new ItemSlot(720 + 60 * j, 334 + 60 * i, 50, 50);
                 }
             }
         }
@@ -134,7 +134,7 @@ namespace Active
             }
             else if (KMReader.RightMouseClick())
             {
-                foreach (Slot tempSlot in slotsLeft)
+                foreach (ItemSlot tempSlot in slotsLeft)
                 {
                     if (tempSlot.RightClicked())
                     {
@@ -142,7 +142,7 @@ namespace Active
                     }
                 }
 
-                foreach (Slot tempSlot in slotsRight)
+                foreach (ItemSlot tempSlot in slotsRight)
                 {
                     if (tempSlot.RightClicked())
                     {
@@ -150,7 +150,7 @@ namespace Active
                     }
                 }
 
-                foreach (Slot tempSlot in tradeSlotsLeft)
+                foreach (ItemSlot tempSlot in tradeSlotsLeft)
                 {
                     if (tempSlot.RightClicked())
                     {
@@ -158,7 +158,7 @@ namespace Active
                     }
                 }
 
-                foreach (Slot tempSlot in tradeSlotsRight)
+                foreach (ItemSlot tempSlot in tradeSlotsRight)
                 {
                     if (tempSlot.RightClicked())
                     {
@@ -226,7 +226,7 @@ namespace Active
             priceDifference = leftPrice - rightPrice;
         }
 
-        static bool CheckSlotClick(Slot[,] slots, Participant participant)
+        static bool CheckSlotClick(ItemSlot[,] slots, Participant participant)
         {
             counterCol = 0;
             counterRow = 0;
@@ -256,7 +256,7 @@ namespace Active
             return false;
         }
 
-        static void SlotClick(Slot[,] slots, Participant participant)
+        static void SlotClick(ItemSlot[,] slots, Participant participant)
         {
             if (CheckShiftClick())
             {
@@ -270,7 +270,7 @@ namespace Active
             UpdatePrices();
         }
 
-        static void MouseSlotClick(Slot[,] slots, Participant participant)
+        static void MouseSlotClick(ItemSlot[,] slots, Participant participant)
         {
             if (participant == Participant.Left)
             {
@@ -302,7 +302,7 @@ namespace Active
             }
         }
 
-        static void ShiftAndMouseClick(Slot[,] slots, Participant participant)
+        static void ShiftAndMouseClick(ItemSlot[,] slots, Participant participant)
         {
             if (participant == Participant.Left)
             {

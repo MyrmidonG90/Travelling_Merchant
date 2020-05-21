@@ -8,13 +8,13 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 namespace Active
 {
-    class Slot
+    class ItemSlot
     {
         Item item;
         
         Rectangle hitbox;
         Vector2 textPos;
-        public Slot(int posX, int posY,int width, int height)
+        public ItemSlot(int posX, int posY,int width, int height)
         {
             hitbox = new Rectangle(posX,posY,width,height);
             textPos = new Vector2(posX+width/2,posY+height/2);
