@@ -123,7 +123,7 @@ namespace Active
 
         static public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(TextureManager.texCalendar, box, Color.White);
+            //spriteBatch.Draw(TextureManager.texCalendar, box, Color.White);
             spriteBatch.DrawString(TextureManager.font24, currentDay, pos, Color.Black);
             spriteBatch.DrawString(TextureManager.font24, dayOfMonth.ToString() + dayFollowUp + " " + currentMonth, new Vector2(pos.X, pos.Y + 30), Color.Black);
             spriteBatch.DrawString(TextureManager.font24, "Total days: " + totalDays.ToString(), new Vector2(pos.X, pos.Y + 60), Color.Black);
