@@ -66,6 +66,36 @@ namespace Active
                 sw.Close();
             }
         }
+        /// <summary>
+        /// Glossary structure
+        /// itemsDiscovered
+        /// itemsLeft
+        /// travelEncountersOccured
+        /// travelEncountersLeft
+        /// worldEventsOccured
+        /// worldEventsLeft
+        /// </summary>
+        /// 
+
+        public static List<List<int>> LoadGlossary()
+        {
+            List<List<int>> glossaries = new List<List<int>>();            
+            ReadFilePerLine("./Data/CityStructure.txt");
+
+            for (int i = 0; i < readPerLine.Count; i++)
+            {
+                glossaries[i] = new List<int>();
+            }
+
+            for (int i = 0; i < readPerLine.Count; i++)
+            {
+                for (int j = 0; j < readPerLine[i].Split(',').Length; j++)
+                {
+                    glossaries[i].Add(int.Parse(readPerLine[i].Split(',')[j]));
+                }
+            }
+            return glossaries;
+        }
 
         static void Reset()
         {

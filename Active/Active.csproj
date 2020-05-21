@@ -56,6 +56,7 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Managers\GlossaryManager.cs" />
     <Compile Include="Managers\TravelScenarios.cs" />
     <Compile Include="Menu\CityInfoMenu.cs" />
     <Compile Include="Managers\EndCredits.cs" />
@@ -121,6 +122,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Data\City_Data\EncounterInfo.txt" />
+    <Content Include="Data\Glossary.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Data\City_Data\Hymn Harbor.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

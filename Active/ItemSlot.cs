@@ -12,6 +12,9 @@ namespace Active
     {
         Item item;
         Vector2 textPos;
+
+        internal Item Item { get => item; set => item = value; }
+
         public ItemSlot(int posX, int posY, int width, int height): base(posX,posY,width,height)
         {
             textPos = new Vector2(posX+width/2,posY+height/2);

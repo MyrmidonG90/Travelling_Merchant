@@ -51,7 +51,7 @@ namespace Active
                 travelEncountersLeft.Add(i);
             }
             for (int i = 0; i < encounters.Count; i++)
-            {                
+            {
                 encounters[i].OccuredDuringTravel = false;
             }
             
@@ -71,8 +71,7 @@ namespace Active
                             eventOnGoing = true;
                             InitiateEncounter(FindID(RandomiseEncounter()));
                         }
-                    }
-                    
+                    }                    
                 }
             }          
             return eventOnGoing;

@@ -40,5 +40,13 @@ namespace Active
                 sb.Draw( texture,hitbox, Color.White);
             }            
         }
+
+        public void DrawShadow(SpriteBatch sb)
+        {
+            if (texture != null)
+            {
+                sb.Draw(texture, hitbox, Color.Black);
+            }
+        }
     }
 }

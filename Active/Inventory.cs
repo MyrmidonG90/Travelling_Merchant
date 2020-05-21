@@ -51,8 +51,7 @@ namespace Active
         {
             stackLimit = 50;
             invLimit = 25;
-        }
-        
+        }        
 
         public bool AddItem(Item newItem)
         {
@@ -316,107 +315,4 @@ namespace Active
         public int InvLimit { get => invLimit;}
     }
 }
-/*
-            if (itemList.Count < invLimit) // itemlist not full
-            {
-                if (index != -1) // There are other stacks with the same ID
-                {
-                    if (itemList.Count < invLimit) // Om den får plats
-                    {
-                        if (itemList[index].Amount + amount <= stackLimit) // Om stacken som item:et är med i har plats
-                        {
-                            itemList[index].Amount += amount; // Ändrar summan av totala antalet av den item:et
-                            working = true;
-                        }
-                        else // Om stacken som item:et är med i inte har plats
-                        {
-                            if (itemList.Count < invLimit) // Om det finns plats för att göra en ny stack
-                            {
-                                if (FindStackNotFull(itemID) != -1)
-                                {
-                                    if (itemList[FindStackNotFull(itemID)].Amount + amount <= stackLimit)
-                                    {
-                                        itemList[FindStackNotFull(itemID)].Amount += amount; // Ändrar summan av totala antalet av den item:et
-                                        working = true;
-                                    }
-                                    else
-                                    {
-                                        amount = itemList[FindStackNotFull(itemID)].Amount + amount - 50;
-                                        itemList[FindStackNotFull(itemID)].Amount += amount;
-                                        ItemList.Add(ItemCreator.CreateItem(itemID, amount));
-                                        working = true;
-                                    }
-                                }
-                                else
-                                {
-                                    ItemList.Add(ItemCreator.CreateItem(itemID, amount));
-                                    working = true;
-                                }
-                            }
-                            else
-                            {
-                                if (FindStackNotFull(itemID) != -1)
-                                {
-                                    if (itemList[FindStackNotFull(itemID)].Amount + amount <= stackLimit) // Om stacken som item:et är med i har plats
-                                    {
-                                        itemList[FindStackNotFull(itemID)].Amount += amount; // Ändrar summan av totala antalet av den item:et
-                                        working = true;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-                else // There are no other stacks with the same ID
-                {
-                    if (itemList.Count < invLimit) //
-                    {
-                        ItemList.Add(ItemCreator.CreateItem(itemID, amount));
-                        working = true;
-                    }
-                }
-            }
-            else // Iitemlist full
-            {
-                if (index != -1) // There are other stacks with the same ID
-                {
 
-                }
-            }*/
-/*if (itemList.Count + amountOfStacks < invLimit+1) // Does not exceed itemList+1
-    {
-        if (index != -1) // There are other stacks with same Id
-        {
-            if (FindStackNotFull(itemID)!= -1) // There are stacks not filled
-            {
-                FillStacks(itemID, ref amount);
-                AddStacks(itemID, amount);
-                working = true;
-            }
-            else
-            {
-                AddStacks(itemID, amount);
-                working = true;
-            }
-        }
-        else if (itemList.Count < 25)
-        {
-            AddStacks(itemID, amount);
-            working = true;
-        }
-    }
-    else if (itemList.Count + amountOfStacks == 26) 
-    {
-        if (index != -1) // There are other stacks with same Id
-        {
-            if (FindStackNotFull(itemID) != -1) // There are stacks not filled
-            {
-                int amountToFill = 50 - itemList[FindStackNotFull(itemID)].Amount;
-                if (amount <= amountToFill)
-                {
-                    FillStacks(itemID, ref amount);
-                    working = true;
-                }                            
-            }
-        }
-    }*/

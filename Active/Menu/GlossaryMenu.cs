@@ -15,7 +15,10 @@ namespace Active.Menu
         {
             if (KMReader.LeftMouseClick())
             {
+                if (CheckButtonClick() != -1)
+                {
 
+                }
             }
             else if (KMReader.RightMouseClick())
             {
@@ -26,10 +29,15 @@ namespace Active.Menu
         {
             
         }
+        static int CheckSlotClick()
+        {
+            return 0;
+        }
         static int CheckButtonClick()
         {
             int count = 0;
             bool found = false;
+
             while (found != false && count < buttons.Count)
             {
                 if (buttons[count].LeftClick())
@@ -41,8 +49,13 @@ namespace Active.Menu
                     ++count;
                 }
             }
-            return c9
 
+            if (found == false)
+            {
+                count = -1;
+            }
+
+            return count;
         }
     }
 }
