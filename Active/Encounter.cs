@@ -52,7 +52,7 @@ namespace Active
                 counter = 0;
                 while (counter < btnOptions.Count && found == false)
                 {
-                    if (KMReader.ClickRectangle(btnOptions[counter].HitBox) == true)
+                    if (KMReader.OverRectangle(btnOptions[counter].HitBox) == true)
                     {
                         found = true;
                         click = counter;
