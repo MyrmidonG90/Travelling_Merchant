@@ -133,7 +133,7 @@ namespace Active
             }
             return counter;
         }
-        static void InitiateEncounter(int id)
+        static public void InitiateEncounter(int id)
         {
             currentEncounter = encounters[FindEncounterID(id)];
             currentTravelEvent = travelEvents[FindIndex(id)];

@@ -22,17 +22,32 @@ namespace Active
 
         static public void Draw(SpriteBatch spritebatch)
         {
-            spritebatch.Draw(TextureManager.texWhite, box, Color.White);
+            spritebatch.Draw(TextureManager.texEventLog, box, Color.White);
             int counter = 0;
             foreach (string tempstring in Player.EventCities)
             {
-                spritebatch.DrawString(TextureManager.font24, tempstring, new Vector2(720, 120 + (44 * counter)), Color.Black);
+                spritebatch.DrawString(TextureManager.font24, tempstring + "====", new Vector2(730, 180 + (60 * counter)), Color.Black);
                 counter++;
             }
             counter = 0;
             foreach (string tempstring in Player.EventNames)
             {
-                spritebatch.DrawString(TextureManager.font24, tempstring, new Vector2(970, 120 + (44 * counter)), Color.Black);
+                if (tempstring == "Plague")
+                {
+                }
+                else if (tempstring == "War")
+                {
+
+                }
+                else if (tempstring == "Crop Failure")
+                {
+
+                }
+                else if (tempstring == "Good Harvest")
+                {
+                    spritebatch.Draw(TextureManager.texIconEventGoodHarvest, new Rectangle(1040, 180 + (60 * counter), 60, 60), Color.White);
+
+                }
                 counter++;
             }
         }
