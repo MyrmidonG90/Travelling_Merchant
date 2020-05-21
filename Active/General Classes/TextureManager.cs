@@ -42,6 +42,11 @@ namespace Active
         static public Texture2D texIconPersuasion;
         static public Texture2D texIconWisdom;
         static public Texture2D texIconCity;
+        static public Texture2D texIconEventPlague;
+        static public Texture2D texIconEventGoodHarvest;
+        static public Texture2D texIconEventBadHarvest;
+        static public Texture2D texIconEventWar;
+
 
         // GUI
         static public Texture2D texButtonGo;
@@ -55,6 +60,7 @@ namespace Active
         static public Texture2D texButtonOptions;
         static public Texture2D texOptionsBox;
         static public Texture2D texCalendar;
+        static public Texture2D texEventLog;
 
         // HUD
         static public Texture2D texRankUpIntimidation;
@@ -121,6 +127,7 @@ namespace Active
             texButtonOptions = content.Load<Texture2D>("options_button");
             texOptionsBox = content.Load<Texture2D>("options_box");
             texCalendar = content.Load<Texture2D>("calendar_box");
+            texEventLog = content.Load<Texture2D>("event_log");
 
         }
         static void LoadItems(ContentManager content)
@@ -183,6 +190,11 @@ namespace Active
             texIconUncommon = content.Load<Texture2D>("uncommon_icon");
             texIconWisdom = content.Load<Texture2D>("skill_icon_wisdom");
             texIconCity = content.Load<Texture2D>("merchant_city_icon");
+            texIconEventBadHarvest = content.Load<Texture2D>("event_icon_crop_failure");
+            texIconEventGoodHarvest = content.Load<Texture2D>("event_icon_good_harvest");
+            texIconEventWar = content.Load<Texture2D>("event_icon_war");
+            texIconEventPlague = content.Load<Texture2D>("event_icon_plague");
+
         }
         static void LoadCategories(ContentManager content)
         {
