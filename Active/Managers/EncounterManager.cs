@@ -142,7 +142,7 @@ namespace Active
 
         }        
 
-        // Works fine
+
         static int RandomiseEncounter()
         {
             chance = 0;
@@ -152,28 +152,33 @@ namespace Active
             }
 
             int chosen = rand.Next(1, chance);
-
-            counter = 0;            
-            while (chance > 0)
+            
+            counter = 0;
+            while (chosen > 0)
             {
-                chance -= travelEvents[travelEncountersLeft[counter]].Percentage;
-                if (chance >= 0)
+                chosen -= travelEvents[travelEncountersLeft[counter]].Percentage;
+                if (chosen >= 0)
                 {
                     ++counter;
                 }
             }
-            counter = travelEncountersLeft[counter];
 
-            int tmp = 0;
+            int tmp = counter;
+            counter = travelEncountersLeft[counter];
+            travelEncountersLeft.RemoveAt(tmp);
+            /*int tmp = 0;
             bool found = false;
             while (found != false)
             {
-                if (travelEncountersLeft[tmp] == 0)
+                if (travelEncountersLeft[tmp] == travelEvents[travelEncountersLeft[tmp]].Id)
                 {
-
+                    found = true;
                 }
-                ++tmp;
-            }
+                else
+                {
+                    ++tmp;
+                }
+            }*/
             
             
             return counter;
