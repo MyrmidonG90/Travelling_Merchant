@@ -82,6 +82,7 @@ namespace Active
             WorldMapMenu.LoadCities();
             EncounterManager.Initialize();
             CityInfoMenu.Init();
+            SkillManager.Init();
 
             ModifierManager.LoadCityAndCategoryLists();
             ModifierManager.LoadItemModifiers();
