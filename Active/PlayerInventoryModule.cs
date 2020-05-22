@@ -33,7 +33,7 @@ namespace Active
 
         Button invTab;
         Button skillTab;
-        Button ashievementTab;
+        Button achievementsTab;
 
         Rectangle priCategoryBox;
         Rectangle secCategoryBox;
@@ -62,7 +62,7 @@ namespace Active
 
             invTab = new Button(280, 90, 200, 60, TextureManager.texInvTab);
             skillTab = new Button(470, 90, 200, 60, TextureManager.texSkillTab);
-            ashievementTab = new Button(660, 90, 200, 60, TextureManager.texSkillTab);
+            achievementsTab = new Button(660, 90, 200, 60, TextureManager.texSkillTab);
 
             disposeButton = new Button(1560, 930, 70, 70, TextureManager.texIconTrashCan);
             returnButton = new Button(20, 20, 80, 80, TextureManager.texBackArrow);
@@ -99,7 +99,7 @@ namespace Active
             returnButton.Draw(spriteBatch);
             if (tab == TabState.Inventory)
             {
-                ashievementTab.Draw(spriteBatch);
+                achievementsTab.Draw(spriteBatch);
                 skillTab.Draw(spriteBatch);
                 invTab.Draw(spriteBatch);
                 
@@ -107,7 +107,7 @@ namespace Active
             else if (tab == TabState.Skills)
             {
                 invTab.Draw(spriteBatch);
-                ashievementTab.Draw(spriteBatch);
+                achievementsTab.Draw(spriteBatch);
                 skillTab.Draw(spriteBatch);
                 
             }
@@ -115,7 +115,7 @@ namespace Active
             {
                 skillTab.Draw(spriteBatch);
                 invTab.Draw(spriteBatch);
-                ashievementTab.Draw(spriteBatch);
+                achievementsTab.Draw(spriteBatch);
             }
 
             if (tab == TabState.Inventory)
@@ -188,7 +188,7 @@ namespace Active
             {
                 tab = TabState.Skills;
             }
-            else if (ashievementTab.LeftClick())
+            else if (achievementsTab.LeftClick())
             {
                 tab = TabState.Achievements;
             }

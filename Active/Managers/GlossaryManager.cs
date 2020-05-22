@@ -22,6 +22,7 @@ namespace Active
         static Glossary currentGlossary;
 
         internal static List<Slot> Slots { get => slots; }
+       
 
         static public void Initialize()
         {
@@ -31,19 +32,9 @@ namespace Active
 
         static public void InitateGlossary(string glossary)
         {
-            bool found = false;
-            while (found != false)
-            {
-                if (currentGlossary.ToString()==glossary)
-                {
-                    found = true;
-                }
-                else
-                {
-                    currentGlossary = (Glossary)((int)(currentGlossary+1) % amountOfGlossaries);
-                }
-            }
+            currentGlossary = (Glossary)GetGlossaryIndex(glossary);
         }
+
         static void InitiateSlots(Glossary glossary)
         {
             slots = new List<Slot>();
@@ -54,6 +45,7 @@ namespace Active
                     slots.Add(new Slot(320 + 150 * j, 210 + 150 * i, 120, 120));
                 }
             }
+
             if (glossary == Glossary.Item)
             {
                 InitiateItemSlots();
@@ -66,6 +58,24 @@ namespace Active
             {
                 InitiateWorlEventsSlots();
             }
+        }
+
+        static public int GetGlossaryIndex(string glossary)
+        {
+            bool found = false;
+            Glossary tmp = 0;
+            while (found != false)
+            {
+                if (tmp.ToString() == glossary)
+                {
+                    found = true;
+                }
+                else
+                {
+                    ++tmp;
+                }
+            }
+            return (int)tmp;
         }
 
         static void InitiateItemSlots()
