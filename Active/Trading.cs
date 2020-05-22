@@ -462,7 +462,8 @@ namespace Active
             double sum = 0;
             for (int i = 0; i < inv.ItemList.Count; i++)
             {
-                sum += inv.ItemList[i].BasePrice*ModifierManager.GetModifier(zoneName, inv.ItemList[i].PrimaryCategory) * inv.ItemList[i].Amount;
+                double temp = inv.ItemList[i].BasePrice *  SkillManager.ReturnSkillModifier(zoneName) * inv.ItemList[i].Amount;
+                sum += (inv.ItemList[i].BasePrice*ModifierManager.GetModifier(zoneName, inv.ItemList[i].PrimaryCategory) * inv.ItemList[i].Amount) - temp;
             }
             return (int)sum; // Avrundas nedåt
         }
