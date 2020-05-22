@@ -9,7 +9,6 @@ namespace Active.Menu
 {
     static class GlossaryMenu
     {
-        static List<Slot> slots;
         static List<Button> buttons;
         static public void Update()
         {

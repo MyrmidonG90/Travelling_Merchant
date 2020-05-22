@@ -29,7 +29,7 @@ namespace Active
             amountOfGlossaries = glossaries.Count/2;
         }
 
-        static public void ChangeGlossary(string glossary)
+        static public void InitateGlossary(string glossary)
         {
             bool found = false;
             while (found != false)
@@ -43,6 +43,45 @@ namespace Active
                     currentGlossary = (Glossary)((int)(currentGlossary+1) % amountOfGlossaries);
                 }
             }
+        }
+        static void InitiateSlots(Glossary glossary)
+        {
+            slots = new List<Slot>();
+            for (int i = 0; i < 5; i++)
+            {
+                for (int j = 0; j < 5; j++)
+                {
+                    slots.Add(new Slot(320 + 150 * j, 210 + 150 * i, 120, 120));
+                }
+            }
+            if (glossary == Glossary.Item)
+            {
+                InitiateItemSlots();
+            }
+            else if (glossary == Glossary.TravelEncounters)
+            {
+                InitiateTravelEncountersSlots();
+            }
+            else if (glossary == Glossary.WorldEvents)
+            {
+                InitiateWorlEventsSlots();
+            }
+        }
+
+        static void InitiateItemSlots()
+        {
+            for (int i = 0; i < 25; i++)
+            {
+                slots[i].AddTexture(ItemCreator.CreateItem(i,0).Tex);
+            }
+        }
+        static void InitiateTravelEncountersSlots()
+        {
+            
+        }
+        static void InitiateWorlEventsSlots()
+        {
+            
         }
 
 

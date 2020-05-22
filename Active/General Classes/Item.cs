@@ -118,5 +118,7 @@ namespace Active
                 return description;
             }
         }
+
+        public Texture2D Tex { get => tex; set => tex = value; }
     }
 }

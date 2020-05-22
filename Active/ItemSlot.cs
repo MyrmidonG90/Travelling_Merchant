@@ -33,6 +33,7 @@ namespace Active
         public void AddItem(Item item)
         {
             this.item = item;
+            
         }
 
         public int GetItemId()
