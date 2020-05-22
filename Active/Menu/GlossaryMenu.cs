@@ -19,6 +19,10 @@ namespace Active.Menu
                 {
 
                 }
+                else if (CheckSlotClick() != -1)
+                {
+
+                }
             }
             else if (KMReader.RightMouseClick())
             {
@@ -27,11 +31,28 @@ namespace Active.Menu
         }
         static public void Draw(SpriteBatch sb)
         {
-            
+            GlossaryManager.Draw(sb);
         }
         static int CheckSlotClick()
         {
-            return 0;
+            int counter = 0;
+            bool found = false;
+            while (found != false && counter < GlossaryManager.Slots.Count)
+            {
+                if (GlossaryManager.Slots[counter].LeftClicked())
+                {
+                    found = true;
+                }
+                else
+                {
+                    ++counter;
+                }
+            }
+            if (found== false)
+            {
+                counter = -1;
+            }
+            return counter;
         }
         static int CheckButtonClick()
         {

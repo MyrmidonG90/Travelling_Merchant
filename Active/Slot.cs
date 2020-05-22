@@ -23,6 +23,10 @@ namespace Active
             this.texture = texture;
         }
 
+        /// <summary>
+        /// Doesn't check if mouse is clicked due to optimization
+        /// </summary>
+        /// <returns></returns>
         public bool LeftClicked()
         {
             return KMReader.OverRectangle(hitbox);
