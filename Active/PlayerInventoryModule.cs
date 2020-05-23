@@ -17,7 +17,8 @@ namespace Active
         {
             Inventory,
             Skills,
-            Achievements
+            Achievements,
+            Glossary
         }
 
         TabState tab;
@@ -100,18 +101,17 @@ namespace Active
 
             if (tab == TabState.Inventory)
             {
-
                 achievementsTab.Draw(spriteBatch);
                 skillTab.Draw(spriteBatch);
                 invTab.Draw(spriteBatch);
-                
+                DrawInventory(spriteBatch);
             }
             else if (tab == TabState.Skills)
             {
                 invTab.Draw(spriteBatch);
                 achievementsTab.Draw(spriteBatch);
                 skillTab.Draw(spriteBatch);
-                
+
             }
             else if (tab == TabState.Achievements)
             {
@@ -119,7 +119,7 @@ namespace Active
                 invTab.Draw(spriteBatch);
                 achievementsTab.Draw(spriteBatch);
 
-                DrawInventory(spriteBatch);
+
             }
             else if (tab == TabState.Skills)
             {
@@ -143,12 +143,14 @@ namespace Active
                 invTab.Draw(spriteBatch);
                 achievementsTab.Draw(spriteBatch);
                 skillTab.Draw(spriteBatch);
+                DrawSkills(spriteBatch);
             }
             else if (tab == TabState.Achievements)
             {
                 skillTab.Draw(spriteBatch);
                 invTab.Draw(spriteBatch);
                 achievementsTab.Draw(spriteBatch);
+                DrawAchievements(spriteBatch);
             }
         }
 
