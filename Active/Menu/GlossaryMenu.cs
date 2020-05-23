@@ -8,7 +8,11 @@ using System.Threading.Tasks;
 
 namespace Active.Menu
 {
+<<<<<<< HEAD:Active/MenuFolder/GlossaryMenu.cs
     class GlossaryMenu : TabClass
+=======
+    static class GlossaryMenu
+>>>>>>> parent of 02e877c... a:Active/Menu/GlossaryMenu.cs
     {
         static Rectangle selectedSlot;
         static int indexOfSelectedSlot;
@@ -41,7 +45,7 @@ namespace Active.Menu
                         }
                     }
                 }
-            }
+            }            
         }
         override public void Draw(SpriteBatch sb)
         {
