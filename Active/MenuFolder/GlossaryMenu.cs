@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Active.Menu
 {
-    static class GlossaryMenu
+    static class GlossaryMenu : MenuClass
     {
         static Rectangle selectedSlot;
         static int indexOfSelectedSlot;
@@ -41,7 +41,7 @@ namespace Active.Menu
                         }
                     }
                 }
-            }            
+            }
         }
         static public void Draw(SpriteBatch sb)
         {
