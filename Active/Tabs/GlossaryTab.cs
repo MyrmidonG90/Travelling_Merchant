@@ -6,9 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Active.Menu
+namespace Active
 {
-    class GlossaryMenu : TabClass
+    class GlossaryTab : TabClass
     {
         static Rectangle selectedSlot;
         static int indexOfSelectedSlot;
@@ -19,6 +19,10 @@ namespace Active.Menu
             WorldEvents
         }
         static Glossary currentGlossary;
+        public GlossaryTab()
+        {
+            name = "Glossary Tab";
+        }
         static void Start(string glossary)
         {
             currentGlossary = (Glossary)GlossaryManager.GetGlossaryIndex(glossary);
@@ -28,7 +32,7 @@ namespace Active.Menu
         override public void Update()
         {
             if (KMReader.LeftMouseClick())
-            {                
+            {
                 if (CheckSlotClick() != -1)
                 {
                     int tmp = CheckSlotClick();

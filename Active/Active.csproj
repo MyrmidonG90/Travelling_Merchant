@@ -73,9 +73,12 @@
     <Compile Include="LevelUp.cs" />
     <Compile Include="General Classes\RollText.cs" />
     <Compile Include="General Classes\SoundManager.cs" />
-    <Compile Include="MenuFolder\GlossaryMenu.cs" />
+    <Compile Include="Tabs\AchievementTab.cs" />
+    <Compile Include="Tabs\GlossaryTab.cs" />
     <Compile Include="MenuFolder\TabClass.cs" />
     <Compile Include="Slot.cs" />
+    <Compile Include="Tabs\InventoryTab.cs" />
+    <Compile Include="Tabs\SkillTab.cs" />
     <Compile Include="TravelEvent.cs" />
     <Compile Include="Managers\EncounterManager.cs" />
     <Compile Include="General Classes\FileManager.cs" />

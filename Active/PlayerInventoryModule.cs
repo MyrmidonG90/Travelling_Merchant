@@ -32,9 +32,14 @@ namespace Active
         Rectangle mainBox;
         Rectangle inventoryBox;
 
+        List<TabClass> tabMenus;
+
+        int amountOfTabs;
+        List<Button> tabButtons;
         Button invTab;
         Button skillTab;
         Button achievementsTab;
+        Button glossaryTab;
 
         Rectangle priCategoryBox;
         Rectangle secCategoryBox;
@@ -61,9 +66,13 @@ namespace Active
             secCategoryBox = new Rectangle(1310, 760, 120, 120);
             terCategoryBox = new Rectangle(1490, 760, 120, 120);
 
+            amountOfTabs = 4; // Change this one if you add/remove tabs!!!
+
+            InitiateTabButtons();
             invTab = new Button(280, 90, 200, 60, TextureManager.texInvTab);
             skillTab = new Button(470, 90, 200, 60, TextureManager.texSkillTab);
             achievementsTab = new Button(660, 90, 200, 60, TextureManager.texSkillTab);
+            glossaryTab = new Button(850,90,200,60,TextureManager.texSkillTab);
 
             disposeButton = new Button(1560, 930, 70, 70, TextureManager.texIconTrashCan);
             returnButton = new Button(20, 20, 80, 80, TextureManager.texBackArrow);
@@ -72,7 +81,7 @@ namespace Active
             disposeDragger = new Button(710, 488, 30, 70, TextureManager.texDisposeDragger);
             disposeOKButton = new Button(900, 650, 120, 60, TextureManager.texWhite);
 
-            selectedSquare = 50; //50 means no slot is selected
+            selectedSquare = -1; //-1 means no slot is selected
 
             LoadGrid();
         }
@@ -97,9 +106,8 @@ namespace Active
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            returnButton.Draw(spriteBatch);            
-
-            if (tab == TabState.Inventory)
+            returnButton.Draw(spriteBatch);
+            /*if (tab == TabState.Inventory)
             {
                 achievementsTab.Draw(spriteBatch);
                 skillTab.Draw(spriteBatch);
@@ -129,27 +137,31 @@ namespace Active
             {
                 DrawAchievements(spriteBatch);
 
-            }
+            }*/
             //spriteBatch.DrawString(TextureManager.fontInventory, Player.EventNames.Count.ToString(), new Vector2(300, 300), Color.White);
 
             if (tab == TabState.Inventory)
             {
-                achievementsTab.Draw(spriteBatch);
+                DrawTabs(spriteBatch);
+                /*achievementsTab.Draw(spriteBatch);
                 skillTab.Draw(spriteBatch);
-                invTab.Draw(spriteBatch);
+                invTab.Draw(spriteBatch);*/
+                DrawInventory(spriteBatch);
             }
             else if (tab == TabState.Skills)
             {
-                invTab.Draw(spriteBatch);
+                DrawTabs(spriteBatch);
+                /*invTab.Draw(spriteBatch);
                 achievementsTab.Draw(spriteBatch);
-                skillTab.Draw(spriteBatch);
+                skillTab.Draw(spriteBatch);*/
                 DrawSkills(spriteBatch);
             }
             else if (tab == TabState.Achievements)
             {
-                skillTab.Draw(spriteBatch);
+                DrawTabs(spriteBatch);
+                /*skillTab.Draw(spriteBatch);
                 invTab.Draw(spriteBatch);
-                achievementsTab.Draw(spriteBatch);
+                achievementsTab.Draw(spriteBatch);*/
                 DrawAchievements(spriteBatch);
             }
         }
@@ -168,6 +180,23 @@ namespace Active
                 counter++;
             }
             streamReader.Close();
+        }
+        void InitiateTabButtons()
+        {
+            tabButtons = new List<Button>();
+            for (int i = 0; i < amountOfTabs; i++)
+            {
+                tabButtons.Add(new Button(280+190*i,90,200,60,TextureManager.texTabs[i]));
+            }
+        }
+
+        void DrawTabs(SpriteBatch sb)
+        {
+            int tmp = (int)tab;
+            for (int i = 0; i < tabButtons.Count; i++)
+            {
+                tabButtons[(tmp+i)% tabButtons.Count].Draw(sb);
+            }
         }
 
         private void CheckSelect()
@@ -270,7 +299,7 @@ namespace Active
                     {
                         Player.Inventory.ItemList.Remove(tempItem);
                         selected = null;
-                        selectedSquare = 50;
+                        selectedSquare = -1;
                         break;
                     }
                 }
@@ -283,13 +312,13 @@ namespace Active
             if (KMReader.prevKeyState.IsKeyUp(Keys.Escape) && KMReader.keyState.IsKeyDown(Keys.Escape))
             {
                 selected = null;
-                selectedSquare = 50;
+                selectedSquare = -1;
                 return true;
             }
             if (returnButton.LeftClick())
             {
                 selected = null;
-                selectedSquare = 50;
+                selectedSquare = -1;
                 return true;
             }
             return false;
@@ -415,7 +444,7 @@ namespace Active
                 disposeButton.Draw(spriteBatch);
             }
 
-            if (selectedSquare != 50)
+            if (selectedSquare != -1)
             {
                 spriteBatch.Draw(TextureManager.texSelect, inventoryGrid[selectedSquare], Color.White);
             }
@@ -434,7 +463,7 @@ namespace Active
 
         private void DrawAchievements(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(TextureManager.texSkillMenu, mainBox, Color.White);
+           spriteBatch.Draw(TextureManager.texSkillMenu, mainBox, Color.White);
             int temp = 0;
             foreach (Achievement achievement in AchievementManager.achievements)
             {

@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework.Graphics;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,11 @@ namespace Active
 {
      abstract class TabClass
     {
+        protected string name;
+        protected Rectangle mainBox;
+
+        public string Name { get => name;}
+
         abstract public void Update();
         abstract public void Draw(SpriteBatch sb);
     }

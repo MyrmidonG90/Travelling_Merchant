@@ -84,6 +84,7 @@ namespace Active
         static public List<Texture2D> texItems;
         static public List<Texture2D> texCities;
         static public List<Texture2D> texCategories;
+        static public List<Texture2D> texTabs;
 
         static public void LoadContent(ContentManager content)
         {
@@ -94,8 +95,10 @@ namespace Active
             LoadIcons(content);
             LoadItems(content);
             LoadBackGrounds(content);
-            LoadLists();
+            InitiateLists();
         }
+
+        
 
         static void LoadHUD(ContentManager content)
         {
@@ -160,8 +163,6 @@ namespace Active
             texWeaponNormal = content.Load<Texture2D>("weapon_normal");
             texWhaleMeat = content.Load<Texture2D>("whale_meat");
         }
-
-
         static void LoadBackGrounds(ContentManager content)
         {
             texBGTravelScreen = content.Load<Texture2D>("travel_screen");
@@ -208,7 +209,33 @@ namespace Active
             texCatValuables = content.Load<Texture2D>("category_valuables");
         }
 
-        static private void LoadLists()
+        static void InitiateLists()
+        {
+            InitiateCityList();
+            InitiateItemList();
+            InitiateCategoryList();
+            InitializeTabList();
+        }
+        static void InitiateCityList()
+        {
+            texCities = new List<Texture2D>();
+            texCities.Add(texBGCarrotTown);
+            texCities.Add(texBGTowerTown);
+        }
+        static void InitiateCategoryList()
+        {
+            texCategories = new List<Texture2D>();
+            texCategories.Add(texCatFood);
+            texCategories.Add(texCatMetals);
+            texCategories.Add(texCatRawMaterials);
+            texCategories.Add(texCatTextiles);
+            texCategories.Add(texCatGear);
+            texCategories.Add(texCatMagic);
+            texCategories.Add(texCatValuables);
+            texCategories.Add(texCatManufactured);
+            
+        }
+        static void InitiateItemList()
         {
             texItems = new List<Texture2D>();
             texItems.Add(texCarrot);
@@ -236,20 +263,14 @@ namespace Active
             texItems.Add(texDragonScale);
             texItems.Add(texSpices);
             texItems.Add(texPotion);
-
-            texCities = new List<Texture2D>();
-            texCities.Add(texBGCarrotTown);
-            texCities.Add(texBGTowerTown);
-
-            texCategories = new List<Texture2D>();
-            texCategories.Add(texCatFood);
-            texCategories.Add(texCatMetals);
-            texCategories.Add(texCatRawMaterials);
-            texCategories.Add(texCatTextiles);
-            texCategories.Add(texCatGear);
-            texCategories.Add(texCatMagic);
-            texCategories.Add(texCatValuables);
-            texCategories.Add(texCatManufactured);
+        }
+        static void InitializeTabList()
+        {
+            texTabs = new List<Texture2D>();
+            texTabs.Add(texInvTab);
+            texTabs.Add(texSkillTab);
+            texTabs.Add(texSkillTab);
+            texTabs.Add(texSkillTab);
         }
     }
 }
