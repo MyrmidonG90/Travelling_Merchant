@@ -106,19 +106,20 @@ namespace Active
         {
             
             StreamReader sr = new StreamReader("./Data/cityInfo.txt");
-            amountOfCities = CityManager.Cities.Count;
-            /*while (!sr.EndOfStream)
+            //amountOfCities = CityManager.Cities.Count;
+            while (!sr.EndOfStream)
             {
                 string tempName = sr.ReadLine();
-                string skip1 = sr.ReadLine();
-                string skip2 = sr.ReadLine();
-                sr.ReadLine();
+                for (int i = 0; i < 4; i++)
+                {
+                    sr.ReadLine();
+                }
 
                 cities.Add(tempName);
 
                 amountOfCities++;
             }
-            sr.Close();*/
+            sr.Close();
 
             StreamReader sr2 = new StreamReader("./Data/CategoryList.txt");
             amountOfCategories = 0;
