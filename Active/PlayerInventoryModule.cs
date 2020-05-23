@@ -100,7 +100,7 @@ namespace Active
 
             if (tab == TabState.Inventory)
             {
-<<<<<<< HEAD
+
                 achievementsTab.Draw(spriteBatch);
                 skillTab.Draw(spriteBatch);
                 invTab.Draw(spriteBatch);
@@ -118,7 +118,7 @@ namespace Active
                 skillTab.Draw(spriteBatch);
                 invTab.Draw(spriteBatch);
                 achievementsTab.Draw(spriteBatch);
-=======
+
                 DrawInventory(spriteBatch);
             }
             else if (tab == TabState.Skills)
@@ -128,27 +128,27 @@ namespace Active
             else if (tab == TabState.Achievements)
             {
                 DrawAchievements(spriteBatch);
->>>>>>> master
+
             }
             //spriteBatch.DrawString(TextureManager.fontInventory, Player.EventNames.Count.ToString(), new Vector2(300, 300), Color.White);
 
             if (tab == TabState.Inventory)
             {
-                ashievementTab.Draw(spriteBatch);
+                achievementsTab.Draw(spriteBatch);
                 skillTab.Draw(spriteBatch);
                 invTab.Draw(spriteBatch);
             }
             else if (tab == TabState.Skills)
             {
                 invTab.Draw(spriteBatch);
-                ashievementTab.Draw(spriteBatch);
+                achievementsTab.Draw(spriteBatch);
                 skillTab.Draw(spriteBatch);
             }
             else if (tab == TabState.Achievements)
             {
                 skillTab.Draw(spriteBatch);
                 invTab.Draw(spriteBatch);
-                ashievementTab.Draw(spriteBatch);
+                achievementsTab.Draw(spriteBatch);
             }
         }
 

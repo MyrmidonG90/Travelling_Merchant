@@ -56,11 +56,8 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
-<<<<<<< HEAD
     <Compile Include="Managers\GlossaryManager.cs" />
-=======
     <Compile Include="Managers\SkillManager.cs" />
->>>>>>> master
     <Compile Include="Managers\TravelScenarios.cs" />
     <Compile Include="Menu\CityInfoMenu.cs" />
     <Compile Include="Managers\EndCredits.cs" />
