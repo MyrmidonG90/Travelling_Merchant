@@ -74,7 +74,7 @@
     <Compile Include="General Classes\RollText.cs" />
     <Compile Include="General Classes\SoundManager.cs" />
     <Compile Include="MenuFolder\GlossaryMenu.cs" />
-    <Compile Include="MenuFolder\MenuClass.cs" />
+    <Compile Include="MenuFolder\TabClass.cs" />
     <Compile Include="Slot.cs" />
     <Compile Include="TravelEvent.cs" />
     <Compile Include="Managers\EncounterManager.cs" />

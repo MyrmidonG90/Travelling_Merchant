@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Active.Menu
 {
-    static class GlossaryMenu : MenuClass
+    class GlossaryMenu : TabClass
     {
         static Rectangle selectedSlot;
         static int indexOfSelectedSlot;
@@ -25,7 +25,7 @@ namespace Active.Menu
             GlossaryManager.InitateGlossary(glossary);
             indexOfSelectedSlot = -1;
         }
-        static public void Update()
+        override public void Update()
         {
             if (KMReader.LeftMouseClick())
             {                
@@ -43,7 +43,7 @@ namespace Active.Menu
                 }
             }
         }
-        static public void Draw(SpriteBatch sb)
+        override public void Draw(SpriteBatch sb)
         {
             GlossaryManager.Draw(sb);
             if (indexOfSelectedSlot != -1)
@@ -51,7 +51,7 @@ namespace Active.Menu
                 sb.Draw(TextureManager.texSelect, selectedSlot, Color.White);
             }
         }
-        static int CheckSlotClick()
+        int CheckSlotClick()
         {
             int counter = 0;
             bool found = false;
