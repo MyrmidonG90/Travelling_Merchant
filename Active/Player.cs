@@ -160,7 +160,7 @@ namespace Active
         }
 
         static public bool AddXP(string skillName, int xp)
-        {            
+        {
             for (int i = 0; i < skillNames.Length; i++)
             {
                 if (skillName == skillNames[i])
