@@ -55,56 +55,18 @@ namespace Active
 
         public PlayerInventoryModule()
         {
-
-            disposing = false;
-
             tab = TabState.Inventory;
-
-            mainBox = new Rectangle(260, 150, 1400, 880);
-            inventoryBox = new Rectangle(300, 170, 720, 720);
-
-            priCategoryBox = new Rectangle(1130, 760, 120, 120);
-            secCategoryBox = new Rectangle(1310, 760, 120, 120);
-            terCategoryBox = new Rectangle(1490, 760, 120, 120);
 
             amountOfTabs = 4; // Change this one if you add/remove tabs!!!
             CreateTabs(); // Change this one if you add/remove tabs!!!
 
             InitiateTabButtons();
-
-            invTab = new Button(280, 90, 200, 60, TextureManager.texInvTab);
-            skillTab = new Button(470, 90, 200, 60, TextureManager.texSkillTab);
-            achievementsTab = new Button(660, 90, 200, 60, TextureManager.texSkillTab);
-            glossaryTab = new Button(850,90,200,60,TextureManager.texSkillTab);
-
-            disposeButton = new Button(1560, 930, 70, 70, TextureManager.texIconTrashCan);
-            returnButton = new Button(20, 20, 80, 80, TextureManager.texBackArrow);
-            disposeBox = new Rectangle(660, 250, 600, 500);
-            disposeBar = new Rectangle(710, 510, 520, 20);
-            disposeDragger = new Button(710, 488, 30, 70, TextureManager.texDisposeDragger);
-            disposeOKButton = new Button(900, 650, 120, 60, TextureManager.texWhite);
-
-            selectedSquare = -1; //-1 means no slot is selected
-
-            //LoadGrid();
         }
    
         public void Update(GameTime gameTime)
         {
             CheckTabClick();
-            tabMenus[(int)tab].Update();
-            /*if (tab == TabState.Inventory)
-            {
-                UpdateInventory();
-            }
-            else if (tab == TabState.Skills)
-            {
-                UpdateSkills();
-            }
-            else if (tab == TabState.Achievements)
-            {
-                UpdateAchievements();
-            }*/
+            tabMenus[(int)tab].Update();            
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -112,65 +74,8 @@ namespace Active
             returnButton.Draw(spriteBatch);
             tabMenus[(int)tab].Draw(spriteBatch);
             DrawTabs(spriteBatch);
-            /*if (tab == TabState.Inventory)
-            {
-                achievementsTab.Draw(spriteBatch);
-                skillTab.Draw(spriteBatch);
-                invTab.Draw(spriteBatch);
-                DrawInventory(spriteBatch);
-            }
-            else if (tab == TabState.Skills)
-            {
-                invTab.Draw(spriteBatch);
-                achievementsTab.Draw(spriteBatch);
-                skillTab.Draw(spriteBatch);
-
-            }
-            else if (tab == TabState.Achievements)
-            {
-                skillTab.Draw(spriteBatch);
-                invTab.Draw(spriteBatch);
-                achievementsTab.Draw(spriteBatch);
-
-
-            }
-            else if (tab == TabState.Skills)
-            {
-                DrawSkills(spriteBatch);
-            }
-            else if (tab == TabState.Achievements)
-            {
-                DrawAchievements(spriteBatch);
-
-            }*/
-            //spriteBatch.DrawString(TextureManager.fontInventory, Player.EventNames.Count.ToString(), new Vector2(300, 300), Color.White);
-
-           /* if (tab == TabState.Inventory)
-            {
-                DrawTabs(spriteBatch);
-                /*achievementsTab.Draw(spriteBatch);
-                skillTab.Draw(spriteBatch);
-                invTab.Draw(spriteBatch);
-                DrawInventory(spriteBatch);
-            }
-            else if (tab == TabState.Skills)
-            {
-                DrawTabs(spriteBatch);
-                /*invTab.Draw(spriteBatch);
-                achievementsTab.Draw(spriteBatch);
-                skillTab.Draw(spriteBatch);
-                DrawSkills(spriteBatch);
-            }
-            else if (tab == TabState.Achievements)
-            {
-                DrawTabs(spriteBatch);
-                /*skillTab.Draw(spriteBatch);
-                invTab.Draw(spriteBatch);
-                achievementsTab.Draw(spriteBatch);
-                DrawAchievements(spriteBatch);
-            }*/
+            
         }
-
         
         void InitiateTabButtons()
         {
@@ -180,7 +85,6 @@ namespace Active
                 tabButtons.Add(new Button(280+190*i,90,200,60,TextureManager.texTabs[i]));
             }
         }
-
         void DrawTabs(SpriteBatch sb)
         {
             int tmp = (int)tab;
