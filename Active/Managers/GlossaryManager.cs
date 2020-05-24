@@ -24,10 +24,11 @@ namespace Active
         internal static List<Slot> Slots { get => slots; }
        
 
-        static public void Initialize()
+        static public void Initialize(string glossary)
         {
             LoadGlossary();
             amountOfGlossaries = glossaries.Count/2;
+            InitiateSlots((Glossary)GetGlossaryIndex(glossary));
         }
 
         static public void InitateGlossary(string glossary)

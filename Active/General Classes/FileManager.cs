@@ -80,11 +80,11 @@ namespace Active
         public static List<List<int>> LoadGlossary()
         {
             List<List<int>> glossaries = new List<List<int>>();            
-            ReadFilePerLine("./Data/CityStructure.txt");
+            ReadFilePerLine("./Data/Glossary.txt");
 
             for (int i = 0; i < readPerLine.Count; i++)
             {
-                glossaries[i] = new List<int>();
+                glossaries.Add(new List<int>());
             }
 
             for (int i = 0; i < readPerLine.Count; i++)

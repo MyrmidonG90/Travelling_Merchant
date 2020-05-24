@@ -56,7 +56,7 @@ namespace Active
         public PlayerInventoryModule()
         {
             tab = TabState.Inventory;
-
+            returnButton = new Button(20, 20, 80, 80, TextureManager.texBackArrow);
             amountOfTabs = 4; // Change this one if you add/remove tabs!!!
             CreateTabs(); // Change this one if you add/remove tabs!!!
 
@@ -103,7 +103,21 @@ namespace Active
         }
         void CheckTabClick()
         {
-            if (invTab.LeftClick() && skillTab.LeftClick())
+            bool found = false;
+            int counter = 0;
+            while (found == false && counter != amountOfTabs)
+            {
+                if (tabButtons[counter].LeftClick())
+                {
+                    found = true;
+                    tab = (TabState)counter;
+                }
+                else
+                {
+                    ++counter;
+                }
+            }
+            /*if (invTab.LeftClick() && skillTab.LeftClick())
             {
                 tab = TabState.Inventory;
             }
@@ -122,7 +136,7 @@ namespace Active
             else if (glossaryTab.LeftClick())
             {
                 tab = TabState.Glossary;
-            }
+            }*/
         }
         public bool CheckExit()
         {

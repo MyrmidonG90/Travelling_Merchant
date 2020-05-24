@@ -23,11 +23,14 @@ namespace Active
         {
             name = "Glossary Tab";
             mainBox = new Rectangle(260, 150, 1400, 880);
-            GlossaryManager.InitateGlossary("Item");
+            GlossaryManager.Initialize("Item");
+            //GlossaryManager.InitateGlossary("Item");
+            currentGlossary = (Glossary)GlossaryManager.GetGlossaryIndex("Item");
         }
         static void Start(string glossary)
         {
             currentGlossary = (Glossary)GlossaryManager.GetGlossaryIndex(glossary);
+
             GlossaryManager.InitateGlossary(glossary);
             indexOfSelectedSlot = -1;
         }
