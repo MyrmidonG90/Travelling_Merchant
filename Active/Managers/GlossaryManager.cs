@@ -167,7 +167,7 @@ namespace Active
             }
             for (int i = 0; i < glossaries[(int)currentGlossary+1].Count; i++)
             {
-                slots[glossaries[(int)currentGlossary][i]].DrawShadow(sb);
+                slots[glossaries[(int)currentGlossary+1][i]].DrawShadow(sb);
             }
         }
     }
