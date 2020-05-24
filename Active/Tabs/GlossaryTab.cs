@@ -22,6 +22,8 @@ namespace Active
         public GlossaryTab()
         {
             name = "Glossary Tab";
+            mainBox = new Rectangle(260, 150, 1400, 880);
+            GlossaryManager.InitateGlossary("Item");
         }
         static void Start(string glossary)
         {
@@ -49,6 +51,7 @@ namespace Active
         }
         override public void Draw(SpriteBatch sb)
         {
+            sb.Draw(TextureManager.texSkillMenu, mainBox, Color.White);
             GlossaryManager.Draw(sb);
             if (indexOfSelectedSlot != -1)
             {
@@ -77,29 +80,5 @@ namespace Active
             return counter;
         }
         
-        /*static int CheckButtonClick()
-        {
-            int count = 0;
-            bool found = false;
-
-            while (found != false && count < buttons.Count)
-            {
-                if (buttons[count].LeftClick())
-                {
-                    found = true;
-                }
-                else
-                {
-                    ++count;
-                }
-            }
-
-            if (found == false)
-            {
-                count = -1;
-            }
-
-            return count;
-        }*/
     }
 }

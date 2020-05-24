@@ -32,9 +32,9 @@ namespace Active
         Rectangle mainBox;
         Rectangle inventoryBox;
 
-        List<TabClass> tabMenus;
+        List<TabClass> tabMenus; // Change this one if you add/remove tabs!!!
 
-        int amountOfTabs;
+        int amountOfTabs; // Change this one if you add/remove tabs!!!
         List<Button> tabButtons;
         Button invTab;
         Button skillTab;
@@ -55,6 +55,7 @@ namespace Active
 
         public PlayerInventoryModule()
         {
+
             disposing = false;
 
             tab = TabState.Inventory;
@@ -67,8 +68,10 @@ namespace Active
             terCategoryBox = new Rectangle(1490, 760, 120, 120);
 
             amountOfTabs = 4; // Change this one if you add/remove tabs!!!
+            CreateTabs(); // Change this one if you add/remove tabs!!!
 
             InitiateTabButtons();
+
             invTab = new Button(280, 90, 200, 60, TextureManager.texInvTab);
             skillTab = new Button(470, 90, 200, 60, TextureManager.texSkillTab);
             achievementsTab = new Button(660, 90, 200, 60, TextureManager.texSkillTab);
@@ -83,14 +86,14 @@ namespace Active
 
             selectedSquare = -1; //-1 means no slot is selected
 
-            LoadGrid();
+            //LoadGrid();
         }
    
         public void Update(GameTime gameTime)
         {
             CheckTabClick();
-
-            if (tab == TabState.Inventory)
+            tabMenus[(int)tab].Update();
+            /*if (tab == TabState.Inventory)
             {
                 UpdateInventory();
             }
@@ -101,12 +104,14 @@ namespace Active
             else if (tab == TabState.Achievements)
             {
                 UpdateAchievements();
-            }
+            }*/
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
             returnButton.Draw(spriteBatch);
+            tabMenus[(int)tab].Draw(spriteBatch);
+            DrawTabs(spriteBatch);
             /*if (tab == TabState.Inventory)
             {
                 achievementsTab.Draw(spriteBatch);
@@ -140,12 +145,12 @@ namespace Active
             }*/
             //spriteBatch.DrawString(TextureManager.fontInventory, Player.EventNames.Count.ToString(), new Vector2(300, 300), Color.White);
 
-            if (tab == TabState.Inventory)
+           /* if (tab == TabState.Inventory)
             {
                 DrawTabs(spriteBatch);
                 /*achievementsTab.Draw(spriteBatch);
                 skillTab.Draw(spriteBatch);
-                invTab.Draw(spriteBatch);*/
+                invTab.Draw(spriteBatch);
                 DrawInventory(spriteBatch);
             }
             else if (tab == TabState.Skills)
@@ -153,7 +158,7 @@ namespace Active
                 DrawTabs(spriteBatch);
                 /*invTab.Draw(spriteBatch);
                 achievementsTab.Draw(spriteBatch);
-                skillTab.Draw(spriteBatch);*/
+                skillTab.Draw(spriteBatch);
                 DrawSkills(spriteBatch);
             }
             else if (tab == TabState.Achievements)
@@ -161,26 +166,12 @@ namespace Active
                 DrawTabs(spriteBatch);
                 /*skillTab.Draw(spriteBatch);
                 invTab.Draw(spriteBatch);
-                achievementsTab.Draw(spriteBatch);*/
+                achievementsTab.Draw(spriteBatch);
                 DrawAchievements(spriteBatch);
-            }
+            }*/
         }
 
-        private void LoadGrid()
-        {
-            StreamReader streamReader = new StreamReader("./Data/InventoryGrid.txt");
-            inventoryGrid = new Rectangle[25];
-            int counter = 0;
-            while (!streamReader.EndOfStream)
-            {
-                string newstring = streamReader.ReadLine();
-                string[] temp2 = newstring.Split(',');
-                Vector2 tempPos = new Vector2(int.Parse(temp2[0]), int.Parse(temp2[1]));
-                inventoryGrid[counter] = new Rectangle((int)tempPos.X, (int)tempPos.Y, 120, 120);
-                counter++;
-            }
-            streamReader.Close();
-        }
+        
         void InitiateTabButtons()
         {
             tabButtons = new List<Button>();
@@ -198,8 +189,54 @@ namespace Active
                 tabButtons[(tmp+i)% tabButtons.Count].Draw(sb);
             }
         }
-
-        private void CheckSelect()
+        void CreateTabs()
+        {
+            tabMenus = new List<TabClass>();
+            tabMenus.Add(new InventoryTab());
+            tabMenus.Add(new SkillTab());
+            tabMenus.Add(new AchievementTab());
+            tabMenus.Add(new GlossaryTab());
+        }
+        void CheckTabClick()
+        {
+            if (invTab.LeftClick() && skillTab.LeftClick())
+            {
+                tab = TabState.Inventory;
+            }
+            else if (invTab.LeftClick())
+            {
+                tab = TabState.Inventory;
+            }
+            else if (skillTab.LeftClick())
+            {
+                tab = TabState.Skills;
+            }
+            else if (achievementsTab.LeftClick())
+            {
+                tab = TabState.Achievements;
+            }
+            else if (glossaryTab.LeftClick())
+            {
+                tab = TabState.Glossary;
+            }
+        }
+        public bool CheckExit()
+        {
+            if (KMReader.prevKeyState.IsKeyUp(Keys.Escape) && KMReader.keyState.IsKeyDown(Keys.Escape))
+            {
+                selected = null;
+                selectedSquare = -1;
+                return true;
+            }
+            if (returnButton.LeftClick())
+            {
+                selected = null;
+                selectedSquare = -1;
+                return true;
+            }
+            return false;
+        }
+        /*private void CheckSelect()
         {
             if (KMReader.LeftMouseClick())
             {
@@ -222,26 +259,21 @@ namespace Active
                 }
             }
         }
-
-        private void CheckTabClick()
+        private void LoadGrid()
         {
-            if (invTab.LeftClick() && skillTab.LeftClick())
+            StreamReader streamReader = new StreamReader("./Data/InventoryGrid.txt");
+            inventoryGrid = new Rectangle[25];
+            int counter = 0;
+            while (!streamReader.EndOfStream)
             {
-                tab = TabState.Inventory;
+                string newstring = streamReader.ReadLine();
+                string[] temp2 = newstring.Split(',');
+                Vector2 tempPos = new Vector2(int.Parse(temp2[0]), int.Parse(temp2[1]));
+                inventoryGrid[counter] = new Rectangle((int)tempPos.X, (int)tempPos.Y, 120, 120);
+                counter++;
             }
-            else if (invTab.LeftClick())
-            {
-                tab = TabState.Inventory;
-            }
-            else if (skillTab.LeftClick())
-            {
-                tab = TabState.Skills;
-            }
-            else if (achievementsTab.LeftClick())
-            {
-                tab = TabState.Achievements;
-            }
-        }
+            streamReader.Close();
+        }        
 
         private void CheckDraggerChange()
         {
@@ -307,22 +339,7 @@ namespace Active
             }
         }
 
-        public bool CheckExit()
-        {
-            if (KMReader.prevKeyState.IsKeyUp(Keys.Escape) && KMReader.keyState.IsKeyDown(Keys.Escape))
-            {
-                selected = null;
-                selectedSquare = -1;
-                return true;
-            }
-            if (returnButton.LeftClick())
-            {
-                selected = null;
-                selectedSquare = -1;
-                return true;
-            }
-            return false;
-        }
+        
 
         private void UpdateInventory()
         {
@@ -349,16 +366,6 @@ namespace Active
 
                 CheckDraggerChange();
             }
-        }
-
-        private void UpdateSkills()
-        {
-
-        }
-
-        private void UpdateAchievements()
-        {
-
         }
 
         private void DrawDisposing(SpriteBatch spriteBatch)
@@ -473,7 +480,7 @@ namespace Active
                 temp += 60;
             }
             
-        }
+        }*/
 
     }
 }

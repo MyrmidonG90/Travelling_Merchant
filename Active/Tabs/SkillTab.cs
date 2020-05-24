@@ -13,7 +13,8 @@ namespace Active
         public SkillTab()
         {
             name = "Skill Tab";
-            
+            mainBox = new Rectangle(260, 150, 1400, 880);
+
         }
         public override void Draw(SpriteBatch sb)
         {
@@ -25,7 +26,7 @@ namespace Active
 
         public override void Update()
         {
-            throw new NotImplementedException();
+            
         }
     }
 }

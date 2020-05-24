@@ -13,9 +13,11 @@ namespace Active
         public AchievementTab()
         {
             name = "Achievement Tab";
+            mainBox = new Rectangle(260, 150, 1400, 880);
         }
         public override void Draw(SpriteBatch sb)
         {
+
             sb.Draw(TextureManager.texSkillMenu, mainBox, Color.White);
             int temp = 0;
             foreach (Achievement achievement in AchievementManager.achievements)
