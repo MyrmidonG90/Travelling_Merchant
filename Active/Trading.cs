@@ -395,9 +395,13 @@ namespace Active
 
             foreach (Item item in tradeRight.ItemList)
             {
-                if(item.Name == "Carrot")
+                if(item.Name == "Carrot" && AchievementManager.achievements[0].complete == false)
                 {
-                    AchievementManager.boughtCarrots++;
+                    AchievementManager.boughtCarrots += item.Amount;
+                    if (AchievementManager.boughtCarrots > 100)
+                    {
+                        AchievementManager.boughtCarrots = 100;
+                    }
                 }
             }
 

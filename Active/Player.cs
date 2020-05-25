@@ -59,7 +59,7 @@ namespace Active
         static public void Update()
         {
 
-            AchievementManager.currentCoins = inventory.Money;
+
 
             DebugFunctions();
 
