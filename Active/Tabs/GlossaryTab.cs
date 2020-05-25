@@ -54,7 +54,7 @@ namespace Active
         }
         override public void Draw(SpriteBatch sb)
         {
-            sb.Draw(TextureManager.texSkillMenu, mainBox, Color.White);
+            sb.Draw(TextureManager.texInvMenu, mainBox, Color.White);
             GlossaryManager.Draw(sb);
             if (indexOfSelectedSlot != -1)
             {

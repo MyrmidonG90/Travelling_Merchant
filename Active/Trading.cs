@@ -29,6 +29,8 @@ namespace Active
 
         static int counterCol, counterRow, leftPrice, rightPrice, priceDifference;
 
+        internal static Inventory TradeRight { get => tradeRight; set => tradeRight = value; }
+
         static public void StartTrade(Inventory player, Inventory trader, string zone) 
         {
             invLeft = player;
@@ -444,6 +446,7 @@ namespace Active
         static void ChangeInv()
         {
             invLeft.Money += leftPrice - rightPrice;
+            GlossaryManager.UpdateGlossary("Item");
             invRight.Money += rightPrice - leftPrice;
             foreach (var item in tradeRight.ItemList)
             {
