@@ -5,7 +5,7 @@ Carrot Town is the great city of carrots.;Its agricultural roots can be traced ;
 1,5
 Steel Ville
 Jag kanner att vi borde byta ut den ;har staden one of these days
-690,670
+700,660
 1,4
 5,0
 Tower Town
@@ -20,7 +20,7 @@ Hymn Harbor has ships like you've never seen. ;Beeing at the center of the map w
 7,0
 Winghelm
 The city got it's name after the ;great gryphons that roam the ;surrounding lands. They are however, ;starting to die out because of the ;increased demand for "Gryphon McNuggets".
-1400,450
+1490,350
 3,4
 5
 Pyramaad
