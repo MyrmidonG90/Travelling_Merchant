@@ -66,7 +66,10 @@ namespace Active
         public void Update(GameTime gameTime)
         {
             CheckTabClick();
-            tabMenus[(int)tab].Update();            
+            tabMenus[(int)tab].Update();
+
+            
+
         }
 
         public void Draw(SpriteBatch spriteBatch)

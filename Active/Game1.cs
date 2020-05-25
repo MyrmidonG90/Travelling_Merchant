@@ -116,6 +116,8 @@ namespace Active
             EndCredits.Update(gameTime.ElapsedGameTime.TotalMilliseconds);//////////////////////////////////////
             LevelUp.Update(gameTime.ElapsedGameTime.TotalMilliseconds); ///////////////////////////////////////
 
+            AchievementManager.Update();
+
             if (WorldEventManager.Update(random))
             {
                 test = true;
