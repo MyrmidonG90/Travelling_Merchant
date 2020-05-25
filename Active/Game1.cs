@@ -97,8 +97,7 @@ namespace Active
 
             options = false;
             activeInv = new Inventory(100);
-            random = new Random();
-            
+            random = new Random();            
 
             CityControlList = new List<string>();
             CityControlList.Add("Carrot Town");
@@ -480,7 +479,7 @@ namespace Active
             {
                 SaveGame();
             }
-            else if (OptionsMenu.CheckFullscreen()) //funkar inte framtida jag ska försöka fixa /My
+            else if (OptionsMenu.CheckFullscreen())
             {
                 graphics.IsFullScreen = !graphics.IsFullScreen;
                 graphics.ApplyChanges();
