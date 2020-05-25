@@ -23,19 +23,15 @@ namespace Active
 
         TabState tab;
 
+        #region ut kommenterat
+        /*
         bool disposing;
         bool dragging;
         bool fix;
-        Item selected;
-        int selectedSquare;
+
         int numberToDispose;
         Rectangle mainBox;
         Rectangle inventoryBox;
-
-        List<TabClass> tabMenus; // Change this one if you add/remove tabs!!!
-
-        int amountOfTabs; // Change this one if you add/remove tabs!!!
-        List<Button> tabButtons;
         Button invTab;
         Button skillTab;
         Button achievementsTab;
@@ -48,10 +44,19 @@ namespace Active
         Button disposeButton;
         Button disposeOKButton;
         Button disposeDragger;
-        Button returnButton;
         Rectangle disposeBar;
         Rectangle disposeBox;
         Rectangle[] inventoryGrid;
+        */
+        #endregion
+
+        List<TabClass> tabMenus; // Change this one if you add/remove tabs!!!
+
+        int amountOfTabs; // Change this one if you add/remove tabs!!!
+        List<Button> tabButtons;
+        Button returnButton;
+        Item selected;
+        int selectedSquare;
 
         public PlayerInventoryModule()
         {
