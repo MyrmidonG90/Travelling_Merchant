@@ -10,8 +10,16 @@ namespace Active
     static class GlossaryManager
     {
         static List<List<int>> glossaries;
+        /*
+         0. Items
+         1. Items Left
+         2. Travel Events Occured
+         3. Travel Events Left
+         4. World Events Occured
+         5. World Events Left
+             */
         static List<Slot> slots;
-        static bool itemFinished, travelEncountersFinished, worldEventsFinished;
+        static List<bool> finished;
         static int amountOfGlossaries;
         enum Glossary
         {
@@ -26,9 +34,9 @@ namespace Active
 
         static public void Initialize(string glossary)
         {
-            LoadGlossary();
-            amountOfGlossaries = glossaries.Count/2;
+            LoadGlossary();            
             InitiateSlots((Glossary)GetGlossaryIndex(glossary));
+
         }
 
         static public void InitateGlossary(string glossary)
@@ -95,80 +103,108 @@ namespace Active
             
         }
 
-
-
-        static public void CheckAcceptedTrade(Inventory inv)
+        static public void UpdateGlossary(string glossary)
         {
-            if (!itemFinished)
+            int index = GetGlossaryIndex(glossary);
+            if (finished[index/2] == false) // Change this into polymorphism!!!
             {
-                int counter = 0;
-                while (counter < glossaries[0].Count)
+                if (index == 0)
                 {
-                    if (inv.FindIndexOf(glossaries[0][counter]) != -1)
-                    {
-                        glossaries[1].Add(inv.FindIndexOf(glossaries[0][counter]));
-                        glossaries[0].RemoveAt(counter);
-                    }
-                    else
-                    {
-                        ++counter;
-                    }
+                    CheckAcceptedTrade();
                 }
-                if (glossaries[0].Count == 0)
+                else if (index == 2)
                 {
-                    itemFinished = true;
-                    glossaries[0].Add(-1);
+
                 }
+                else if (index == 4)
+                {
+
+                }
+            }
+        }
+
+        static public void CheckAcceptedTrade()
+        {
+            Inventory inv = Trading.TradeRight;
+            int counter = 0;
+            while (counter < glossaries[1].Count)
+            {
+                if (inv.FindIndexOf(glossaries[1][counter]) != -1)
+                {
+                    int tmp = inv.FindIndexOf(glossaries[1][counter]);
+                    glossaries[0].Add(inv.ItemList[tmp].ID);
+                    glossaries[1].RemoveAt(counter);
+                }
+                else
+                {
+                    ++counter;
+                }
+            }
+            if (glossaries[1].Count == 0)
+            {
+                finished[0] = true;
+                glossaries[0].Clear();
             }
         }
 
         static public void CheckTravelEncounter()
         {
-            if (!travelEncountersFinished)
-            {
-                if (glossaries[2].Count == 0)
-                {
-                    itemFinished = true;
-                    glossaries[2].Add(-1);
-                }
-            }
+            
         }
 
         static public void CheckWorldEvents()
         {
-            if (!worldEventsFinished)
-            {
-                if (glossaries[4].Count == 0)
-                {
-                    itemFinished = true;
-                    glossaries[4].Add(-1);
-                }
-            }
+            
         }
 
         static void LoadGlossary()
         {
+            finished = new List<bool>();            
             glossaries = FileManager.LoadGlossary();
-            for (int i = 0; i < glossaries.Count; i++)
+            amountOfGlossaries = glossaries.Count / 2;
+            for (int i = 0; i < amountOfGlossaries; i++) // To Add a list of bools for optimization
+            {
+                if (glossaries[1 + i * 2][0] == -1) // If they've seen all items/events
+                {
+                    finished.Add(true);
+                }
+                else // If they haven't seen all items/events
+                {
+                    finished.Add(false);
+                }
+            }
+
+            for (int i = 0; i < glossaries.Count; i++) // Removing unecessary data
             {
                 if (glossaries[i][0] == -1)
                 {
                     glossaries[i].Clear();
                 }
             }
+
+            
         }
 
         static public void Draw(SpriteBatch sb)
         {
             // Draws all Item slots
-            for (int i = 0; i < glossaries[(int)currentGlossary].Count; i++)
+            /*for (int i = 0; i < glossaries[(int)currentGlossary].Count; i++)
             {
                 slots[glossaries[(int)currentGlossary][i]].Draw(sb);
             }
             for (int i = 0; i < glossaries[(int)currentGlossary+1].Count; i++)
             {
                 slots[glossaries[(int)currentGlossary+1][i]].DrawShadow(sb);
+            }*/
+            for (int i = 0; i < glossaries[0].Count; i++)
+            {
+                slots[glossaries[0][i]].Draw(sb);
             }
+            for (int i = 0; i < glossaries[1].Count; i++)
+            {
+                slots[glossaries[1][i]].DrawShadow(sb);
+            }
+
         }
     }
 }
