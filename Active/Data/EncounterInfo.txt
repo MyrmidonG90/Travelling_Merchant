@@ -1,6 +1,6 @@
 ﻿0
 0
-Your journey towards the next city was going in a|||||great pace until down the road you spot some sort|||||of roadblock. Your worries about it being a trap is|||||quickly quelled as a guard wearing the lord of the lands|||||signature armor approaches you from the blockade.|||||He informs you that the road on which you travel is|||||built for military use and if civilian wishes to use it|||||then that person needs to pay a toll of 20gp. 
+Your journey towards the next city was going in a|||||great pace until down the road you spot some sort|||||of roadblock. Your worries about it being a trap is|||||quickly quelled as a guard wearing the lord of the lands|||||signature armor approaches you from the blockade.|||||He informs you that the road on which you travel is|||||built for military use due to war and if civilian wishes|||||to use it then that person needs to pay a toll of 20gp. 
 20
 1
 1
@@ -16,7 +16,7 @@ Not only was the weather getting worse by the minute|||||but while trying to cro
 20
 4
 2
-The road in front of you is submerged in water
+The road in front of you is submerged in water which|||||forces you to take another path. Atleast you get|||||a welcoming refill of your water reserves.
 20
 5
 7
