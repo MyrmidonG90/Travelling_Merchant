@@ -42,6 +42,11 @@ namespace Active
         static public Texture2D texIconPersuasion;
         static public Texture2D texIconWisdom;
         static public Texture2D texIconCity;
+        static public Texture2D texIconEventPlague;
+        static public Texture2D texIconEventGoodHarvest;
+        static public Texture2D texIconEventBadHarvest;
+        static public Texture2D texIconEventWar;
+
 
         //Avatars
         static public Texture2D texPCavatar1;
@@ -60,6 +65,7 @@ namespace Active
         static public Texture2D texButtonOptions;
         static public Texture2D texOptionsBox;
         static public Texture2D texCalendar;
+        static public Texture2D texEventLog;
 
         // HUD
         static public Texture2D texRankUpIntimidation;
@@ -83,6 +89,7 @@ namespace Active
         static public List<Texture2D> texItems;
         static public List<Texture2D> texCities;
         static public List<Texture2D> texCategories;
+        static public List<Texture2D> texTabs;
 
         static public void LoadContent(ContentManager content)
         {
@@ -94,8 +101,10 @@ namespace Active
             LoadAvatars(content);
             LoadItems(content);
             LoadBackGrounds(content);
-            LoadLists();
+            InitiateLists();
         }
+
+        
 
         static void LoadHUD(ContentManager content)
         {
@@ -127,6 +136,7 @@ namespace Active
             texButtonOptions = content.Load<Texture2D>("options_button");
             texOptionsBox = content.Load<Texture2D>("options_box");
             texCalendar = content.Load<Texture2D>("calendar_box");
+            texEventLog = content.Load<Texture2D>("event_log");
 
         }
         static void LoadItems(ContentManager content)
@@ -159,8 +169,6 @@ namespace Active
             texWeaponNormal = content.Load<Texture2D>("weapon_normal");
             texWhaleMeat = content.Load<Texture2D>("whale_meat");
         }
-
-
         static void LoadBackGrounds(ContentManager content)
         {
             texBGTravelScreen = content.Load<Texture2D>("travel_screen");
@@ -189,6 +197,11 @@ namespace Active
             texIconUncommon = content.Load<Texture2D>("uncommon_icon");
             texIconWisdom = content.Load<Texture2D>("skill_icon_wisdom");
             texIconCity = content.Load<Texture2D>("merchant_city_icon");
+            texIconEventBadHarvest = content.Load<Texture2D>("event_icon_crop_failure");
+            texIconEventGoodHarvest = content.Load<Texture2D>("event_icon_good_harvest");
+            texIconEventWar = content.Load<Texture2D>("event_icon_war");
+            texIconEventPlague = content.Load<Texture2D>("event_icon_plague");
+
         }
         static void LoadAvatars(ContentManager content)
         {
@@ -208,7 +221,33 @@ namespace Active
             texCatValuables = content.Load<Texture2D>("category_valuables");
         }
 
-        static private void LoadLists()
+        static void InitiateLists()
+        {
+            InitiateCityList();
+            InitiateItemList();
+            InitiateCategoryList();
+            InitializeTabList();
+        }
+        static void InitiateCityList()
+        {
+            texCities = new List<Texture2D>();
+            texCities.Add(texBGCarrotTown);
+            texCities.Add(texBGTowerTown);
+        }
+        static void InitiateCategoryList()
+        {
+            texCategories = new List<Texture2D>();
+            texCategories.Add(texCatFood);
+            texCategories.Add(texCatMetals);
+            texCategories.Add(texCatRawMaterials);
+            texCategories.Add(texCatTextiles);
+            texCategories.Add(texCatGear);
+            texCategories.Add(texCatMagic);
+            texCategories.Add(texCatValuables);
+            texCategories.Add(texCatManufactured);
+            
+        }
+        static void InitiateItemList()
         {
             texItems = new List<Texture2D>();
             texItems.Add(texCarrot);
@@ -236,20 +275,14 @@ namespace Active
             texItems.Add(texDragonScale);
             texItems.Add(texSpices);
             texItems.Add(texPotion);
-
-            texCities = new List<Texture2D>();
-            texCities.Add(texBGCarrotTown);
-            texCities.Add(texBGTowerTown);
-
-            texCategories = new List<Texture2D>();
-            texCategories.Add(texCatFood);
-            texCategories.Add(texCatMetals);
-            texCategories.Add(texCatRawMaterials);
-            texCategories.Add(texCatTextiles);
-            texCategories.Add(texCatGear);
-            texCategories.Add(texCatMagic);
-            texCategories.Add(texCatValuables);
-            texCategories.Add(texCatManufactured);
+        }
+        static void InitializeTabList()
+        {
+            texTabs = new List<Texture2D>();
+            texTabs.Add(texInvTab);
+            texTabs.Add(texSkillTab);
+            texTabs.Add(texSkillTab);
+            texTabs.Add(texSkillTab);
         }
     }
 }

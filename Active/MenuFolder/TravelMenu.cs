@@ -30,6 +30,7 @@ namespace Active
 
         static string[,] routeNames;
         static int[] routes;
+        static bool[] boat;
 
         static public void Init()
         {
@@ -66,7 +67,12 @@ namespace Active
                         turnsLeft = turnsToTravel;
                         turnTimer = timerLength;
 
+                        if (boat[i])
+                        {
+                            Player.Inventory.Money -= 100;
+                        }
                         EncounterManager.NewTrip();
+
                         return true;
                     }
                 }
@@ -195,6 +201,7 @@ namespace Active
             streamReader = new StreamReader("./Data/routeInfo.txt");
             routes = new int[14];
             routeNames = new string[14, 2];
+            boat = new bool[14];
 
             int counter = 0;
             while (!streamReader.EndOfStream)
@@ -205,6 +212,14 @@ namespace Active
                 routeNames[counter, 0] = data[0];
                 routeNames[counter, 1] = data[1];
                 routes[counter] = int.Parse(data[2]);
+                if (int.Parse(data[3]) == 0)
+                {
+                    boat[counter] = false;
+                }
+                else
+                {
+                    boat[counter] = true;
+                }
                 counter++;
             }
         }

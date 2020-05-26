@@ -17,23 +17,25 @@ namespace Active
         {
             Inventory,
             Skills,
-            Achievements
+            Achievements,
+            Glossary
         }
 
         TabState tab;
 
+        #region ut kommenterat
+        /*
         bool disposing;
         bool dragging;
         bool fix;
-        Item selected;
-        int selectedSquare;
+
         int numberToDispose;
         Rectangle mainBox;
         Rectangle inventoryBox;
-
         Button invTab;
         Button skillTab;
-        Button ashievementTab;
+        Button achievementsTab;
+        Button glossaryTab;
 
         Rectangle priCategoryBox;
         Rectangle secCategoryBox;
@@ -42,113 +44,125 @@ namespace Active
         Button disposeButton;
         Button disposeOKButton;
         Button disposeDragger;
-        Button returnButton;
         Rectangle disposeBar;
         Rectangle disposeBox;
         Rectangle[] inventoryGrid;
+        */
+        #endregion
+
+        List<TabClass> tabMenus; // Change this one if you add/remove tabs!!!
+
+        int amountOfTabs; // Change this one if you add/remove tabs!!!
+        List<Button> tabButtons;
+        Button returnButton;
+        Item selected;
+        int selectedSquare;
 
         public PlayerInventoryModule()
         {
-            disposing = false;
-
             tab = TabState.Inventory;
-
-            mainBox = new Rectangle(260, 150, 1400, 880);
-            inventoryBox = new Rectangle(300, 170, 720, 720);
-
-            priCategoryBox = new Rectangle(1130, 760, 120, 120);
-            secCategoryBox = new Rectangle(1310, 760, 120, 120);
-            terCategoryBox = new Rectangle(1490, 760, 120, 120);
-
-            invTab = new Button(280, 90, 200, 60, TextureManager.texInvTab);
-            skillTab = new Button(470, 90, 200, 60, TextureManager.texSkillTab);
-            ashievementTab = new Button(660, 90, 200, 60, TextureManager.texSkillTab);
-
-            disposeButton = new Button(1560, 930, 70, 70, TextureManager.texIconTrashCan);
             returnButton = new Button(20, 20, 80, 80, TextureManager.texBackArrow);
-            disposeBox = new Rectangle(660, 250, 600, 500);
-            disposeBar = new Rectangle(710, 510, 520, 20);
-            disposeDragger = new Button(710, 488, 30, 70, TextureManager.texDisposeDragger);
-            disposeOKButton = new Button(900, 650, 120, 60, TextureManager.texWhite);
+            amountOfTabs = 4; // Change this one if you add/remove tabs!!!
+            CreateTabs(); // Change this one if you add/remove tabs!!!
 
-            selectedSquare = 50; //50 means no slot is selected
-
-            LoadGrid();
+            InitiateTabButtons();
         }
    
         public void Update(GameTime gameTime)
         {
             CheckTabClick();
+            tabMenus[(int)tab].Update();
 
-            if (tab == TabState.Inventory)
-            {
-                UpdateInventory();
-            }
-            else if (tab == TabState.Skills)
-            {
-                UpdateSkills();
-            }
-            else if (tab == TabState.Achievements)
-            {
-                UpdateAchievements();
-            }
+            
+
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            returnButton.Draw(spriteBatch);            
-
-            if (tab == TabState.Inventory)
-            {
-                DrawInventory(spriteBatch);
-            }
-            else if (tab == TabState.Skills)
-            {
-                DrawSkills(spriteBatch);
-            }
-            else if (tab == TabState.Achievements)
-            {
-                DrawAchievements(spriteBatch);
-            }
-            //spriteBatch.DrawString(TextureManager.fontInventory, Player.EventNames.Count.ToString(), new Vector2(300, 300), Color.White);
-
-            if (tab == TabState.Inventory)
-            {
-                ashievementTab.Draw(spriteBatch);
-                skillTab.Draw(spriteBatch);
-                invTab.Draw(spriteBatch);
-            }
-            else if (tab == TabState.Skills)
-            {
-                invTab.Draw(spriteBatch);
-                ashievementTab.Draw(spriteBatch);
-                skillTab.Draw(spriteBatch);
-            }
-            else if (tab == TabState.Achievements)
-            {
-                skillTab.Draw(spriteBatch);
-                invTab.Draw(spriteBatch);
-                ashievementTab.Draw(spriteBatch);
-            }
+            returnButton.Draw(spriteBatch);
+            tabMenus[(int)tab].Draw(spriteBatch);
+            DrawTabs(spriteBatch);
+            
         }
-
-        private void LoadGrid()
+        
+        void InitiateTabButtons()
         {
-            StreamReader streamReader = new StreamReader("./Data/InventoryGrid.txt");
-            inventoryGrid = new Rectangle[25];
-            int counter = 0;
-            while (!streamReader.EndOfStream)
+            tabButtons = new List<Button>();
+            for (int i = 0; i < amountOfTabs; i++)
             {
-                string newstring = streamReader.ReadLine();
-                string[] temp2 = newstring.Split(',');
-                Vector2 tempPos = new Vector2(int.Parse(temp2[0]), int.Parse(temp2[1]));
-                inventoryGrid[counter] = new Rectangle((int)tempPos.X, (int)tempPos.Y, 120, 120);
-                counter++;
+                tabButtons.Add(new Button(280+190*i,90,200,60,TextureManager.texTabs[i]));
             }
-            streamReader.Close();
         }
-
-        private void CheckSelect()
+        void DrawTabs(SpriteBatch sb)
+        {
+            int tmp = (int)tab;
+            for (int i = 0; i < tabButtons.Count; i++)
+            {
+                tabButtons[(tmp+i)% tabButtons.Count].Draw(sb);
+            }
+        }
+        void CreateTabs()
+        {
+            tabMenus = new List<TabClass>();
+            tabMenus.Add(new InventoryTab());
+            tabMenus.Add(new SkillTab());
+            tabMenus.Add(new AchievementTab());
+            tabMenus.Add(new GlossaryTab());
+        }
+        void CheckTabClick()
+        {
+            bool found = false;
+            int counter = 0;
+            while (found == false && counter != amountOfTabs)
+            {
+                if (tabButtons[counter].LeftClick())
+                {
+                    found = true;
+                    tab = (TabState)counter;
+                }
+                else
+                {
+                    ++counter;
+                }
+            }
+            /*if (invTab.LeftClick() && skillTab.LeftClick())
+            {
+                tab = TabState.Inventory;
+            }
+            else if (invTab.LeftClick())
+            {
+                tab = TabState.Inventory;
+            }
+            else if (skillTab.LeftClick())
+            {
+                tab = TabState.Skills;
+            }
+            else if (achievementsTab.LeftClick())
+            {
+                tab = TabState.Achievements;
+            }
+            else if (glossaryTab.LeftClick())
+            {
+                tab = TabState.Glossary;
+            }*/
+        }
+        public bool CheckExit()
+        {
+            if (KMReader.prevKeyState.IsKeyUp(Keys.Escape) && KMReader.keyState.IsKeyDown(Keys.Escape))
+            {
+                selected = null;
+                selectedSquare = -1;
+                return true;
+            }
+            if (returnButton.LeftClick())
+            {
+                selected = null;
+                selectedSquare = -1;
+                return true;
+            }
+            return false;
+        }
+        /*private void CheckSelect()
         {
             if (KMReader.LeftMouseClick())
             {
@@ -171,26 +185,21 @@ namespace Active
                 }
             }
         }
-
-        private void CheckTabClick()
+        private void LoadGrid()
         {
-            if (invTab.LeftClick() && skillTab.LeftClick())
+            StreamReader streamReader = new StreamReader("./Data/InventoryGrid.txt");
+            inventoryGrid = new Rectangle[25];
+            int counter = 0;
+            while (!streamReader.EndOfStream)
             {
-                tab = TabState.Inventory;
+                string newstring = streamReader.ReadLine();
+                string[] temp2 = newstring.Split(',');
+                Vector2 tempPos = new Vector2(int.Parse(temp2[0]), int.Parse(temp2[1]));
+                inventoryGrid[counter] = new Rectangle((int)tempPos.X, (int)tempPos.Y, 120, 120);
+                counter++;
             }
-            else if (invTab.LeftClick())
-            {
-                tab = TabState.Inventory;
-            }
-            else if (skillTab.LeftClick())
-            {
-                tab = TabState.Skills;
-            }
-            else if (ashievementTab.LeftClick())
-            {
-                tab = TabState.Achievements;
-            }
-        }
+            streamReader.Close();
+        }        
 
         private void CheckDraggerChange()
         {
@@ -248,7 +257,7 @@ namespace Active
                     {
                         Player.Inventory.ItemList.Remove(tempItem);
                         selected = null;
-                        selectedSquare = 50;
+                        selectedSquare = -1;
                         break;
                     }
                 }
@@ -256,22 +265,7 @@ namespace Active
             }
         }
 
-        public bool CheckExit()
-        {
-            if (KMReader.prevKeyState.IsKeyUp(Keys.Escape) && KMReader.keyState.IsKeyDown(Keys.Escape))
-            {
-                selected = null;
-                selectedSquare = 50;
-                return true;
-            }
-            if (returnButton.LeftClick())
-            {
-                selected = null;
-                selectedSquare = 50;
-                return true;
-            }
-            return false;
-        }
+        
 
         private void UpdateInventory()
         {
@@ -298,16 +292,6 @@ namespace Active
 
                 CheckDraggerChange();
             }
-        }
-
-        private void UpdateSkills()
-        {
-
-        }
-
-        private void UpdateAchievements()
-        {
-
         }
 
         private void DrawDisposing(SpriteBatch spriteBatch)
@@ -393,7 +377,7 @@ namespace Active
                 disposeButton.Draw(spriteBatch);
             }
 
-            if (selectedSquare != 50)
+            if (selectedSquare != -1)
             {
                 spriteBatch.Draw(TextureManager.texSelect, inventoryGrid[selectedSquare], Color.White);
             }
@@ -413,7 +397,7 @@ namespace Active
 
         private void DrawAchievements(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(TextureManager.texSkillMenu, mainBox, Color.White);
+           spriteBatch.Draw(TextureManager.texSkillMenu, mainBox, Color.White);
             int temp = 0;
             foreach (Achievement achievement in AchievementManager.achievements)
             {
@@ -423,7 +407,7 @@ namespace Active
                 temp += 60;
             }
             
-        }
+        }*/
 
     }
 }

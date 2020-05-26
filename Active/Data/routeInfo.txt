@@ -1,14 +1,14 @@
-Carrot Town|Steel Ville|10
-Carrot Town|Mount Goblin|10
-Carrot Town|Dryad's Grove|5
-Steel Ville|Tower Town|5
-Steel Ville|Hymn Harbor|5
-Steel Ville|Winghelm|5
-Steel Ville|Mount Goblin|5
-Steel Ville|Sanctuary|5
-Tower Town|Winghelm|5
-Tower Town|Hymn Harbor|5
-Tower Town|Sanctuary|5
-Hymn Harbor|Winghelm|5
-Pyramaad|Winghelm|5
-Mount Goblin|The Tomb|5
+Carrot Town|Steel Ville|2|1
+Carrot Town|Mount Goblin|10|0
+Carrot Town|Dryad's Grove|5|0
+Steel Ville|Tower Town|5|1
+Steel Ville|Hymn Harbor|5|1
+Steel Ville|Winghelm|5|1
+Steel Ville|Mount Goblin|5|0
+Steel Ville|Sanctuary|5|1
+Tower Town|Winghelm|5|1
+Tower Town|Hymn Harbor|5|1
+Tower Town|Sanctuary|5|0
+Hymn Harbor|Winghelm|5|1
+Pyramaad|Winghelm|5|0
+Mount Goblin|The Tomb|5|1

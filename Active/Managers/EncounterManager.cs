@@ -51,7 +51,7 @@ namespace Active
                 travelEncountersLeft.Add(i);
             }
             for (int i = 0; i < encounters.Count; i++)
-            {                
+            {
                 encounters[i].OccuredDuringTravel = false;
             }
             
@@ -71,8 +71,7 @@ namespace Active
                             eventOnGoing = true;
                             InitiateEncounter(FindID(RandomiseEncounter()));
                         }
-                    }
-                    
+                    }                    
                 }
             }          
             return eventOnGoing;
@@ -133,7 +132,7 @@ namespace Active
             }
             return counter;
         }
-        static void InitiateEncounter(int id)
+        static public void InitiateEncounter(int id)
         {
             currentEncounter = encounters[FindEncounterID(id)];
             currentTravelEvent = travelEvents[FindIndex(id)];

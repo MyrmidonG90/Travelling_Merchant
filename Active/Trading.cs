@@ -29,6 +29,8 @@ namespace Active
 
         static int counterCol, counterRow, leftPrice, rightPrice, priceDifference;
 
+        internal static Inventory TradeRight { get => tradeRight; set => tradeRight = value; }
+
         static public void StartTrade(Inventory player, Inventory trader, string zone) 
         {
             invLeft = player;
@@ -395,9 +397,13 @@ namespace Active
 
             foreach (Item item in tradeRight.ItemList)
             {
-                if(item.Name == "Carrot")
+                if(item.Name == "Carrot" && AchievementManager.achievements[0].complete == false)
                 {
-                    AchievementManager.boughtCarrots++;
+                    AchievementManager.boughtCarrots += item.Amount;
+                    if (AchievementManager.boughtCarrots > 100)
+                    {
+                        AchievementManager.boughtCarrots = 100;
+                    }
                 }
             }
 
@@ -444,6 +450,7 @@ namespace Active
         static void ChangeInv()
         {
             invLeft.Money += leftPrice - rightPrice;
+            GlossaryManager.UpdateGlossary("Item");
             invRight.Money += rightPrice - leftPrice;
             foreach (var item in tradeRight.ItemList)
             {
@@ -462,7 +469,8 @@ namespace Active
             double sum = 0;
             for (int i = 0; i < inv.ItemList.Count; i++)
             {
-                sum += inv.ItemList[i].BasePrice*ModifierManager.GetModifier(zoneName, inv.ItemList[i].PrimaryCategory) * inv.ItemList[i].Amount;
+                double temp = inv.ItemList[i].BasePrice *  SkillManager.ReturnSkillModifier(zoneName) * inv.ItemList[i].Amount;
+                sum += (inv.ItemList[i].BasePrice*ModifierManager.GetModifier(zoneName, inv.ItemList[i].PrimaryCategory) * inv.ItemList[i].Amount) - temp;
             }
             return (int)sum; // Avrundas nedåt
         }

@@ -59,24 +59,9 @@ namespace Active
         static public void Update()
         {
 
-            AchievementManager.currentCoins = inventory.Money;            
 
-            //debug funktioner
-            if (test)
-            {
-                if (KMReader.prevKeyState.IsKeyUp(Keys.A) && KMReader.keyState.IsKeyDown(Keys.A))
-                {
-                    inventory.AddItem(ItemCreator.CreateItem(0, 20));
-                }
-                if (KMReader.prevKeyState.IsKeyUp(Keys.B) && KMReader.keyState.IsKeyDown(Keys.B))
-                {
-                    inventory.AddItem(ItemCreator.CreateItem(1, 30));
-                }
-                if (KMReader.prevKeyState.IsKeyUp(Keys.C) && KMReader.keyState.IsKeyDown(Keys.C))
-                {
-                    inventory.AddItem(ItemCreator.CreateItem(2, 10));
-                }
-            }
+
+            DebugFunctions();
 
             date = Calendar.TotalDays;
             int counter = 0;
@@ -107,19 +92,8 @@ namespace Active
                     }
                 }
             }
+            CheckNewCityArrival();
 
-            if (date != oldDate)
-            {
-                counter = 0;
-                foreach (bool tempVisit in visitedCities)
-                {
-                    if (location == WorldMapMenu.Cities[counter].Name)
-                    {
-                        visitedCities[counter] = true;
-                    }
-                    counter++;
-                }
-            }
             oldDate = date;
         }
 
@@ -160,7 +134,7 @@ namespace Active
         }
 
         static public bool AddXP(string skillName, int xp)
-        {            
+        {
             for (int i = 0; i < skillNames.Length; i++)
             {
                 if (skillName == skillNames[i])
@@ -177,7 +151,40 @@ namespace Active
             return false;
         }
 
+        static private void DebugFunctions()
+        {
+            if (test)
+            {
+                if (KMReader.prevKeyState.IsKeyUp(Keys.A) && KMReader.keyState.IsKeyDown(Keys.A))
+                {
+                    inventory.AddItem(ItemCreator.CreateItem(0, 20));
+                }
+                if (KMReader.prevKeyState.IsKeyUp(Keys.B) && KMReader.keyState.IsKeyDown(Keys.B))
+                {
+                    inventory.AddItem(ItemCreator.CreateItem(1, 30));
+                }
+                if (KMReader.prevKeyState.IsKeyUp(Keys.C) && KMReader.keyState.IsKeyDown(Keys.C))
+                {
+                    inventory.AddItem(ItemCreator.CreateItem(2, 10));
+                }
+            }
+        }
 
+        static private void CheckNewCityArrival()
+        {
+            if (date != oldDate)
+            {
+                int counter = 0;
+                foreach (bool tempVisit in visitedCities)
+                {
+                    if (location == WorldMapMenu.Cities[counter].Name)
+                    {
+                        visitedCities[counter] = true;
+                    }
+                    counter++;
+                }
+            }
+        }
 
         static public Inventory Inventory
         {

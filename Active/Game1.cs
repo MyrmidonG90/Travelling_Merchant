@@ -84,6 +84,7 @@ namespace Active
             EncounterManager.Initialize();
             CityInfoMenu.Init();
             CharCreationMenu.Init();
+            SkillManager.Init();
 
             ModifierManager.LoadCityAndCategoryLists();
             ModifierManager.LoadItemModifiers();
@@ -98,8 +99,7 @@ namespace Active
 
             options = false;
             activeInv = new Inventory(100);
-            random = new Random();
-            
+            random = new Random();            
 
             CityControlList = new List<string>();
             CityControlList.Add("Carrot Town");
@@ -116,6 +116,8 @@ namespace Active
 
             EndCredits.Update(gameTime.ElapsedGameTime.TotalMilliseconds);//////////////////////////////////////
             LevelUp.Update(gameTime.ElapsedGameTime.TotalMilliseconds); ///////////////////////////////////////
+
+            AchievementManager.Update();
 
             if (WorldEventManager.Update(random))
             {
@@ -500,7 +502,7 @@ namespace Active
             {
                 SaveGame();
             }
-            else if (OptionsMenu.CheckFullscreen()) //funkar inte framtida jag ska försöka fixa /My
+            else if (OptionsMenu.CheckFullscreen())
             {
                 graphics.IsFullScreen = !graphics.IsFullScreen;
                 graphics.ApplyChanges();

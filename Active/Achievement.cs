@@ -12,14 +12,17 @@ namespace Active
         
         public string name, description, progress;
         public bool complete;
+        public int maxAmount, currentAmount;
 
-
-        public Achievement(string name, string description, string progress, bool complete)
+        public Achievement(string name, string description, string progress, bool complete, int currentAmount, int maxAmount)
         {
             this.name = name;
             this.description = description;
             this.progress = progress;
             this.complete = complete;
+            this.currentAmount = currentAmount;
+            this.maxAmount = maxAmount;
+            
         }
 
 

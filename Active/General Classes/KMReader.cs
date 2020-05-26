@@ -46,15 +46,24 @@ namespace Active
             return mouseState.Position;
         }
 
-        public static bool ClickRectangle(Rectangle rect)
+        /// <summary>
+        /// Used to check if mouse is hovering above the rectacngle
+        /// </summary>
+        /// <param name="rect"></param>
+        /// <returns></returns>
+        public static bool OverRectangle(Rectangle rect)
         {
-            tmp = false;
-            if (rect.Contains(mouseState.Position))
-            {
-                tmp = true;
-            }
+            return rect.Contains(mouseState.Position);
+        }
 
-            return tmp;
+        public static bool LeftClickRectangle(Rectangle rect)
+        {
+            return LeftMouseClick() && OverRectangle(rect) ? true:false;
+        }
+
+        public static bool RightClickRectangle(Rectangle rect)
+        {
+            return RightMouseClick() && OverRectangle(rect) ? true : false;
         }
 
         public static bool LeftMouseClick()
