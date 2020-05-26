@@ -454,6 +454,10 @@ namespace Active
             {
                 ChangeGameState(GameState.CityMenu);
             }
+            if (CharCreationMenu.CheckNextAvatar())
+            {
+                CharCreationMenu.playerAvatar
+            }
         }
 
         private void UpdateDebugMenu()
