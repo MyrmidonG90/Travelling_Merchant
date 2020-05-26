@@ -167,6 +167,11 @@ namespace Active
             }
         }
 
+        static public int ConfirmedAvatar
+        {
+            get => confirmedAvatar;
+            set => confirmedAvatar = value;
+        }
 
     }
 }

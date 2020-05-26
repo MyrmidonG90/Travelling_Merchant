@@ -21,7 +21,7 @@ namespace Active
         //==================================================================================
         //OM DU ÄNDRAR HUR SPELET SPARAR SÅ ***MÅSTE*** DU ÄNDRA VÄRDET I ver
         //==================================================================================
-        static string ver = "1.4.0";
+        static string ver = "1.4.1";
         static public bool GenerateSave(Inventory inventory, string location, string gameState)
         {
             string path = Path.Combine("./Saves/", "Save-" + DateTime.Now.ToString() + ".ptmsave");
@@ -63,11 +63,13 @@ namespace Active
                 }
             }
 
+
             int[] temp = Player.SkillLevels;
             for (int i = 0; i < 3; i++)
             {
                 streamWriter.WriteLine(temp[i].ToString());
             }
+            streamWriter.WriteLine(CharCreationMenu.ConfirmedAvatar);
 
             streamWriter.WriteLine(inventory.Money);
             streamWriter.WriteLine(inventory.ItemList.Count);
@@ -235,6 +237,7 @@ namespace Active
             }
             Player.SkillLevels = tempLevels;
 
+            CharCreationMenu.ConfirmedAvatar = int.Parse(streamReader.ReadLine());
             tempInv.Money = int.Parse(streamReader.ReadLine());
             int counter = int.Parse(streamReader.ReadLine());
 
