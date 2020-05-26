@@ -35,9 +35,9 @@ namespace Active
             skillNames[2] = "Persuasion";
 
             skillLevels = new int[3];
-            skillLevels[0] = 1; // Wisdom
-            skillLevels[1] = 1; // Intimidation
-            skillLevels[2] = 1; // Persuasion
+            skillLevels[0] = 0; // Wisdom
+            skillLevels[1] = 0; // Intimidation
+            skillLevels[2] = 0; // Persuasion
 
             skillXP = new int[3];
             skillXP[0] = 0;

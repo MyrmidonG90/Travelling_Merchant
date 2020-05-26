@@ -450,13 +450,14 @@ namespace Active
 
         private void UpdateCharacterCreationMenu()
         {
+            CharCreationMenu.Update();
             if (CharCreationMenu.CheckStartGame())
             {
                 ChangeGameState(GameState.CityMenu);
             }
-            if (CharCreationMenu.CheckNextAvatar())
+            if (CharCreationMenu.CheckBack())
             {
-                CharCreationMenu.playerAvatar
+                ChangeGameState(GameState.MainMenu);
             }
         }
 
