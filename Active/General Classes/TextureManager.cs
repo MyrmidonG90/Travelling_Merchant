@@ -48,6 +48,11 @@ namespace Active
         static public Texture2D texIconEventWar;
 
 
+        //Avatars
+        static public Texture2D texPCavatar1;
+        static public Texture2D texPCavatar2;
+        static public Texture2D texPCavatar3;
+
         // GUI
         static public Texture2D texButtonGo;
         static public Texture2D texTab;
@@ -93,6 +98,7 @@ namespace Active
             LoadGUI(content);
             LoadHUD(content);
             LoadIcons(content);
+            LoadAvatars(content);
             LoadItems(content);
             LoadBackGrounds(content);
             InitiateLists();
@@ -196,6 +202,12 @@ namespace Active
             texIconEventWar = content.Load<Texture2D>("event_icon_war");
             texIconEventPlague = content.Load<Texture2D>("event_icon_plague");
 
+        }
+        static void LoadAvatars(ContentManager content)
+        {
+            texPCavatar1 = content.Load<Texture2D>("pc_1");
+            texPCavatar2 = content.Load<Texture2D>("pc_2");
+            texPCavatar3 = content.Load<Texture2D>("pc_3");
         }
         static void LoadCategories(ContentManager content)
         {

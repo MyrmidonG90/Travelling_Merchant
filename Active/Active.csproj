@@ -59,6 +59,7 @@
     <Compile Include="Managers\GlossaryManager.cs" />
     <Compile Include="Managers\SkillManager.cs" />
     <Compile Include="Managers\TravelScenarios.cs" />
+    <Compile Include="MenuFolder\CharCreationMenu.cs" />
     <Compile Include="MenuFolder\CityInfoMenu.cs" />
     <Compile Include="Managers\EndCredits.cs" />
     <Compile Include="Achievement.cs" />
