@@ -39,6 +39,7 @@ namespace Active
             InventoryMenu,
             TravelMenu,
             MainMenu,
+            CharacterCreationMenu,
         }
 
         GameState previousGameState2;
@@ -82,6 +83,7 @@ namespace Active
             WorldMapMenu.LoadCities();
             EncounterManager.Initialize();
             CityInfoMenu.Init();
+            CharCreationMenu.Init();
 
             ModifierManager.LoadCityAndCategoryLists();
             ModifierManager.LoadItemModifiers();
@@ -154,6 +156,10 @@ namespace Active
             else if (gameState == GameState.MainMenu)
             {
                 UpdateMainMenu();
+            }
+            else if (gameState == GameState.CharacterCreationMenu)
+            {
+                UpdateCharacterCreationMenu();
             }
             else if (gameState == GameState.Debug)
             {
@@ -228,6 +234,10 @@ namespace Active
             else if (gameState == GameState.MainMenu)
             {
                 MainMenuManager.Draw(spriteBatch);
+            }
+            else if (gameState == GameState.CharacterCreationMenu)
+            {
+                CharCreationMenu.Draw(spriteBatch);
             }
             else if (gameState == GameState.Debug)
             {
@@ -426,7 +436,7 @@ namespace Active
         {
             if (MainMenuManager.CheckNewGame())
             {
-                ChangeGameState(GameState.CityMenu);
+                ChangeGameState(GameState.CharacterCreationMenu);
             }
             if (MainMenuManager.CheckLoadGame())
             {
@@ -435,6 +445,14 @@ namespace Active
             if (MainMenuManager.CheckExitGame())
             {
                 Exit();
+            }
+        }
+
+        private void UpdateCharacterCreationMenu()
+        {
+            if (CharCreationMenu.CheckStartGame())
+            {
+                ChangeGameState(GameState.CityMenu);
             }
         }
 

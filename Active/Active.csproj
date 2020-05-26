@@ -57,6 +57,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Managers\TravelScenarios.cs" />
+    <Compile Include="Menu\CharCreationMenu.cs" />
     <Compile Include="Menu\CityInfoMenu.cs" />
     <Compile Include="Managers\EndCredits.cs" />
     <Compile Include="Achievement.cs" />

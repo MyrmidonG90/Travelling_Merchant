@@ -43,6 +43,11 @@ namespace Active
         static public Texture2D texIconWisdom;
         static public Texture2D texIconCity;
 
+        //Avatars
+        static public Texture2D texPCavatar1;
+        static public Texture2D texPCavatar2;
+        static public Texture2D texPCavatar3;
+
         // GUI
         static public Texture2D texButtonGo;
         static public Texture2D texTab;
@@ -86,6 +91,7 @@ namespace Active
             LoadGUI(content);
             LoadHUD(content);
             LoadIcons(content);
+            LoadAvatars(content);
             LoadItems(content);
             LoadBackGrounds(content);
             LoadLists();
@@ -183,6 +189,12 @@ namespace Active
             texIconUncommon = content.Load<Texture2D>("uncommon_icon");
             texIconWisdom = content.Load<Texture2D>("skill_icon_wisdom");
             texIconCity = content.Load<Texture2D>("merchant_city_icon");
+        }
+        static void LoadAvatars(ContentManager content)
+        {
+            texPCavatar1 = content.Load<Texture2D>("pc_1");
+            texPCavatar2 = content.Load<Texture2D>("pc_2");
+            texPCavatar3 = content.Load<Texture2D>("pc_3");
         }
         static void LoadCategories(ContentManager content)
         {
