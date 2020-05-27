@@ -23,7 +23,7 @@ namespace Active
             foreach (Achievement achievement in AchievementManager.achievements)
             {
                 sb.DrawString(TextureManager.font24, achievement.name + "  " + achievement.progress, new Vector2(300, 200 + temp), Color.Black);
-                sb.DrawString(TextureManager.font24, achievement.description, new Vector2(800, 200 + temp), Color.Black);
+                sb.DrawString(TextureManager.font24, achievement.description, new Vector2(900, 200 + temp), Color.Black);
                 temp += 60;
             }
         }

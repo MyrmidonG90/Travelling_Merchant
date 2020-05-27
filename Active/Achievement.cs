@@ -9,7 +9,6 @@ namespace Active
     class Achievement
     {
 
-        
         public string name, description, progress;
         public bool complete;
         public int maxAmount, currentAmount;
@@ -24,8 +23,5 @@ namespace Active
             this.maxAmount = maxAmount;
             
         }
-
-
-
     }
 }
