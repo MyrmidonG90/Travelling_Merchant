@@ -125,6 +125,9 @@ namespace Active
                     ++counter;
                 }
             }
+
+            //PENDING REMOVAL
+
             /*if (invTab.LeftClick() && skillTab.LeftClick())
             {
                 tab = TabState.Inventory;
@@ -162,6 +165,9 @@ namespace Active
             }
             return false;
         }
+
+        //PENDING REMOVAL
+
         /*private void CheckSelect()
         {
             if (KMReader.LeftMouseClick())

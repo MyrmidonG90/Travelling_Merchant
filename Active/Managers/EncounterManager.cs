@@ -30,7 +30,7 @@ namespace Active
         internal static List<TravelEvent> Events { get => travelEvents;}
         public static bool EventOnGoing { get => eventOnGoing;}
 
-        static public void Initialize() // Only needed to called once
+        static public void Initialize() // Only needed to be called once
         {
             LoadEncountInfo();
             LoadEncounters();
