@@ -17,6 +17,7 @@ namespace Active
         static ItemSlot[,] slotsLeft, slotsRight, tradeSlotsLeft, tradeSlotsRight;
         static Button accept, reset, back;
         static Item selected;
+        static bool finished;
         static string zoneName;
         enum Participant
         {
@@ -35,7 +36,7 @@ namespace Active
         {
             invLeft = player;
             invRight = trader;
-
+            finished = false;
             tradeLeft = new Inventory(player.Money,true);
             tradeRight = new Inventory(trader.Money,true);
 
@@ -95,83 +96,98 @@ namespace Active
             back = new Button(20, 20, 80, 80, TextureManager.texBackArrow);
         }
 
-        static public bool Update(ref Inventory participantLeft, ref Inventory participantRight) // Too Long
+        static public bool Update(ref Inventory participantLeft, ref Inventory participantRight)
         {
             //När ett mussklick händer
             if (KMReader.LeftMouseClick())
             {
-                // Om knappen accept klickas
-                if (accept.LeftClick())
+                finished = LeftClickEvent(ref participantLeft, ref participantRight);
+            }
+            else if (KMReader.RightMouseClick())
+            {
+                RightClickEvent();
+            }
+            return finished;
+        }
+       static bool LeftClickEvent(ref Inventory participantLeft, ref Inventory participantRight)
+        {
+            bool answer = false;
+            // Om knappen accept klickas
+            if (accept.LeftClick())
+            {
+                //AcceptTrade(ref participantLeft, ref participantRight);
+                if (AcceptTrade(ref participantLeft, ref participantRight)) //Debugg
                 {
-                    //AcceptTrade(ref participantLeft, ref participantRight);
-                    if (AcceptTrade(ref participantLeft, ref participantRight)) //Debugg
-                    {
 
-                    }
                 }
-                // Om knappen reset klickas
-                else if (reset.LeftClick())
+            }
+            // Om knappen reset klickas
+            else if (reset.LeftClick())
+            {
+                ResetTrade();
+            }
+            // Om knappen back klickas
+            else if (back.LeftClick())
+            {
+                answer= Exit();
+            }
+            // Checkar om man har klickat på inventory:n
+            else
+            {
+                if (CheckSlotClick(slotsLeft, Participant.Left) == false) // Checkar om man har klickat på den vänstra inventorium
                 {
-                    ResetTrade();
-                }
-                // Om knappen back klickas
-                else if (back.LeftClick())
-                {
-                    return Exit();
-                }
-                // Checkar om man har klickat på inventory:n
-                else
-                {
-                    if (CheckSlotClick(slotsLeft, Participant.Left) == false) // Checkar om man har klickat på den vänstra inventorium
+                    if (CheckSlotClick(slotsRight, Participant.Right) == false) //Checkar om man har klickat på den högra inventorium
                     {
-                        if (CheckSlotClick(slotsRight, Participant.Right) == false) //Checkar om man har klickat på den högra inventorium
+                        if (CheckSlotClick(tradeSlotsLeft, Participant.TradeSlotsLeft) == false) // Checkar om man har klickat på den vänstra trade inventorium
                         {
-                            if (CheckSlotClick(tradeSlotsLeft, Participant.TradeSlotsLeft) == false) // Checkar om man har klickat på den vänstra trade inventorium
-                            {
-                                CheckSlotClick(tradeSlotsRight, Participant.TradeSlotsRight); // Checkar om man har klickat på den högra trade inventorium
-                            }
+                            CheckSlotClick(tradeSlotsRight, Participant.TradeSlotsRight); // Checkar om man har klickat på den högra trade inventorium
                         }
                     }
                 }
             }
-            else if (KMReader.RightMouseClick())
+            return answer;
+        }
+        static void RightClickEvent()
+        {
+            foreach (ItemSlot tempSlot in slotsLeft)
             {
-                foreach (ItemSlot tempSlot in slotsLeft)
+                if (tempSlot.RightClicked())
                 {
-                    if (tempSlot.RightClicked())
-                    {
-                        selected = tempSlot.Item;
-                    }
-                }
-
-                foreach (ItemSlot tempSlot in slotsRight)
-                {
-                    if (tempSlot.RightClicked())
-                    {
-                        selected = tempSlot.Item;
-                    }
-                }
-
-                foreach (ItemSlot tempSlot in tradeSlotsLeft)
-                {
-                    if (tempSlot.RightClicked())
-                    {
-                        selected = tempSlot.Item;
-                    }
-                }
-
-                foreach (ItemSlot tempSlot in tradeSlotsRight)
-                {
-                    if (tempSlot.RightClicked())
-                    {
-                        selected = tempSlot.Item;
-                    }
+                    selected = tempSlot.Item;
                 }
             }
-            return false;
+
+            foreach (ItemSlot tempSlot in slotsRight)
+            {
+                if (tempSlot.RightClicked())
+                {
+                    selected = tempSlot.Item;
+                }
+            }
+
+            foreach (ItemSlot tempSlot in tradeSlotsLeft)
+            {
+                if (tempSlot.RightClicked())
+                {
+                    selected = tempSlot.Item;
+                }
+            }
+
+            foreach (ItemSlot tempSlot in tradeSlotsRight)
+            {
+                if (tempSlot.RightClicked())
+                {
+                    selected = tempSlot.Item;
+                }
+            }
         }
-       
-        static void UpdateSlots() // 4 rows too long
+        static void UpdateSlots() 
+        {
+            UpdateTradeSlots();
+            UpdateInventorySlots();
+            
+        }
+        static void UpdateTradeSlots()
         {
             for (int i = 0; i < 3; i++)
             {
@@ -195,6 +211,9 @@ namespace Active
                     }
                 }
             }
+        }
+        static void UpdateInventorySlots()
+        {
             for (int i = 0; i < 5; i++)
             {
                 for (int j = 0; j < 5; j++)
@@ -325,7 +344,7 @@ namespace Active
                     {
                         invRight.ReduceAmountOfItems(slots[counterCol, counterRow].Item.ID, 5);
                     }
-                   ;// Lägger till item till det vänstra trade fältet
+                   ;// Lägger till item till det vänstra trade fältet ///////////////////////////////////////////////////////////////!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                     
                 }
                 else
@@ -493,7 +512,7 @@ namespace Active
             }
             
             invLeft = origLeftInv;
-            invRight = origRightInv;//
+            invRight = origRightInv;
 
             foreach (var item in tradeLeft.ItemList) 
             {
@@ -528,9 +547,30 @@ namespace Active
             return true;
         }
 
-        static public void Draw(SpriteBatch sb) // Too long
+        static public void Draw(SpriteBatch sb) 
         {
             sb.Draw(TextureManager.texTradeMenu, new Vector2(190, 144), Color.White);
+            DrawSlots(sb);
+            DrawButtons(sb);
+
+            sb.DrawString(TextureManager.font24, invLeft.Money.ToString(), new Vector2(315, 530),Color.Black);
+            sb.DrawString(TextureManager.font24, invRight.Money.ToString(), new Vector2(1520, 530), Color.Black);
+
+            DrawCostIcon(sb);
+            if (selected != null)
+            {
+                DrawSelected(sb);
+            }
+
+        }
+        static void DrawButtons(SpriteBatch sb)
+        {
+            accept.Draw(sb);
+            reset.Draw(sb);
+            back.Draw(sb);
+        }
+        static void DrawSlots(SpriteBatch sb)
+        {
             foreach (var item in slotsLeft)
             {
                 item.Draw(sb);
@@ -547,18 +587,15 @@ namespace Active
             {
                 item.Draw(sb);
             }
-            accept.Draw(sb);
-            reset.Draw(sb);
-            back.Draw(sb);
-            sb.DrawString(TextureManager.font24, invLeft.Money.ToString(), new Vector2(315, 530),Color.Black);
-            sb.DrawString(TextureManager.font24, invRight.Money.ToString(), new Vector2(1520, 530), Color.Black);
+        }
+        static void DrawCostIcon(SpriteBatch sb)
+        {
             Vector2 arrowPos = new Vector2(867, 502);
             Vector2 moneyPos = new Vector2(920, 535);
-            
             if (priceDifference < 0)
             {
                 sb.Draw(TextureManager.texArrowMoneyRight, arrowPos, Color.White);
-                sb.DrawString(TextureManager.font24, (priceDifference*-1).ToString(), moneyPos, Color.Black);
+                sb.DrawString(TextureManager.font24, (priceDifference * -1).ToString(), moneyPos, Color.Black);
             }
             else if (priceDifference > 0)
             {
@@ -569,40 +606,38 @@ namespace Active
             {
                 sb.DrawString(TextureManager.font24, priceDifference.ToString(), moneyPos, Color.Black);
             }
-
-            if (selected != null)
+        }
+        static void DrawSelected(SpriteBatch sb)
+        {
+            Vector2 temp = TextureManager.font24.MeasureString(selected.Name);
+            Vector2 namePos = new Vector2(((1920 - temp.X) / 2) - 5, 610);
+            sb.DrawString(TextureManager.font24, selected.Name, namePos, Color.Black);
+            if (selected.Rarity == 0)
             {
-                Vector2 temp = TextureManager.font24.MeasureString(selected.Name);
-                Vector2 namePos = new Vector2(((1920 - temp.X) / 2)-5, 610);
-                sb.DrawString(TextureManager.font24, selected.Name, namePos, Color.Black);
-                if (selected.Rarity == 0)
-                {
-                    sb.Draw(TextureManager.texIconCommon, new Rectangle(930, 650, 60, 60), Color.White);
-                }
-                if (selected.Rarity == 1)
-                {
-                    sb.Draw(TextureManager.texIconUncommon, new Rectangle(930, 650, 60, 60), Color.White);
-                }
-                if (selected.Rarity == 2)
-                {
-                    sb.Draw(TextureManager.texIconRare, new Rectangle(930, 650, 60, 60), Color.White);
-                }
-                sb.DrawString(TextureManager.font24, "Standard Price: " + selected.BasePrice.ToString(), new Vector2(800, 730), Color.Black);
-
-                if (selected.PrimaryCategory != 999)
-                {
-                    sb.Draw(TextureManager.texCategories[selected.PrimaryCategory-1], new Rectangle(800, 780, 80, 80), Color.White);
-                }
-                if (selected.SecondaryCategory != 999)
-                {
-                    sb.Draw(TextureManager.texCategories[selected.SecondaryCategory - 1], new Rectangle(915, 780, 80, 80), Color.White);
-                }
-                if (selected.TertiaryCategory != 999)
-                {
-                    sb.Draw(TextureManager.texCategories[selected.TertiaryCategory - 1], new Rectangle(1030, 780, 80, 80), Color.White);
-                }
+                sb.Draw(TextureManager.texIconCommon, new Rectangle(930, 650, 60, 60), Color.White);
             }
+            if (selected.Rarity == 1)
+            {
+                sb.Draw(TextureManager.texIconUncommon, new Rectangle(930, 650, 60, 60), Color.White);
+            }
+            if (selected.Rarity == 2)
+            {
+                sb.Draw(TextureManager.texIconRare, new Rectangle(930, 650, 60, 60), Color.White);
+            }
+            sb.DrawString(TextureManager.font24, "Standard Price: " + selected.BasePrice.ToString(), new Vector2(800, 730), Color.Black);
 
+            if (selected.PrimaryCategory != 999)
+            {
+                sb.Draw(TextureManager.texCategories[selected.PrimaryCategory - 1], new Rectangle(800, 780, 80, 80), Color.White);
+            }
+            if (selected.SecondaryCategory != 999)
+            {
+                sb.Draw(TextureManager.texCategories[selected.SecondaryCategory - 1], new Rectangle(915, 780, 80, 80), Color.White);
+            }
+            if (selected.TertiaryCategory != 999)
+            {
+                sb.Draw(TextureManager.texCategories[selected.TertiaryCategory - 1], new Rectangle(1030, 780, 80, 80), Color.White);
+            }
         }
     }
 }
