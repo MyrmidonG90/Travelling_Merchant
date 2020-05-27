@@ -19,7 +19,7 @@ namespace Active
         static string turnDisplay;
 
         static string destination;
-        static string oldLocation;  
+        static string oldLocation;
         static bool paused;
         static bool test;
         static public bool travelling;
@@ -59,22 +59,7 @@ namespace Active
                 {
                     if (routeNames[i, 1] == newDestination)
                     {
-                        destination = newDestination;
-                        paused = false;
-                        travelling = true;
-
-                        turnsToTravel = routes[i];
-                        turnsLeft = turnsToTravel;
-                        turnTimer = timerLength;
-
-                        if (boat[i])
-                        {
-                            Player.Inventory.Money -= 100;
-                        }
-                        EncounterManager.NewTrip();
-                        AchievementManager.travelCounter++;
-                        AchievementManager.boatTravelCounter++;
-                        return true;
+                        StartTravelResult(newDestination, i);
                     }
                 }
             }
@@ -85,25 +70,31 @@ namespace Active
                 {
                     if (routeNames[i, 1] == Player.Location)
                     {
-                        destination = newDestination;
-                        paused = false;
-                        travelling = true;
-
-                        turnsToTravel = routes[i];
-                        turnsLeft = turnsToTravel;
-                        turnTimer = timerLength;
-
-                        if (boat[i])
-                        {
-                            Player.Inventory.Money -= 100;
-                        }
-                        EncounterManager.NewTrip();
-                        AchievementManager.travelCounter++;
-                        return true;
+                        StartTravelResult(newDestination, i);
                     }
                 }
             }
             return false;
+        }
+
+        static bool StartTravelResult(string newDestination, int i)
+        {
+            destination = newDestination;
+            paused = false;
+            travelling = true;
+
+            turnsToTravel = routes[i];
+            turnsLeft = turnsToTravel;
+            turnTimer = timerLength;
+
+            if (boat[i])
+            {
+                Player.Inventory.Money -= 100;
+            }
+            EncounterManager.NewTrip();
+            AchievementManager.travelCounter++;
+            AchievementManager.boatTravelCounter++;
+            return true;
         }
 
         static public void AbortTravel()

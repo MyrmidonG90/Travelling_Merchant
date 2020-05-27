@@ -145,7 +145,7 @@ namespace Active
             achievements[7].currentAmount = jewels;
             achievements[8].currentAmount = currentCoins;
             achievements[9].currentAmount = spentMoney;
-            achievements[10].currentAmount = citiesVisited;
+            //achievements[10].currentAmount = citiesVisited;
             achievements[11].currentAmount = boatTravelCounter;
         }
        
