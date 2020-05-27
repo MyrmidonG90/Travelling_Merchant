@@ -205,55 +205,75 @@ namespace Active
             }
         }
 
-        static private void CheckDebugMenu() // Too long
+        static private void CheckDebugMenu()
         {
             if (menuToggle == MenuToggle.Debug)
             {
-                if (btnSkillCycle.LeftClick() && !block)
+                CheckSkillCycle();
+                CheckSkillIncrease();
+                CheckSkillDecrease();
+                CheckTest();
+            }
+        }
+
+        static void CheckSkillCycle()
+        {
+            if (btnSkillCycle.LeftClick() && !block)
+            {
+                selectedSkill++;
+                if (selectedSkill == 3)
                 {
-                    selectedSkill++;
-                    if (selectedSkill == 3)
-                    {
-                        selectedSkill = 0;
-                    }
+                    selectedSkill = 0;
                 }
-                if (btnSkillIncrease.LeftClick() && !block)
+            }
+        }
+
+        static void CheckSkillIncrease()
+        {
+            if (btnSkillIncrease.LeftClick() && !block)
+            {
+                if (selectedSkill == 0)
                 {
-                    if (selectedSkill == 0)
-                    {
-                        Player.AddXP("Wisdom", 100);
-                    }
-                    else if (selectedSkill == 1)
-                    {
-                        Player.AddXP("Intimidation", 100);
-                    }
-                    else if (selectedSkill == 2)
-                    {
-                        Player.AddXP("Persuasion", 100);
-                    }
+                    Player.AddXP("Wisdom", 100);
                 }
-                if (btnSkillDecrease.LeftClick() && !block)
+                else if (selectedSkill == 1)
                 {
-                    if (selectedSkill == 0)
-                    {
-                        Player.AddXP("Wisdom", -100);
-                    }
-                    else if (selectedSkill == 1)
-                    {
-                        Player.AddXP("Intimidation", -100);
-                    }
-                    else if (selectedSkill == 2)
-                    {
-                        Player.AddXP("Persuasion", -100);
-                    }
+                    Player.AddXP("Intimidation", 100);
                 }
-                if (btnWorldEventTest.LeftClick() && !block)
+                else if (selectedSkill == 2)
                 {
-                    string[] test = new string[2];
-                    test[0] = "Carrot Town";
-                    test[1] = "Steel Ville";
-                    WorldEventManager.EventFire(2, test, new Random());
+                    Player.AddXP("Persuasion", 100);
                 }
+            }
+        }
+
+        static void CheckSkillDecrease()
+        {
+            if (btnSkillDecrease.LeftClick() && !block)
+            {
+                if (selectedSkill == 0)
+                {
+                    Player.AddXP("Wisdom", -100);
+                }
+                else if (selectedSkill == 1)
+                {
+                    Player.AddXP("Intimidation", -100);
+                }
+                else if (selectedSkill == 2)
+                {
+                    Player.AddXP("Persuasion", -100);
+                }
+            }
+        }
+
+        static void CheckTest()
+        {
+            if (btnWorldEventTest.LeftClick() && !block)
+            {
+                string[] test = new string[2];
+                test[0] = "Carrot Town";
+                test[1] = "Steel Ville";
+                WorldEventManager.EventFire(2, test, new Random());
             }
         }
     }

@@ -63,17 +63,20 @@ namespace Active
 
         static public void Update(GameTime gameTime)
         {
-            bool temp = false; // Vad gör temp?
+            bool isCityClicked = false;
+            //temp is used to check that a city has been pressed on and that it should display the associated 
+            //buttons and info and once somewhere else has been pressed on the screen that info should disappear
+            
 
             foreach (Button button in cityButtons)
             {
                 if (button.LeftClick())
                 {
-                    temp = true;
+                    isCityClicked = true;
                 }
             }
 
-            if (!temp)
+            if (!isCityClicked)
             {
                 if (KMReader.LeftMouseClick())
                 {

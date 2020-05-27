@@ -81,50 +81,60 @@ namespace Active
                     counter++;
                 }
 
-                spriteBatch.DrawString(TextureManager.font32, "Info", infoPos, Color.Black);
+                DrawCityDeals(spriteBatch);
 
-                foreach (City tempCity in WorldMapMenu.Cities)
-                {
-                    if (tempCity.Name == selected)
-                    {
-                        spriteBatch.Draw(TextureManager.texCategories[tempCity.GoodTrade[0]], new Rectangle(620, 360, 120, 120), Color.White);
-                        spriteBatch.Draw(TextureManager.texCategories[tempCity.GoodTrade[1]], new Rectangle(780, 360, 120, 120), Color.White);
-                        spriteBatch.Draw(TextureManager.texCategories[tempCity.BadTrade[0]], new Rectangle(620, 520, 120, 120), Color.White);
-                        spriteBatch.Draw(TextureManager.texCategories[tempCity.BadTrade[1]], new Rectangle(780, 520, 120, 120), Color.White);
-                    }
-                }
-
-                int travelTime = 0;
-                for (int i = 0; i < 14; i++)
-                {
-                    if (TravelMenu.RouteNames[i, 0] == Player.Location)
-                    {
-                        if (TravelMenu.RouteNames[i, 1] == selected)
-                        {
-                            travelTime = TravelMenu.Routes[i];
-                        }
-                    }
-                }
-
-                for (int i = 0; i < 14; i++)
-                {
-                    if (TravelMenu.RouteNames[i, 0] == selected)
-                    {
-                        if (TravelMenu.RouteNames[i, 1] == Player.Location)
-                        {
-                            travelTime = TravelMenu.Routes[i];
-                        }
-                    }
-                }
-
-                if (travelTime != 0)
-                {
-                    spriteBatch.DrawString(TextureManager.font24, "Travel time:\n   " + travelTime.ToString() + " days", new Vector2(680, 700), Color.Black);
-                }
+                CheckAndDrawTravelTime(spriteBatch);
 
                 Vector2 temp =  TextureManager.font48.MeasureString(selected);
                 Vector2 pos = new Vector2((1920 - temp.X) / 2, 210);
                 spriteBatch.DrawString(TextureManager.font48, selected, pos, Color.Black);
+            }
+        }
+
+        static void DrawCityDeals(SpriteBatch spriteBatch)
+        {
+            spriteBatch.DrawString(TextureManager.font32, "Info", infoPos, Color.Black);
+
+            foreach (City tempCity in WorldMapMenu.Cities)
+            {
+                if (tempCity.Name == selected)
+                {
+                    spriteBatch.Draw(TextureManager.texCategories[tempCity.GoodTrade[0]], new Rectangle(620, 360, 120, 120), Color.White);
+                    spriteBatch.Draw(TextureManager.texCategories[tempCity.GoodTrade[1]], new Rectangle(780, 360, 120, 120), Color.White);
+                    spriteBatch.Draw(TextureManager.texCategories[tempCity.BadTrade[0]], new Rectangle(620, 520, 120, 120), Color.White);
+                    spriteBatch.Draw(TextureManager.texCategories[tempCity.BadTrade[1]], new Rectangle(780, 520, 120, 120), Color.White);
+                }
+            }
+        }
+
+        static void CheckAndDrawTravelTime(SpriteBatch spriteBatch)
+        {
+            int travelTime = 0;
+            for (int i = 0; i < 14; i++)
+            {
+                if (TravelMenu.RouteNames[i, 0] == Player.Location)
+                {
+                    if (TravelMenu.RouteNames[i, 1] == selected)
+                    {
+                        travelTime = TravelMenu.Routes[i];
+                    }
+                }
+            }
+
+            for (int i = 0; i < 14; i++)
+            {
+                if (TravelMenu.RouteNames[i, 0] == selected)
+                {
+                    if (TravelMenu.RouteNames[i, 1] == Player.Location)
+                    {
+                        travelTime = TravelMenu.Routes[i];
+                    }
+                }
+            }
+
+            if (travelTime != 0)
+            {
+                spriteBatch.DrawString(TextureManager.font24, "Travel time:\n   " + travelTime.ToString() + " days", new Vector2(680, 700), Color.Black);
             }
         }
 
