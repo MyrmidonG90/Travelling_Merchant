@@ -22,7 +22,7 @@ namespace Active
         //OM DU ÄNDRAR HUR SPELET SPARAR SÅ ***MÅSTE*** DU ÄNDRA VÄRDET I ver
         //==================================================================================
         static string ver = "1.4.1";
-        static public bool GenerateSave(Inventory inventory, string location, string gameState)
+        static public bool GenerateSave(Inventory inventory, string location, string gameState) // Too long
         {
             string path = Path.Combine("./Saves/", "Save-" + DateTime.Now.ToString() + ".ptmsave");
             StreamWriter streamWriter = new StreamWriter(ToSafeFileName(path), false);
@@ -100,7 +100,7 @@ namespace Active
         //==================================================================================
         //OM DU ÄNDRAR HUR SPELET SPARAR SÅ ***MÅSTE*** DU ÄNDRA VÄRDET I ver
         //==================================================================================
-        static public string[] LoadSave()
+        static public string[] LoadSave() // Too long
         {
             Inventory tempInv = new Inventory(0);
             StreamReader streamReader = InitLoadSave();

@@ -205,7 +205,7 @@ namespace Active
             }
         }
 
-        static private void CheckDebugMenu()
+        static private void CheckDebugMenu() // Too long
         {
             if (menuToggle == MenuToggle.Debug)
             {

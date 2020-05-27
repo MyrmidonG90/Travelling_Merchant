@@ -27,7 +27,7 @@ namespace Active
 
         static public void Init()
         {
-            races = new int[10];
+            races = new int[10]; // Förstår ej vad som händer
             races[0] = 2;
             races[1] = 1;
             races[2] = 2;

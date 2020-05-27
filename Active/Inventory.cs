@@ -10,8 +10,8 @@ namespace Active
     {
         int money, stackLimit, invLimit;
         List<Item> itemList;
-        int surrogateKey;
-        string surrogateKeyName;
+        int surrogateKey; // används inte
+        string surrogateKeyName; // Andvänds inte
         public Inventory(int m, List<Item> iL)
         {
             money = m;
@@ -92,7 +92,7 @@ namespace Active
             }
             return working;
         }
-        bool StacksDoNotAddUp(int amountOfStacks, int index, int itemID, int amount)
+        bool StacksDoNotAddUp(int amountOfStacks, int index, int itemID, int amount) // Two rows too long
         {
             bool answer = false;
             if (itemList.Count + amountOfStacks < InvLimit + 1) // Does not exceed itemList+1
@@ -309,8 +309,8 @@ namespace Active
             }
         }
 
-        public int SurrogateKey { get => surrogateKey; set => surrogateKey = value; }
-        public string SurrogateKeyName { get => surrogateKeyName; set => surrogateKeyName = value; }
+        public int SurrogateKey { get => surrogateKey; set => surrogateKey = value; } // Används inte
+        public string SurrogateKeyName { get => surrogateKeyName; set => surrogateKeyName = value; } // Används inte
         public int StackLimit { get => stackLimit;}
         public int InvLimit { get => invLimit;}
     }

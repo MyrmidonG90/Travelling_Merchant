@@ -9,7 +9,7 @@ namespace Active
     class InventoryTemplate
     {
         int id;
-        List<bool> amountNegOrPos;
+        List<bool> amountNegOrPos; // ändra namnet
         List<Item> items;
 
         public InventoryTemplate(int id, List<bool> a, List<Item> i)

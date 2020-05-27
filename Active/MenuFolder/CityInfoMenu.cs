@@ -57,7 +57,7 @@ namespace Active
             return false;
         }
 
-        static public void Draw(SpriteBatch spriteBatch)
+        static public void Draw(SpriteBatch spriteBatch) // Too long
         {
             if (active)
             {

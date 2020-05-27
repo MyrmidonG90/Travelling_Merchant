@@ -58,9 +58,6 @@ namespace Active
 
         static public void Update()
         {
-
-
-
             DebugFunctions();
 
             date = Calendar.TotalDays;

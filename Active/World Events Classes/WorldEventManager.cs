@@ -238,7 +238,7 @@ namespace Active
             }
         }
 
-        static private void ApplyInventory(WorldEvent newWorldEvent)
+        static private void ApplyInventory(WorldEvent newWorldEvent) // Too long
         {
             foreach (InventoryTemplate newInv in inventoryList)
             {
@@ -378,7 +378,7 @@ namespace Active
             }
         }
 
-        static private void CheckNotNeighbors(List<string> targets)
+        static private void CheckNotNeighbors(List<string> targets) // Too long
         {
             bool exit = false;
             bool exitCheck = true;

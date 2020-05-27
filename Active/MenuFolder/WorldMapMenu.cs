@@ -63,7 +63,7 @@ namespace Active
 
         static public void Update(GameTime gameTime)
         {
-            bool temp = false;
+            bool temp = false; // Vad gör temp?
 
             foreach (Button button in cityButtons)
             {
@@ -178,7 +178,7 @@ namespace Active
             }
         }
 
-        static public void LoadCities()
+        static public void LoadCities() // Too long
         {
             ItemList();
             

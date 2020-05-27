@@ -57,12 +57,12 @@ namespace Active
             onGoing = true;
         }
 
-        public void AddText(string text)
+        public void AddText(string text) // Börjar Längst ner
         {
             texts.Add(text);
             textPos.Add( new Vector2(1920 / 2 - font.MeasureString(texts[texts.Count - 1]).X/2, 1080 + textPos.Count * font.MeasureString("I").Y));
         }
-        public void AddText(string text,Vector2 startPos)
+        public void AddText(string text,Vector2 startPos) // Börjar vid start positionen
         {
             texts.Add(text);
             this.startPos = startPos;

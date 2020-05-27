@@ -43,9 +43,9 @@ namespace Active
 
         public bool LeftClick()
         {
-            if (KMReader.mouseState.LeftButton == ButtonState.Pressed && KMReader.prevMouseState.LeftButton == ButtonState.Released) //för att "hitta" exakt när kanppen trycks på
+            if (KMReader.mouseState.LeftButton == ButtonState.Pressed && KMReader.prevMouseState.LeftButton == ButtonState.Released) //för att "hitta" exakt när kanppen trycks på //ONÖDIGT!!!
             {
-                if (KMReader.LeftMouseClick())
+                if (KMReader.LeftMouseClick()) // 
                 {
                     if (hitBox.Contains(KMReader.GetMousePoint()))
                     {

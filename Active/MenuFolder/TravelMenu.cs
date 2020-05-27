@@ -19,7 +19,7 @@ namespace Active
         static string turnDisplay;
 
         static string destination;
-        static string oldLocation;  // Never declared and never used?
+        static string oldLocation;  
         static bool paused;
         static bool test;
         static public bool travelling;

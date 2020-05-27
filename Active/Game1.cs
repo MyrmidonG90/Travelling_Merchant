@@ -109,7 +109,7 @@ namespace Active
         //========================================================================
         //OM DU SKA ÄNDRA GAMESTATE ANVÄND METODERNA SOM FINNS EFTER DRAW METODEN
         //========================================================================
-        protected override void Update(GameTime gameTime)
+        protected override void Update(GameTime gameTime) // Too long
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Back))
                 Exit();
@@ -202,7 +202,7 @@ namespace Active
             base.Update(gameTime);
         }
 
-        protected override void Draw(GameTime gameTime)
+        protected override void Draw(GameTime gameTime) // Too long
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 

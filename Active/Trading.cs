@@ -95,7 +95,7 @@ namespace Active
             back = new Button(20, 20, 80, 80, TextureManager.texBackArrow);
         }
 
-        static public bool Update(ref Inventory participantLeft, ref Inventory participantRight)
+        static public bool Update(ref Inventory participantLeft, ref Inventory participantRight) // Too Long
         {
             //När ett mussklick händer
             if (KMReader.LeftMouseClick())
@@ -167,13 +167,11 @@ namespace Active
                         selected = tempSlot.Item;
                     }
                 }
-
             }
-
             return false;
         }
        
-        static void UpdateSlots()
+        static void UpdateSlots() // 4 rows too long
         {
             for (int i = 0; i < 3; i++)
             {
@@ -304,7 +302,7 @@ namespace Active
             }
         }
 
-        static void ShiftAndMouseClick(ItemSlot[,] slots, Participant participant)
+        static void ShiftAndMouseClick(ItemSlot[,] slots, Participant participant) // Too Long
         {
             if (participant == Participant.Left)
             {
@@ -530,7 +528,7 @@ namespace Active
             return true;
         }
 
-        static public void Draw(SpriteBatch sb)
+        static public void Draw(SpriteBatch sb) // Too long
         {
             sb.Draw(TextureManager.texTradeMenu, new Vector2(190, 144), Color.White);
             foreach (var item in slotsLeft)
