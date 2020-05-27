@@ -72,7 +72,8 @@ namespace Active
                             Player.Inventory.Money -= 100;
                         }
                         EncounterManager.NewTrip();
-
+                        AchievementManager.travelCounter++;
+                        AchievementManager.boatTravelCounter++;
                         return true;
                     }
                 }
@@ -92,7 +93,12 @@ namespace Active
                         turnsLeft = turnsToTravel;
                         turnTimer = timerLength;
 
+                        if (boat[i])
+                        {
+                            Player.Inventory.Money -= 100;
+                        }
                         EncounterManager.NewTrip();
+                        AchievementManager.travelCounter++;
                         return true;
                     }
                 }

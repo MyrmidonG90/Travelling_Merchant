@@ -74,7 +74,7 @@ namespace Active
                 timer -= timePassed;
                 if (timer < 0)
                 {
-                    if (imagePos.X > 1980)
+                    if (imagePos.X > 1980) 
                     {
                         onGoing = false;
                     }
