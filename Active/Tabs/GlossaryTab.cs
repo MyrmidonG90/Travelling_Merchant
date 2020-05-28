@@ -11,6 +11,8 @@ namespace Active
     class GlossaryTab : TabClass
     {
         static Rectangle selectedSlot;
+        static Item selectedItem;
+        static List<Vector2> textInfo;
         static int indexOfSelectedSlot;
         enum Glossary
         {
@@ -24,14 +26,20 @@ namespace Active
             name = "Glossary Tab";
             mainBox = new Rectangle(260, 150, 1400, 880);
             GlossaryManager.Initialize("Item");
+            textInfo = new List<Vector2>();
+            textInfo.Add(new Vector2(1220, 200));
+            textInfo.Add(new Vector2(1100, 310));
+            textInfo.Add(new Vector2(1100, 660));
+            indexOfSelectedSlot = -1;
             currentGlossary = (Glossary)GlossaryManager.GetGlossaryIndex("Item");
         }
         static void Start(string glossary)
         {
             currentGlossary = (Glossary)GlossaryManager.GetGlossaryIndex(glossary);
-
+            textInfo = new List<Vector2>();
+            
             GlossaryManager.InitateGlossary(glossary);
-            indexOfSelectedSlot = -1;
+            
         }
         override public void Update()
         {
@@ -39,12 +47,13 @@ namespace Active
             {
                 if (CheckSlotClick() != -1)
                 {
-                    int tmp = CheckSlotClick();
-                    if (tmp != -1) // Om en slot blir klickad
+                    int indexOfClicked = CheckSlotClick();
+                    if (indexOfClicked != -1) // Om en slot blir klickad
                     {
-                        if (tmp != indexOfSelectedSlot) // Om en slot som inte redan är iklickad blir klickad
+                        if (indexOfClicked != indexOfSelectedSlot) // Om en slot som inte redan är iklickad blir klickad
                         {
-                            indexOfSelectedSlot = tmp;
+                            indexOfSelectedSlot = indexOfClicked;
+                            selectedItem = ItemCreator.CreateItem(indexOfSelectedSlot,0);
                             selectedSlot = new Rectangle(320 + 150 * indexOfSelectedSlot % 5, 210 + 150 * indexOfSelectedSlot / 5, 120, 120);
                         }
                     }
@@ -57,14 +66,20 @@ namespace Active
             GlossaryManager.Draw(sb);
             if (indexOfSelectedSlot != -1)
             {
+                
                 sb.Draw(TextureManager.texSelect, selectedSlot, Color.White);
+                sb.DrawString(TextureManager.font48, selectedItem.Name, textInfo[0], Color.White);
+                sb.DrawString(TextureManager.font32, "Info: \n" + selectedItem.Description, textInfo[1], Color.White);
+                sb.DrawString(TextureManager.font32, "Standard Price: " + selectedItem.BasePrice.ToString() + "c", textInfo[2], Color.White);
             }
+
+
         }
         int CheckSlotClick()
         {
             int counter = 0;
             bool found = false;
-            while (found != false && counter < GlossaryManager.Slots.Count)
+            while (found != true && counter < GlossaryManager.Slots.Count)
             {
                 if (GlossaryManager.Slots[counter].LeftClicked())
                 {

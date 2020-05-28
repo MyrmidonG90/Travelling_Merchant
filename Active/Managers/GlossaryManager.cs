@@ -10,7 +10,7 @@ namespace Active
     static class GlossaryManager
     {
         static List<List<int>> glossaries;
-        /*
+        /* Glossary text file structure
          0. Items
          1. Items Left
          2. Travel Events Occured
@@ -180,9 +180,7 @@ namespace Active
                 {
                     glossaries[i].Clear();
                 }
-            }
-
-            
+            }            
         }
 
         static public void Draw(SpriteBatch sb)
