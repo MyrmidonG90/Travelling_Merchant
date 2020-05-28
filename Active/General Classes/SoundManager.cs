@@ -21,11 +21,7 @@ namespace Active
         {
             bgmCity = content.Load<Song>("Game_RPG_Music_2-AudioTrimmer.com");
             bgmTravel = content.Load<Song>("Game_RPG_Music_1-AudioTrimmer.com");
-        }
-        static public void PlaySound(string sound)
-        {
-            
-        }
+        }        
         static public void PlayMusic()
         {
             MediaPlayer.Play(bgmCity);

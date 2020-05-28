@@ -28,7 +28,7 @@ namespace Active
             }
         }
 
-        public override void Update()
+        public override void Update() // Behövs för inheritance
         {
             
         }

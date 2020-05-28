@@ -24,7 +24,7 @@ namespace Active
             sb.DrawString(TextureManager.font32, "Persuasion: " + Player.ReturnSkillLevel("Persuasion"), new Vector2(400, 500), Color.Black);
         }
 
-        public override void Update()
+        public override void Update() // Behövs pga inheritance
         {
             
         }
