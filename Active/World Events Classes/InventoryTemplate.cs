@@ -9,13 +9,13 @@ namespace Active
     class InventoryTemplate
     {
         int id;
-        List<bool> amountNegOrPos; // ändra namnet
+        List<bool> amountNegativeOrPositive; // ändra namnet
         List<Item> items;
 
         public InventoryTemplate(int id, List<bool> a, List<Item> i)
         {
             this.id = id;
-            amountNegOrPos = a;
+            amountNegativeOrPositive = a;
             items = i;
         }
 
@@ -29,9 +29,9 @@ namespace Active
             get => items;
         }
 
-        public List<bool> AmountNegorPos
+        public List<bool> AmountNegativeOrPositive
         {
-            get => amountNegOrPos;
+            get => amountNegativeOrPositive;
         }
     }
 }
