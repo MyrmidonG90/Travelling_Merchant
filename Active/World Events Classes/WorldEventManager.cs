@@ -415,65 +415,29 @@ namespace Active
             bool exit = true;
             while (exit)
             {
-                
-            }           
-
-            //denna kod funkar inte så om du ser detta säg till My eller ta bort det själv
-            //bool exit = true;
-            //bool exitCheck = true;
-            //while (exit)
-            //{
-            //    exitCheck = true;
-            //    foreach (string tempTarget in targets)
-            //    {
-            //        bool check = false;
-            //        foreach (City tempCity in WorldMapMenu.Cities)
-            //        {
-            //            if (tempCity.Name == tempTarget)
-            //            {
-            //                for (int i = 0; i < 14; i++)
-            //                {
-            //                    if (TravelMenu.RouteNames[i, 0] == tempCity.Name)
-            //                    {
-            //                        if (TravelMenu.RouteNames[i, 1] == tempTarget)
-            //                        {
-            //                            check = true;
-            //                            exitCheck = false;
-            //                        }
-            //                    }
-            //                }
-
-            //                for (int i = 0; i < 14; i++)
-            //                {
-            //                    if (TravelMenu.RouteNames[i, 0] == tempTarget)
-            //                    {
-            //                        if (TravelMenu.RouteNames[i, 1] == tempCity.Name)
-            //                        {
-            //                            check = true;
-            //                            exitCheck = false;
-            //                        }
-            //                    }
-            //                }
-
-            //                if (check)
-            //                {
-            //                    targets.Remove(tempTarget);
-            //                    exitCheck = false;
-            //                    break;
-            //                }
-            //            }
-            //        }
-            //        if (check)
-            //        {
-            //            exitCheck = false;
-            //            break;
-            //        }
-            //    }
-            //    if (exitCheck)
-            //    {
-            //        exit = false;
-            //    }
-            //}
+                bool checkExit = false;
+                foreach (string target in targets)
+                {
+                    bool check = false;
+                    foreach (string checkTarget in targets)
+                    {
+                        if (CheckRoutes(target, checkTarget))
+                        {
+                            check = true;
+                        }
+                    }
+                    if (!check)
+                    {
+                        targets.Remove(target);
+                        checkExit = true;
+                        break;
+                    }
+                }
+                if (!checkExit)
+                {
+                    exit = false;
+                }
+            }                       
         }
 
         static public List<string> EventDesList
