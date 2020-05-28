@@ -52,11 +52,8 @@ namespace Active
         public override void Draw(SpriteBatch sb)
         {
             sb.Draw(TextureManager.texInvMenu, mainBox, Color.White);
-
             sb.DrawString(TextureManager.font24, Player.Inventory.Money.ToString(), new Vector2(440, 958), Color.Black);
             //spriteBatch.Draw(TextureManager.texWhite, inventoryBox, Color.DarkGray);
-
-
             DrawGrid(sb);
 
             if (selected != null)
@@ -84,7 +81,6 @@ namespace Active
                 if (selected.SecondaryCategory != 999)
                 {
                     sb.Draw(TextureManager.texCategories[selected.SecondaryCategory - 1], secCategoryBox, Color.White);
-
                 }
                 if (selected.TertiaryCategory != 999)
                 {

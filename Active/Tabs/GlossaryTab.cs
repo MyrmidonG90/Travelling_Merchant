@@ -24,7 +24,6 @@ namespace Active
             name = "Glossary Tab";
             mainBox = new Rectangle(260, 150, 1400, 880);
             GlossaryManager.Initialize("Item");
-            //GlossaryManager.InitateGlossary("Item");
             currentGlossary = (Glossary)GlossaryManager.GetGlossaryIndex("Item");
         }
         static void Start(string glossary)
@@ -43,7 +42,7 @@ namespace Active
                     int tmp = CheckSlotClick();
                     if (tmp != -1) // Om en slot blir klickad
                     {
-                        if (tmp != indexOfSelectedSlot) // Om en slot som inte redan är iclickad blir clickad
+                        if (tmp != indexOfSelectedSlot) // Om en slot som inte redan är iklickad blir klickad
                         {
                             indexOfSelectedSlot = tmp;
                             selectedSlot = new Rectangle(320 + 150 * indexOfSelectedSlot % 5, 210 + 150 * indexOfSelectedSlot / 5, 120, 120);
