@@ -301,7 +301,7 @@ namespace Active
 
         }
 
-        static bool Scenarios(int eID, int answer)
+        static bool Scenarios(int eID, int answer) //undantagstillstånd längdmässigt vi räknar så att varje case ist har en bra längd
         {
             switch (eID)
             {
@@ -315,7 +315,7 @@ namespace Active
                     {
                         if (TravelScenarios.SkillCheck(1, "Persuasion"))
                         {
-                            Player.Inventory.Money -= 10;
+                            TravelScenarios.ChangeMoney(-10);
                             return true;
                         }
                         
