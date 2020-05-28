@@ -29,6 +29,8 @@ namespace Active
 
         public static int rareItems = 0;
 
+        public static int citiesVisited = 0;
+
         public static bool inCT, inSV, inPMAD, inTomb, inGrove, inMTG;
 
         public static int inventorySpaces = 0;
@@ -145,7 +147,7 @@ namespace Active
             achievements[7].currentAmount = jewels;
             achievements[8].currentAmount = currentCoins;
             achievements[9].currentAmount = spentMoney;
-            //achievements[10].currentAmount = citiesVisited;
+            achievements[10].currentAmount = citiesVisited;
             achievements[11].currentAmount = boatTravelCounter;
         }
        
