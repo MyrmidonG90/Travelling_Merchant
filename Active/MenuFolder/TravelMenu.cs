@@ -59,7 +59,11 @@ namespace Active
                 {
                     if (routeNames[i, 1] == newDestination)
                     {
-                        StartTravelResult(newDestination, i);
+                        if (StartTravelResult(newDestination, i))
+                        {
+                            return true;
+                        }
+                        
                     }
                 }
             }
@@ -70,7 +74,10 @@ namespace Active
                 {
                     if (routeNames[i, 1] == Player.Location)
                     {
-                        StartTravelResult(newDestination, i);
+                        if (StartTravelResult(newDestination, i))
+                        {
+                            return true;
+                        }
                     }
                 }
             }
