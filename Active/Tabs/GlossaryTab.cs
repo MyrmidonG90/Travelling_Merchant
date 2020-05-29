@@ -22,6 +22,7 @@ namespace Active
             WorldEvents
         }
         static Glossary currentGlossary;
+
         public GlossaryTab()
         {
             name = "Glossary Tab";
@@ -38,6 +39,7 @@ namespace Active
             textInfo.Add(new Vector2(1100, 660));
             indexOfSelectedSlot = -1;
             currentGlossary = (Glossary)GlossaryManager.GetGlossaryIndex("Item");
+
         }
         static void Start(string glossary)
         {
@@ -60,24 +62,26 @@ namespace Active
                         {
                             indexOfSelectedSlot = indexOfClicked;
                             selectedItem = ItemCreator.CreateItem(indexOfSelectedSlot,0);
-                            selectedSlot = new Rectangle(320 + 150 * indexOfSelectedSlot % 5, 210 + 150 * indexOfSelectedSlot / 5, 120, 120);
+                            selectedSlot = new Rectangle(320 + 150 * (indexOfSelectedSlot % 5), 210 + 150 * (indexOfSelectedSlot / 5), 120, 120);
                         }
                     }
                 }
             }
         }
+
         override public void Draw(SpriteBatch sb)
         {
             sb.Draw(TextureManager.texInvMenu, mainBox, Color.White);
             GlossaryManager.Draw(sb);
             if (indexOfSelectedSlot != -1)
-            {                
+            {
                 sb.Draw(TextureManager.texSelect, selectedSlot, Color.White);
                 sb.DrawString(TextureManager.font48, selectedItem.Name, textInfo[0], Color.White);
                 sb.DrawString(TextureManager.font32, "Info: \n" + selectedItem.Description, textInfo[1], Color.White);
                 sb.DrawString(TextureManager.font32, "Standard Price: " + selectedItem.BasePrice.ToString() + "c", textInfo[2], Color.White);
             }
         }
+
         int CheckSlotClick()
         {
             int counter = 0;
