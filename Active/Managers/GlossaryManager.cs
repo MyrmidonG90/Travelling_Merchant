@@ -36,7 +36,6 @@ namespace Active
         {
             LoadGlossary();            
             InitiateSlots((Glossary)GetGlossaryIndex(glossary));
-
         }
 
         static public void InitateGlossary(string glossary)
@@ -186,14 +185,15 @@ namespace Active
         static public void Draw(SpriteBatch sb)
         {
             // Draws all Item slots
-            /*for (int i = 0; i < glossaries[(int)currentGlossary].Count; i++)
+            for (int i = 0; i < glossaries[(int)currentGlossary].Count; i++)
             {
                 slots[glossaries[(int)currentGlossary][i]].Draw(sb);
             }
             for (int i = 0; i < glossaries[(int)currentGlossary+1].Count; i++)
             {
                 slots[glossaries[(int)currentGlossary+1][i]].DrawShadow(sb);
-            }*/
+            }
+            /*
             for (int i = 0; i < glossaries[0].Count; i++)
             {
                 slots[glossaries[0][i]].Draw(sb);
@@ -201,7 +201,7 @@ namespace Active
             for (int i = 0; i < glossaries[1].Count; i++)
             {
                 slots[glossaries[1][i]].DrawShadow(sb);
-            }
+            }*/
 
         }
     }
