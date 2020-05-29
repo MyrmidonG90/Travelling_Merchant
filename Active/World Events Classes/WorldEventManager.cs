@@ -23,7 +23,7 @@ namespace Active
         static int oldCounter = 0;
         static int eventCounter = 0;
 
-        static float chance = 4f;
+        static float chance = 90f;
 
         static public void Init()
         {
@@ -194,7 +194,7 @@ namespace Active
         {
             int id = int.Parse(sr.ReadLine());
             int counter = int.Parse(sr.ReadLine());
-            List<bool> amountNegOrPos = new List<bool>();
+            List<bool> amountNegativeOrPositive = new List<bool>();
             List<Item> items = new List<Item>();
             for (int i = 0; i < counter; i++)
             {
@@ -205,14 +205,14 @@ namespace Active
                 items.Add(ItemCreator.CreateItem(itemID, amount));
                 if (data[2] == "-")
                 {
-                    amountNegOrPos.Add(false);
+                    amountNegativeOrPositive.Add(false);
                 }
                 else
                 {
-                    amountNegOrPos.Add(true);
+                    amountNegativeOrPositive.Add(true);
                 }
             }
-            inventoryList.Add(new InventoryTemplate(id, amountNegOrPos, items));
+            inventoryList.Add(new InventoryTemplate(id, amountNegativeOrPositive, items));
         }
 
         static private void ApplyItemModifier(WorldEvent newWorldEvent)
@@ -238,21 +238,21 @@ namespace Active
             }
         }
 
-        static private void ApplyInventory(WorldEvent newWorldEvent) // Too long
+        static private void ApplyInventory(WorldEvent newWorldEvent)
         {
             foreach (InventoryTemplate newInv in inventoryList)
             {
-                if (newInv.ID == newWorldEvent.EffectVal[1])
+                if (newInv.ID == newWorldEvent.EffectVal[1]) //finds the correct inventoryTemplate
                 {
                     foreach (string cityTarget in newWorldEvent.Target)
                     {
                         foreach (City tempCity in WorldMapMenu.Cities)
                         {
-                            if (cityTarget == tempCity.Name)
+                            if (cityTarget == tempCity.Name)//locates the cities that are targeted by the event
                             {
-                                newWorldEvent.OldTemplateInv = new Inventory(tempCity.TemplateInv);
+                                newWorldEvent.OldTemplateInv = new Inventory(tempCity.TemplateInv); //saves the city's old inventory
                                 Inventory newTemplateInv = new Inventory(tempCity.TemplateInv);
-                                for (int i = 0; i < newInv.AmountNegorPos.Count; i++)
+                                for (int i = 0; i < newInv.AmountNegativeOrPositive.Count; i++)
                                 {
                                     Item fixedItem = newInv.Items[i];
                                     int counter = 0;
@@ -261,33 +261,37 @@ namespace Active
                                     {
                                         if (fixedItem.ID == tempCity.TemplateInv.ItemList[j].ID)
                                         {
-                                            counter += tempCity.TemplateInv.ItemList[j].Amount;
+                                            counter += tempCity.TemplateInv.ItemList[j].Amount; //räknar hur många som finns av det itemet i staden (eftersom det ändras procentuellt)
                                         }
                                     }
 
-                                    float temp = (fixedItem.Amount / 100f) * counter;
+                                    float temp = (fixedItem.Amount / 100f) * counter; //konverterar procenten och hur mycket som fanns till ett faktiskt värde
 
                                     fixedItem.Amount = (int)(temp + 0.5f);
 
-                                    if (fixedItem.Amount > 0)
-                                    {
-                                        if (newInv.AmountNegorPos[i])
-                                        {
-                                            newTemplateInv.AddItem(fixedItem);
-                                        }
-                                        else
-                                        {
-                                            newTemplateInv.ReduceAmountOfItems(fixedItem);
-                                        }
-                                    }
+                                    ApplyFixedItem(fixedItem, newTemplateInv, newInv, i);
                                 }
-                                int ih = 0;
                                 tempCity.TemplateInv = new Inventory(newTemplateInv);
                                 tempCity.Traded = true;
                                 tempCity.CheckDate();
                             }
                         }
                     }
+                }
+            }
+        }
+
+        static void ApplyFixedItem(Item fixedItem, Inventory newTemplateInv, InventoryTemplate newInv, int i)
+        {
+            if (fixedItem.Amount > 0)
+            {
+                if (newInv.AmountNegativeOrPositive[i])
+                {
+                    newTemplateInv.AddItem(fixedItem);
+                }
+                else
+                {
+                    newTemplateInv.ReduceAmountOfItems(fixedItem);
                 }
             }
         }
@@ -378,63 +382,62 @@ namespace Active
             }
         }
 
-        static private void CheckNotNeighbors(List<string> targets) // Too long
+        static bool CheckRoutes(string target, string target2)
         {
-            bool exit = false;
-            bool exitCheck = true;
+            int j = 0;
+            for (int i = 0; i < 14; i++)
+            {
+                if (TravelMenu.RouteNames[i, 0] == target2)
+                {
+                    if (TravelMenu.RouteNames[i, 1] == target)
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            for (int i = 0; i < 14; i++)
+            {
+                if (TravelMenu.RouteNames[i, 0] == target)
+                {
+                    if (TravelMenu.RouteNames[i, 1] == target2)
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        }
+
+        static void CheckNotNeighbors(List<string> targets)
+        {
+            bool exit = true;
             while (exit)
             {
-                exitCheck = true;
-                foreach (string tempTarget in targets)
+                bool checkExit = false;
+                foreach (string target in targets)
                 {
                     bool check = false;
-                    foreach (City tempCity in WorldMapMenu.Cities)
+                    foreach (string checkTarget in targets)
                     {
-                        if (tempCity.Name == tempTarget)
+                        if (CheckRoutes(target, checkTarget))
                         {
-                            for (int i = 0; i < 14; i++)
-                            {
-                                if (TravelMenu.RouteNames[i, 0] == tempCity.Name)
-                                {
-                                    if (TravelMenu.RouteNames[i, 1] == tempTarget)
-                                    {
-                                        check = true;
-                                        exitCheck = false;
-                                    }
-                                }
-                            }
-
-                            for (int i = 0; i < 14; i++)
-                            {
-                                if (TravelMenu.RouteNames[i, 0] == tempTarget)
-                                {
-                                    if (TravelMenu.RouteNames[i, 1] == tempCity.Name)
-                                    {
-                                        check = true;
-                                        exitCheck = false;
-                                    }
-                                }
-                            }
-
-                            if (!check)
-                            {
-                                targets.Remove(tempTarget);
-                                exitCheck = false;
-                                break;
-                            }
+                            check = true;
                         }
                     }
-                    if (check)
+                    if (!check)
                     {
-                        exitCheck = false;
+                        targets.Remove(target);
+                        checkExit = true;
                         break;
                     }
                 }
-                if (exitCheck)
+                if (!checkExit)
                 {
-                    exit = true;
+                    exit = false;
                 }
-            }
+            }                       
         }
 
         static public List<string> EventDesList
