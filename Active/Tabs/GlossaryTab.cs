@@ -13,6 +13,7 @@ namespace Active
         static Rectangle selectedSlot;
         static Item selectedItem;
         static List<Vector2> textInfo;
+        static Rectangle[] categoryRects;
         static int indexOfSelectedSlot;
         enum Glossary
         {
@@ -27,6 +28,11 @@ namespace Active
             mainBox = new Rectangle(260, 150, 1400, 880);
             GlossaryManager.Initialize("Item");
             textInfo = new List<Vector2>();
+            categoryRects = new Rectangle[3];
+            categoryRects[0] = new Rectangle(1130, 760, 120, 120);
+            categoryRects[1] = new Rectangle(1310, 760, 120, 120);
+            categoryRects[2] = new Rectangle(1490, 760, 120, 120);
+
             textInfo.Add(new Vector2(1220, 200));
             textInfo.Add(new Vector2(1100, 310));
             textInfo.Add(new Vector2(1100, 660));
@@ -65,15 +71,12 @@ namespace Active
             sb.Draw(TextureManager.texInvMenu, mainBox, Color.White);
             GlossaryManager.Draw(sb);
             if (indexOfSelectedSlot != -1)
-            {
-                
+            {                
                 sb.Draw(TextureManager.texSelect, selectedSlot, Color.White);
                 sb.DrawString(TextureManager.font48, selectedItem.Name, textInfo[0], Color.White);
                 sb.DrawString(TextureManager.font32, "Info: \n" + selectedItem.Description, textInfo[1], Color.White);
                 sb.DrawString(TextureManager.font32, "Standard Price: " + selectedItem.BasePrice.ToString() + "c", textInfo[2], Color.White);
             }
-
-
         }
         int CheckSlotClick()
         {
