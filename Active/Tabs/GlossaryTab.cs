@@ -23,11 +23,11 @@ namespace Active
         }
         static Glossary currentGlossary;
 
-        public GlossaryTab()
+        public GlossaryTab(string tabName, string glossary)
         {
-            name = "Glossary Tab";
+            name = tabName;
             mainBox = new Rectangle(260, 150, 1400, 880);
-            GlossaryManager.Initialize("Item");
+            GlossaryManager.Initialize(glossary);
             textInfo = new List<Vector2>();
             categoryRects = new Rectangle[3];
             categoryRects[0] = new Rectangle(1130, 760, 120, 120);
@@ -38,7 +38,7 @@ namespace Active
             textInfo.Add(new Vector2(1100, 310));
             textInfo.Add(new Vector2(1100, 660));
             indexOfSelectedSlot = -1;
-            currentGlossary = (Glossary)GlossaryManager.GetGlossaryIndex("Item");
+            currentGlossary = (Glossary)GlossaryManager.GetGlossaryIndex(glossary);
 
         }
         static void Start(string glossary)
@@ -46,8 +46,7 @@ namespace Active
             currentGlossary = (Glossary)GlossaryManager.GetGlossaryIndex(glossary);
             textInfo = new List<Vector2>();
             
-            GlossaryManager.InitateGlossary(glossary);
-            
+            GlossaryManager.InitateGlossary(glossary);            
         }
         override public void Update()
         {

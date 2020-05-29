@@ -107,7 +107,7 @@ namespace Active
             tabMenus.Add(new InventoryTab());
             tabMenus.Add(new SkillTab());
             tabMenus.Add(new AchievementTab());
-            tabMenus.Add(new GlossaryTab());
+            tabMenus.Add(new GlossaryTab("Item Tab","Item"));
         }
         void CheckTabClick()
         {

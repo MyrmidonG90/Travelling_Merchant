@@ -34,7 +34,7 @@ namespace Active
 
         static public void Initialize(string glossary)
         {
-            LoadGlossary();            
+            LoadGlossary();
             InitiateSlots((Glossary)GetGlossaryIndex(glossary));
         }
 
@@ -95,11 +95,17 @@ namespace Active
         }
         static void InitiateTravelEncountersSlots()
         {
-            
+            for (int i = 0; i < EncounterManager.Events.Count; i++)
+            {
+                //slots[i].AddTexture();
+            }
         }
         static void InitiateWorlEventsSlots()
         {
-            
+            for (int i = 0; i < 3; i++)
+            {
+                slots[i].AddTexture(TextureManager.texWorldEventIcons[i]);
+            }
         }
 
         static public void UpdateGlossary(string glossary)

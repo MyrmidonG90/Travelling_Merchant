@@ -86,10 +86,12 @@ namespace Active
         //Items
         static public Texture2D texArmourFine, texArmourMagic, texArmourNormal, texCarrot, texCotton, texDragonScale, texFur, texGoldIngot, texGoldOre, texGryphonMeat, texIronIngot, texIronOre, texDiamond, texEmerald, texRuby, texLumber, texPotato, texPotion, texSilk, texSpices, texStone, texWeaponFine, texWeaponMagic, texWeaponNormal, texWhaleMeat;
 
+        //Lists
         static public List<Texture2D> texItems;
         static public List<Texture2D> texCities;
         static public List<Texture2D> texCategories;
         static public List<Texture2D> texTabs;
+        static public List<Texture2D> texWorldEventIcons;
 
         static public void LoadContent(ContentManager content)
         {
@@ -227,6 +229,7 @@ namespace Active
             InitiateItemList();
             InitiateCategoryList();
             InitializeTabList();
+            InitiateWorldEventIcons();
         }
         static void InitiateCityList()
         {
@@ -283,6 +286,13 @@ namespace Active
             texTabs.Add(texSkillTab);
             texTabs.Add(texSkillTab);
             texTabs.Add(texSkillTab);
+        }
+        static void InitiateWorldEventIcons()
+        {
+            texWorldEventIcons = new List<Texture2D>();
+            texWorldEventIcons.Add(texIconEventWar);
+            texWorldEventIcons.Add(texIconEventPlague);
+            texWorldEventIcons.Add(texIconEventGoodHarvest);            
         }
     }
 }
