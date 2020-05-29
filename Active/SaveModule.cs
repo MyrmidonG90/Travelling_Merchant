@@ -28,25 +28,7 @@ namespace Active
             StreamWriter streamWriter = new StreamWriter(ToSafeFileName(path), false);
 
             streamWriter.WriteLine(ver);
-
-            streamWriter.WriteLine(AchievementManager.boughtCarrots.ToString());
-            streamWriter.WriteLine(AchievementManager.totalCoins.ToString());
-            streamWriter.WriteLine(AchievementManager.travelCounter.ToString());
-            streamWriter.WriteLine(AchievementManager.spentMoney.ToString());
-
-            foreach (Achievement achievement in AchievementManager.achievements)
-            {
-                if (achievement.complete)
-                {
-                    streamWriter.WriteLine('1');
-                }
-                else
-                {
-                    streamWriter.WriteLine('0');
-                }
-            }
-
-
+            SaveAchievements(streamWriter);
             streamWriter.WriteLine(gameState);
             streamWriter.WriteLine(Calendar.TotalDays);
             streamWriter.WriteLine(location);
@@ -63,7 +45,6 @@ namespace Active
                 }
             }
 
-
             int[] temp = Player.SkillLevels;
             for (int i = 0; i < 3; i++)
             {
@@ -71,13 +52,17 @@ namespace Active
             }
             streamWriter.WriteLine(CharCreationMenu.ConfirmedAvatar);
 
-            streamWriter.WriteLine(inventory.Money);
-            streamWriter.WriteLine(inventory.ItemList.Count);
+            SaveInventory(streamWriter, inventory);
 
-            foreach (Item tempItem in inventory.ItemList)
-            {
-                streamWriter.WriteLine(tempItem.ToString());
-            }
+            SaveIfTravelling(streamWriter);
+            
+            streamWriter.Close();
+
+            return true;
+        }
+
+        static void SaveIfTravelling(StreamWriter streamWriter)
+        {
             if (Player.Location != TravelMenu.Destination)
             {
                 streamWriter.WriteLine('1');
@@ -88,9 +73,37 @@ namespace Active
             {
                 streamWriter.WriteLine('0');
             }
-            streamWriter.Close();
+        }
 
-            return true;
+        static void SaveInventory(StreamWriter streamWriter, Inventory inventory)
+        {
+            streamWriter.WriteLine(inventory.Money);
+            streamWriter.WriteLine(inventory.ItemList.Count);
+
+            foreach (Item tempItem in inventory.ItemList)
+            {
+                streamWriter.WriteLine(tempItem.ToString());
+            }
+        }
+
+        static void SaveAchievements(StreamWriter streamWriter)
+        {
+            streamWriter.WriteLine(AchievementManager.boughtCarrots.ToString());
+            streamWriter.WriteLine(AchievementManager.totalCoins.ToString());
+            streamWriter.WriteLine(AchievementManager.travelCounter.ToString());
+            streamWriter.WriteLine(AchievementManager.spentMoney.ToString());
+
+            foreach (Achievement achievement in AchievementManager.achievements)
+            {
+                if (achievement.complete)
+                {
+                    streamWriter.WriteLine('1');
+                }
+                else
+                {
+                    streamWriter.WriteLine('0');
+                }
+            }
         }
 
         //==================================================================================
@@ -112,24 +125,7 @@ namespace Active
 
             if (streamReader.ReadLine() == ver)
             {
-
-                AchievementManager.boughtCarrots = int.Parse(streamReader.ReadLine());
-                AchievementManager.totalCoins = int.Parse(streamReader.ReadLine());
-                AchievementManager.travelCounter = int.Parse(streamReader.ReadLine());
-                AchievementManager.spentMoney = int.Parse(streamReader.ReadLine());
-
-                foreach (Achievement achievement in AchievementManager.achievements)
-                {
-                    string temp = streamReader.ReadLine();
-                    if (temp == "1")
-                    {
-                        achievement.complete = true;
-                    }
-                    else if(temp == "0")
-                    {
-                        achievement.complete = false;
-                    }
-                }
+                LoadAchievements(streamReader);
 
                 string[] data = new string[3];
                 data[0] = streamReader.ReadLine();
@@ -160,6 +156,27 @@ namespace Active
         //==================================================================================
         //OM DU ÄNDRAR HUR SPELET SPARAR SÅ ***MÅSTE*** DU ÄNDRA VÄRDET I ver
         //==================================================================================
+
+        static void LoadAchievements(StreamReader streamReader)
+        {
+            AchievementManager.boughtCarrots = int.Parse(streamReader.ReadLine());
+            AchievementManager.totalCoins = int.Parse(streamReader.ReadLine());
+            AchievementManager.travelCounter = int.Parse(streamReader.ReadLine());
+            AchievementManager.spentMoney = int.Parse(streamReader.ReadLine());
+
+            foreach (Achievement achievement in AchievementManager.achievements)
+            {
+                string temp = streamReader.ReadLine();
+                if (temp == "1")
+                {
+                    achievement.complete = true;
+                }
+                else if (temp == "0")
+                {
+                    achievement.complete = false;
+                }
+            }
+        }
 
         //skamlöst stulen från the interwebs 
         //https://stackoverflow.com/questions/7348768/the-given-paths-format-is-not-supported

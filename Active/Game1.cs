@@ -250,13 +250,15 @@ namespace Active
                 Calendar.Draw(spriteBatch);
             }
 
+            CityInfoMenu.Draw(spriteBatch);
+
             if (eventLog)
             {
                 EventLog.Draw(spriteBatch);
             }
 
             OptionsMenu.Draw(spriteBatch, options);
-            CityInfoMenu.Draw(spriteBatch);
+
             EndCredits.Draw(spriteBatch);//////////////////////////////
             LevelUp.Draw(spriteBatch);/////////////////////////////////
             spriteBatch.End();
