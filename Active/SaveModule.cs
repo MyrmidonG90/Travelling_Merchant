@@ -115,7 +115,7 @@ namespace Active
                     {
                         achievement.complete = true;
                     }
-                    else if(temp == "0")
+                    else if (temp == "0")
                     {
                         achievement.complete = false;
                     }
@@ -132,7 +132,7 @@ namespace Active
                 int check = int.Parse(streamReader.ReadLine());
                 if (check == 1)
                 {
-                    
+
                     data[1] = streamReader.ReadLine();
                     data[2] = streamReader.ReadLine();
                     streamReader.Close();
@@ -141,7 +141,7 @@ namespace Active
 
                 streamReader.Close();
                 AchievementManager.LoadAchievements();
-                return data;               
+                return data;             
             }
             return null;
         }
@@ -152,6 +152,27 @@ namespace Active
         //==================================================================================
         //OM DU ÄNDRAR HUR SPELET SPARAR SÅ ***MÅSTE*** DU ÄNDRA VÄRDET I ver
         //==================================================================================
+
+        static void LoadAchievements(StreamReader streamReader)
+        {
+            AchievementManager.boughtCarrots = int.Parse(streamReader.ReadLine());
+            AchievementManager.totalCoins = int.Parse(streamReader.ReadLine());
+            AchievementManager.travelCounter = int.Parse(streamReader.ReadLine());
+            AchievementManager.spentMoney = int.Parse(streamReader.ReadLine());
+
+            foreach (Achievement achievement in AchievementManager.achievements)
+            {
+                string temp = streamReader.ReadLine();
+                if (temp == "1")
+                {
+                    achievement.complete = true;
+                }
+                else if (temp == "0")
+                {
+                    achievement.complete = false;
+                }
+            }
+        }
 
         //skamlöst stulen från the interwebs 
         //https://stackoverflow.com/questions/7348768/the-given-paths-format-is-not-supported
