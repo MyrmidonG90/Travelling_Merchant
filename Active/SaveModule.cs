@@ -21,28 +21,14 @@ namespace Active
         //==================================================================================
         //OM DU ÄNDRAR HUR SPELET SPARAR SÅ ***MÅSTE*** DU ÄNDRA VÄRDET I ver
         //==================================================================================
-        static string ver = "1.5.0";
-        static public bool GenerateSave(Inventory inventory, string location, string gameState) // Too long
+        static string ver = "1.5.1";
+        static public bool GenerateSave(Inventory inventory, string location, string gameState)
         {
             string path = Path.Combine("./Saves/", "Save-" + DateTime.Now.ToString() + ".ptmsave");
             StreamWriter streamWriter = new StreamWriter(ToSafeFileName(path), false);
 
             streamWriter.WriteLine(ver);
-
-            foreach (Achievement achievement in AchievementManager.achievements)
-            {
-                if (achievement.complete)
-                {
-                    streamWriter.WriteLine('1');
-                }
-                else
-                {
-                    streamWriter.WriteLine('0');
-                }
-                streamWriter.WriteLine(achievement.currentAmount.ToString());
-            }
-
-
+            SaveAchievements(streamWriter);          
             streamWriter.WriteLine(gameState);
             streamWriter.WriteLine(Calendar.TotalDays);
             streamWriter.WriteLine(location);
@@ -67,13 +53,17 @@ namespace Active
             }
             streamWriter.WriteLine(CharCreationMenu.ConfirmedAvatar);
 
-            streamWriter.WriteLine(inventory.Money);
-            streamWriter.WriteLine(inventory.ItemList.Count);
+            SaveInventory(streamWriter, inventory);
 
-            foreach (Item tempItem in inventory.ItemList)
-            {
-                streamWriter.WriteLine(tempItem.ToString());
-            }
+            SaveIfTravelling(streamWriter);
+            
+            streamWriter.Close();
+
+            return true;
+        }
+
+        static void SaveIfTravelling(StreamWriter streamWriter)
+        {
             if (Player.Location != TravelMenu.Destination)
             {
                 streamWriter.WriteLine('1');
@@ -84,9 +74,33 @@ namespace Active
             {
                 streamWriter.WriteLine('0');
             }
-            streamWriter.Close();
+        }
 
-            return true;
+        static void SaveInventory(StreamWriter streamWriter, Inventory inventory)
+        {
+            streamWriter.WriteLine(inventory.Money);
+            streamWriter.WriteLine(inventory.ItemList.Count);
+
+            foreach (Item tempItem in inventory.ItemList)
+            {
+                streamWriter.WriteLine(tempItem.ToString());
+            }
+        }
+
+        static void SaveAchievements(StreamWriter streamWriter)
+        {
+            foreach (Achievement achievement in AchievementManager.achievements)
+            {
+                if (achievement.complete)
+                {
+                    streamWriter.WriteLine('1');
+                }
+                else
+                {
+                    streamWriter.WriteLine('0');
+                }
+                streamWriter.WriteLine(achievement.currentAmount.ToString());
+            }
         }
 
         //==================================================================================
@@ -96,7 +110,7 @@ namespace Active
         //==================================================================================
         //OM DU ÄNDRAR HUR SPELET SPARAR SÅ ***MÅSTE*** DU ÄNDRA VÄRDET I ver
         //==================================================================================
-        static public string[] LoadSave() // Too long
+        static public string[] LoadSave()
         {
             Inventory tempInv = new Inventory(0);
             StreamReader streamReader = InitLoadSave();
@@ -108,20 +122,7 @@ namespace Active
 
             if (streamReader.ReadLine() == ver)
             {
-                foreach (Achievement achievement in AchievementManager.achievements)
-                {
-                    string temp = streamReader.ReadLine();
-                    if (temp == "1")
-                    {
-                        achievement.complete = true;
-                    }
-                    else if (temp == "0")
-                    {
-                        achievement.complete = false;
-                    }
-                    achievement.currentAmount = int.Parse(streamReader.ReadLine());
-                }
-
+                LoadAchievements(streamReader);
                 string[] data = new string[3];
                 data[0] = streamReader.ReadLine();
                 Calendar.TotalDays = int.Parse(streamReader.ReadLine());
@@ -155,11 +156,6 @@ namespace Active
 
         static void LoadAchievements(StreamReader streamReader)
         {
-            AchievementManager.boughtCarrots = int.Parse(streamReader.ReadLine());
-            AchievementManager.totalCoins = int.Parse(streamReader.ReadLine());
-            AchievementManager.travelCounter = int.Parse(streamReader.ReadLine());
-            AchievementManager.spentMoney = int.Parse(streamReader.ReadLine());
-
             foreach (Achievement achievement in AchievementManager.achievements)
             {
                 string temp = streamReader.ReadLine();
@@ -171,6 +167,7 @@ namespace Active
                 {
                     achievement.complete = false;
                 }
+                achievement.currentAmount = int.Parse(streamReader.ReadLine());
             }
         }
 
