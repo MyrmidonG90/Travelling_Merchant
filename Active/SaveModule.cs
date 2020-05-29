@@ -21,18 +21,13 @@ namespace Active
         //==================================================================================
         //OM DU ÄNDRAR HUR SPELET SPARAR SÅ ***MÅSTE*** DU ÄNDRA VÄRDET I ver
         //==================================================================================
-        static string ver = "1.4.1";
+        static string ver = "1.5.0";
         static public bool GenerateSave(Inventory inventory, string location, string gameState) // Too long
         {
             string path = Path.Combine("./Saves/", "Save-" + DateTime.Now.ToString() + ".ptmsave");
             StreamWriter streamWriter = new StreamWriter(ToSafeFileName(path), false);
 
             streamWriter.WriteLine(ver);
-
-            streamWriter.WriteLine(AchievementManager.boughtCarrots.ToString());
-            streamWriter.WriteLine(AchievementManager.totalCoins.ToString());
-            streamWriter.WriteLine(AchievementManager.travelCounter.ToString());
-            streamWriter.WriteLine(AchievementManager.spentMoney.ToString());
 
             foreach (Achievement achievement in AchievementManager.achievements)
             {
@@ -44,6 +39,7 @@ namespace Active
                 {
                     streamWriter.WriteLine('0');
                 }
+                streamWriter.WriteLine(achievement.currentAmount.ToString());
             }
 
 
@@ -112,12 +108,6 @@ namespace Active
 
             if (streamReader.ReadLine() == ver)
             {
-
-                AchievementManager.boughtCarrots = int.Parse(streamReader.ReadLine());
-                AchievementManager.totalCoins = int.Parse(streamReader.ReadLine());
-                AchievementManager.travelCounter = int.Parse(streamReader.ReadLine());
-                AchievementManager.spentMoney = int.Parse(streamReader.ReadLine());
-
                 foreach (Achievement achievement in AchievementManager.achievements)
                 {
                     string temp = streamReader.ReadLine();
@@ -129,6 +119,7 @@ namespace Active
                     {
                         achievement.complete = false;
                     }
+                    achievement.currentAmount = int.Parse(streamReader.ReadLine());
                 }
 
                 string[] data = new string[3];
@@ -149,6 +140,7 @@ namespace Active
                 }
 
                 streamReader.Close();
+                AchievementManager.LoadAchievements();
                 return data;               
             }
             return null;

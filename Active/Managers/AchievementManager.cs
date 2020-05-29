@@ -13,7 +13,7 @@ namespace Active
 
         public static int boughtCarrots = 0;
 
-        public static int totalCoins = 0;
+        public static int totalCoinsEarned = 0;
 
         public static int travelCounter = 0;
 
@@ -41,12 +41,12 @@ namespace Active
 
 
 
-        public static void LoadAchievements()
+        public static void CreateAchievements()
         {
             achievements[0] = new Achievement("Carrot Hunter", "Own 100 carrots", "0/100", false,0, 100);
             achievements[1] = new Achievement("Insane Wealth", "Have 100,000 coins in your inventory", "0/100000", false,0, 100000);
             achievements[2] = new Achievement("On the road again", "Travel 50 times", "0/50", false, 0, 50);
-            achievements[3] = new Achievement("Investor", "Spend 1,000,000 coins in total", "0/1000000", false, 0, 1000000);
+            achievements[3] = new Achievement("Investor", "Spend a total of 1,000,000 coins in trades", "0/1000000", false, 0, 1000000);
             achievements[4] = new Achievement("Treasure Finder", "Obtain a rare item", "0/1", false, 0, 1);
             achievements[5] = new Achievement("Treasure Hunter", "Obtain every rare item", "0/4", false, 0, 4);
             achievements[6] = new Achievement("Fat stash", "Have a full inventory", "0/25", false, 0, 25);
@@ -57,24 +57,31 @@ namespace Active
             achievements[11] = new Achievement("On the boat again", "Travel over the sea 10 times", "0/10", false, 0, 10);
         }
 
-        public static void ChangeAchievements()
+        public static void LoadAchievements()
+        {
+            boughtCarrots = achievements[0].currentAmount;
+            currentCoins = achievements[1].currentAmount;
+            travelCounter = achievements[2].currentAmount;
+            spentMoney = achievements[3].currentAmount;
+            rareItems = achievements[4].currentAmount;
+            rareItems = achievements[5].currentAmount;
+            inventorySpaces = achievements[6].currentAmount;
+            jewels = achievements[7].currentAmount;
+            currentCoins = achievements[8].currentAmount;
+            totalCoinsEarned = achievements[9].currentAmount;
+            citiesVisited = achievements[10].currentAmount;
+            boatTravelCounter = achievements[11].currentAmount;
+        }
+
+
+            public static void ChangeAchievements()
         {
             foreach (Achievement achievement in achievements)
             {
                 if(achievement.currentAmount >= achievement.maxAmount)
                 {
-                    achievement.progress = achievement.maxAmount.ToString() + "/" + achievement.maxAmount.ToString();
-                }
-                else
-                {
-                    achievement.progress = achievement.currentAmount.ToString() + "/" + achievement.maxAmount.ToString();
-                }
-
-                if (achievement.currentAmount >= achievement.maxAmount)
-                {
                     achievement.complete = true;
                 }
-
             }
         }
 
@@ -146,9 +153,21 @@ namespace Active
             achievements[6].currentAmount = inventorySpaces;
             achievements[7].currentAmount = jewels;
             achievements[8].currentAmount = currentCoins;
-            achievements[9].currentAmount = spentMoney;
+            achievements[9].currentAmount = totalCoinsEarned;
             achievements[10].currentAmount = citiesVisited;
             achievements[11].currentAmount = boatTravelCounter;
+
+            foreach (Achievement achievement in achievements)
+            {
+                if (achievement.complete)
+                {
+                    achievement.progress = achievement.maxAmount.ToString() + "/" + achievement.maxAmount.ToString();
+                }
+                else if(!achievement.complete)
+                {
+                    achievement.progress = achievement.currentAmount + "/" + achievement.maxAmount;
+                }
+            }
         }
        
 
