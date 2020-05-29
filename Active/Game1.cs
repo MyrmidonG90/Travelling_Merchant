@@ -345,10 +345,12 @@ namespace Active
             if (cityMenu.CheckInvButton())
             {
                 ChangeGameState(GameState.InventoryMenu);
+                CityInfoMenu.Active = false;
             }
             if (cityMenu.CheckTradeButton())
             {
                 ChangeGameState(GameState.TradeMenu);
+                CityInfoMenu.Active = false;
                 string tmp = "";
                 foreach (City tempCity in WorldMapMenu.Cities)
                 {
@@ -364,6 +366,7 @@ namespace Active
             if (cityMenu.CheckMapButton())
             {
                 ChangeGameState(GameState.MapMenu);
+                CityInfoMenu.Active = false;
             }
         }
 
@@ -377,19 +380,20 @@ namespace Active
                 if (TravelMenu.StartTravel(temp))
                 {
                     ChangeGameState(GameState.TravelMenu);
+                    CityInfoMenu.Active = false;
                 }
             }
-
-
 
             if (WorldMapMenu.inventoryButton.LeftClick())
             {
                 ChangeGameState(GameState.InventoryMenu);
+                CityInfoMenu.Active = false;
             }
 
             if (WorldMapMenu.returnButton.LeftClick())
             {
                 RevertGameState();
+                CityInfoMenu.Active = false;
             }
         }
 
