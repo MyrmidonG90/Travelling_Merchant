@@ -72,7 +72,7 @@ namespace Active
             ItemCreator.LoadItemData();
             SoundManager.LoadSounds(Content);
             //SoundManager.PlayMusic();
-            AchievementManager.LoadAchievements();
+            AchievementManager.CreateAchievements();
             Player.Init();
             MainMenuManager.Init();
             OptionsMenu.Init();
