@@ -1,5 +1,5 @@
 Carrot Town
-Carrot Town is the great city of carrots.;Its agricultural roots can be traced ;thousands of years! There is no better ;place to buy fruits, vegetables ;and, of course, carrots.
+Carrot Town is the great city of ;carrots. Its agricultural roots can ;be traced thousands of years! There ;is no better place to buy fruits, ;vegetables and, of course, ;carrots.
 280,480
 0,3
 1,5

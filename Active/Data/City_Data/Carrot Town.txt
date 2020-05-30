@@ -1,8 +1,5 @@
-4000
-22
-Carrot;50
-Carrot;50
-Carrot;50
+6000
+17
 Carrot;50
 Carrot;50
 Carrot;50
@@ -11,14 +8,12 @@ Carrot;50
 Carrot;36
 Potato;50
 Potato;50
-Potato;50
 Potato;21
 Silk;50
 Silk;17
 Cotton;33
 Fur;50
 Fur;19
-Lumber;50
 Lumber;50
 Lumber;50
 Lumber;19

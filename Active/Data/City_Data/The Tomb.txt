@@ -1,20 +1,15 @@
 ﻿6660
-18
-Potato;8
-Iron Ingot;12
-Iron Ore;31
-Gold Ingot;24
-Gold Ore;8
+13
+Potato;10
+Potions;50
+Potions;30
 Ruby;13
 Emerald;7
-Diamond;4
-Stone;33
-Simple Weapons;14
-Simple Armour;2
-Fine Weapons;4
-Fine Armour;2
-Magic Weapons;13
-Magic Armour;15
-Whale Meat;21
-Gryphon Meat;14
-Dragon Scale;22
+Stone;50
+Stone;50
+Stone;21
+Simple Weapons;24
+Simple Armour;48
+Magic Weapons;32
+Magic Armour;20
+Whale Meat;8

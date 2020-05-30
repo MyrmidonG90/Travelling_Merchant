@@ -1,26 +1,26 @@
 25
-Carrot|20|0|1|999|999|The Carrot has no natural ;predators..;Except for rabbits.
-Potato|40|0|1|999|999|Potatoes are apex hunters. ;They just can't prove it due ;to their lack of strong arms.
-Iron Ingot|100|0|2|999|999|An iron ingot what did you ;expect?
+Carrot|20|0|1|999|999|The Carrot has no ;natural predators...;Except for rabbits.
+Potato|40|0|1|999|999|Potatoes are apex ;hunters. They just ;can't prove it due to ;their lack of strong ;arms.
+Iron Ingot|100|0|2|999|999|An iron ingot what did ;you expect?
 Iron Ore|60|0|2|3|999|The perfect mineral if ;you love heavy metal! ;YEEAH! \m/
-Gold Ingot|300|1|2|7|999|A rare metal used to craft ;artifacts, jewelry and ;for some reason clocks
-Gold Ore|200|1|2|3|7|You can tell it's gold ;when it's a little bit;shinier than other rocks.
-Ruby|400|1|7|999|999|Many years ago the royal ;house decided that all rubys ;must have the shape of ;a raindrop.
-Emerald|500|1|7|999|999|Unlike its red counterpart ;the ruby, this gem is ;actually green.
-Diamond|600|2|6|999|999|Shine bright like a diamond.
-Fur|80|0|4|3|999|Gathered from an animal.;Not clear what animal.
-Silk|240|1|4|8|999|Can be used for fishing, ;tailoring and as dental ;floss.
+Gold Ingot|300|1|2|7|999|A rare metal used to ;craft artifacts, ;jewelry and clocks ;for some reason.
+Gold Ore|200|1|2|3|7|You can tell it's gold ;when it's a little bit;shinier than other ;rocks.
+Ruby|400|1|7|999|999|Many years ago the ;royal house decided ;that all rubys must ;have the shape of ;a raindrop.
+Emerald|500|1|7|999|999|Unlike its red ;counterpart the ruby, ;this gem is actually ;green.
+Diamond|600|2|6|7|999|Shine bright like a ;diamond.
+Fur|80|0|4|3|999|Gathered from an ;animal. Not clear ;what animal.
+Silk|240|1|4|8|999|Can be used for ;fishing, tailoring and ;as dental floss.
 Cotton|120|0|4|3|999|Very fluffy. ;You could die.
-Lumber|50|0|3|999|999|Don't underestimate ;the power of nature.
-Stone|40|0|3|999|999|One rank higher than rock.
+Lumber|50|0|3|999|999|Do not underestimate ;the power of nature.
+Stone|40|0|3|999|999|One rank higher than ;rock.
 Simple Weapons|120|0|5|8|999|Is that rust?
-Simple Armour|180|0|5|8|999|May protect you in battle..;No promises though.
-Fine Weapons|240|1|5|8|999|Cut a man with a sword and ;he will never cross you ;again. But cut a man with a ;fine sword and he will ;never cross anyone again.
-Fine Armour|360|1|5|8|999|A pretty good armour that ;has pretty good protection.
-Magic Weapons|480|2|5|8|6|Weak mages cast spells. ;Badass mages use swords.
-Magic Armour|720|2|5|8|6|Enchanted armour sets are ;always shiny for unknown ;reasons.
-Whale Meat|500|1|1|999|999|On the one hand it is ;horrible to kill these ;magestic creatures but ;on the other they have ;such a magical taste.
+Simple Armour|180|0|5|8|999|May protect you in ;battle... ;No promises though.
+Fine Weapons|240|1|5|8|999|Can cut through flesh, ;bone and butter as ;if it were made out ;of butter.
+Fine Armour|360|1|5|8|999|A pretty good armour ;that has pretty ;good protection.
+Magic Weapons|480|2|5|8|6|Weak mages cast ;spells. ;Badass mages use ;swords.
+Magic Armour|720|2|5|8|6|Enchanted armour ;sets are always ;shiny for unknown ;reasons.
+Whale Meat|500|1|1|999|999|On the one hand it is ;horrible to kill these ;magestic creatures ;but on the other they ;have such a magical ;taste.
 Gryphon Meat|2000|2|1|6|999|Can be cooked and ;fried at the innkeep KFG - ;Kingdom Fried Gryphon
-Dragon Scale|5000|2|6|7|999|Everyone wants one for ;some reason. no matter ;how dangerous they are ;to obtain.
-Spices|480|1|1|7|999|The sworn enemy of salt.
-Potions|720|1|6|999|999|The ingredients are phoenix ;feathers, royal rogue flower ;and red food coloring.
+Dragon Scale|5000|2|6|7|999|Everyone wants one ;for some reason. no ;matter how dangerous ;they are to obtain.
+Spices|480|1|1|7|999|The sworn enemy of ;salt.
+Potions|720|1|6|999|999|The ingredients are ;phoenix feathers, ;royal rogue flower ;and red food coloring.

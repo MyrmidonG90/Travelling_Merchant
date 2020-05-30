@@ -1,5 +1,5 @@
 ﻿12000
-12
+10
 Potato;30
 Iron Ingot;21
 Iron Ore;22
@@ -7,8 +7,6 @@ Emerald;4
 Diamond;3
 Silk;12
 Cotton;22
-Whale Meat;2
 Gryphon Meat;13
-Dragon Scale;2
 Spices;21
-Potions;8
+Potions;15

@@ -10,6 +10,10 @@ namespace Active
     {
 
         public static Achievement[] achievements = new Achievement[12];
+        public static bool[] visitedCities = new bool[10];
+        public static string[] cityNames = new string[10];
+        
+
 
         public static int boughtCarrots = 0;
 
@@ -21,6 +25,13 @@ namespace Active
 
         public static int spentMoney = 0;
 
+        
+
+
+
+
+
+
         public static bool hasDragonscale, hasGryphonMeat, hasDiamond, hasRuby, hasEmerald, hasWhaleMeat;
 
         public static int rareItem = 0;
@@ -31,7 +42,7 @@ namespace Active
 
         public static int citiesVisited = 0;
 
-        public static bool inCT, inSV, inPMAD, inTomb, inGrove, inMTG;
+        
 
         public static int inventorySpaces = 0;
 
@@ -55,6 +66,28 @@ namespace Active
             achievements[9] = new Achievement("Capitalist", "Earn a total of 10,000,000 coins", "0/10000000", false, 0, 10000000);
             achievements[10] = new Achievement("Mr. Worldwide", "Visit every city", "0/10", false, 0, 10);
             achievements[11] = new Achievement("On the boat again", "Travel over the sea 10 times", "0/10", false, 0, 10);
+
+            visitedCities[0] = false;
+            visitedCities[1] = false;
+            visitedCities[2] = false;
+            visitedCities[3] = false;
+            visitedCities[4] = false;
+            visitedCities[5] = false;
+            visitedCities[6] = false;
+            visitedCities[7] = false;
+            visitedCities[8] = false;
+            visitedCities[9] = false;
+
+            cityNames[0] = "Carrot Town";
+            cityNames[1] = "Steel Ville";
+            cityNames[2] = "Tower Town";
+            cityNames[3] = "Hymn Harbor";
+            cityNames[4] = "Winghelm";
+            cityNames[5] = "Pyramaad";
+            cityNames[6] = "Mount Goblin";
+            cityNames[7] = "Sanctuary";
+            cityNames[8] = "Dryad's Grove";
+            cityNames[9] = "The Tomb";
         }
 
         public static void LoadAchievements()
@@ -140,6 +173,16 @@ namespace Active
 
             currentCoins = Player.Inventory.Money;
 
+            int temp = 0;
+            foreach (bool visited in visitedCities)
+            {
+                if(visited == true)
+                {
+                    temp++;
+                }
+            }
+            citiesVisited = temp;
+
         }
 
         public static void UpdateAchievements()
@@ -168,6 +211,17 @@ namespace Active
                     achievement.progress = achievement.currentAmount + "/" + achievement.maxAmount;
                 }
             }
+
+            int temp = 0;
+            foreach (string name in cityNames)
+            {
+                if (Player.location == name)
+                {
+                    visitedCities[temp] = true;
+                }
+                temp++;
+            }
+
         }
        
 

@@ -1,17 +1,14 @@
 ﻿5000
-15
-Carrot;20
-Potato;30
-Iron Ingot;20
-Iron Ore;8
+12
+Iron Ingot;21
+Iron Ore;50
+Iron Ore;10
 Gold Ingot;10
-Gold Ore;23
+Gold Ore;33
 Ruby;4
 Fur;24
 Silk;12
-Lumber;11
 Stone;33
 Gryphon Meat;3
-Dragon Scale;5
-Spices;18
-Potions;4
+Spices;10
+Potions;12
