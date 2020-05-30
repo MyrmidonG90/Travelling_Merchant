@@ -1,20 +1,15 @@
 ﻿53000
-18
-Carrot;12
+13
 Potato;43
 Iron Ingot;23
 Iron Ore;33
 Gold Ingot;35
 Gold Ore;5
 Ruby;2
-Emerald;3
 Diamond;6
-Fur;7
-Stone;22
-Simple Weapons;23
-Simple Armour;33
-Fine Weapons;19
-Fine Armour;18
+Simple Weapons;33
+Simple Armour;43
+Fine Weapons;23
+Fine Armour;31
 Gryphon Meat;5
-Dragon Scale;13
-Potions;19
+Potions;20

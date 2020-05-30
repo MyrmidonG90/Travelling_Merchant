@@ -1,22 +1,16 @@
 ﻿12000
-20
-Carrot;10
+14
+Carrot;13
 Potato;24
-Iron Ingot;35
-Iron Ore;23
-Gold Ingot;10
+Iron Ingot;16
+Iron Ore;9
+Gold Ingot;4
 Gold Ore;5
 Diamond;2
-Fur;32
-Silk;10
-Lumber;18
-Stone;17
-Simple Weapons;15
+Silk;30
 Simple Armour;6
 Fine Weapons;8
-Spices;24
+Spices;10
 Fine Armour;3
-Magic Armour;5
-Magic Weapons;6
-Whale Meat;15
-Potions;10
+Whale Meat;4
+Potions;12
