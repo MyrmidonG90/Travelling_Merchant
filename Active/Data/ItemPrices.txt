@@ -44,7 +44,7 @@ Textiles
 Gear
 1
 Magic
-0,3
+0,8
 Valuables
 1
 Manufactured
@@ -61,7 +61,7 @@ Textiles
 Gear
 1,5
 Magic
-0,6
+1
 Valuables
 0,8
 Manufactured
@@ -76,9 +76,9 @@ Raw Materials
 Textiles
 1,5
 Gear
-1
+1,2
 Magic
-0,9
+0,8
 Valuables
 1,3
 Manufactured
@@ -129,7 +129,7 @@ Textiles
 Gear
 0,7
 Magic
-0,8
+1,1
 Valuables
 1,4
 Manufactured
@@ -146,7 +146,7 @@ Textiles
 Gear
 0,9
 Magic
-0,5
+0,8
 Valuables
 0,9
 Manufactured
@@ -163,7 +163,7 @@ Textiles
 Gear
 0,7
 Magic
-1,5
+1,3
 Valuables
 0,8
 Manufactured
