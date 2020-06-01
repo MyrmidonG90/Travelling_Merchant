@@ -102,6 +102,7 @@ namespace Active
             if (KMReader.LeftMouseClick())
             {
                 finished = LeftClickEvent(ref participantLeft, ref participantRight);
+
             }
             else if (KMReader.RightMouseClick())
             {
@@ -545,6 +546,7 @@ namespace Active
 
         static bool Exit()
         {
+            ResetTrade();
             invLeft = null;
             invRight = null;
             tradeLeft = null;
