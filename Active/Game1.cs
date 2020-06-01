@@ -72,7 +72,7 @@ namespace Active
             ItemCreator.LoadItemData();
             SoundManager.LoadSounds(Content);
             //SoundManager.PlayMusic();
-            AchievementManager.LoadAchievements();
+            AchievementManager.CreateAchievements();
             Player.Init();
             MainMenuManager.Init();
             OptionsMenu.Init();
@@ -250,13 +250,15 @@ namespace Active
                 Calendar.Draw(spriteBatch);
             }
 
+            CityInfoMenu.Draw(spriteBatch);
+
             if (eventLog)
             {
                 EventLog.Draw(spriteBatch);
             }
 
             OptionsMenu.Draw(spriteBatch, options);
-            CityInfoMenu.Draw(spriteBatch);
+
             EndCredits.Draw(spriteBatch);//////////////////////////////
             LevelUp.Draw(spriteBatch);/////////////////////////////////
             spriteBatch.End();
@@ -343,10 +345,12 @@ namespace Active
             if (cityMenu.CheckInvButton())
             {
                 ChangeGameState(GameState.InventoryMenu);
+                CityInfoMenu.Active = false;
             }
             if (cityMenu.CheckTradeButton())
             {
                 ChangeGameState(GameState.TradeMenu);
+                CityInfoMenu.Active = false;
                 string tmp = "";
                 foreach (City tempCity in WorldMapMenu.Cities)
                 {
@@ -362,6 +366,7 @@ namespace Active
             if (cityMenu.CheckMapButton())
             {
                 ChangeGameState(GameState.MapMenu);
+                CityInfoMenu.Active = false;
             }
         }
 
@@ -375,19 +380,20 @@ namespace Active
                 if (TravelMenu.StartTravel(temp))
                 {
                     ChangeGameState(GameState.TravelMenu);
+                    CityInfoMenu.Active = false;
                 }
             }
-
-
 
             if (WorldMapMenu.inventoryButton.LeftClick())
             {
                 ChangeGameState(GameState.InventoryMenu);
+                CityInfoMenu.Active = false;
             }
 
             if (WorldMapMenu.returnButton.LeftClick())
             {
                 RevertGameState();
+                CityInfoMenu.Active = false;
             }
         }
 

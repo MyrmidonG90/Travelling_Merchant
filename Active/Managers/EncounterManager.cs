@@ -66,7 +66,7 @@ namespace Active
                 {
                     if (travelEncountersLeft.Count != 0)
                     {
-                        if (rand.Next(0, 9) == 0) // If Encountered //Change this one to increase/decrease encounters!!!
+                        if (rand.Next(0, 7) == 0) // If Encountered //Change this one to increase/decrease encounters!!!
                         {
                             eventOnGoing = true;
                             InitiateEncounter(FindID(RandomiseEncounter()));

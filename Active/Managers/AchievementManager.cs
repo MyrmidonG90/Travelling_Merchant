@@ -10,16 +10,27 @@ namespace Active
     {
 
         public static Achievement[] achievements = new Achievement[12];
+        public static bool[] visitedCities = new bool[10];
+        public static string[] cityNames = new string[10];
+        
+
 
         public static int boughtCarrots = 0;
 
-        public static int totalCoins = 0;
+        public static int totalCoinsEarned = 0;
 
         public static int travelCounter = 0;
 
         public static int boatTravelCounter = 0;
 
         public static int spentMoney = 0;
+
+        
+
+
+
+
+
 
         public static bool hasDragonscale, hasGryphonMeat, hasDiamond, hasRuby, hasEmerald, hasWhaleMeat;
 
@@ -31,7 +42,7 @@ namespace Active
 
         public static int citiesVisited = 0;
 
-        public static bool inCT, inSV, inPMAD, inTomb, inGrove, inMTG;
+        
 
         public static int inventorySpaces = 0;
 
@@ -41,12 +52,12 @@ namespace Active
 
 
 
-        public static void LoadAchievements()
+        public static void CreateAchievements()
         {
             achievements[0] = new Achievement("Carrot Hunter", "Own 100 carrots", "0/100", false,0, 100);
             achievements[1] = new Achievement("Insane Wealth", "Have 100,000 coins in your inventory", "0/100000", false,0, 100000);
             achievements[2] = new Achievement("On the road again", "Travel 50 times", "0/50", false, 0, 50);
-            achievements[3] = new Achievement("Investor", "Spend 1,000,000 coins in total", "0/1000000", false, 0, 1000000);
+            achievements[3] = new Achievement("Investor", "Spend a total of 1,000,000 coins in trades", "0/1000000", false, 0, 1000000);
             achievements[4] = new Achievement("Treasure Finder", "Obtain a rare item", "0/1", false, 0, 1);
             achievements[5] = new Achievement("Treasure Hunter", "Obtain every rare item", "0/4", false, 0, 4);
             achievements[6] = new Achievement("Fat stash", "Have a full inventory", "0/25", false, 0, 25);
@@ -55,26 +66,55 @@ namespace Active
             achievements[9] = new Achievement("Capitalist", "Earn a total of 10,000,000 coins", "0/10000000", false, 0, 10000000);
             achievements[10] = new Achievement("Mr. Worldwide", "Visit every city", "0/10", false, 0, 10);
             achievements[11] = new Achievement("On the boat again", "Travel over the sea 10 times", "0/10", false, 0, 10);
+
+            visitedCities[0] = false;
+            visitedCities[1] = false;
+            visitedCities[2] = false;
+            visitedCities[3] = false;
+            visitedCities[4] = false;
+            visitedCities[5] = false;
+            visitedCities[6] = false;
+            visitedCities[7] = false;
+            visitedCities[8] = false;
+            visitedCities[9] = false;
+
+            cityNames[0] = "Carrot Town";
+            cityNames[1] = "Steel Ville";
+            cityNames[2] = "Tower Town";
+            cityNames[3] = "Hymn Harbor";
+            cityNames[4] = "Winghelm";
+            cityNames[5] = "Pyramaad";
+            cityNames[6] = "Mount Goblin";
+            cityNames[7] = "Sanctuary";
+            cityNames[8] = "Dryad's Grove";
+            cityNames[9] = "The Tomb";
         }
 
-        public static void ChangeAchievements()
+        public static void LoadAchievements()
+        {
+            boughtCarrots = achievements[0].currentAmount;
+            currentCoins = achievements[1].currentAmount;
+            travelCounter = achievements[2].currentAmount;
+            spentMoney = achievements[3].currentAmount;
+            rareItems = achievements[4].currentAmount;
+            rareItems = achievements[5].currentAmount;
+            inventorySpaces = achievements[6].currentAmount;
+            jewels = achievements[7].currentAmount;
+            currentCoins = achievements[8].currentAmount;
+            totalCoinsEarned = achievements[9].currentAmount;
+            citiesVisited = achievements[10].currentAmount;
+            boatTravelCounter = achievements[11].currentAmount;
+        }
+
+
+            public static void ChangeAchievements()
         {
             foreach (Achievement achievement in achievements)
             {
                 if(achievement.currentAmount >= achievement.maxAmount)
                 {
-                    achievement.progress = achievement.maxAmount.ToString() + "/" + achievement.maxAmount.ToString();
-                }
-                else
-                {
-                    achievement.progress = achievement.currentAmount.ToString() + "/" + achievement.maxAmount.ToString();
-                }
-
-                if (achievement.currentAmount >= achievement.maxAmount)
-                {
                     achievement.complete = true;
                 }
-
             }
         }
 
@@ -133,6 +173,16 @@ namespace Active
 
             currentCoins = Player.Inventory.Money;
 
+            int temp = 0;
+            foreach (bool visited in visitedCities)
+            {
+                if(visited == true)
+                {
+                    temp++;
+                }
+            }
+            citiesVisited = temp;
+
         }
 
         public static void UpdateAchievements()
@@ -146,9 +196,32 @@ namespace Active
             achievements[6].currentAmount = inventorySpaces;
             achievements[7].currentAmount = jewels;
             achievements[8].currentAmount = currentCoins;
-            achievements[9].currentAmount = spentMoney;
+            achievements[9].currentAmount = totalCoinsEarned;
             achievements[10].currentAmount = citiesVisited;
             achievements[11].currentAmount = boatTravelCounter;
+
+            foreach (Achievement achievement in achievements)
+            {
+                if (achievement.complete)
+                {
+                    achievement.progress = achievement.maxAmount.ToString() + "/" + achievement.maxAmount.ToString();
+                }
+                else if(!achievement.complete)
+                {
+                    achievement.progress = achievement.currentAmount + "/" + achievement.maxAmount;
+                }
+            }
+
+            int temp = 0;
+            foreach (string name in cityNames)
+            {
+                if (Player.location == name)
+                {
+                    visitedCities[temp] = true;
+                }
+                temp++;
+            }
+
         }
        
 

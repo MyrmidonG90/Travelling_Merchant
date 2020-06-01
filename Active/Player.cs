@@ -11,7 +11,7 @@ namespace Active
     {
         static Inventory inventory;
         static bool test;
-        static string location;
+        public static string location;
         static string[] skillNames;
         static int[] skillLevels;
         static int[] skillXP;

@@ -1,15 +1,15 @@
 ﻿5000
 13
 Carrot;27
-Potato;32
-Gold Ore;5
-Emerald;12
-Fur;23
-Silk;19
-Cotton;5
+Potato;21
+Fur;40
+Cotton;50
+Cotton;22
 Lumber;50
+Lumber;50
+Lumber;31
 Stone;43
 Magic Weapons;8
-Magic Armour;6
-Dragon Scale;9
+Magic Armour;17
+Dragon Scale;4
 Potions;24

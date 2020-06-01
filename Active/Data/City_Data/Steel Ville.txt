@@ -1,18 +1,10 @@
 25500
-16
-Carrot;23
-Potato;12
+8
 Iron Ingot;40
 Iron Ore;50
+Iron Ore;50
+Iron Ore;35
 Gold Ingot;33
 Gold Ore;28
-Cotton;18
-Lumber;26
-Stone;36
-Simple Weapons;17
-Simple Armour;32
-Fine Weapons;13
-Fine Armour;11
-Magic Weapons;2
-Magic Armour;5
-Potions;4
+Simple Armour;42
+Simple Weapons;44

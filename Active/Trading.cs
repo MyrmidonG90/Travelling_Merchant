@@ -388,7 +388,7 @@ namespace Active
 
         static bool AcceptTrade(ref Inventory participantLeft, ref Inventory participantRight)
         {
-            EndCredits.Start();///////////////////////////////////////////////////////////////////////////////
+            //EndCredits.Start();///////////////////////////////////////////////////////////////////////////////
 
             //If nothing is presented
             if (tradeLeft.ItemList.Count == 0 && tradeRight.ItemList.Count == 0)
@@ -469,6 +469,17 @@ namespace Active
             invLeft.Money += leftPrice - rightPrice;
             GlossaryManager.UpdateGlossary("Item");
             invRight.Money += rightPrice - leftPrice;
+
+            if(rightPrice - leftPrice >= 0)
+            {
+                AchievementManager.spentMoney += rightPrice - leftPrice;
+            }
+
+            if (leftPrice - rightPrice >= 0)
+            {
+                AchievementManager.totalCoinsEarned += leftPrice - rightPrice;
+            }
+
             foreach (var item in tradeRight.ItemList)
             {
                 invLeft.AddItem(item);
@@ -479,6 +490,8 @@ namespace Active
             }
             tradeLeft.ItemList.Clear();
             tradeRight.ItemList.Clear();
+
+
         }
 
         static int CheckValue(Inventory inv)
