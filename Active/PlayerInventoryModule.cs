@@ -72,9 +72,6 @@ namespace Active
         {
             CheckTabClick();
             tabMenus[(int)tab].Update();
-
-            
-
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -93,6 +90,7 @@ namespace Active
                 tabButtons.Add(new Button(280+190*i,90,200,60,TextureManager.texTabs[i]));
             }
         }
+
         void DrawTabs(SpriteBatch sb)
         {
             int tmp = (int)tab;
@@ -101,6 +99,7 @@ namespace Active
                 tabButtons[(tmp+i)% tabButtons.Count].Draw(sb);
             }
         }
+
         void CreateTabs()
         {
             tabMenus = new List<TabClass>();
@@ -109,6 +108,7 @@ namespace Active
             tabMenus.Add(new AchievementTab());
             tabMenus.Add(new GlossaryTab("Item Tab","Item"));
         }
+
         void CheckTabClick()
         {
             bool found = false;

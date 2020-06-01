@@ -39,15 +39,16 @@ namespace Active
             textInfo.Add(new Vector2(1100, 660));
             indexOfSelectedSlot = -1;
             currentGlossary = (Glossary)GlossaryManager.GetGlossaryIndex(glossary);
-
         }
+
         static void Start(string glossary)
         {
             currentGlossary = (Glossary)GlossaryManager.GetGlossaryIndex(glossary);
             textInfo = new List<Vector2>();
             
-            GlossaryManager.InitateGlossary(glossary);            
+            GlossaryManager.InitateGlossary(glossary);
         }
+
         override public void Update()
         {
             if (KMReader.LeftMouseClick())

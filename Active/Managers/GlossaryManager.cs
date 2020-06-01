@@ -10,6 +10,7 @@ namespace Active
     static class GlossaryManager
     {
         static List<List<int>> glossaries;
+        static List<GlossaryTab> glossaryTabs;
         /* Glossary text file structure
          0. Items
          1. Items Left
@@ -30,12 +31,14 @@ namespace Active
         static Glossary currentGlossary;
 
         internal static List<Slot> Slots { get => slots; }
-       
+        internal static List<GlossaryTab> GlossaryTabs { get => glossaryTabs; set => glossaryTabs = value; }
 
         static public void Initialize(string glossary)
         {
             LoadGlossary();
-            InitiateSlots((Glossary)GetGlossaryIndex(glossary));
+            Glossary glossaryIndex = (Glossary)GetGlossaryIndex(glossary);
+            InitiateSlots(glossaryIndex);
+            currentGlossary = glossaryIndex;
         }
 
         static public void InitateGlossary(string glossary)
@@ -97,7 +100,7 @@ namespace Active
         {
             for (int i = 0; i < EncounterManager.Events.Count; i++)
             {
-                //slots[i].AddTexture();
+                //slots[i].AddTexture(TextureManager.encounterIcons[i];);
             }
         }
         static void InitiateWorlEventsSlots()
@@ -152,14 +155,34 @@ namespace Active
             }
         }
 
-        static public void CheckTravelEncounter()
+        static public void CheckTravelEncounter(int encounterID)
         {
-            
+            if (finished[1] == false)
+            {
+                int counter = 0;
+                bool found = false;
+                while (counter < glossaries[3].Count && found == false)
+                {
+                    if (encounterID == glossaries[3][counter])
+                    {
+                        glossaries[2].Add(counter);
+                        glossaries[3].RemoveAt(counter);
+                        found = true;
+                    }
+                    else
+                    {
+                        ++counter;
+                    }
+                }                
+            }
         }
 
         static public void CheckWorldEvents()
         {
-            
+            if (finished[2] == false)
+            {
+
+            }
         }
 
         static void LoadGlossary()

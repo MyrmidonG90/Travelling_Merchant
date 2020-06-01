@@ -138,6 +138,7 @@ namespace Active
             currentTravelEvent = travelEvents[FindIndex(id)];
             currentEncounter.OccuredDuringTravel = true;
             boolUpdate = false;
+            GlossaryManager.CheckTravelEncounter(id);
 
         }        
 

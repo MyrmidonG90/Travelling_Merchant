@@ -47,6 +47,11 @@ namespace Active
         static public Texture2D texIconEventBadHarvest;
         static public Texture2D texIconEventWar;
 
+        static public Texture2D texIconEncounterBandits;
+        static public Texture2D texIconEncounterCartBreak;
+        static public Texture2D texIconEncounterFlood;
+        static public Texture2D texIconEncounterKingsToll;
+        static public Texture2D texIconEncounterRoadToll;
 
         //Avatars
         static public Texture2D texPCavatar1;
@@ -55,7 +60,13 @@ namespace Active
 
         // GUI
         static public Texture2D texButtonGo;
+        static public Texture2D texButtonPrev;
+        static public Texture2D texButtonNext;
         static public Texture2D texTab;
+        static public Texture2D texTabInv;
+        static public Texture2D texTabSkills;
+        static public Texture2D texTabGlossaries;
+        static public Texture2D texTabGlosasriesDark;
         static public Texture2D texBackArrow;
         static public Texture2D texOptions;
         static public Texture2D texButton;
@@ -67,6 +78,7 @@ namespace Active
         static public Texture2D texCalendar;
         static public Texture2D texEventLog;
 
+
         // HUD
         static public Texture2D texRankUpIntimidation;
         static public Texture2D texRankUpWisdom;
@@ -77,11 +89,11 @@ namespace Active
         static public Texture2D texSelect;
         static public Texture2D texInvMenu;
         static public Texture2D texSkillMenu;
-        static public Texture2D texInvTab;
-        static public Texture2D texSkillTab;
         static public Texture2D texTradeMenu;
         static public Texture2D texArrowMoneyLeft;
         static public Texture2D texArrowMoneyRight;
+        static public Texture2D texMenuGlossary;
+        static public Texture2D texMenuAchievement;
 
         //Items
         static public Texture2D texArmourFine, texArmourMagic, texArmourNormal, texCarrot, texCotton, texDragonScale, texFur, texGoldIngot, texGoldOre, texGryphonMeat, texIronIngot, texIronOre, texDiamond, texEmerald, texRuby, texLumber, texPotato, texPotion, texSilk, texSpices, texStone, texWeaponFine, texWeaponMagic, texWeaponNormal, texWhaleMeat;
@@ -92,6 +104,7 @@ namespace Active
         static public List<Texture2D> texCategories;
         static public List<Texture2D> texTabs;
         static public List<Texture2D> texWorldEventIcons;
+        static public List<Texture2D> encounterIcons;
 
         static public void LoadContent(ContentManager content)
         {
@@ -122,6 +135,8 @@ namespace Active
             texInvMenu = content.Load<Texture2D>("inventory_menu");
             texSkillMenu = content.Load<Texture2D>("skill_menu");
             texTradeMenu = content.Load<Texture2D>("trading_menu");
+            texMenuAchievement = content.Load<Texture2D>("achievements_menu");
+            texMenuGlossary = content.Load<Texture2D>("glossary_menu");
         }
         static void LoadGUI(ContentManager content)
         {
@@ -129,8 +144,8 @@ namespace Active
             texTab = content.Load<Texture2D>("Tab");
             texBackArrow = content.Load<Texture2D>("backarrow");
             texButton = content.Load<Texture2D>("btn");
-            texInvTab = content.Load<Texture2D>("inventory_tab");
-            texSkillTab = content.Load<Texture2D>("skill_tab");
+            texTabInv = content.Load<Texture2D>("inventory_tab");
+            texTabSkills = content.Load<Texture2D>("skill_tab");
             texOptions = content.Load<Texture2D>("options");
             texDisposeBar = content.Load<Texture2D>("dispose_bar");
             texDisposeBox = content.Load<Texture2D>("dispose_box");
@@ -140,6 +155,14 @@ namespace Active
             texCalendar = content.Load<Texture2D>("calendar_box");
             texEventLog = content.Load<Texture2D>("event_log");
 
+            texTabGlosasriesDark = content.Load<Texture2D>("glossaries_tab_dark");
+            texButtonNext = content.Load<Texture2D>("next_button");
+            texButtonPrev = content.Load<Texture2D>("prev_button");
+            texIconEncounterBandits = content.Load<Texture2D>("icon_encounter_bandits");
+            texIconEncounterFlood= content.Load<Texture2D>("icon_encounter_flood");
+            texIconEncounterCartBreak= content.Load<Texture2D>("icon_encounter_cart_break");
+            texIconEncounterKingsToll= content.Load<Texture2D>("icon_encounter_kings_toll");
+            texIconEncounterRoadToll = content.Load<Texture2D>("icon_encounter_road_toll");
         }
         static void LoadItems(ContentManager content)
         {
@@ -230,6 +253,16 @@ namespace Active
             InitiateCategoryList();
             InitializeTabList();
             InitiateWorldEventIcons();
+            InitiateEncounterList();
+        }
+        static void InitiateEncounterList()
+        {
+            encounterIcons = new List<Texture2D>();
+            encounterIcons.Add(texIconEncounterBandits);
+            encounterIcons.Add(texIconEncounterCartBreak);
+            encounterIcons.Add(texIconEncounterFlood);
+            encounterIcons.Add(texIconEncounterKingsToll);
+            encounterIcons.Add(texIconEncounterRoadToll);
         }
         static void InitiateCityList()
         {
@@ -282,10 +315,10 @@ namespace Active
         static void InitializeTabList()
         {
             texTabs = new List<Texture2D>();
-            texTabs.Add(texInvTab);
-            texTabs.Add(texSkillTab);
-            texTabs.Add(texSkillTab);
-            texTabs.Add(texSkillTab);
+            texTabs.Add(texTabInv);
+            texTabs.Add(texTabSkills);
+            texTabs.Add(texTabSkills);
+            texTabs.Add(texTabSkills);
         }
         static void InitiateWorldEventIcons()
         {
