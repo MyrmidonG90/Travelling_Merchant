@@ -426,6 +426,14 @@ namespace Active
                 }
             }
 
+            foreach (City city in WorldMapMenu.Cities)
+            {
+                if(city.Name == Player.location)
+                {
+                    //ska ändras
+                }
+            }
+
             ChangeInv();
             participantLeft = invLeft;
             participantRight = invRight;
@@ -642,8 +650,13 @@ namespace Active
             {
                 sb.Draw(TextureManager.texIconRare, new Rectangle(930, 650, 60, 60), Color.White);
             }
+
+            Inventory test = new Inventory(0);
+            test.AddItem(selected.ID, 1);
             sb.DrawString(TextureManager.font24, "Base Price: " + selected.BasePrice.ToString(), new Vector2(785, 710), Color.Black);
-            sb.DrawString(TextureManager.font24, "Current Price: " + (selected.BasePrice * SkillManager.ReturnSkillModifier(zoneName)).ToString(), new Vector2(785, 750), Color.Black); //måste fixas
+            sb.DrawString(TextureManager.font24, "Current Price: " + CheckValue(test).ToString(), new Vector2(785, 750), Color.Black); //måste fixas
+            test.ReduceAmountOfItems(selected.ID, 1);
+
             if (selected.PrimaryCategory != 999)
             {
                 sb.Draw(TextureManager.texCategories[selected.PrimaryCategory - 1], new Rectangle(800, 780, 80, 80), Color.White);
