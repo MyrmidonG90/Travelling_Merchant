@@ -42,6 +42,10 @@ namespace Active
         static public Texture2D texIconPersuasion;
         static public Texture2D texIconWisdom;
         static public Texture2D texIconCity;
+        static public Texture2D texIconCityInfo;
+        static public Texture2D texAffirmative;
+        static public Texture2D texNegative;
+
         static public Texture2D texIconEventPlague;
         static public Texture2D texIconEventGoodHarvest;
         static public Texture2D texIconEventBadHarvest;
@@ -90,6 +94,7 @@ namespace Active
         static public Texture2D texInvMenu;
         static public Texture2D texSkillMenu;
         static public Texture2D texTradeMenu;
+        static public Texture2D texCityInfoMenu;
         static public Texture2D texArrowMoneyLeft;
         static public Texture2D texArrowMoneyRight;
         static public Texture2D texMenuGlossary;
@@ -135,6 +140,7 @@ namespace Active
             texInvMenu = content.Load<Texture2D>("inventory_menu");
             texSkillMenu = content.Load<Texture2D>("skill_menu");
             texTradeMenu = content.Load<Texture2D>("trading_menu");
+            texCityInfoMenu = content.Load<Texture2D>("city_info_menu");
             texMenuAchievement = content.Load<Texture2D>("achievements_menu");
             texMenuGlossary = content.Load<Texture2D>("glossary_menu");
         }
@@ -223,6 +229,9 @@ namespace Active
             texIconUncommon = content.Load<Texture2D>("uncommon_icon");
             texIconWisdom = content.Load<Texture2D>("skill_icon_wisdom");
             texIconCity = content.Load<Texture2D>("merchant_city_icon");
+            texIconCityInfo = content.Load<Texture2D>("city_info_button");
+            texAffirmative = content.Load<Texture2D>("icon_affirmative");
+            texNegative = content.Load<Texture2D>("icon_negative");
             texIconEventBadHarvest = content.Load<Texture2D>("event_icon_crop_failure");
             texIconEventGoodHarvest = content.Load<Texture2D>("event_icon_good_harvest");
             texIconEventWar = content.Load<Texture2D>("event_icon_war");

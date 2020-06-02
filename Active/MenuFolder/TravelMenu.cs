@@ -110,11 +110,13 @@ namespace Active
             destination = Player.Location;
             paused = false;
 
-            turnsToTravel = 5;
-            turnsLeft = turnsToTravel - turnsLeft;
+            int temp = turnsLeft;
+            turnsLeft = turnsToTravel - temp;
+            turnsToTravel = turnsLeft;
+
             turnTimer = timerLength;
 
-            EncounterManager.NewTrip();
+            //EncounterManager.NewTrip();
         }
 
         static public bool CheckInvbutton()

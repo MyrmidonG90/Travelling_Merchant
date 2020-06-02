@@ -23,8 +23,8 @@ namespace Active
 
         static public void Init()
         {
-            mainBox = new Rectangle(460, 200, 1000, 600);
-            exit = new Button(465, 205, 70, 70, TextureManager.texIconTrashCan);
+            mainBox = new Rectangle(460, 180, 1000, 600);
+            exit = new Button(485, 205, 70, 70, TextureManager.texIconTrashCan);
             go = new Button(830, 820, 260, 120, TextureManager.texButtonGo);
             loreHeaderPos = new Vector2(1100, 290);
             lorePos = new Vector2(950, 360);
@@ -57,11 +57,11 @@ namespace Active
             return false;
         }
 
-        static public void Draw(SpriteBatch spriteBatch) // Too long
+        static public void Draw(SpriteBatch spriteBatch)
         {
             if (active)
             {
-                spriteBatch.Draw(TextureManager.texWhite, mainBox, Color.LightGray);
+                spriteBatch.Draw(TextureManager.texCityInfoMenu, mainBox, Color.White);
                 exit.Draw(spriteBatch);
                 if (selected != Player.Location)
                 {
@@ -99,10 +99,26 @@ namespace Active
             {
                 if (tempCity.Name == selected)
                 {
-                    spriteBatch.Draw(TextureManager.texCategories[tempCity.GoodTrade[0]], new Rectangle(620, 360, 120, 120), Color.White);
-                    spriteBatch.Draw(TextureManager.texCategories[tempCity.GoodTrade[1]], new Rectangle(780, 360, 120, 120), Color.White); // Här hände ett error "index låg utanför"
-                    spriteBatch.Draw(TextureManager.texCategories[tempCity.BadTrade[0]], new Rectangle(620, 520, 120, 120), Color.White);
-                    spriteBatch.Draw(TextureManager.texCategories[tempCity.BadTrade[1]], new Rectangle(780, 520, 120, 120), Color.White);
+                    spriteBatch.DrawString(TextureManager.font32, "Buy!", new Vector2(480, 380), Color.White);
+                    spriteBatch.DrawString(TextureManager.font32, "Sell!", new Vector2(480, 540), Color.White);                  
+                    try //expert felhantering
+                    {
+                        spriteBatch.Draw(TextureManager.texCategories[tempCity.GoodTrade[0]], new Rectangle(620, 360, 120, 120), Color.White);
+                        spriteBatch.Draw(TextureManager.texCategories[tempCity.GoodTrade[1]], new Rectangle(780, 360, 120, 120), Color.White);
+                    }
+                    catch
+                    {
+
+                    }
+                    try
+                    {
+                        spriteBatch.Draw(TextureManager.texCategories[tempCity.BadTrade[0]], new Rectangle(620, 520, 120, 120), Color.White);
+                        spriteBatch.Draw(TextureManager.texCategories[tempCity.BadTrade[1]], new Rectangle(780, 520, 120, 120), Color.White);
+                    }
+                    catch
+                    {
+
+                    }
                 }
             }
         }

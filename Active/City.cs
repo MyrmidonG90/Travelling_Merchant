@@ -44,7 +44,9 @@ namespace Active
         {
             if (traded)
             {
+
                 if (lastTraded + 50 <= Calendar.TotalDays)
+
                 {
                     InvReset();
                     traded = false;
@@ -73,6 +75,7 @@ namespace Active
         public void CheckDate()
         {
             lastTraded = Calendar.TotalDays;
+            traded = true;
         }
 
         public string Name

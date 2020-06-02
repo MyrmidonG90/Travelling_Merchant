@@ -8,6 +8,21 @@ namespace Active
 {
     static class SkillManager
     {
+        //Carrot Town - Halflings
+        //Emberfell - Dwaves
+        //Cloudspire - Humans
+        //Hymn Harbor - Elves
+        //Winghelm - Humans
+        //Pyramaad - Lizardfolk
+        //Mount Goblin - Orcs
+        //Sanctuary - Halflings
+        //Dryad's Grove - Elves
+        //The Tomb - Dwarves
+
+        //Persuasion - Human/Halfling
+        //Wisdom - Elf/Lizardfolk
+        //Intimidation - Dwarf/Orc
+
         //jag ber om ursäkt över hur detta är upplagt men jag var trött och ville bara få det gjort så hoppas du okända person kan förlåta mig
 
         static int[] races;
@@ -26,8 +41,8 @@ namespace Active
         //My är analfabet och har säkert stavat någon av dessa fel
 
         static public void Init()
-        {
-            races = new int[10]; // Förstår ej vad som händer
+        {            
+            races = new int[10];
             races[0] = 2;
             races[1] = 1;
             races[2] = 2;
@@ -54,15 +69,15 @@ namespace Active
 
             if (temp == 0)
             {
-                return 0.1f * Player.ReturnSkillLevel("Wisdom");
+                return 0.05f * Player.ReturnSkillLevel("Wisdom");
             }
             if (temp == 1)
             {
-                return 0.1f * Player.ReturnSkillLevel("Intimidation");
+                return 0.05f * Player.ReturnSkillLevel("Intimidation");
             }
             if (temp == 2)
             {
-                return 0.1f * Player.ReturnSkillLevel("Persuasion");
+                return 0.05f * Player.ReturnSkillLevel("Persuasion");
             }
             return 0;
         }

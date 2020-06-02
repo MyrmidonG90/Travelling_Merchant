@@ -26,7 +26,7 @@ namespace Active
 
         public override void Update() // Behövs pga inheritance
         {
-            
+            //please dont harm me i have a wife and three kids and have never hurt a single person in my entire life
         }
     }
 }
