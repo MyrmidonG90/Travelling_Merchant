@@ -1,15 +1,18 @@
 ﻿5000
 13
-Carrot;27
-Potato;21
-Fur;40
-Cotton;50
-Cotton;22
-Lumber;50
-Lumber;50
-Lumber;31
-Stone;43
+Carrot;15
+Potato;11
+Fur;20
+Cotton;20
+Cotton;20
+Lumber;20
+Lumber;20
+Lumber;20
+Lumber;12
+Stone;20
+Stone;20
+Stone;12
 Magic Weapons;8
-Magic Armour;17
-Dragon Scale;4
-Potions;24
+Magic Armour;4
+Dragon Scale;3
+Potions;17

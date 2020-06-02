@@ -1,16 +1,14 @@
 16000
-14
+12
 Iron Ore;8
 Gold Ingot;10
-Gold Ore;5
 Fur;13
 Silk;20
-Cotton;30
-Simple Weapons;47
-Simple Armour;40
-Gryphon Meat;4
-Dragon Scale;5
-Magic Weapons;32
-Magic Armour;23
-Potions;23
-Spices;44
+Cotton;20
+Simple Weapons;17
+Simple Armour;20
+Gryphon Meat;3
+Magic Weapons;17
+Magic Armour;11
+Potions;20
+Spices;20
