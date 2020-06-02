@@ -426,8 +426,6 @@ namespace Active
                 }
             }
 
-<<<<<<< Updated upstream
-=======
             foreach (City city in WorldMapMenu.Cities)
             {
                 if(city.Name == Player.location)
@@ -437,7 +435,6 @@ namespace Active
                 }
             }
 
->>>>>>> Stashed changes
             ChangeInv();
             participantLeft = invLeft;
             participantRight = invRight;
