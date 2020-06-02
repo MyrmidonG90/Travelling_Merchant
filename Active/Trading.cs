@@ -101,6 +101,7 @@ namespace Active
             //När ett mussklick händer
             if (KMReader.LeftMouseClick())
             {
+                RightClickEvent(); //Jag lade in den här för jag tyckte det kändes bra att se info när man vänster klickar också
                 finished = LeftClickEvent(ref participantLeft, ref participantRight);
 
             }
@@ -468,7 +469,14 @@ namespace Active
         static void ChangeInv()
         {
             invLeft.Money += leftPrice - rightPrice;
+<<<<<<< HEAD
             GlossaryManager.CheckAcceptedTrade(tradeRight);
+=======
+
+
+            GlossaryManager.UpdateGlossary("Items");
+
+>>>>>>> master
             invRight.Money += rightPrice - leftPrice;
 
             if(rightPrice - leftPrice >= 0)
@@ -639,8 +647,8 @@ namespace Active
             {
                 sb.Draw(TextureManager.texIconRare, new Rectangle(930, 650, 60, 60), Color.White);
             }
-            sb.DrawString(TextureManager.font24, "Standard Price: " + selected.BasePrice.ToString(), new Vector2(800, 730), Color.Black);
-
+            sb.DrawString(TextureManager.font24, "Base Price: " + selected.BasePrice.ToString(), new Vector2(785, 710), Color.Black);
+            sb.DrawString(TextureManager.font24, "Current Price: " + (selected.BasePrice * SkillManager.ReturnSkillModifier(zoneName)).ToString(), new Vector2(785, 750), Color.Black); //måste fixas
             if (selected.PrimaryCategory != 999)
             {
                 sb.Draw(TextureManager.texCategories[selected.PrimaryCategory - 1], new Rectangle(800, 780, 80, 80), Color.White);
