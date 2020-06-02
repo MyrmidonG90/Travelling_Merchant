@@ -94,6 +94,7 @@ namespace Active
         static public Texture2D texInvMenu;
         static public Texture2D texSkillMenu;
         static public Texture2D texTradeMenu;
+        static public Texture2D texCityInfoMenu;
         static public Texture2D texArrowMoneyLeft;
         static public Texture2D texArrowMoneyRight;
         static public Texture2D texMenuGlossary;
@@ -139,6 +140,7 @@ namespace Active
             texInvMenu = content.Load<Texture2D>("inventory_menu");
             texSkillMenu = content.Load<Texture2D>("skill_menu");
             texTradeMenu = content.Load<Texture2D>("trading_menu");
+            texCityInfoMenu = content.Load<Texture2D>("city_info_menu");
             texMenuAchievement = content.Load<Texture2D>("achievements_menu");
             texMenuGlossary = content.Load<Texture2D>("glossary_menu");
         }

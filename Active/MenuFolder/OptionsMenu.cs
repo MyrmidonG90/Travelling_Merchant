@@ -270,10 +270,8 @@ namespace Active
         {
             if (btnWorldEventTest.LeftClick() && !block)
             {
-                string[] test = new string[3];
+                string[] test = new string[1];
                 test[0] = "Carrot Town";
-                test[1] = "Steel Ville";
-                test[2] = "Winghelm";
                 WorldEventManager.EventFire(2, test, new Random());
             }
         }

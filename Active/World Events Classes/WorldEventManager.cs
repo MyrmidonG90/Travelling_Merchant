@@ -349,7 +349,8 @@ namespace Active
             {
                 int id = rnd.Next(0, eventDesList.Count);
 
-                int number = rnd.Next(1, WorldMapMenu.Cities.Length);
+                //int number = rnd.Next(1, WorldMapMenu.Cities.Length);
+                int number = 1;
                 int[] protoTargets = new int[number];
 
                 for (int i = 0; i < number; i++)
