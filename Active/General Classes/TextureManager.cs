@@ -42,6 +42,10 @@ namespace Active
         static public Texture2D texIconPersuasion;
         static public Texture2D texIconWisdom;
         static public Texture2D texIconCity;
+        static public Texture2D texIconCityInfo;
+        static public Texture2D texAffirmative;
+        static public Texture2D texNegative;
+
         static public Texture2D texIconEventPlague;
         static public Texture2D texIconEventGoodHarvest;
         static public Texture2D texIconEventBadHarvest;
@@ -223,6 +227,9 @@ namespace Active
             texIconUncommon = content.Load<Texture2D>("uncommon_icon");
             texIconWisdom = content.Load<Texture2D>("skill_icon_wisdom");
             texIconCity = content.Load<Texture2D>("merchant_city_icon");
+            texIconCityInfo = content.Load<Texture2D>("city_info_button");
+            texAffirmative = content.Load<Texture2D>("icon_affirmative");
+            texNegative = content.Load<Texture2D>("icon_negative");
             texIconEventBadHarvest = content.Load<Texture2D>("event_icon_crop_failure");
             texIconEventGoodHarvest = content.Load<Texture2D>("event_icon_good_harvest");
             texIconEventWar = content.Load<Texture2D>("event_icon_war");

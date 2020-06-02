@@ -218,7 +218,7 @@ namespace Active
                 cities[counter] = new City(tempName, tempInfo, cord, good, bad);
                 cityButtons[counter] = new Button((int)cord.X, (int)cord.Y, 68, 68, tempName, TextureManager.texIconCity);
                 travelButtons[counter] = new Button((int)cord.X, (int)cord.Y + 75, 68, 36, tempName, TextureManager.texButtonGo);
-                infoButtons[counter] = new Button((int)cord.X + 80, (int)cord.Y + 42, 30, 30, tempName, TextureManager.texWhite);
+                infoButtons[counter] = new Button((int)cord.X + 80, (int)cord.Y + 42, 30, 30, tempName, TextureManager.texIconCityInfo);
                 //CityManager.CreateCity(tempName, tempInfo, cord, neighData);
                 counter++;
             }

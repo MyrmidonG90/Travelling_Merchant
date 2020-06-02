@@ -57,7 +57,7 @@ namespace Active
             return false;
         }
 
-        static public void Draw(SpriteBatch spriteBatch) // Too long
+        static public void Draw(SpriteBatch spriteBatch)
         {
             if (active)
             {
@@ -99,10 +99,26 @@ namespace Active
             {
                 if (tempCity.Name == selected)
                 {
-                    spriteBatch.Draw(TextureManager.texCategories[tempCity.GoodTrade[0]], new Rectangle(620, 360, 120, 120), Color.White);
-                    spriteBatch.Draw(TextureManager.texCategories[tempCity.GoodTrade[1]], new Rectangle(780, 360, 120, 120), Color.White); // Här hände ett error "index låg utanför"
-                    spriteBatch.Draw(TextureManager.texCategories[tempCity.BadTrade[0]], new Rectangle(620, 520, 120, 120), Color.White);
-                    spriteBatch.Draw(TextureManager.texCategories[tempCity.BadTrade[1]], new Rectangle(780, 520, 120, 120), Color.White);
+                    spriteBatch.Draw(TextureManager.texAffirmative, new Rectangle(480, 360, 120, 120), Color.White);
+                    spriteBatch.Draw(TextureManager.texNegative, new Rectangle(480, 520, 120, 120), Color.White);
+                    try //expert felhantering
+                    {
+                        spriteBatch.Draw(TextureManager.texCategories[tempCity.GoodTrade[0]], new Rectangle(620, 360, 120, 120), Color.White);
+                        spriteBatch.Draw(TextureManager.texCategories[tempCity.GoodTrade[1]], new Rectangle(780, 360, 120, 120), Color.White);
+                    }
+                    catch
+                    {
+
+                    }
+                    try
+                    {
+                        spriteBatch.Draw(TextureManager.texCategories[tempCity.BadTrade[0]], new Rectangle(620, 520, 120, 120), Color.White);
+                        spriteBatch.Draw(TextureManager.texCategories[tempCity.BadTrade[1]], new Rectangle(780, 520, 120, 120), Color.White);
+                    }
+                    catch
+                    {
+
+                    }
                 }
             }
         }
