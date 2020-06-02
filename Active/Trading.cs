@@ -468,7 +468,7 @@ namespace Active
         static void ChangeInv()
         {
             invLeft.Money += leftPrice - rightPrice;
-            GlossaryManager.UpdateGlossary("Item");
+            GlossaryManager.UpdateGlossary("Items");
             invRight.Money += rightPrice - leftPrice;
 
             if(rightPrice - leftPrice >= 0)
