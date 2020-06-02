@@ -25,7 +25,7 @@ namespace Active
 
         static public void Init()
         {
-            inventory = new Inventory(1000);
+            inventory = new Inventory(300);
             test = true;
             location = "Carrot Town";
 
