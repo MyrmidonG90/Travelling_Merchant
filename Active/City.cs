@@ -44,7 +44,7 @@ namespace Active
         {
             if (traded)
             {
-                if (lastTraded + 7 <= Calendar.TotalDays)
+                if (lastTraded + 50 <= Calendar.TotalDays)
                 {
                     InvReset();
                     traded = false;

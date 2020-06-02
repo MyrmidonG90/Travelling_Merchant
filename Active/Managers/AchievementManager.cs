@@ -122,6 +122,8 @@ namespace Active
         public static void Update() // Needs to be shorter
         {
             
+
+
             ChangeAchievements();
             UpdateAchievements();
             inventorySpaces = Player.Inventory.ItemList.Count;

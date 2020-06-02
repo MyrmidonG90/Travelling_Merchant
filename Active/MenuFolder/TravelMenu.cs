@@ -97,10 +97,11 @@ namespace Active
             if (boat[i])
             {
                 Player.Inventory.Money -= 100;
+                AchievementManager.boatTravelCounter++;
             }
             EncounterManager.NewTrip();
             AchievementManager.travelCounter++;
-            AchievementManager.boatTravelCounter++;
+            
             return true;
         }
 
