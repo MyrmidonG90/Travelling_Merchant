@@ -120,7 +120,7 @@ namespace Active
         }
         static void DrawItemInfo(SpriteBatch sb)
         {
-            if (GlossaryManager.IfExistIn(currentGlossary.ToString(), true, selectedItem.ID))
+            if (GlossaryManager.IfIndexIn(currentGlossary.ToString(), true, selectedItem.ID) != -1)
             {
                 sb.Draw(TextureManager.texSelect, selectedSlot, Color.White);
                 sb.DrawString(TextureManager.font48, selectedItem.Name, textInfoPos[0], Color.White);

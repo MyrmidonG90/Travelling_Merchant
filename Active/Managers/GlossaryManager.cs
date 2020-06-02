@@ -155,7 +155,7 @@ namespace Active
                 EventOccured("WorldEvents", worldEID);
             }
         }
-        static public bool IfExistIn(string glossary, bool existsInOccured, int find)
+        static public int IfIndexIn(string glossary, bool existsInOccured, int find)
         {
             int counter = 0;
             bool found = false;
@@ -173,7 +173,6 @@ namespace Active
                         ++counter;
                     }
                 }
-
             }
             else
             {
@@ -189,18 +188,22 @@ namespace Active
                     }
                 }
             }
+            if (found == false)
+            {
+                counter = -1;
+            }
             
-            return found;
+            return counter;
         }
-        static bool EventOccured(string glossary,int index)
+        static bool EventOccured(string glossary,int id)
         {
-            int counter = 0;
             int parameter = GetGlossaryIndex(glossary);
             bool found = false;
-            if (IfExistIn(glossary,false,index))
+            int index = IfIndexIn(glossary, false, id);
+            if (index != -1)
             {
-                glossaries[parameter * 2].Add(counter);
-                glossaries[parameter * 2 + 1].RemoveAt(counter);
+                glossaries[parameter * 2].Add(id);
+                glossaries[parameter * 2 + 1].RemoveAt(index);
                 found = true;
 
                 if (glossaries[parameter * 2 + 1].Count == 0)
