@@ -97,6 +97,7 @@ namespace Active
             {
                 newWorldEvent.DaysLeft -= mod;
             }
+            GlossaryManager.CheckWorldEvents(newWorldEvent.EventID);
             return newWorldEvent;
         }
 

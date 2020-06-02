@@ -145,7 +145,7 @@ namespace Active
             if (finished[1] == false)
             {
                 EventOccured("TravelEncounters", encounterID);
-            }            
+            }
         }
 
         static public void CheckWorldEvents(int worldEID)
@@ -208,29 +208,7 @@ namespace Active
                     finished[parameter] = true;
                 }
             }
-           /* while (counter < glossaries[parameter*2+1].Count && found == false)
-            {
-                if (IfExistIn(glossary,false,index))
-                {
-
-                }
-                if (index == glossaries[parameter*2+1][counter])
-                {
-                    glossaries[parameter*2].Add(counter);
-                    glossaries[parameter*2+1].RemoveAt(counter);
-                    found = true;
-
-                    if (glossaries[parameter*2+1].Count == 0)
-                    {
-                        finished[parameter] = true;
-                    }
-
-                }
-                else
-                {
-                    ++counter;
-                }
-            }*/
+          
             return found;
         }
         
