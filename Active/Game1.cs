@@ -408,7 +408,7 @@ namespace Active
                     {
                         tempCity.Inv = activeInv;
                         Player.Inventory = activePlayerInv;
-                        tempCity.Traded = true;
+                        tempCity.CheckDate();
                     }
                 }
             }
