@@ -273,7 +273,6 @@ namespace Active
                                     ApplyFixedItem(fixedItem, newTemplateInv, newInv, i);
                                 }
                                 tempCity.TemplateInv = new Inventory(newTemplateInv);
-                                tempCity.Traded = true;
                                 tempCity.CheckDate();
                             }
                         }
@@ -334,7 +333,6 @@ namespace Active
                             if (cityTarget == tempCity.Name)
                             {
                                 tempCity.TemplateInv = worldEvent.OldTemplateInv;
-                                tempCity.Traded = true;
                                 tempCity.CheckDate();
                             }
                         }
