@@ -140,7 +140,7 @@ namespace Active
             boolUpdate = false;
             GlossaryManager.CheckTravelEncounter(id);
 
-        }        
+        }
 
 
         static int RandomiseEncounter()

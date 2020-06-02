@@ -155,6 +155,7 @@ namespace Active
             texCalendar = content.Load<Texture2D>("calendar_box");
             texEventLog = content.Load<Texture2D>("event_log");
 
+            texTabGlossaries = content.Load<Texture2D>("glossaries_tab");
             texTabGlosasriesDark = content.Load<Texture2D>("glossaries_tab_dark");
             texButtonNext = content.Load<Texture2D>("next_button");
             texButtonPrev = content.Load<Texture2D>("prev_button");
@@ -316,9 +317,13 @@ namespace Active
         {
             texTabs = new List<Texture2D>();
             texTabs.Add(texTabInv);
+
+            
+            texTabs.Add(texTabGlosasriesDark);
+
             texTabs.Add(texTabSkills);
             texTabs.Add(texTabGlossaries);
-            texTabs.Add(texTabGlosasriesDark);
+
         }
         static void InitiateWorldEventIcons()
         {
