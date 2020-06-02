@@ -77,7 +77,9 @@ namespace Active
             FileManager.ReadFilePerLine(pathway);
             List<string> info = FileManager.ReadPerLine ;
 
-            int nrOfItems = 8; // Change This if you add more items
+            List<int> mysInt = new List<int>();
+
+            int nrOfItems = 9; // Change This if you add more items
 
             int nrOfCities = FileManager.ReadPerLine.Count / nrOfItems;
             
@@ -139,6 +141,9 @@ namespace Active
                     tmpModifiers.Add(new Vector2(float.Parse(info[index + start].Split(';')[j].Split(':')[0]), float.Parse(info[index + start].Split(';')[j].Split(':')[1])));
                 }
                 cities[i].AddModifiers(tmpModifiers); // Added Modifiers
+                ++start; // Mys int
+                mysInt.Add(int.Parse(info[index+start]));
+                
             }
         }
         static public int FindCityIndex(string cityName)

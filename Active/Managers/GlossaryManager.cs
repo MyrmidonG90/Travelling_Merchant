@@ -218,7 +218,7 @@ namespace Active
 
         static void LoadGlossary()
         {
-            finished = new List<bool>();            
+            finished = new List<bool>();
             glossaries = FileManager.LoadGlossary();
             amountOfGlossaries = glossaries.Count / 2;
             for (int i = 0; i < amountOfGlossaries; i++) // To Add a list of bools for optimization
