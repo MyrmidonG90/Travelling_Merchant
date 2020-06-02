@@ -117,36 +117,15 @@ namespace Active
             }
         }
 
-        static public void UpdateGlossary(string glossary)
+        static public void CheckAcceptedTrade(Inventory tradeInv)
         {
-            int index = GetGlossaryIndex(glossary);
-            if (finished[index/2] == false) // Change this into polymorphism!!!
-            {
-                if (index == 0)
-                {
-                    CheckAcceptedTrade();
-                }
-                else if (index == 2)
-                {
-                    
-                }
-                else if (index == 4)
-                {
-
-                }
-            }
-        }
-
-        static public void CheckAcceptedTrade()
-        {
-            Inventory inv = Trading.TradeRight;
             int counter = 0;
             while (counter < glossaries[1].Count)
             {
-                if (inv.FindIndexOf(glossaries[1][counter]) != -1)
+                if (tradeInv.FindIndexOf(glossaries[1][counter]) != -1)
                 {
-                    int tmp = inv.FindIndexOf(glossaries[1][counter]);
-                    glossaries[0].Add(inv.ItemList[tmp].ID);
+                    int tmp = tradeInv.FindIndexOf(glossaries[1][counter]);
+                    glossaries[0].Add(tradeInv.ItemList[tmp].ID);
                     glossaries[1].RemoveAt(counter);
                 }
                 else
@@ -165,31 +144,96 @@ namespace Active
         {
             if (finished[1] == false)
             {
-                int counter = 0;
-                bool found = false;
-                while (counter < glossaries[3].Count && found == false)
+                EventOccured("TravelEncounters", encounterID);
+            }            
+        }
+
+        static public void CheckWorldEvents(int worldEID)
+        {
+            if (finished[2] == false)
+            {
+                EventOccured("WorldEvents", worldEID);
+            }
+        }
+        static public bool IfExistIn(string glossary, bool existsInOccured, int find)
+        {
+            int counter = 0;
+            bool found = false;
+            int parameter = GetGlossaryIndex(glossary);
+            if (existsInOccured)
+            {
+                while (found == false && counter < glossaries[parameter * 2].Count)
                 {
-                    if (encounterID == glossaries[3][counter])
+                    if (find == glossaries[parameter*2][counter])
                     {
-                        glossaries[2].Add(counter);
-                        glossaries[3].RemoveAt(counter);
                         found = true;
                     }
                     else
                     {
                         ++counter;
                     }
-                }                
-            }
-        }
+                }
 
-        static public void CheckWorldEvents()
-        {
-            if (finished[2] == false)
+            }
+            else
             {
-
+                while (found == false && counter < glossaries[parameter * 2+1].Count)
+                {
+                    if (find == glossaries[parameter * 2+1][counter])
+                    {
+                        found = true;
+                    }
+                    else
+                    {
+                        ++counter;
+                    }
+                }
             }
+            
+            return found;
         }
+        static bool EventOccured(string glossary,int index)
+        {
+            int counter = 0;
+            int parameter = GetGlossaryIndex(glossary);
+            bool found = false;
+            if (IfExistIn(glossary,false,index))
+            {
+                glossaries[parameter * 2].Add(counter);
+                glossaries[parameter * 2 + 1].RemoveAt(counter);
+                found = true;
+
+                if (glossaries[parameter * 2 + 1].Count == 0)
+                {
+                    finished[parameter] = true;
+                }
+            }
+           /* while (counter < glossaries[parameter*2+1].Count && found == false)
+            {
+                if (IfExistIn(glossary,false,index))
+                {
+
+                }
+                if (index == glossaries[parameter*2+1][counter])
+                {
+                    glossaries[parameter*2].Add(counter);
+                    glossaries[parameter*2+1].RemoveAt(counter);
+                    found = true;
+
+                    if (glossaries[parameter*2+1].Count == 0)
+                    {
+                        finished[parameter] = true;
+                    }
+
+                }
+                else
+                {
+                    ++counter;
+                }
+            }*/
+            return found;
+        }
+        
 
         static void LoadGlossary()
         {
