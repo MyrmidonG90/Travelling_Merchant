@@ -469,14 +469,9 @@ namespace Active
         static void ChangeInv()
         {
             invLeft.Money += leftPrice - rightPrice;
-<<<<<<< HEAD
+
             GlossaryManager.CheckAcceptedTrade(tradeRight);
-=======
 
-
-            GlossaryManager.UpdateGlossary("Items");
-
->>>>>>> master
             invRight.Money += rightPrice - leftPrice;
 
             if(rightPrice - leftPrice >= 0)
