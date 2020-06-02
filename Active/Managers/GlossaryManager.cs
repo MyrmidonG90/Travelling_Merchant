@@ -11,6 +11,7 @@ namespace Active
     {
         static List<List<int>> glossaries;
         static List<GlossaryTab> glossaryTabs;
+
         /* Glossary text file structure
          0. Items
          1. Items Left
@@ -19,12 +20,13 @@ namespace Active
          4. World Events Occured
          5. World Events Left
              */
+
         static List<Slot> slots;
         static List<bool> finished;
         static int amountOfGlossaries;
         enum Glossary
         {
-            Item,
+            Items,
             TravelEncounters,
             WorldEvents
         }
@@ -32,6 +34,7 @@ namespace Active
 
         internal static List<Slot> Slots { get => slots; }
         internal static List<GlossaryTab> GlossaryTabs { get => glossaryTabs; set => glossaryTabs = value; }
+        public static int AmountOfGlossaries { get => amountOfGlossaries; }
 
         static public void Initialize(string glossary)
         {
@@ -44,20 +47,13 @@ namespace Active
         static public void InitateGlossary(string glossary)
         {
             currentGlossary = (Glossary)GetGlossaryIndex(glossary);
+            InitiateSlots((Glossary)GetGlossaryIndex(glossary));
         }
 
         static void InitiateSlots(Glossary glossary)
         {
             slots = new List<Slot>();
-            for (int i = 0; i < 5; i++)
-            {
-                for (int j = 0; j < 5; j++)
-                {
-                    slots.Add(new Slot(320 + 150 * j, 210 + 150 * i, 120, 120));
-                }
-            }
-
-            if (glossary == Glossary.Item)
+            if (glossary == Glossary.Items)
             {
                 InitiateItemSlots();
             }
@@ -74,8 +70,9 @@ namespace Active
         static public int GetGlossaryIndex(string glossary)
         {
             bool found = false;
+            
             Glossary tmp = 0;
-            while (found != false)
+            while (found == false)
             {
                 if (tmp.ToString() == glossary)
                 {
@@ -91,6 +88,13 @@ namespace Active
 
         static void InitiateItemSlots()
         {
+            for (int i = 0; i < 5; i++)
+            {
+                for (int j = 0; j < 5; j++)
+                {
+                    slots.Add(new Slot(320 + 150 * j, 210 + 150 * i, 120, 120));
+                }
+            }
             for (int i = 0; i < 25; i++)
             {
                 slots[i].AddTexture(ItemCreator.CreateItem(i,0).Tex);
@@ -98,15 +102,17 @@ namespace Active
         }
         static void InitiateTravelEncountersSlots()
         {
-            for (int i = 0; i < EncounterManager.Events.Count; i++)
+            for (int i = 0; i < 5; i++)
             {
-                //slots[i].AddTexture(TextureManager.encounterIcons[i];);
-            }
+                slots.Add(new Slot(320 + 150 * i, 210, 120, 120));
+                slots[i].AddTexture(TextureManager.encounterIcons[i]);
+            }            
         }
         static void InitiateWorlEventsSlots()
-        {
+        {            
             for (int i = 0; i < 3; i++)
             {
+                slots.Add(new Slot(320 + 150 * i, 210, 120, 120));
                 slots[i].AddTexture(TextureManager.texWorldEventIcons[i]);
             }
         }
@@ -122,7 +128,7 @@ namespace Active
                 }
                 else if (index == 2)
                 {
-
+                    
                 }
                 else if (index == 4)
                 {
@@ -214,24 +220,14 @@ namespace Active
         static public void Draw(SpriteBatch sb)
         {
             // Draws all Item slots
-            for (int i = 0; i < glossaries[(int)currentGlossary].Count; i++)
+            for (int i = 0; i < glossaries[(int)currentGlossary*2].Count; i++)
             {
-                slots[glossaries[(int)currentGlossary][i]].Draw(sb);
+                slots[glossaries[(int)currentGlossary*2][i]].Draw(sb);
             }
-            for (int i = 0; i < glossaries[(int)currentGlossary+1].Count; i++)
+            for (int i = 0; i < glossaries[(int)currentGlossary*2+1].Count; i++)
             {
-                slots[glossaries[(int)currentGlossary+1][i]].DrawShadow(sb);
+                slots[glossaries[(int)currentGlossary*2+1][i]].DrawShadow(sb);
             }
-            /*
-            for (int i = 0; i < glossaries[0].Count; i++)
-            {
-                slots[glossaries[0][i]].Draw(sb);
-            }
-            for (int i = 0; i < glossaries[1].Count; i++)
-            {
-                slots[glossaries[1][i]].DrawShadow(sb);
-            }*/
-
         }
     }
 }

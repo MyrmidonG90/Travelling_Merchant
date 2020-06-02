@@ -15,6 +15,8 @@ namespace Active
         static List<Vector2> textInfo;
         static Rectangle[] categoryRects;
         static int indexOfSelectedSlot;
+        static Button btnPrev;
+        static Button btnNext;
         enum Glossary
         {
             Items,
@@ -33,10 +35,9 @@ namespace Active
             categoryRects[0] = new Rectangle(1130, 760, 120, 120);
             categoryRects[1] = new Rectangle(1310, 760, 120, 120);
             categoryRects[2] = new Rectangle(1490, 760, 120, 120);
-
-            textInfo.Add(new Vector2(1220, 200));
-            textInfo.Add(new Vector2(1100, 310));
-            textInfo.Add(new Vector2(1100, 660));
+            btnNext = new Button(800,950,TextureManager.texButtonNext.Width, TextureManager.texButtonNext.Height, TextureManager.texButtonNext);
+            btnPrev = new Button(300,950, TextureManager.texButtonPrev.Width, TextureManager.texButtonPrev.Height,TextureManager.texButtonPrev);
+            
             indexOfSelectedSlot = -1;
             currentGlossary = (Glossary)GlossaryManager.GetGlossaryIndex(glossary);
         }
@@ -45,7 +46,11 @@ namespace Active
         {
             currentGlossary = (Glossary)GlossaryManager.GetGlossaryIndex(glossary);
             textInfo = new List<Vector2>();
-            
+            indexOfSelectedSlot = -1;
+            selectedItem = null;
+            textInfo.Add(new Vector2(1220, 200));
+            textInfo.Add(new Vector2(1100, 310));
+            textInfo.Add(new Vector2(1100, 660));
             GlossaryManager.InitateGlossary(glossary);
         }
 
@@ -66,20 +71,49 @@ namespace Active
                         }
                     }
                 }
+                else
+                {
+                    CheckButtonClick();
+                }
+            }
+        }
+
+        void CheckButtonClick()
+        {
+            int tmp = (int)currentGlossary;
+            if (btnNext.LeftClick())
+            {
+                ++tmp;
+                Start(((Glossary)(tmp % GlossaryManager.AmountOfGlossaries)).ToString());
+            }
+            else if (btnPrev.LeftClick())
+            {
+                --tmp;
+                if (tmp == -1)
+                {
+                    tmp = GlossaryManager.AmountOfGlossaries - 1;
+                }
+                Start(((Glossary)tmp).ToString());
             }
         }
 
         override public void Draw(SpriteBatch sb)
         {
-            sb.Draw(TextureManager.texInvMenu, mainBox, Color.White);
+            sb.Draw(TextureManager.texMenuGlossary, mainBox, Color.White);
             GlossaryManager.Draw(sb);
             if (indexOfSelectedSlot != -1)
             {
-                sb.Draw(TextureManager.texSelect, selectedSlot, Color.White);
-                sb.DrawString(TextureManager.font48, selectedItem.Name, textInfo[0], Color.White);
-                sb.DrawString(TextureManager.font32, "Info: \n" + selectedItem.Description, textInfo[1], Color.White);
-                sb.DrawString(TextureManager.font32, "Standard Price: " + selectedItem.BasePrice.ToString() + "c", textInfo[2], Color.White);
+                if (currentGlossary == 0)
+                {
+                    sb.Draw(TextureManager.texSelect, selectedSlot, Color.White);
+                    sb.DrawString(TextureManager.font48, selectedItem.Name, textInfo[0], Color.White);
+                    sb.DrawString(TextureManager.font32, "Info: \n" + selectedItem.Description, textInfo[1], Color.White);
+                    sb.DrawString(TextureManager.font32, "Standard Price: " + selectedItem.BasePrice.ToString() + "c", textInfo[2], Color.White);
+                }
+               
             }
+            btnPrev.Draw(sb);
+            btnNext.Draw(sb);
         }
 
         int CheckSlotClick()

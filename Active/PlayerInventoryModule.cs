@@ -93,10 +93,9 @@ namespace Active
 
         void DrawTabs(SpriteBatch sb)
         {
-            int tmp = (int)tab;
             for (int i = 0; i < tabButtons.Count; i++)
             {
-                tabButtons[(tmp+i)% tabButtons.Count].Draw(sb);
+                tabButtons[i].Draw(sb);
             }
         }
 
@@ -106,7 +105,7 @@ namespace Active
             tabMenus.Add(new InventoryTab());
             tabMenus.Add(new SkillTab());
             tabMenus.Add(new AchievementTab());
-            tabMenus.Add(new GlossaryTab("Item Tab","Item"));
+            tabMenus.Add(new GlossaryTab("Item Tab","Items"));
         }
 
         void CheckTabClick()
