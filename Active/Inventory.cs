@@ -30,7 +30,7 @@ namespace Active
         {
             this.money = money;
             itemList = new List<Item>();
-            stackLimit = 50;
+            stackLimit = 20;
             invLimit = 9;
         }
 
@@ -49,7 +49,7 @@ namespace Active
 
         void Initialize()
         {
-            stackLimit = 50;
+            stackLimit = 20;
             invLimit = 25;
         }        
 

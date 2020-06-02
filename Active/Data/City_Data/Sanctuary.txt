@@ -1,15 +1,15 @@
 ﻿53000
 13
-Potato;43
-Iron Ingot;23
-Iron Ore;33
-Gold Ingot;35
-Gold Ore;5
+Potato;14
+Iron Ingot;15
+Iron Ore;20
+Gold Ingot;11
+Gold Ore;7
 Ruby;2
 Diamond;6
-Simple Weapons;33
-Simple Armour;43
-Fine Weapons;23
-Fine Armour;31
-Gryphon Meat;5
-Potions;20
+Simple Weapons;16
+Simple Armour;12
+Fine Weapons;5
+Fine Armour;7
+Gryphon Meat;2
+Potions;11

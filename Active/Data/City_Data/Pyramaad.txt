@@ -1,15 +1,16 @@
 ﻿13000
-13
+14
 Carrot;17
-Gold Ingot;36
+Gold Ingot;20
+Gold Ingot;20
 Gold Ore;20
-Ruby;7
+Ruby;4
 Emerald;6
-Diamond;2
-Magic Weapons;27
-Magic Armour;32
+Diamond;1
+Magic Weapons;20
+Magic Armour;17
 Dragon Scale;4
-Spices;50
+Spices;20
+Spices;20
 Spices;12
-Potions;22
-Gryphon Meat;3
+Potions;13

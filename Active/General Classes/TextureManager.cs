@@ -317,8 +317,8 @@ namespace Active
             texTabs = new List<Texture2D>();
             texTabs.Add(texTabInv);
             texTabs.Add(texTabSkills);
-            texTabs.Add(texTabSkills);
-            texTabs.Add(texTabSkills);
+            texTabs.Add(texTabGlossaries);
+            texTabs.Add(texTabGlosasriesDark);
         }
         static void InitiateWorldEventIcons()
         {
