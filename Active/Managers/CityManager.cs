@@ -77,7 +77,7 @@ namespace Active
             FileManager.ReadFilePerLine(pathway);
             List<string> info = FileManager.ReadPerLine ;
 
-            List<int> mysInt = new List<int>();
+            List<int> CityRaces = new List<int>();
 
             int nrOfItems = 9; // Change This if you add more items
 
@@ -142,8 +142,14 @@ namespace Active
                 }
                 cities[i].AddModifiers(tmpModifiers); // Added Modifiers
                 ++start; // Mys int
-                mysInt.Add(int.Parse(info[index+start]));
-                
+                CityRaces.Add(int.Parse(info[index+start]));
+
+                int tempCounter = 0;
+                foreach (City city in cities)
+                {
+                    city.Race = CityRaces[tempCounter];
+                    tempCounter++;
+                }
             }
         }
         static public int FindCityIndex(string cityName)

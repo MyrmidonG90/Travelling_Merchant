@@ -24,6 +24,7 @@ namespace Active
         bool traded;
         List<int> goodTrade;
         List<int> badTrade;
+        int race;
 
         float x, y;
 
@@ -38,6 +39,7 @@ namespace Active
             templateInv = new Inventory(100);
             goodTrade = good;
             badTrade = bad;
+            race = -1;
         }
 
         public void Update()
@@ -141,6 +143,12 @@ namespace Active
         {
             get => templateInv;
             set => templateInv = value;
+        }
+
+        public int Race
+        {
+            get => race;
+            set => race = value;
         }
 
         public Inventory Inv { get => inv; set => inv = value; }
