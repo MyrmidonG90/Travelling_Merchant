@@ -247,24 +247,7 @@ namespace Active
             }
         }
 
-        static List<List<string>> Radbrytte(string text)
-        {
-            List<List<string>> strings = new List<List<string>>();
-            string[] split = text.Split('|');
-
-            for (int i = 0; i < split.Length; i++)
-            {
-                strings.Add(new List<string>());
-
-                string[] secondSplit = split[i].Split('/');
-                for (int j = 0; j < secondSplit.Length; j++)
-                {
-                    strings[i].Add(secondSplit[j]);
-                }
-            }
-
-            return strings;
-        }
+        
 
         static void CreateEncounter() // Programmer tool
         {

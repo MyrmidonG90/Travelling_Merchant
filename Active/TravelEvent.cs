@@ -42,7 +42,7 @@ namespace Active
             for (int i = 0; i < text.Count; i++)
             {
                 sb.DrawString(TextureManager.font24,text[i],textPos[i],Color.Black);
-            }            
+            }
         }
     }
 }
