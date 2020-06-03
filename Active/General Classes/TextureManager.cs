@@ -325,12 +325,11 @@ namespace Active
         static void InitializeTabList()
         {
             texTabs = new List<Texture2D>();
+
             texTabs.Add(texTabInv);
-
-            
-            texTabs.Add(texTabGlosasriesDark);
-
             texTabs.Add(texTabSkills);
+            texTabs.Add(texTabGlosasriesDark);
+            
             texTabs.Add(texTabGlossaries);
 
         }

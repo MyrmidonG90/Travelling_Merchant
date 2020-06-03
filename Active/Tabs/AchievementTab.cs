@@ -18,7 +18,7 @@ namespace Active
         public override void Draw(SpriteBatch sb)
         {
 
-            sb.Draw(TextureManager.texSkillMenu, mainBox, Color.White);
+            sb.Draw(TextureManager.texMenuAchievement, mainBox, Color.White);
             int temp = 0;
             foreach (Achievement achievement in AchievementManager.achievements)
             {
