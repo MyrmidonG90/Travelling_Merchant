@@ -58,7 +58,7 @@ namespace Active
             SaveIfTravelling(streamWriter);
             
             streamWriter.Close();
-
+            GlossaryManager.SaveGlossaries();
             return true;
         }
 

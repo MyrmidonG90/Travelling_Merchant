@@ -104,7 +104,7 @@ namespace Active
                 sw = new StreamWriter("./Data/Glossary.txt");
                 for (int i = 0; i < glossaries.Count; i++)
                 {
-                    if (glossaries[i] != null)
+                    if (glossaries[i].Count != 0)
                     {
                         string tmp = "";
                         for (int j = 0; j < glossaries[i].Count; j++)
