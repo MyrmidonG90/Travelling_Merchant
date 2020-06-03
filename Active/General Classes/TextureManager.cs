@@ -99,6 +99,7 @@ namespace Active
         static public Texture2D texArrowMoneyRight;
         static public Texture2D texMenuGlossary;
         static public Texture2D texMenuAchievement;
+        static public Texture2D texCharacterCreationMenu;
 
         //Items
         static public Texture2D texArmourFine, texArmourMagic, texArmourNormal, texCarrot, texCotton, texDragonScale, texFur, texGoldIngot, texGoldOre, texGryphonMeat, texIronIngot, texIronOre, texDiamond, texEmerald, texRuby, texLumber, texPotato, texPotion, texSilk, texSpices, texStone, texWeaponFine, texWeaponMagic, texWeaponNormal, texWhaleMeat;
@@ -143,6 +144,7 @@ namespace Active
             texCityInfoMenu = content.Load<Texture2D>("city_info_menu");
             texMenuAchievement = content.Load<Texture2D>("achievements_menu");
             texMenuGlossary = content.Load<Texture2D>("glossary_menu");
+            texCharacterCreationMenu = content.Load<Texture2D>("character_creation_menu");
         }
         static void LoadGUI(ContentManager content)
         {
