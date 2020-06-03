@@ -98,7 +98,7 @@ namespace Active
 
                 for (int i = 0; i < rader.Count; i++)
                 {
-                    Vector2 temp2 = new Vector2(hitBox.X + ((HitBox.Width - (int)temp.X) / 2), hitBox.Y + ((HitBox.Height - (int)temp.Y) / 2)+50*i);
+                    Vector2 temp2 = new Vector2(hitBox.X + ((HitBox.Width - (int)temp.X) / 2), hitBox.Y + ((HitBox.Height - (int)temp.Y) / 2)+40*i);
                     spriteBatch.DrawString(TextureManager.font24,rader[i], temp2, Color.Black);
                 }
                 //spriteBatch.DrawString(TextureManager.font24, text, temp2, Color.Black);
