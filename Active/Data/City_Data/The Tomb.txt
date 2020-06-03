@@ -1,17 +1,15 @@
 ﻿6660
-15
-Potato;12
+13
 Potions;20
 Potions;10
-Ruby;8
-Emerald;4
+Ruby;4
+Emerald;6
 Stone;20
-Stone;20
-Stone;20
-Simple Weapons;20
-Simple Armour;20
-Simple Weapons;2
-Simple Armour;5
+Stone;11
 Magic Weapons;12
-Magic Armour;12
-Whale Meat;3
+Magic Armour;16
+Silk;20
+Silk;13
+Cotton;19
+Fur;20
+Fur;9

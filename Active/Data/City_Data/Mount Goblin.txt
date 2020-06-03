@@ -1,15 +1,14 @@
 ﻿5000
-13
-Iron Ingot;20
+12
+Iron Ingot;10
 Iron Ore;20
 Iron Ore;10
-Gold Ingot;10
+Gold Ingot;6
 Gold Ore;19
-Ruby;4
+Ruby;2
 Fur;20
+Fur;10
 Silk;12
 Stone;20
 Stone;10
-Gryphon Meat;3
-Spices;10
-Potions;12
+Potions;6

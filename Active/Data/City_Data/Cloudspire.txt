@@ -1,0 +1,11 @@
+16000
+9
+Iron Ore;8
+Gold Ingot;10
+Dragon Scale;1
+Fur;13
+Silk;19
+Cotton;20
+Magic Weapons;10
+Magic Armour;11
+Potions;20

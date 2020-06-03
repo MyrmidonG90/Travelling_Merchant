@@ -2,9 +2,9 @@ Carrot Town
 Food
 0,7
 Metal
-1,1
-Raw Materials
 1,2
+Raw Materials
+1
 Textiles
 0,8
 Gear
@@ -14,31 +14,31 @@ Magic
 Valuables
 1
 Manufactured
-1,3
-Steel Ville
+1,1
+Emberfell
 Food
 1,1
 Metal
 0,7
 Raw Materials
-0,8
+1
 Textiles
-1,4
+1,1
 Gear
-0,7
+0,9
 Magic
 1,2
 Valuables
-1,3
+1,2
 Manufactured
 0,8
-Tower Town
+Cloudspire
 Food
-1,2
+1
 Metal
-1,5
+1,2
 Raw Materials
-1,3
+1,1
 Textiles
 0,8
 Gear
@@ -48,20 +48,20 @@ Magic
 Valuables
 1
 Manufactured
-1,7
+1,3
 Pyramaad
 Food
-1,6
+1,4
 Metal
 1
 Raw Materials
 1
 Textiles
-0,8
+0,9
 Gear
-1,5
+1,3
 Magic
-1
+0,8
 Valuables
 0,8
 Manufactured
@@ -70,13 +70,13 @@ Dryad's Grove
 Food
 1
 Metal
-1,4
+1,3
 Raw Materials
-0,7
+0,8
 Textiles
-1,5
+1,1
 Gear
-1,2
+1,1
 Magic
 0,8
 Valuables
@@ -85,21 +85,21 @@ Manufactured
 1
 Hymn Harbor
 Food
-1,5
+1,3
 Metal
-1,5
+1,1
 Raw Materials
 1
 Textiles
-1,2
+1
 Gear
-0,9
+0,8
 Magic
-1,2
+1
 Valuables
 0,8
 Manufactured
-1,4
+1,3
 Mount Goblin
 Food
 1
@@ -110,7 +110,7 @@ Raw Materials
 Textiles
 1,3
 Gear
-1,2
+1
 Magic
 1
 Valuables
@@ -129,28 +129,28 @@ Textiles
 Gear
 0,7
 Magic
-1,1
+0,9
 Valuables
-1,4
+1,3
 Manufactured
 1
 The Tomb
 Food
-1,5
+1
 Metal
-1,6
+1,3
 Raw Materials
-1,2
+1
 Textiles
-0,9
+0,8
 Gear
-0,9
+1
 Magic
 0,8
 Valuables
-0,9
+1
 Manufactured
-1,6
+1,4
 Winghelm
 Food
 1
@@ -165,6 +165,6 @@ Gear
 Magic
 1,3
 Valuables
-0,8
+0,9
 Manufactured
-0,7
+0,9
