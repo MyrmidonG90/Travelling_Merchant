@@ -2,11 +2,11 @@
 10
 Potato;15
 Iron Ingot;20
-Iron Ore;20
-Emerald;4
-Diamond;3
-Silk;12
+Emerald;2
+Silk;20
+Silk;11
 Cotton;20
-Gryphon Meat;5
-Spices;20
-Potions;15
+Simple Weapons;6
+Simple Armour;9
+Gryphon Meat;3
+Fur;13

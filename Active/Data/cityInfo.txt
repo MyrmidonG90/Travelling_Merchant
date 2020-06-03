@@ -3,13 +3,13 @@ Carrot Town is the great city of ;carrots. Its agricultural roots can ;be traced
 280,480
 0,3
 1,5
-Steel Ville
-Jag kanner att vi borde byta ut den ;har staden one of these days
+Emberfell
+*INSERT EPIC LORE HERE*
 700,660
 1,4
 5,0
-Tower Town
-If you don't like heights then Tower Town ;might not be the place for you. The city ;has towers and tall building everywhere ;and of course they had to place every ;shop at the top. ;Sigh...
+Cloudspire
+If you don't like heights then Cloudspire ;might not be the place for you. The city ;has towers and tall building everywhere ;and of course they had to place every ;shop at the top. ;Sigh...
 1500,600
 5,3
 7,1

@@ -170,7 +170,7 @@
     <Content Include="Data\Items.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Data\City_Data\Steel Ville.txt">
+    <Content Include="Data\City_Data\Emberfell.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Data\routeInfo.txt">
@@ -179,7 +179,7 @@
     <Content Include="Data\test.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Data\City_Data\Tower Town.txt">
+    <Content Include="Data\City_Data\Cloudspire.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Data\WorldEvents.txt">

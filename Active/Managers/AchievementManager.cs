@@ -12,9 +12,9 @@ namespace Active
         public static Achievement[] achievements = new Achievement[12];
         public static bool[] visitedCities = new bool[10];
         public static string[] cityNames = new string[10];
-        
 
 
+        public static List<string> rareItemsAquired = new List<string>();
         public static int boughtCarrots = 0;
 
         public static int totalCoinsEarned = 0;
@@ -32,7 +32,7 @@ namespace Active
 
 
 
-        public static bool hasDragonscale, hasGryphonMeat, hasDiamond, hasRuby, hasEmerald, hasWhaleMeat;
+        public static bool hasDragonscale, hasGryphonMeat, hasDiamond, hasRuby, hasEmerald, hasWhaleMeat, hasMagicArmour, hasMagicWeapons;
 
         public static int rareItem = 0;
 
@@ -55,15 +55,15 @@ namespace Active
         public static void CreateAchievements()
         {
             achievements[0] = new Achievement("Carrot Hunter", "Own 100 carrots", "0/100", false,0, 100);
-            achievements[1] = new Achievement("Insane Wealth", "Have 100,000 coins in your inventory", "0/100000", false,0, 100000);
+            achievements[1] = new Achievement("Insane Wealth", "Have 5,000 coins in your inventory", "0/5000", false,0, 5000);
             achievements[2] = new Achievement("On the road again", "Travel 50 times", "0/50", false, 0, 50);
-            achievements[3] = new Achievement("Investor", "Spend a total of 1,000,000 coins in trades", "0/1000000", false, 0, 1000000);
+            achievements[3] = new Achievement("Investor", "Spend a total of 100,000 coins in trades", "0/100000", false, 0, 100000);
             achievements[4] = new Achievement("Treasure Finder", "Obtain a rare item", "0/1", false, 0, 1);
-            achievements[5] = new Achievement("Treasure Hunter", "Obtain every rare item", "0/4", false, 0, 4);
+            achievements[5] = new Achievement("Treasure Hunter", "Obtain every rare item", "0/6", false, 0, 6);
             achievements[6] = new Achievement("Fat stash", "Have a full inventory", "0/25", false, 0, 25);
             achievements[7] = new Achievement("Jewel heist", "Obtain a ruby, an emerald and a diamond", "0/3", false, 0, 3);
-            achievements[8] = new Achievement("Millionaire", "Have 1,000,000 coins in your inventory", "0/1000000", false, 0, 1000000);
-            achievements[9] = new Achievement("Capitalist", "Earn a total of 10,000,000 coins", "0/10000000", false, 0, 10000000);
+            achievements[8] = new Achievement("Capitalist", "Have 100,000 coins in your inventory", "0/100000", false, 0, 100000);
+            achievements[9] = new Achievement("Millionaire", "Earn a total of 1,000,000 coins", "0/1000000", false, 0, 1000000);
             achievements[10] = new Achievement("Mr. Worldwide", "Visit every city", "0/10", false, 0, 10);
             achievements[11] = new Achievement("On the boat again", "Travel over the sea 10 times", "0/10", false, 0, 10);
 
@@ -107,7 +107,18 @@ namespace Active
         }
 
 
-            public static void ChangeAchievements()
+        public static int CountRareItems(int temp)
+        {
+            temp = 0;
+            foreach (string item in rareItemsAquired)
+            {
+                temp++;
+            }
+            return temp;
+        }
+
+
+        public static void ChangeAchievements()
         {
             foreach (Achievement achievement in achievements)
             {
@@ -118,42 +129,100 @@ namespace Active
             }
         }
 
-
-        public static void Update() // Needs to be shorter
+        public static void CheckInventoryItems()
         {
-            
-
-
-            ChangeAchievements();
-            UpdateAchievements();
-            inventorySpaces = Player.Inventory.ItemList.Count;
             foreach (Item item in Player.Inventory.ItemList)
             {
-                if (item.Name == "Diamond")
+                if (item.Name == "Diamond" && !hasDiamond)
                 {
+                    rareItemsAquired.Add(item.Name);
                     hasDiamond = true;
                 }
-                else if (item.Name == "Emerald")
+                else if (item.Name == "Emerald" && !hasEmerald)
                 {
                     hasEmerald = true;
                 }
-                else if (item.Name == "Ruby")
+                else if (item.Name == "Ruby" && !hasRuby)
                 {
                     hasRuby = true;
                 }
-                else if (item.Name == "Dragon Scale")
+                else if (item.Name == "Dragon Scale" && !hasDragonscale)
                 {
+                    rareItemsAquired.Add(item.Name);
                     hasDragonscale = true;
                 }
-                else if (item.Name == "Gryphon Meat")
+                else if (item.Name == "Gryphon Meat" && !hasGryphonMeat)
                 {
+                    rareItemsAquired.Add(item.Name);
                     hasGryphonMeat = true;
                 }
-                else if (item.Name == "Whale Meat")
+                else if (item.Name == "Whale Meat" && !hasWhaleMeat)
                 {
+                    rareItemsAquired.Add(item.Name);
                     hasWhaleMeat = true;
                 }
+                else if (item.Name == "Magic Armour" && !hasMagicArmour)
+                {
+                    rareItemsAquired.Add(item.Name);
+                    hasMagicArmour = true;
+                }
+                else if (item.Name == "Magic Weapons" && !hasMagicWeapons)
+                {
+                    rareItemsAquired.Add(item.Name);
+                    hasMagicWeapons = true;
+                }
             }
+        }
+
+        public static void UpdateAchievements()
+        {
+            achievements[0].currentAmount = boughtCarrots;
+            achievements[1].currentAmount = currentCoins;
+            achievements[2].currentAmount = travelCounter;
+            achievements[3].currentAmount = spentMoney;
+            achievements[4].currentAmount = rareItem;
+            achievements[5].currentAmount = rareItems;
+            achievements[6].currentAmount = inventorySpaces;
+            achievements[7].currentAmount = jewels;
+            achievements[8].currentAmount = currentCoins;
+            achievements[9].currentAmount = totalCoinsEarned;
+            achievements[10].currentAmount = citiesVisited;
+            achievements[11].currentAmount = boatTravelCounter;
+
+            foreach (Achievement achievement in achievements)
+            {
+                if (achievement.complete)
+                {
+                    achievement.progress = achievement.maxAmount.ToString() + "/" + achievement.maxAmount.ToString();
+                }
+                else if (!achievement.complete)
+                {
+                    achievement.progress = achievement.currentAmount + "/" + achievement.maxAmount;
+                }
+            }
+
+            int temp = 0;
+            foreach (string name in cityNames)
+            {
+                if (Player.location == name)
+                {
+                    visitedCities[temp] = true;
+                }
+                temp++;
+            }
+
+        }
+
+        public static void Update()
+        {
+            ChangeAchievements();
+            UpdateAchievements();
+            CheckInventoryItems();
+
+            rareItems = CountRareItems(1);
+
+            inventorySpaces = Player.Inventory.ItemList.Count;
+            
 
             if(hasDiamond || hasDragonscale ||  hasGryphonMeat || hasWhaleMeat)
             {
@@ -186,47 +255,6 @@ namespace Active
             citiesVisited = temp;
 
         }
-
-        public static void UpdateAchievements()
-        {
-            achievements[0].currentAmount = boughtCarrots;
-            achievements[1].currentAmount = currentCoins;
-            achievements[2].currentAmount = travelCounter;
-            achievements[3].currentAmount = spentMoney;
-            achievements[4].currentAmount = rareItem;
-            achievements[5].currentAmount = rareItems;
-            achievements[6].currentAmount = inventorySpaces;
-            achievements[7].currentAmount = jewels;
-            achievements[8].currentAmount = currentCoins;
-            achievements[9].currentAmount = totalCoinsEarned;
-            achievements[10].currentAmount = citiesVisited;
-            achievements[11].currentAmount = boatTravelCounter;
-
-            foreach (Achievement achievement in achievements)
-            {
-                if (achievement.complete)
-                {
-                    achievement.progress = achievement.maxAmount.ToString() + "/" + achievement.maxAmount.ToString();
-                }
-                else if(!achievement.complete)
-                {
-                    achievement.progress = achievement.currentAmount + "/" + achievement.maxAmount;
-                }
-            }
-
-            int temp = 0;
-            foreach (string name in cityNames)
-            {
-                if (Player.location == name)
-                {
-                    visitedCities[temp] = true;
-                }
-                temp++;
-            }
-
-        }
-       
-
 
     }
 }

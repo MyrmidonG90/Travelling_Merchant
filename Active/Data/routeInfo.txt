@@ -1,14 +1,14 @@
-Carrot Town|Steel Ville|6|0
+Carrot Town|Emberfell|6|0
 Carrot Town|Mount Goblin|7|0
 Carrot Town|Dryad's Grove|4|0
-Steel Ville|Tower Town|5|1
-Steel Ville|Hymn Harbor|5|1
-Steel Ville|Winghelm|5|1
-Steel Ville|Mount Goblin|10|0
-Steel Ville|Sanctuary|7|1
-Tower Town|Winghelm|5|1
-Tower Town|Hymn Harbor|5|1
-Tower Town|Sanctuary|8|0
+Emberfell|Cloudspire|5|1
+Emberfell|Hymn Harbor|5|1
+Emberfell|Winghelm|5|1
+Emberfell|Mount Goblin|10|0
+Emberfell|Sanctuary|7|1
+Cloudspire|Winghelm|5|1
+Cloudspire|Hymn Harbor|5|1
+Cloudspire|Sanctuary|8|0
 Hymn Harbor|Winghelm|5|1
 Pyramaad|Winghelm|5|0
 Mount Goblin|The Tomb|5|1

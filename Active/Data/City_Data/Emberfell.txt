@@ -1,5 +1,5 @@
 25500
-9
+11
 Iron Ore;20
 Iron Ore;20
 Iron Ore;11
@@ -7,5 +7,7 @@ Iron Ingot;20
 Iron Ingot;20
 Gold Ingot;10
 Gold Ore;11
-Simple Armour;7
+Simple Armour;17
 Simple Weapons;12
+Fine Armour;4
+Fine Weapons;5
