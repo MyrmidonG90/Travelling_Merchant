@@ -274,6 +274,7 @@ namespace Active
                                 }
                                 tempCity.TemplateInv = new Inventory(newTemplateInv);
                                 tempCity.CheckDate();
+                                tempCity.InvReset();
                             }
                         }
                     }

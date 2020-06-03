@@ -9,7 +9,7 @@ Carrot Town is the great city of carrots.;Its agricultural roots can be traced t
 1
 Emberfell
 Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum ;500;750;0;|TowerTown;Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum yughhgLorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum
-1500,600
+700,660
 1,4
 5,0
 25500
@@ -36,7 +36,7 @@ Hymn Harbor has ships like you've never seen. ;Beeing at the center of the map w
 2
 Winghelm
 The city got it's name after the ;great gryphons that roam the ;surrounding lands. They are however, ;starting to die out because of the ;increased demand for "Gryphon McNuggets".
-1400,450
+1490,350
 3,4
 5
 12000

@@ -23,10 +23,6 @@ namespace Active
         //Wisdom - Elf/Lizardfolk
         //Intimidation - Dwarf/Orc
 
-        //jag ber om ursäkt över hur detta är upplagt men jag var trött och ville bara få det gjort så hoppas du okända person kan förlåta mig
-
-        static int[] races;
-
         //0. Human      (P)
         //1. Halfling   (P)
         //2. Elf        (W)
@@ -42,40 +38,30 @@ namespace Active
 
         static public void Init()
         {            
-            races = new int[10];
-            races[0] = 2;
-            races[1] = 1;
-            races[2] = 2;
-            races[3] = 0;
-            races[4] = 2;
-            races[5] = 0;
-            races[6] = 1;
-            races[7] = 2;
-            races[8] = 0;
-            races[9] = 1;
+           
         }
 
         static public float ReturnSkillModifier(string location)
         {
             int temp = 0;
 
-            for (int i = 0; i < WorldMapMenu.Cities.Length; i++)
+            for (int i = 0; i < CityManager.Cities.Count; i++)
             {
-                if (Player.Location == WorldMapMenu.Cities[i].Name)
+                if (Player.Location == CityManager.Cities[i].Name)
                 {
-                    temp = races[i];
+                    temp = CityManager.Cities[i].Race;
                 }
             }
 
-            if (temp == 0)
+            if (temp == 2 || temp == 3)
             {
                 return 0.05f * Player.ReturnSkillLevel("Wisdom");
             }
-            if (temp == 1)
+            if (temp == 4 || temp == 5)
             {
                 return 0.05f * Player.ReturnSkillLevel("Intimidation");
             }
-            if (temp == 2)
+            if (temp == 0 || temp == 1)
             {
                 return 0.05f * Player.ReturnSkillLevel("Persuasion");
             }
