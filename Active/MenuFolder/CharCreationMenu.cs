@@ -27,8 +27,9 @@ namespace Active
 
         static Rectangle creationBox;
 
-        static Vector2 characterPos = new Vector2(430, 200);
-        static Vector2 skillPos = new Vector2(1315, 350);
+        static Vector2 characterPos = new Vector2(515, 250);
+        static Vector2 skillPos = new Vector2(1225, 440);
+        static Vector2 windowPos = new Vector2(310, 150);
 
 
         static public void Init()
@@ -38,13 +39,13 @@ namespace Active
             confirmedAvatar = 1;
 
             startGame = new Button(830, 900, 260, 120, "start", "Start Game", TextureManager.texButton);
-            nextAvatar = new Button(570, 650, 150, 150, "next", "Next", TextureManager.texWhite);
-            prevAvatar = new Button(370, 650, 150, 150, "prev", "Prev", TextureManager.texWhite);
-            nextSkill = new Button(1400, 650, 150, 150, "next", "Next", TextureManager.texWhite);
-            prevSkill = new Button(1200, 650, 150, 150, "next", "Next", TextureManager.texWhite);
+            nextAvatar = new Button(640, 700, 220, 60, "next", " ", TextureManager.texButtonNext);
+            prevAvatar = new Button(400, 700, 220, 60, "prev", " ", TextureManager.texButtonPrev);
+            nextSkill = new Button(1300, 700, 220, 60, "next", " ", TextureManager.texButtonNext);
+            prevSkill = new Button(1060, 700, 220, 60, "next", " ", TextureManager.texButtonPrev);
             backToMain = new Button(430, 900, 260, 120, "back", "Back", TextureManager.texButton);
 
-            creationBox = new Rectangle(310, 150, 1300, 700);
+            //creationBox = new Rectangle(310, 150, 1300, 700);
         }
 
         static public void Update()
@@ -89,7 +90,7 @@ namespace Active
 
         static public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(TextureManager.texWhite, creationBox, Color.Gray);
+            spriteBatch.Draw(TextureManager.texCharacterCreationMenu, windowPos, Color.White);
             startGame.Draw(spriteBatch);
             nextAvatar.Draw(spriteBatch);
             prevAvatar.Draw(spriteBatch);

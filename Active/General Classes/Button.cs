@@ -14,6 +14,8 @@ namespace Active
         Rectangle hitBox;
         Texture2D tex;
 
+        List<string> rader;
+
         string name;
         string text;
 
@@ -24,6 +26,7 @@ namespace Active
             this.tex = tex;
             this.name = name;
             this.text = text;
+            rader = Radbrytte(text);
         }
 
         public Button(int x, int y, int xLength, int yLength, string name, Texture2D tex)
@@ -71,6 +74,19 @@ namespace Active
             return false;
         }
 
+        List<string> Radbrytte(string text)
+        {
+            List<string> strings = new List<string>();
+            string[] split = text.Split('/');
+
+            for (int i = 0; i < split.Length; i++)
+            {
+                strings.Add(split[i]);
+            }
+
+            return strings;
+        }
+
 
         public void Draw(SpriteBatch spriteBatch)
         {
@@ -78,9 +94,14 @@ namespace Active
             {
                 spriteBatch.Draw(tex, hitBox, Color.White);
                 Vector2 temp = TextureManager.font24.MeasureString(text);
-                Vector2 temp2 = new Vector2(hitBox.X + ((HitBox.Width - (int)temp.X)/2), hitBox.Y + ((HitBox.Height - (int)temp.Y) / 2));
+                //Vector2 temp2 = new Vector2(hitBox.X + ((HitBox.Width - (int)temp.X)/2), hitBox.Y + ((HitBox.Height - (int)temp.Y) / 2));
 
-                spriteBatch.DrawString(TextureManager.font24, text, temp2, Color.Black);
+                for (int i = 0; i < rader.Count; i++)
+                {
+                    Vector2 temp2 = new Vector2(hitBox.X + ((HitBox.Width - (int)temp.X) / 2), hitBox.Y + ((HitBox.Height - (int)temp.Y) / 2)+40*i);
+                    spriteBatch.DrawString(TextureManager.font24,rader[i], temp2, Color.Black);
+                }
+                //spriteBatch.DrawString(TextureManager.font24, text, temp2, Color.Black);
             }
             else
             {

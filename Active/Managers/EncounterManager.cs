@@ -247,6 +247,8 @@ namespace Active
             }
         }
 
+        
+
         static void CreateEncounter() // Programmer tool
         {
             tmpString = new List<string>();

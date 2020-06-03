@@ -1,20 +1,20 @@
 ﻿0
-Pay 20gp|Pay 10gp(Persuasion)| Go back to town
+Pay 20gp|Pay 10gp /(Persuasion)| Go back /to town
 1
-Pay 30% of your money|Give them a rare item|Back off!
+Pay 30% of /your money|Give them /a rare item|Back off!
 2
-Add 3 days to your travel
+Add 3 days /to your travel
 3
-Run away!|Wait and see what happens
+Run away!|Wait and /see what happens
 4
 Take the item|Leave the item
 5
 Nothing happens
 6
-Take the shortcut(Wisdom)|Don't take the shortcut
+Take the /shortcut(Wisdom)|Don't take /the shortcut
 7
 Donate 100gp|No thanks
 8
-Initiate trade|Haggle Price(Persuasion)|Decline
+Initiate trade|Haggle Price/(Persuasion)|Decline
 9
-Investigate(Wisdom)|Scream|Probably the wind
+Investigate(Wisdom)|Scream|Probably /the wind
