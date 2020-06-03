@@ -183,59 +183,72 @@ namespace Active
         static public void LoadCities() // Too long
         {
             ItemList();
+
+            //StreamReader sr = new StreamReader("./Data/cityInfo.txt");
+            ////posArrowDown = new Vector2(cities[0].Coordinates.X, cities[0].Coordinates.Y);
             
-            StreamReader sr = new StreamReader("./Data/cityInfo.txt");
-            //posArrowDown = new Vector2(cities[0].Coordinates.X, cities[0].Coordinates.Y);
-            int counter = 0;
-            while (!sr.EndOfStream)
-            {
- 
-                string tempName = sr.ReadLine();
-                string tempInfo = sr.ReadLine();
-                string tempCord = sr.ReadLine();
-                string tempNeigh = sr.ReadLine();
-                string tempbad = sr.ReadLine();
+            //while (!sr.EndOfStream)
+            //{
 
-                string[] tempCord2 = tempCord.Split(',');
-                string[] tempNeigh2 = tempNeigh.Split(',');
-                string[] tempbad2 = tempbad.Split(','); 
+            //    string tempName = sr.ReadLine();
+            //    string tempInfo = sr.ReadLine();
+            //    string tempCord = sr.ReadLine();
+            //    string tempNeigh = sr.ReadLine();
+            //    string tempbad = sr.ReadLine();
 
-                Vector2 cord = new Vector2(int.Parse(tempCord2[0]), int.Parse(tempCord2[1]));
-                List<int> good = new List<int>();
-                List<int> bad = new List<int>();
+            //    string[] tempCord2 = tempCord.Split(',');
+            //    //string[] tempNeigh2 = tempNeigh.Split(',');
+            //    //string[] tempbad2 = tempbad.Split(',');
 
-                for (int i = 0; i < tempNeigh2.Length; i++)
-                {
-                    good.Add(int.Parse(tempNeigh2[i]));
-                }
+            //    Vector2 cord = new Vector2(int.Parse(tempCord2[0]), int.Parse(tempCord2[1]));
+            //    //List<int> good = new List<int>();
+            //    //List<int> bad = new List<int>();
 
-                for (int i = 0; i < tempbad2.Length; i++)
-                {
-                    bad.Add(int.Parse(tempbad2[i]));
-                }
+            //    //for (int i = 0; i < tempNeigh2.Length; i++)
+            //    //{
+            //    //    good.Add(int.Parse(tempNeigh2[i]));
+            //    //}
 
-                cities[counter] = new City(tempName, tempInfo, cord, good, bad);
-                cityButtons[counter] = new Button((int)cord.X, (int)cord.Y, 68, 68, tempName, TextureManager.texIconCity);
-                travelButtons[counter] = new Button((int)cord.X, (int)cord.Y + 75, 68, 36, tempName, TextureManager.texButtonGo);
-                infoButtons[counter] = new Button((int)cord.X + 80, (int)cord.Y + 42, 30, 30, tempName, TextureManager.texIconCityInfo);
-                //CityManager.CreateCity(tempName, tempInfo, cord, neighData);
-                counter++;
-            }
-            sr.Close();
+            //    //for (int i = 0; i < tempbad2.Length; i++)
+            //    //{
+            //    //    bad.Add(int.Parse(tempbad2[i]));
+            //    //}
+
+            //    //cities[counter] = new City(tempName, tempInfo, cord, good, bad);
+                
+            //    //CityManager.CreateCity(tempName, tempInfo, cord, neighData);
+            //}
+            //sr.Close();
 
             //CityManager.SaveCities();
             //CityManager.LoadCities();
             /*CityManager.SaveCities();
             CityManager.LoadCities();*/
 
-            for (int i = 0; i < cities.Length; i++)
+            //for (int i = 0; i < cities.Length; i++)
+            //{
+            //    cities[i].Information = cities[i].Information.Replace(";", "\n");
+            //}
+
+            //foreach (City tempCity in cities)
+            //{
+            //    tempCity.AddInventory(LoadCityMerchant(tempCity.Name));
+            //    tempCity.InvInit();
+            //}
+
+            cities = CityManager.Cities.ToArray();
+
+            int counter = 0;
+            foreach (City city in cities)
             {
-                cities[i].Information = cities[i].Information.Replace(";", "\n");
+                cityButtons[counter] = new Button((int)city.Coordinates.X, (int)city.Coordinates.Y, 68, 68, city.Name, TextureManager.texIconCity);
+                travelButtons[counter] = new Button((int)city.Coordinates.X, (int)city.Coordinates.Y + 75, 68, 36, city.Name, TextureManager.texButtonGo);
+                infoButtons[counter] = new Button((int)city.Coordinates.X + 80, (int)city.Coordinates.Y + 42, 30, 30, city.Name, TextureManager.texIconCityInfo);
+                counter++;
             }
 
             foreach (City tempCity in cities)
             {
-                tempCity.AddInventory(LoadCityMerchant(tempCity.Name));
                 tempCity.InvInit();
             }
         }

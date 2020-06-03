@@ -119,6 +119,7 @@ namespace Active
                     {
 
                     }
+                    spriteBatch.Draw(TextureManager.texRaces[tempCity.Race], new Vector2(480, 650), Color.White);
                 }
             }
         }
@@ -150,7 +151,8 @@ namespace Active
 
             if (travelTime != 0)
             {
-                spriteBatch.DrawString(TextureManager.font24, "Travel time:\n   " + travelTime.ToString() + " days", new Vector2(680, 700), Color.Black);
+                spriteBatch.DrawString(TextureManager.font18, "Travel time:\n   " + travelTime.ToString() + " days", new Vector2(720, 680), Color.Black);
+                spriteBatch.Draw(TextureManager.texTravelTime, new Rectangle(600, 660, 100, 100), Color.White);
             }
         }
 
