@@ -25,7 +25,15 @@ namespace Active
             temp += 100;
             foreach (Achievement achievement in AchievementManager.achievements)
             {
-                sb.DrawString(TextureManager.font24, achievement.name + "  " + achievement.progress, new Vector2(300, 180 + temp), Color.Black);
+                if (achievement.complete)
+                {
+                    sb.Draw(TextureManager.texAffirmative, new Rectangle(275, 180 + temp, 40, 40), Color.White);
+                }
+                else
+                {
+                    sb.Draw(TextureManager.texNegative, new Rectangle(275, 180 + temp, 40, 40), Color.White);
+                }
+                sb.DrawString(TextureManager.font24, achievement.name + "  " + achievement.progress, new Vector2(330, 180 + temp), Color.Black);
                 sb.DrawString(TextureManager.font24, achievement.description, new Vector2(880, 180 + temp), Color.Black);
                 temp += 60;
             }

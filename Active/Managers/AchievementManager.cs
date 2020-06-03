@@ -54,7 +54,7 @@ namespace Active
 
         public static void CreateAchievements()
         {
-            achievements[0] = new Achievement("Carrot Hunter", "Own 100 carrots", "0/100", false,0, 100);
+            achievements[0] = new Achievement("Carrot Hunter", "Buy 100 carrots", "0/100", false,0, 100);
             achievements[1] = new Achievement("Insane Wealth", "Have 5,000 coins in your inventory", "0/5000", false,0, 5000);
             achievements[2] = new Achievement("On the road again", "Travel 50 times", "0/50", false, 0, 50);
             achievements[3] = new Achievement("Investor", "Spend a total of 100,000 coins in trades", "0/100000", false, 0, 100000);
