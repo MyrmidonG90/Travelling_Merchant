@@ -57,6 +57,13 @@ namespace Active
         static public Texture2D texIconEncounterKingsToll;
         static public Texture2D texIconEncounterRoadToll;
 
+        static public Texture2D texIconHuman;
+        static public Texture2D texIconHalfling;
+        static public Texture2D texIconElf;
+        static public Texture2D texIconLizard;
+        static public Texture2D texIconDwarf;
+        static public Texture2D texIconOrc;
+
         //Avatars
         static public Texture2D texPCavatar1;
         static public Texture2D texPCavatar2;
@@ -110,6 +117,7 @@ namespace Active
         static public List<Texture2D> texTabs;
         static public List<Texture2D> texWorldEventIcons;
         static public List<Texture2D> encounterIcons;
+        static public List<Texture2D> texRaces;
 
         static public void LoadContent(ContentManager content)
         {
@@ -237,6 +245,12 @@ namespace Active
             texIconEventWar = content.Load<Texture2D>("event_icon_war");
             texIconEventPlague = content.Load<Texture2D>("event_icon_plague");
 
+            texIconHuman = content.Load<Texture2D>("race_human");
+            texIconHalfling = content.Load<Texture2D>("race_halfling");
+            texIconElf = content.Load<Texture2D>("race_elf");
+            texIconLizard = content.Load<Texture2D>("race_lizardfolk");
+            texIconDwarf = content.Load<Texture2D>("race_dwarf");
+            texIconOrc = content.Load<Texture2D>("race_orc");
         }
         static void LoadAvatars(ContentManager content)
         {
@@ -264,6 +278,17 @@ namespace Active
             InitializeTabList();
             InitiateWorldEventIcons();
             InitiateEncounterList();
+            InitiateRaces();
+        }
+        static void InitiateRaces()
+        {
+            texRaces = new List<Texture2D>();
+            texRaces.Add(texIconHuman);
+            texRaces.Add(texIconHalfling);
+            texRaces.Add(texIconElf);
+            texRaces.Add(texIconLizard);
+            texRaces.Add(texIconDwarf);
+            texRaces.Add(texIconOrc);
         }
         static void InitiateEncounterList()
         {
