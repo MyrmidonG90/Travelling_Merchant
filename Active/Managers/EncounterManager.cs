@@ -247,6 +247,17 @@ namespace Active
             }
         }
 
+        static List<string> Radbrytte(string text)
+        {
+            List<string> strings = new List<string>();
+            string[] split = text.Split('|');
+            for (int i = 0; i < split.Length; i++)
+            {
+                strings.Add(split[i]);
+            }
+            return strings;
+        }
+
         static void CreateEncounter() // Programmer tool
         {
             tmpString = new List<string>();
