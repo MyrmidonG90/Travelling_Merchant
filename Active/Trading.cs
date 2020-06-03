@@ -329,8 +329,12 @@ namespace Active
             {
                 if (invLeft.ItemList[invLeft.FindIndexOf(slots[counterCol, counterRow].Item.ID)].Amount >= 5)
                 {
-                    tradeLeft.AddItem(slots[counterCol, counterRow].Item.ID, 5);// Lägger till item till det vänstra trade fältet
-                    invLeft.ReduceAmountOfItems(slots[counterCol, counterRow].Item.ID, 5);
+                    if (tradeLeft.AddItem(slots[counterCol, counterRow].Item.ID, 5))
+                    {
+                        invLeft.ReduceAmountOfItems(slots[counterCol, counterRow].Item.ID, 5);
+                    }
+                    // Lägger till item till det vänstra trade fältet
+                   
                 }
                 else
                 {
@@ -346,7 +350,7 @@ namespace Active
                     {
                         invRight.ReduceAmountOfItems(slots[counterCol, counterRow].Item.ID, 5);
                     }
-                   ;// Lägger till item till det vänstra trade fältet ///////////////////////////////////////////////////////////////!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                   ;
                     
                 }
                 else
@@ -470,7 +474,6 @@ namespace Active
                     full = true;
                 }
             }
-
             return full;
         }
 

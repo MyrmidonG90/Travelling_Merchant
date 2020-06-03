@@ -50,7 +50,7 @@ namespace Active
             }
         }
 
-        public static void SaveCityFile(string pathway)
+        public static void SaveCityFile(string pathway) // Funkar EJ som intended!!! Ändra på city.ToStringArray() och lägg till Mys int!!!
         {
             if (File.Exists(pathway))
             {
@@ -79,7 +79,7 @@ namespace Active
 
         public static List<List<int>> LoadGlossary()
         {
-            List<List<int>> glossaries = new List<List<int>>();            
+            List<List<int>> glossaries = new List<List<int>>();
             ReadFilePerLine("./Data/Glossary.txt");
 
             for (int i = 0; i < readPerLine.Count; i++)
@@ -95,6 +95,38 @@ namespace Active
                 }
             }
             return glossaries;
+        }
+        public static void SaveGlossaries(List<List<int>> glossaries)
+        {
+            if (File.Exists("./Data/Glossary.txt"))
+            {
+                EmptyFile("./Data/Glossary.txt");
+                sw = new StreamWriter("./Data/Glossary.txt");
+                for (int i = 0; i < glossaries.Count; i++)
+                {
+                    if (glossaries[i] != null)
+                    {
+                        string tmp = "";
+                        for (int j = 0; j < glossaries[i].Count; j++)
+                        {
+                            if (j != 0)
+                            {
+                                tmp += ','+glossaries[i][j].ToString() ;
+                            }
+                            else
+                            {
+                                tmp = glossaries[i][j].ToString();
+                            }
+                        }
+                        sw.WriteLine(tmp);
+                    }
+                    else
+                    {
+                        sw.WriteLine(-1);
+                    }                    
+                }
+                sw.Close();
+            }
         }
 
         static void Reset()

@@ -39,6 +39,7 @@ namespace Active
         static public void Initialize(string glossary)
         {
             LoadGlossary();
+            
             Glossary glossaryIndex = (Glossary)GetGlossaryIndex(glossary);
             InitiateSlots(glossaryIndex);
             currentGlossary = glossaryIndex;
@@ -240,6 +241,11 @@ namespace Active
                     glossaries[i].Clear();
                 }
             }            
+        }
+
+        static public void SaveGlossaries()
+        {
+            FileManager.SaveGlossaries(glossaries);
         }
 
         static public void Draw(SpriteBatch sb)
