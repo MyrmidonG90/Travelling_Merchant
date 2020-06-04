@@ -25,7 +25,7 @@ namespace Active
         static int month;
         static int dayOfMonth;
 
-        static Vector2 pos = new Vector2(820, 14);
+        static Vector2 pos = new Vector2(800, 24);
         static Button eventLog = new Button(1280, 10, 195, 90, "event", "Open log", TextureManager.texButton);
         static Rectangle box = new Rectangle(730, 0, 460, 200);
 
@@ -35,18 +35,18 @@ namespace Active
             week = 0;
             month = 0;
 
-            months.Add("January");
-            months.Add("February");
-            months.Add("March");
-            months.Add("April");
+            months.Add("Jan");
+            months.Add("Feb");
+            months.Add("Mar");
+            months.Add("Apr");
             months.Add("May");
-            months.Add("June");
-            months.Add("July");
-            months.Add("August");
-            months.Add("September");
-            months.Add("October");
-            months.Add("November");
-            months.Add("December");
+            months.Add("Jun");
+            months.Add("Jul");
+            months.Add("Aug");
+            months.Add("Sep");
+            months.Add("Oct");
+            months.Add("Nov");
+            months.Add("Dec");
 
             days.Add("Monday");
             days.Add("Tuesday");
@@ -123,10 +123,10 @@ namespace Active
 
         static public void Draw(SpriteBatch spriteBatch)
         {
-            //spriteBatch.Draw(TextureManager.texCalendar, box, Color.White);
-            spriteBatch.DrawString(TextureManager.font24, currentDay, pos, Color.Black);
-            spriteBatch.DrawString(TextureManager.font24, dayOfMonth.ToString() + dayFollowUp + " " + currentMonth, new Vector2(pos.X, pos.Y + 30), Color.Black);
-            spriteBatch.DrawString(TextureManager.font24, "Total days: " + totalDays.ToString(), new Vector2(pos.X, pos.Y + 60), Color.Black);
+            spriteBatch.Draw(TextureManager.texCalendar, box, Color.White);
+            spriteBatch.DrawString(TextureManager.font18, currentDay, pos, Color.Black);
+            spriteBatch.DrawString(TextureManager.font18, currentMonth + " " + dayOfMonth.ToString() + dayFollowUp, new Vector2(pos.X, pos.Y + 30), Color.Black);
+            spriteBatch.DrawString(TextureManager.font18, "Total days:\n       " + totalDays.ToString(), new Vector2(pos.X + 200, pos.Y), Color.Black);
             eventLog.Draw(spriteBatch);
         }
 

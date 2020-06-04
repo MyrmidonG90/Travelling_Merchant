@@ -74,6 +74,10 @@ namespace Active
         static public Texture2D texButtonGo;
         static public Texture2D texButtonPrev;
         static public Texture2D texButtonNext;
+        static public Texture2D texButtonAccept;
+        static public Texture2D texButtonReset;
+        static public Texture2D texButtonEncounter;
+        static public Texture2D texBoxEncounter;
         static public Texture2D texTab;
         static public Texture2D texTabInv;
         static public Texture2D texTabSkills;
@@ -172,6 +176,10 @@ namespace Active
             texOptionsBox = content.Load<Texture2D>("options_box");
             texCalendar = content.Load<Texture2D>("calendar_box");
             texEventLog = content.Load<Texture2D>("event_log");
+            texButtonAccept = content.Load<Texture2D>("accept_trade_button");
+            texButtonReset = content.Load<Texture2D>("reset_trade_button");
+            texButtonEncounter = content.Load<Texture2D>("encounter_button");
+            texBoxEncounter = content.Load<Texture2D>("encounter_box");
 
             texTabAchievements = content.Load<Texture2D>("achievements_tab");
             texTabGlossaries = content.Load<Texture2D>("glossaries_tab");

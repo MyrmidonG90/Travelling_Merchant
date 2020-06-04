@@ -91,8 +91,8 @@ namespace Active
 
         static void CreateButtons() // Initialiserar knapparna
         {
-            accept = new Button(1020, 200, 260, 120, "accept", "Accept Trade", TextureManager.texButton);
-            reset = new Button(720, 200, 260, 120, "reset", "Reset Trade", TextureManager.texButton);
+            accept = new Button(915, 302, 80, 80, TextureManager.texButtonAccept);
+            reset = new Button(915, 402, 80, 80, TextureManager.texButtonReset);
             back = new Button(20, 20, 80, 80, TextureManager.texBackArrow);
         }
 
@@ -567,7 +567,7 @@ namespace Active
             double sum = 0;
             for (int i = 0; i < inv.ItemList.Count; i++)
             {
-                double temp = inv.ItemList[i].BasePrice * SkillManager.ReturnSkillModifier(zoneName) * inv.ItemList[i].Amount;
+                double temp = inv.ItemList[i].BasePrice * SkillManager.ReturnSkillModifier(zoneName, 1) * inv.ItemList[i].Amount;
                 if (isPlayer)
                 {
                     sum += (inv.ItemList[i].BasePrice * ModifierManager.GetModifier(zoneName, inv.ItemList[i].PrimaryCategory) * inv.ItemList[i].Amount) + temp;
