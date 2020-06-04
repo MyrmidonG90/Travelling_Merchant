@@ -13,8 +13,8 @@ namespace Active
         static bool test;
         public static string location;
         static string[] skillNames;
-        static int[] skillLevels;
-        static int[] skillXP;
+        public static int[] skillLevels;
+        public static int[] skillXP;
         static List<string> eventCities;
         static List<string> eventNames;
         static List<int> activeEventID;
@@ -137,7 +137,7 @@ namespace Active
                 if (skillName == skillNames[i])
                 {
                     skillXP[i] += xp;
-                    if (skillXP[i]>= 100 * skillLevels[i] && skillLevels[i] <5) // !!!!!!!!!!!!!!!!!!!!!!!!!!ÄNDRA MAX ANTAL LVL!!!!!!!!!!!!!!!!!!!!!!
+                    if (skillXP[i]>=100 * skillLevels[i] && skillLevels[i] <5) // !!!!!!!!!!!!!!!!!!!!!!!!!!ÄNDRA MAX ANTAL LVL!!!!!!!!!!!!!!!!!!!!!!
                     {
                         ++skillLevels[i];
                         LevelUp.Start(skillName);
