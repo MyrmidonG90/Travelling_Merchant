@@ -28,35 +28,51 @@ namespace Active
             
             if(Player.skillLevels[0] == 0)
             {
-                sb.DrawString(TextureManager.font32, (Player.skillXP[0] - Player.skillLevels[0] * 100).ToString() + "/100", new Vector2(1100, 300), Color.Black);
+                sb.DrawString(TextureManager.font32, Player.skillXP[0].ToString() + "/1", new Vector2(1100, 300), Color.Black);
+            }
+            else if((Player.skillLevels[0] * Player.skillLevels[0] * 100) < 2500)
+            {
+                sb.DrawString(TextureManager.font32, Player.skillXP[0] + "/" + Player.skillLevels[0] * Player.skillLevels[0] * 100, new Vector2(1100, 300), Color.Black);
             }
             else
             {
-                sb.DrawString(TextureManager.font32, (Player.skillXP[0] - Player.skillLevels[0] * 100 + 100).ToString() + "/100", new Vector2(1100, 300), Color.Black);
+                sb.DrawString(TextureManager.font32, "MAX LEVEL", new Vector2(1100, 300), Color.Black);
             }
+
+
             if (Player.skillLevels[1] == 0)
             {
-                sb.DrawString(TextureManager.font32, (Player.skillXP[1] - Player.skillLevels[1] * 100).ToString() + "/100", new Vector2(1100, 400), Color.Black);
+                sb.DrawString(TextureManager.font32, Player.skillXP[1].ToString() + "/1", new Vector2(1100, 400), Color.Black);
+            }
+            else if((Player.skillLevels[1] * Player.skillLevels[1] * 100) < 2500)
+            {
+                sb.DrawString(TextureManager.font32, Player.skillXP[1].ToString() + "/" + Player.skillLevels[1] * Player.skillLevels[1] * 100, new Vector2(1100, 400), Color.Black);
             }
             else
             {
-                sb.DrawString(TextureManager.font32, (Player.skillXP[1] - Player.skillLevels[1] * 100 + 100).ToString() + "/100", new Vector2(1100, 400), Color.Black);
+                sb.DrawString(TextureManager.font32, "MAX LEVEL", new Vector2(1100, 400), Color.Black);
             }
+
+
             if (Player.skillLevels[2] == 0)
             {
-                sb.DrawString(TextureManager.font32, (Player.skillXP[2] - Player.skillLevels[2] * 100).ToString() + "/100", new Vector2(1100, 500), Color.Black);
+                sb.DrawString(TextureManager.font32, Player.skillXP[2].ToString() + "/1", new Vector2(1100, 500), Color.Black);
+            }
+            else if((Player.skillLevels[2] * Player.skillLevels[2] * 100) < 2500)
+            {
+                sb.DrawString(TextureManager.font32, Player.skillXP[2].ToString() + "/" + Player.skillLevels[2] * Player.skillLevels[2] * 100, new Vector2(1100, 500), Color.Black);
             }
             else
             {
-                sb.DrawString(TextureManager.font32, (Player.skillXP[2] - Player.skillLevels[2] * 100 + 100).ToString() + "/100", new Vector2(1100, 500), Color.Black);
+                sb.DrawString(TextureManager.font32, "MAX LEVEL", new Vector2(1100, 500), Color.Black);
             }
 
-            
 
-            
-            
-           
-            
+
+
+
+
+
         }
 
         public override void Update() // Behövs pga inheritance

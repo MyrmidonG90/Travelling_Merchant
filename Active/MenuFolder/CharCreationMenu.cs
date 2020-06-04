@@ -131,15 +131,15 @@ namespace Active
             {
                 if(startingSkill == 1)
                 {
-                    Player.AddXP("Wisdom", 100);
+                    Player.AddXP("Wisdom", 1);
                 }
                 else if (startingSkill == 2)
                 {
-                    Player.AddXP("Intimidation", 100);
+                    Player.AddXP("Intimidation", 1);
                 }
                 else if (startingSkill == 3)
                 {
-                    Player.AddXP("Persuasion", 100);
+                    Player.AddXP("Persuasion", 1);
                 }
 
                 confirmedAvatar = playerAvatarSelect;

@@ -137,7 +137,12 @@ namespace Active
                 if (skillName == skillNames[i])
                 {
                     skillXP[i] += xp;
-                    if (skillXP[i]>=100 * skillLevels[i] && skillLevels[i] <5) // !!!!!!!!!!!!!!!!!!!!!!!!!!ÄNDRA MAX ANTAL LVL!!!!!!!!!!!!!!!!!!!!!!
+                    if (skillXP[i] >= 100 * skillLevels[i] * skillLevels[i] && skillLevels[i] < 5) // !!!!!!!!!!!!!!!!!!!!!!!!!!ÄNDRA MAX ANTAL LVL!!!!!!!!!!!!!!!!!!!!!!
+                    {
+                        ++skillLevels[i];
+                        LevelUp.Start(skillName);
+                    }
+                    if (skillXP[i] >= 100 * skillLevels[i] * skillLevels[i] && skillLevels[i] < 5) // !!!!!!!!!!!!!!!!!!!!!!!!!!ÄNDRA MAX ANTAL LVL!!!!!!!!!!!!!!!!!!!!!!
                     {
                         ++skillLevels[i];
                         LevelUp.Start(skillName);
@@ -147,6 +152,9 @@ namespace Active
 
             return false;
         }
+
+
+        
 
         static private void DebugFunctions()
         {
