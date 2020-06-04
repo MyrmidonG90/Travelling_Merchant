@@ -80,8 +80,11 @@ namespace Active
         static public Texture2D texBoxEncounter;
         static public Texture2D texTab;
         static public Texture2D texTabInv;
+        static public Texture2D texTabInvDark;
         static public Texture2D texTabSkills;
+        static public Texture2D texTabSkillsDark;
         static public Texture2D texTabAchievements;
+        static public Texture2D texTabAchievementsDark;
         static public Texture2D texTabGlossaries;
         static public Texture2D texTabGlosasriesDark;
         static public Texture2D texBackArrow;
@@ -167,7 +170,9 @@ namespace Active
             texBackArrow = content.Load<Texture2D>("backarrow");
             texButton = content.Load<Texture2D>("btn");
             texTabInv = content.Load<Texture2D>("inventory_tab");
+            texTabInvDark = content.Load<Texture2D>("inventory_tab_dark");
             texTabSkills = content.Load<Texture2D>("skill_tab");
+            texTabSkillsDark = content.Load<Texture2D>("skill_tab_dark");
             texOptions = content.Load<Texture2D>("options");
             texDisposeBar = content.Load<Texture2D>("dispose_bar");
             texDisposeBox = content.Load<Texture2D>("dispose_box");
@@ -182,6 +187,7 @@ namespace Active
             texBoxEncounter = content.Load<Texture2D>("encounter_box");
 
             texTabAchievements = content.Load<Texture2D>("achievements_tab");
+            texTabAchievementsDark = content.Load<Texture2D>("achievements_tab_dark");
             texTabGlossaries = content.Load<Texture2D>("glossaries_tab");
             texTabGlosasriesDark = content.Load<Texture2D>("glossaries_tab_dark");
             texButtonNext = content.Load<Texture2D>("next_button");
@@ -367,8 +373,7 @@ namespace Active
 
             texTabs.Add(texTabInv);
             texTabs.Add(texTabSkills);
-            texTabs.Add(texTabAchievements);
-            
+            texTabs.Add(texTabAchievements);          
             texTabs.Add(texTabGlossaries);
 
         }

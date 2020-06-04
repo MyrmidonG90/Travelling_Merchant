@@ -78,8 +78,7 @@ namespace Active
         {
             returnButton.Draw(spriteBatch);
             tabMenus[(int)tab].Draw(spriteBatch);
-            DrawTabs(spriteBatch);
-            
+            DrawTabs(spriteBatch);           
         }
         
         void InitiateTabButtons()
