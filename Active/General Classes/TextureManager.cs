@@ -77,6 +77,8 @@ namespace Active
         static public Texture2D texButtonAccept;
         static public Texture2D texButtonReset;
         static public Texture2D texButtonEncounter;
+        static public Texture2D texButtonPause;
+        static public Texture2D texButtonUnpause;
         static public Texture2D texBoxEncounter;
         static public Texture2D texTab;
         static public Texture2D texTabInv;
@@ -185,6 +187,9 @@ namespace Active
             texButtonReset = content.Load<Texture2D>("reset_trade_button");
             texButtonEncounter = content.Load<Texture2D>("encounter_button");
             texBoxEncounter = content.Load<Texture2D>("encounter_box");
+
+            texButtonPause = content.Load<Texture2D>("button_pause");
+            texButtonUnpause = content.Load<Texture2D>("button_unpause");
 
             texTabAchievements = content.Load<Texture2D>("achievements_tab");
             texTabAchievementsDark = content.Load<Texture2D>("achievements_tab_dark");
