@@ -41,7 +41,7 @@ namespace Active
            
         }
 
-        static public float ReturnSkillModifier(string location)
+        static public float ReturnSkillModifier(string location, int catMod)
         {
             int temp = 0;
 
@@ -52,20 +52,38 @@ namespace Active
                     temp = CityManager.Cities[i].Race;
                 }
             }
-
-            if (temp == 2 || temp == 3)
+            if (catMod == 0)
             {
-                return 0.05f * Player.ReturnSkillLevel("Wisdom");
+                if (temp == 2 || temp == 3)
+                {
+                    return 0.05f * Player.ReturnSkillLevel("Wisdom");
+                }
+                if (temp == 4 || temp == 5)
+                {
+                    return 0.05f * Player.ReturnSkillLevel("Intimidation");
+                }
+                if (temp == 0 || temp == 1)
+                {
+                    return 0.05f * Player.ReturnSkillLevel("Persuasion");
+                }
+                return 0;
             }
-            if (temp == 4 || temp == 5)
+            else
             {
-                return 0.05f * Player.ReturnSkillLevel("Intimidation");
+                if (temp == 2 || temp == 3)
+                {
+                    return 0.05f * Player.ReturnSkillLevel("Wisdom") + 1;
+                }
+                if (temp == 4 || temp == 5)
+                {
+                    return 0.05f * Player.ReturnSkillLevel("Intimidation") + 1;
+                }
+                if (temp == 0 || temp == 1)
+                {
+                    return 0.05f * Player.ReturnSkillLevel("Persuasion") + 1;
+                }
+                return 0;
             }
-            if (temp == 0 || temp == 1)
-            {
-                return 0.05f * Player.ReturnSkillLevel("Persuasion");
-            }
-            return 0;
         }
     }
 }

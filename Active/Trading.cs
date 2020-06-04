@@ -565,9 +565,36 @@ namespace Active
         static int CheckValue(Inventory inv)
         {
             double sum = 0;
+            int number = 0;
             for (int i = 0; i < inv.ItemList.Count; i++)
             {
-                double temp = inv.ItemList[i].BasePrice *  SkillManager.ReturnSkillModifier(zoneName) * inv.ItemList[i].Amount;
+                foreach (City city in WorldMapMenu.cities)
+                {
+                    if(city.Name == Player.location)
+                    {
+                        for (int j = 0; j < city.GoodTrade.Count; j++)
+                        {
+                            if (inv.ItemList[i].PrimaryCategory == city.GoodTrade[j])
+                            {
+                                number = 1;
+                            }
+                            else if (inv.ItemList[i].SecondaryCategory == city.GoodTrade[j])
+                            {
+                                number = 1;
+                            }
+                            else if (inv.ItemList[i].TertiaryCategory == city.GoodTrade[j])
+                            {
+                                number = 1;
+                            }
+                            else
+                            {
+                                number = 0;
+                            }
+                        }
+                    }
+
+                }
+                double temp = inv.ItemList[i].BasePrice *  SkillManager.ReturnSkillModifier(zoneName, number) * inv.ItemList[i].Amount;
                 sum += (inv.ItemList[i].BasePrice*ModifierManager.GetModifier(zoneName, inv.ItemList[i].PrimaryCategory) * inv.ItemList[i].Amount) - temp;
             }
             return (int)sum; // Avrundas nedåt

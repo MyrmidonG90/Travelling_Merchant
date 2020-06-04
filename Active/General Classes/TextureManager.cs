@@ -77,6 +77,7 @@ namespace Active
         static public Texture2D texTab;
         static public Texture2D texTabInv;
         static public Texture2D texTabSkills;
+        static public Texture2D texTabAchievements;
         static public Texture2D texTabGlossaries;
         static public Texture2D texTabGlosasriesDark;
         static public Texture2D texBackArrow;
@@ -172,6 +173,7 @@ namespace Active
             texCalendar = content.Load<Texture2D>("calendar_box");
             texEventLog = content.Load<Texture2D>("event_log");
 
+            texTabAchievements = content.Load<Texture2D>("achievements_tab");
             texTabGlossaries = content.Load<Texture2D>("glossaries_tab");
             texTabGlosasriesDark = content.Load<Texture2D>("glossaries_tab_dark");
             texButtonNext = content.Load<Texture2D>("next_button");
@@ -357,7 +359,7 @@ namespace Active
 
             texTabs.Add(texTabInv);
             texTabs.Add(texTabSkills);
-            texTabs.Add(texTabGlosasriesDark);
+            texTabs.Add(texTabAchievements);
             
             texTabs.Add(texTabGlossaries);
 
