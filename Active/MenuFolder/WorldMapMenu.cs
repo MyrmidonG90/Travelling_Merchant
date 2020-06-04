@@ -11,11 +11,11 @@ namespace Active
 {
     static class WorldMapMenu
     {
-        //OM DU ÄNDRAR VÄRDET HÄR SÅ BEHVÖER DU ÄNDRA SAMMA VÄRDE I PLAYER FÖR JAG SUGER PÅ PROGRAMMERING
-        static int nrCities = 10;
-        //OM DU ÄNDRAR VÄRDET HÄR SÅ BEHVÖER DU ÄNDRA SAMMA VÄRDE I PLAYER FÖR JAG SUGER PÅ PROGRAMMERING
+        
+        public static int nrCities = 10;
+        
 
-        static City[] cities = new City[nrCities];
+        public static City[] cities = new City[nrCities];
         static Button[] cityButtons = new Button[nrCities];
         static Button[] travelButtons = new Button[nrCities];
         static Button[] infoButtons = new Button[nrCities];

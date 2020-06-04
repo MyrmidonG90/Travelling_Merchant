@@ -30,6 +30,18 @@ namespace Active
             lorePos = new Vector2(950, 360);
             infoPos = new Vector2(670, 290);
         }
+        static List<string> Radbrytte(string text)
+        {
+            List<string> strings = new List<string>();
+            string[] split = text.Split(';');
+
+            for (int i = 0; i < split.Length; i++)
+            {
+                strings.Add(split[i]);
+            }
+
+            return strings;
+        }
 
         static public bool Update()
         {
@@ -75,7 +87,12 @@ namespace Active
                     {
                         if (Player.VisitedCities[counter])
                         {
-                            spriteBatch.DrawString(TextureManager.font18, desc, lorePos, Color.Black);
+                            List<string> radbrytte = Radbrytte(desc);
+                            for (int i = 0; i < radbrytte.Count; i++)
+                            {
+                                spriteBatch.DrawString(TextureManager.font18, radbrytte[i], new Vector2(lorePos.X,lorePos.Y+ i*TextureManager.font18.MeasureString(radbrytte[i]).Y), Color.Black);
+                            }
+                            //spriteBatch.DrawString(TextureManager.font18, desc, lorePos, Color.Black);
                         }
                     }
                     counter++;
