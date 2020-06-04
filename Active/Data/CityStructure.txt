@@ -1,5 +1,5 @@
 ﻿Carrot Town
-Carrot Town is the great city of carrots.;Its agricultural roots can be traced thousands of years!; There is no better place to buy fruits, vegetables and, of course, carrots.
+Carrot Town is the great city;of carrots. Its agricultural;roots can be traced;thousands of years!;There is no better place to buy;fruits, vegetables;and, of course, carrots.
 280,480
 0,3
 1,5
@@ -8,7 +8,7 @@ Carrot Town is the great city of carrots.;Its agricultural roots can be traced t
 0:0,7;1:1,2;2:1;3:0,8;4:1;5:1,2;6:1;7:1,1
 1
 Emberfell
-Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum ;500;750;0;|TowerTown;Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum yughhgLorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum
+Lorem ipsum Lorem ipsum Lorem;ipsum Lorem ipsum Lorem ipsum;Lorem ipsum Lorem ipsum;Lorem ipsum Lorem ipsum Lorem ;ipsum Lorem ipsum
 700,660
 1,4
 5,0
@@ -17,7 +17,7 @@ Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ip
 0:1,1;1:0,7;2:1;3:1,1;4:0,9;5:1,2;6:1,2;7:0,8
 4
 Cloudspire
-Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum yughhgLorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum
+Lorem ipsum Lorem ipsum Lorem;ipsum Lorem ipsum Lorem ipsum;Lorem ipsum Lorem ipsum;Lorem ipsum Lorem ipsum Lorem ;ipsum Lorem ipsum
 1500,600
 5,3
 7,1
@@ -26,7 +26,7 @@ Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ip
 0:1;1:1,2;2:1,1;3:0,8;4:1;5:0,8;6:1;7:1,3
 0
 Hymn Harbor
-Hymn Harbor has ships like you've never seen. ;Beeing at the center of the map with ;trade ships delivering goods all day, ;it's only natural that this city has a ;diverse collection of wares.
+Hymn Harbor has ships like you've;never seen. Beeing at the center of; the map with trade ships delivering;goods all day, it's only natural that;this city has a diverse collection of;wares.
 1170,310
 4,6
 7,0
@@ -35,7 +35,7 @@ Hymn Harbor has ships like you've never seen. ;Beeing at the center of the map w
 0:1,3;1:1,1;2:1;3:1;4:0,8;5:1;6:0,8;7:1,3
 2
 Winghelm
-The city got it's name after the ;great gryphons that roam the ;surrounding lands. They are however, ;starting to die out because of the ;increased demand for "Gryphon McNuggets".
+The city got it's name after the ;great gryphons that roam the ;surrounding lands. ;They are however, starting ;to die out because of the ;increased demand for ;"Gryphon McNuggets".
 1490,350
 3,4
 5
@@ -62,7 +62,7 @@ The greatest goblin city there is! ;Might also be the only goblin city ;there is
 0:1;1:1;2:0,7;3:1,3;4:1;5:1;6:1,3;7:1
 5
 Sanctuary
-This city was created by the cleric Henry the smitefull ;when he thought: "What would ;happen if every house in the ;city was a church?". Now we know.
+This city was created by the cleric;Henry the smitefull;when he thought: "What would;happen if every house in the;city was a church?". Now we know.
 1270,880
 4,5
 0,6
@@ -71,7 +71,7 @@ This city was created by the cleric Henry the smitefull ;when he thought: "What 
 0:1,4;1:1;2:1;3:1;4:0,7;5:0,9;6:1,3;7:1
 1
 Dryad's Grove
-16249 years ago the Elves and creatures ;of the forrest united to create ;this city of nature. Legends ;tell of a dragon that tried to ;burn down the city once but ;he got his ass whooped.
+16249 years ago the Elves and;creatures of the forrest united to;create this city of nature. Legends ;tell of a dragon that tried to ;burn down the city once but ;he got his ass whooped.
 110,250
 2,5
 1,6
@@ -80,7 +80,7 @@ Dryad's Grove
 0:1;1:1,3;2:0,8;3:1,1;4:1,1;5:0,8;6:1,3;7:1
 2
 The Tomb
-The Tomb is a pretty cool place for ;everyone who loves ghouls, ;suffering and the everlasting void. ;Founded by Carl the Necromancer, ;the Tomb is the world hub of ;everything that concerns the dark arts.
+The Tomb is a pretty cool place for ;everyone who loves ghouls, ;suffering and the everlasting void. ;Founded by Carl the Necromancer, ;the Tomb is the world hub of ;everything that concerns the;dark arts.
 340,860
 5,3
 1,7
