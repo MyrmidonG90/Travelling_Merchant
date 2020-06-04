@@ -186,7 +186,7 @@ namespace Active
 
             //StreamReader sr = new StreamReader("./Data/cityInfo.txt");
             ////posArrowDown = new Vector2(cities[0].Coordinates.X, cities[0].Coordinates.Y);
-            
+
             //while (!sr.EndOfStream)
             //{
 
@@ -215,7 +215,7 @@ namespace Active
             //    //}
 
             //    //cities[counter] = new City(tempName, tempInfo, cord, good, bad);
-                
+
             //    //CityManager.CreateCity(tempName, tempInfo, cord, neighData);
             //}
             //sr.Close();
@@ -228,12 +228,6 @@ namespace Active
             //for (int i = 0; i < cities.Length; i++)
             //{
             //    cities[i].Information = cities[i].Information.Replace(";", "\n");
-            //}
-
-            //foreach (City tempCity in cities)
-            //{
-            //    tempCity.AddInventory(LoadCityMerchant(tempCity.Name));
-            //    tempCity.InvInit();
             //}
 
             cities = CityManager.Cities.ToArray();
@@ -249,6 +243,7 @@ namespace Active
 
             foreach (City tempCity in cities)
             {
+                tempCity.AddInventory(LoadCityMerchant(tempCity.Name));
                 tempCity.InvInit();
             }
         }
