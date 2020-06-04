@@ -1,3 +1,4 @@
+25
 Carrot|20|0|1|999|999|The Carrot has no ;natural predators...;Except for rabbits.
 Potato|40|0|1|999|999|Potatoes are apex ;hunters. They just ;can't prove it due to ;their lack of strong ;arms.
 Iron Ingot|100|0|2|999|999|An iron ingot what did ;you expect?
