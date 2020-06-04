@@ -69,6 +69,37 @@ namespace Active
             return false;
         }
 
+        static void CheckBoat(SpriteBatch spriteBatch)
+        {
+            for (int i = 0; i < 14; i++)
+            {
+                if (TravelMenu.RouteNames[i, 0] == Player.Location)
+                {
+                    if (TravelMenu.RouteNames[i, 1] == selected)
+                    {
+                        if (TravelMenu.Boat[i])
+                        {
+                            spriteBatch.DrawString(TextureManager.font24, "-100 Gold", new Vector2(880, 950), Color.Black);
+                        }
+                    }
+                }
+            }
+            for (int i = 0; i < 14; i++)
+            {
+                if (TravelMenu.RouteNames[i, 0] == selected)
+                {
+                    if (TravelMenu.RouteNames[i, 1] == Player.Location)
+                    {
+                        if (TravelMenu.Boat[i])
+                        {
+                            spriteBatch.DrawString(TextureManager.font24, "-100 Gold", new Vector2(880, 950), Color.Black);
+                        }
+                    }
+                }
+            }
+            
+        }
+
         static public void Draw(SpriteBatch spriteBatch)
         {
             if (active)
@@ -105,6 +136,7 @@ namespace Active
                 Vector2 temp =  TextureManager.font48.MeasureString(selected);
                 Vector2 pos = new Vector2((1920 - temp.X) / 2, 210);
                 spriteBatch.DrawString(TextureManager.font48, selected, pos, Color.Black);
+                CheckBoat(spriteBatch);
             }
         }
 
