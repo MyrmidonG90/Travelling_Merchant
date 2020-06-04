@@ -563,7 +563,7 @@ namespace Active
         static int CheckValue(Inventory inv)
         {
             double sum = 0;
-            int number = 1;
+            int number = 0;
             for (int i = 0; i < inv.ItemList.Count; i++)
             {
 

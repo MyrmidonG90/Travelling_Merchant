@@ -57,6 +57,22 @@ namespace Active
             {
                 if (temp == 2 || temp == 3)
                 {
+                    return -0.05f * Player.ReturnSkillLevel("Wisdom");
+                }
+                if (temp == 4 || temp == 5)
+                {
+                    return -0.05f * Player.ReturnSkillLevel("Intimidation");
+                }
+                if (temp == 0 || temp == 1)
+                {
+                    return -0.05f * Player.ReturnSkillLevel("Persuasion");
+                }
+                return 1;
+            }
+            else if (catMod > 0)
+            {
+                if (temp == 2 || temp == 3)
+                {
                     return 0.05f * Player.ReturnSkillLevel("Wisdom");
                 }
                 if (temp == 4 || temp == 5)
@@ -69,25 +85,9 @@ namespace Active
                 }
                 return 1;
             }
-            //else if (catMod > 0)
-            //{
-            //    if (temp == 2 || temp == 3)
-            //    {
-            //        return 0.05f * Player.ReturnSkillLevel("Wisdom") + 1f;
-            //    }
-            //    if (temp == 4 || temp == 5)
-            //    {
-            //        return 0.05f * Player.ReturnSkillLevel("Intimidation") + 1f;
-            //    }
-            //    if (temp == 0 || temp == 1)
-            //    {
-            //        return 0.05f * Player.ReturnSkillLevel("Persuasion") + 1f;
-            //    }
-            //    return 1;
-            //}
             else
             {
-                return 1;
+                return 0;
             }
         }
     }

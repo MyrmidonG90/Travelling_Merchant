@@ -96,6 +96,30 @@ namespace Active
             {
                 tabButtons[i].Draw(sb);
             }
+            if (tab == TabState.Inventory)
+            {
+                sb.Draw(TextureManager.texTabSkillsDark, tabButtons[1].HitBox, Color.White);
+                sb.Draw(TextureManager.texTabAchievementsDark, tabButtons[2].HitBox, Color.White);
+                sb.Draw(TextureManager.texTabGlosasriesDark, tabButtons[3].HitBox, Color.White);
+            }
+            if (tab == TabState.Skills)
+            {
+                sb.Draw(TextureManager.texTabInvDark, tabButtons[0].HitBox, Color.White);
+                sb.Draw(TextureManager.texTabAchievementsDark, tabButtons[2].HitBox, Color.White);
+                sb.Draw(TextureManager.texTabGlosasriesDark, tabButtons[3].HitBox, Color.White);
+            }
+            if (tab == TabState.Achievements)
+            {
+                sb.Draw(TextureManager.texTabInvDark, tabButtons[0].HitBox, Color.White);
+                sb.Draw(TextureManager.texTabSkillsDark, tabButtons[1].HitBox, Color.White);
+                sb.Draw(TextureManager.texTabGlosasriesDark, tabButtons[3].HitBox, Color.White);
+            }
+            if (tab == TabState.Glossary)
+            {
+                sb.Draw(TextureManager.texTabInvDark, tabButtons[0].HitBox, Color.White);
+                sb.Draw(TextureManager.texTabSkillsDark, tabButtons[1].HitBox, Color.White);
+                sb.Draw(TextureManager.texTabAchievementsDark, tabButtons[2].HitBox, Color.White);
+            }
         }
 
         void CreateTabs()
