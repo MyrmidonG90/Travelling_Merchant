@@ -72,6 +72,7 @@ namespace Active
             ItemCreator.LoadItemData();
             SoundManager.LoadSounds(Content);
             SoundManager.PlayMusic();
+            SoundManager.PlayPauseMusic();
             AchievementManager.CreateAchievements();
             Player.Init();
             MainMenuManager.Init();
@@ -133,7 +134,6 @@ namespace Active
             if (Calendar.CheckEventClick())
             {
                 eventLog = !eventLog;
-                SoundManager.PlayPauseMusic();
             }
 
             if (gameState == GameState.CityMenu)
@@ -213,6 +213,7 @@ namespace Active
             {
                 DrawBackground(spriteBatch);
             }
+           
 
             if (gameState == GameState.CityMenu)
             {
@@ -246,7 +247,7 @@ namespace Active
             {
                 spriteBatch.DrawString(TextureManager.font32, "Press F1 for City Menu, F2 for Map Menu, F3 for Inv. Menu,\nF4 for Trading Menu or F5 for Travelling Menu \nand you can always press F6 to return here\nF11 loads and F12 saves", new Vector2(200, 200), Color.White);
             }
-            if (gameState != GameState.MainMenu)
+            if (gameState != GameState.MainMenu && gameState != GameState.InventoryMenu)
             {
                 Calendar.Draw(spriteBatch);
             }

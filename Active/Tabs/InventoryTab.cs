@@ -43,7 +43,7 @@ namespace Active
             disposeBox = new Rectangle(660, 250, 600, 500);
             disposeBar = new Rectangle(710, 510, 520, 20);
             disposeDragger = new Button(710, 488, 30, 70, TextureManager.texDisposeDragger);
-            disposeOKButton = new Button(900, 650, 120, 60, TextureManager.texWhite);
+            disposeOKButton = new Button(860, 650, 200, 80, "ok", "Confirm", TextureManager.texButton);
 
             selectedSquare = -1; //-1 means no slot is selected
 
@@ -127,8 +127,8 @@ namespace Active
             if (disposing)
             {
                 spriteBatch.Draw(TextureManager.texDisposeBox, disposeBox, Color.White);
-                Vector2 temp = TextureManager.font32.MeasureString("Select amount to remove");
-                spriteBatch.DrawString(TextureManager.font32, "Select amount to remove", new Vector2((1920 - temp.X) / 2, 270), Color.Black);
+                Vector2 temp = TextureManager.font24.MeasureString("Select amount to remove");
+                spriteBatch.DrawString(TextureManager.font24, "Select amount to remove", new Vector2((1920 - temp.X) / 2, 270), Color.Black);
 
                 temp = TextureManager.font32.MeasureString(numberToDispose.ToString());
                 spriteBatch.DrawString(TextureManager.font32, numberToDispose.ToString(), new Vector2((1920 - temp.X) / 2, 370), Color.Black);

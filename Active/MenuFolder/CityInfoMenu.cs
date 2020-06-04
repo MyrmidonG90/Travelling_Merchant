@@ -24,7 +24,7 @@ namespace Active
         static public void Init()
         {
             mainBox = new Rectangle(460, 180, 1000, 600);
-            exit = new Button(485, 205, 70, 70, TextureManager.texIconTrashCan);
+            exit = new Button(485, 205, 80, 80, TextureManager.texButtonReset);
             go = new Button(830, 820, 260, 120, TextureManager.texButtonGo);
             loreHeaderPos = new Vector2(1100, 290);
             lorePos = new Vector2(950, 360);
