@@ -226,8 +226,8 @@ namespace Active
         {
             Player.Location = streamReader.ReadLine();
 
-            //ÄNDRA SIFFRAN I FOR LOOPEN HÄR OCKSÅ OM DU HAR PILLAT MED ANTAL STÄDER
-            for (int i = 0; i < 10; i++)
+           
+            for (int i = 0; i < WorldMapMenu.nrCities; i++)
             {
                 string temp = streamReader.ReadLine();
                 if (temp == "true")

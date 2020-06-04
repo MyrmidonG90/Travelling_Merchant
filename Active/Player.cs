@@ -44,11 +44,11 @@ namespace Active
             skillXP[1] = 0;
             skillXP[2] = 0;
 
-            //OM DU ÄNDRADE ANTAL STÄDER I WOLRDMAPMENU ÄNDRA HÄR OCKSÅ
-            //DU BEHÖVER OCKSÅ ÄNDRA I SaveModule.ReadPlayerData
-            visitedCities = new bool[10];
+           
+            
+            visitedCities = new bool[WorldMapMenu.nrCities];
             visitedCities[0] = true;
-            //OM DU ÄNDRADE ANTAL STÄDER I WOLRDMAPMENU ÄNDRA HÄR OCKSÅ
+            
 
             eventCities = new List<string>();
             eventNames = new List<string>();

@@ -20,7 +20,7 @@ namespace Active
 
             sb.Draw(TextureManager.texMenuAchievement, mainBox, Color.White);
             int temp = 0;
-            sb.DrawString(TextureManager.font48, "Achievement", new Vector2(300, 180 + temp), Color.Black);
+            sb.DrawString(TextureManager.font48, "Achievements", new Vector2(300, 180 + temp), Color.Black);
             sb.DrawString(TextureManager.font32, "Description", new Vector2(880, 200 + temp), Color.Black);
             temp += 100;
             foreach (Achievement achievement in AchievementManager.achievements)
