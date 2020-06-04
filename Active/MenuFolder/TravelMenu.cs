@@ -268,5 +268,9 @@ namespace Active
         {
             get => routes;
         }
+        static public bool[] Boat
+        {
+            get => boat;
+        }
     }
 }
