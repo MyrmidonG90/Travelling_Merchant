@@ -242,8 +242,8 @@ namespace Active
 
         static void UpdatePrices()
         {
-            leftPrice = CheckValue(tradeLeft);
-            rightPrice = CheckValue(tradeRight);
+            leftPrice = CheckValue(tradeLeft, true);
+            rightPrice = CheckValue(tradeRight, false);
             priceDifference = leftPrice - rightPrice;
         }
 
@@ -562,17 +562,34 @@ namespace Active
         }
 
 
+        static int CheckValue(Inventory inv, bool isPlayer)
+        {
+            double sum = 0;
+            for (int i = 0; i < inv.ItemList.Count; i++)
+            {
+                double temp = inv.ItemList[i].BasePrice * SkillManager.ReturnSkillModifier(zoneName) * inv.ItemList[i].Amount;
+                if (isPlayer)
+                {
+                    sum += (inv.ItemList[i].BasePrice * ModifierManager.GetModifier(zoneName, inv.ItemList[i].PrimaryCategory) * inv.ItemList[i].Amount) + temp;
+                }
+                else
+                {
+                    sum += (inv.ItemList[i].BasePrice * ModifierManager.GetModifier(zoneName, inv.ItemList[i].PrimaryCategory) * inv.ItemList[i].Amount) - temp;
+                }
+            }
+            return (int)sum; // Avrundas nedåt
+        }
         static int CheckValue(Inventory inv)
         {
             double sum = 0;
             for (int i = 0; i < inv.ItemList.Count; i++)
             {
-                double temp = inv.ItemList[i].BasePrice *  SkillManager.ReturnSkillModifier(zoneName) * inv.ItemList[i].Amount;
-                sum += (inv.ItemList[i].BasePrice*ModifierManager.GetModifier(zoneName, inv.ItemList[i].PrimaryCategory) * inv.ItemList[i].Amount) - temp;
+                double temp = inv.ItemList[i].BasePrice * SkillManager.ReturnSkillModifier(zoneName) * inv.ItemList[i].Amount;
+                sum += (inv.ItemList[i].BasePrice * ModifierManager.GetModifier(zoneName, inv.ItemList[i].PrimaryCategory) * inv.ItemList[i].Amount);
             }
             return (int)sum; // Avrundas nedåt
         }
-        
+
         static void ResetTrade()
         {
             foreach (var item in tradeSlotsLeft)
@@ -715,15 +732,15 @@ namespace Active
 
             if (selected.PrimaryCategory != 999)
             {
-                sb.Draw(TextureManager.texCategories[selected.PrimaryCategory - 1], new Rectangle(800, 780, 80, 80), Color.White);
+                sb.Draw(TextureManager.texCategories[selected.PrimaryCategory], new Rectangle(800, 780, 80, 80), Color.White);
             }
             if (selected.SecondaryCategory != 999)
             {
-                sb.Draw(TextureManager.texCategories[selected.SecondaryCategory - 1], new Rectangle(915, 780, 80, 80), Color.White);
+                sb.Draw(TextureManager.texCategories[selected.SecondaryCategory], new Rectangle(915, 780, 80, 80), Color.White);
             }
             if (selected.TertiaryCategory != 999)
             {
-                sb.Draw(TextureManager.texCategories[selected.TertiaryCategory - 1], new Rectangle(1030, 780, 80, 80), Color.White);
+                sb.Draw(TextureManager.texCategories[selected.TertiaryCategory], new Rectangle(1030, 780, 80, 80), Color.White);
             }
         }
     }

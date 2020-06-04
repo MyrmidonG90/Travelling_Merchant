@@ -16,6 +16,7 @@ namespace Active
     {
         static Song bgmCity;
         static Song bgmTravel;
+        static bool playing;
 
         static public void LoadSounds(ContentManager content)
         {
@@ -26,6 +27,19 @@ namespace Active
         {
             MediaPlayer.Play(bgmCity);
             MediaPlayer.IsRepeating = true;
+            playing = true;
+        }
+        static public void PlayPauseMusic()
+        {
+            playing = !playing;
+            if (playing)
+            {
+                MediaPlayer.Resume();
+            }
+            else
+            {
+                MediaPlayer.Pause();
+            }
         }
     }
 }

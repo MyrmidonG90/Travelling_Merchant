@@ -30,7 +30,6 @@ namespace Active
                 
         static public double GetModifier(string city, int category)
         {
-            category--;// Debug funktion? Bör egentligen inte vara där
             int counter = 0;
             for (int i = 0; i < amountOfCities; i++)
             {

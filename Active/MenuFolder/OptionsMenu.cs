@@ -23,6 +23,7 @@ namespace Active
         static Button btnSkillIncrease;
         static Button btnSkillDecrease;
         static Button btnWorldEventTest;
+        static Button btnPauseMusic;
 
         static Rectangle box;
         static bool block;
@@ -44,6 +45,7 @@ namespace Active
             btnSkillCycle = new Button(830, 160, 260, 80, "skills", "Cycle Skill", TextureManager.texButtonOptions);
 
             btnSave = new Button(830, 260, 260, 80, "save", "Save Game", TextureManager.texButtonOptions);
+            btnPauseMusic = new Button(830, 260, 260, 80, "pause music", "Toggle Music", TextureManager.texButtonOptions);
             btnSkillIncrease = new Button(830, 260, 260, 80, "inc", "+1 Skill", TextureManager.texButtonOptions);
 
             btnLoad = new Button(830, 360, 260, 80, "load", "Load Game", TextureManager.texButtonOptions);
@@ -116,6 +118,22 @@ namespace Active
             return false;
         }
 
+        static public bool CheckMusic()
+        {
+            if (menuToggle == MenuToggle.Options)
+            {
+                if (btnPauseMusic.LeftClick())
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            return false;
+        }
+
         static public bool CheckMenuToggle()
         {
             if (btnMenu.LeftClick())
@@ -174,6 +192,7 @@ namespace Active
             {
                 btnFullscreen.Draw(spriteBatch);
                 btnOptionsReturn.Draw(spriteBatch);
+                btnPauseMusic.Draw(spriteBatch);
             }
             else if (menuToggle == MenuToggle.Debug && mode)
             {

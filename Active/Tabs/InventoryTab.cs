@@ -74,18 +74,7 @@ namespace Active
                 sb.DrawString(TextureManager.font32, "Info: \n" + selected.Description, new Vector2(1100, 310), Color.White);
                 sb.DrawString(TextureManager.font32, "Standard Price: " + selected.BasePrice.ToString() + "c", new Vector2(1100, 660), Color.White);
 
-                if (selected.PrimaryCategory != 999)
-                {
-                    sb.Draw(TextureManager.texCategories[selected.PrimaryCategory - 1], priCategoryBox, Color.White);
-                }
-                if (selected.SecondaryCategory != 999)
-                {
-                    sb.Draw(TextureManager.texCategories[selected.SecondaryCategory - 1], secCategoryBox, Color.White);
-                }
-                if (selected.TertiaryCategory != 999)
-                {
-                    sb.Draw(TextureManager.texCategories[selected.TertiaryCategory - 1], terCategoryBox, Color.White);
-                }
+                DrawCategory(sb);
 
                 disposeButton.Draw(sb);
             }
@@ -97,7 +86,24 @@ namespace Active
 
             DrawDisposing(sb);
         }
-        private void DrawGrid(SpriteBatch spriteBatch)
+
+        void DrawCategory(SpriteBatch sb)
+        {
+            if (selected.PrimaryCategory != 999)
+            {
+                sb.Draw(TextureManager.texCategories[selected.PrimaryCategory], priCategoryBox, Color.White);
+            }
+            if (selected.SecondaryCategory != 999)
+            {
+                sb.Draw(TextureManager.texCategories[selected.SecondaryCategory], secCategoryBox, Color.White);
+            }
+            if (selected.TertiaryCategory != 999)
+            {
+                sb.Draw(TextureManager.texCategories[selected.TertiaryCategory], terCategoryBox, Color.White);
+            }
+        }
+
+        void DrawGrid(SpriteBatch spriteBatch)
         {
             int counter = 0;
             foreach (Item tempItem in Player.Inventory.ItemList)

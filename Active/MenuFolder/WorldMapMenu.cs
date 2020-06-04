@@ -180,7 +180,7 @@ namespace Active
             }
         }
 
-        static public void LoadCities() // Too long
+        static public void LoadCities()
         {
             ItemList();
 
@@ -238,6 +238,9 @@ namespace Active
                 cityButtons[counter] = new Button((int)city.Coordinates.X, (int)city.Coordinates.Y, 68, 68, city.Name, TextureManager.texIconCity);
                 travelButtons[counter] = new Button((int)city.Coordinates.X, (int)city.Coordinates.Y + 75, 68, 36, city.Name, TextureManager.texButtonGo);
                 infoButtons[counter] = new Button((int)city.Coordinates.X + 80, (int)city.Coordinates.Y + 42, 30, 30, city.Name, TextureManager.texIconCityInfo);
+
+                
+
                 counter++;
             }
 
