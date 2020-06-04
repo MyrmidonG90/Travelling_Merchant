@@ -71,7 +71,7 @@ namespace Active
             TextureManager.LoadContent(Content);
             ItemCreator.LoadItemData();
             SoundManager.LoadSounds(Content);
-            //SoundManager.PlayMusic();
+            SoundManager.PlayMusic();
             AchievementManager.CreateAchievements();
             Player.Init();
             MainMenuManager.Init();
@@ -133,6 +133,7 @@ namespace Active
             if (Calendar.CheckEventClick())
             {
                 eventLog = !eventLog;
+                SoundManager.PlayPauseMusic();
             }
 
             if (gameState == GameState.CityMenu)
@@ -202,7 +203,7 @@ namespace Active
             base.Update(gameTime);
         }
 
-        protected override void Draw(GameTime gameTime) // Too long
+        protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
@@ -512,6 +513,10 @@ namespace Active
             {
                 graphics.IsFullScreen = !graphics.IsFullScreen;
                 graphics.ApplyChanges();
+            }
+            else if (OptionsMenu.CheckMusic())
+            {
+                SoundManager.PlayPauseMusic();
             }
             if (OptionsMenu.Update())
             {

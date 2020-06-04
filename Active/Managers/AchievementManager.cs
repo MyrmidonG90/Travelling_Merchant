@@ -229,18 +229,7 @@ namespace Active
                 rareItem = 1;
             }
 
-            if (hasDiamond && hasRuby && hasEmerald)
-            {
-                jewels = 3;
-            }
-            else if((hasDiamond && hasEmerald) || (hasDiamond && hasRuby) || (hasEmerald && hasRuby))
-            {
-                jewels = 2;
-            }
-            else if(hasDiamond || hasRuby || hasDiamond)
-            {
-                jewels = 1;
-            }
+            CheckJewels();
 
             currentCoins = Player.Inventory.Money;
 
@@ -256,5 +245,20 @@ namespace Active
 
         }
 
+        static void CheckJewels()
+        {
+            if (hasDiamond && hasRuby && hasEmerald)
+            {
+                jewels = 3;
+            }
+            else if ((hasDiamond && hasEmerald) || (hasDiamond && hasRuby) || (hasEmerald && hasRuby))
+            {
+                jewels = 2;
+            }
+            else if (hasDiamond || hasRuby || hasDiamond)
+            {
+                jewels = 1;
+            }
+        }
     }
 }
