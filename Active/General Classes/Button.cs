@@ -108,22 +108,12 @@ namespace Active
             if (text != null)
             {
                 spriteBatch.Draw(tex, hitBox, Color.White);
-                Vector2 temp = TextureManager.font24.MeasureString(text);
-                //Vector2 temp2 = new Vector2(hitBox.X + ((HitBox.Width - (int)temp.X)/2), hitBox.Y + ((HitBox.Height - (int)temp.Y) / 2));
 
                 for (int i = 0; i < rader.Count; i++)
                 {
-<<<<<<< HEAD
-                    Vector2 temp2 = new Vector2(hitBox.X + ((HitBox.Width - (int)temp.X) / 2), hitBox.Y + ((HitBox.Height - (int)temp.Y) / 2)+40*i);
-                    spriteBatch.DrawString(TextureManager.font24,rader[i], temp2, Color.Black);
-=======
                     spriteBatch.DrawString(TextureManager.font24, rader[i], textPos[i], Color.Black);
-                    /*Vector2 temp2 = new Vector2(hitBox.X + ((HitBox.Width - (int)temp.X) / 2), hitBox.Y + ((HitBox.Height - (int)temp.Y) / 2)+20*i);
-                    spriteBatch.DrawString(TextureManager.font24,rader[i], temp2, Color.Black);*/
-
->>>>>>> Kevin2
                 }
-                //spriteBatch.DrawString(TextureManager.font24, text, temp2, Color.Black);
+
             }
             else
             {
