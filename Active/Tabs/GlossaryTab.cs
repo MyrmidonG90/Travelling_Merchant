@@ -17,6 +17,7 @@ namespace Active
         static int indexOfSelectedSlot;
         static Button btnPrev;
         static Button btnNext;
+        static Rectangle itemName;
         enum Glossary
         {
             Items,
@@ -38,7 +39,8 @@ namespace Active
             btnNext = new Button(800,950,TextureManager.texButtonNext.Width, TextureManager.texButtonNext.Height, TextureManager.texButtonNext);
             btnPrev = new Button(300,950, TextureManager.texButtonPrev.Width, TextureManager.texButtonPrev.Height,TextureManager.texButtonPrev);
             textInfoPos = new List<Vector2>();
-            textInfoPos.Add(new Vector2(1220, 200));
+            textInfoPos.Add(new Vector2(1100, 200));
+            itemName = new Rectangle(1100,200,550,0);
             textInfoPos.Add(new Vector2(1100, 310));
             textInfoPos.Add(new Vector2(1100, 660));
             indexOfSelectedSlot = -1;
@@ -123,7 +125,7 @@ namespace Active
             if (GlossaryManager.IfIndexIn(currentGlossary.ToString(), true, selectedItem.ID) != -1)
             {
                 sb.Draw(TextureManager.texSelect, selectedSlot, Color.White);
-                sb.DrawString(TextureManager.font48, selectedItem.Name, textInfoPos[0], Color.White);
+                sb.DrawString(TextureManager.font48, selectedItem.Name, new Vector2(itemName.X+itemName.Width/2-TextureManager.font48.MeasureString(selectedItem.Name).X/2,200), Color.White);
                 sb.DrawString(TextureManager.font32, "Info: \n" + selectedItem.Description, textInfoPos[1], Color.White);
                 sb.DrawString(TextureManager.font32, "Standard Price: " + selectedItem.BasePrice.ToString() + "c", textInfoPos[2], Color.White);
             }
