@@ -563,22 +563,22 @@ namespace Active
         static int CheckValue(Inventory inv)
         {
             double sum = 0;
-            int number = 1;
+            int number = 0;
             for (int i = 0; i < inv.ItemList.Count; i++)
             {
 
-                //if (inv.ItemList[i].BasePrice < (inv.ItemList[i].BasePrice * ModifierManager.GetModifier(zoneName, inv.ItemList[i].PrimaryCategory)))
-                //{
-                //    number = 1;
-                //}
-                //else if (inv.ItemList[i].BasePrice > (inv.ItemList[i].BasePrice * ModifierManager.GetModifier(zoneName, inv.ItemList[i].PrimaryCategory)))
-                //{
-                //    number = -1;
-                //}
-                //else
-                //{
-                //    number = 0;
-                //}
+                if (inv.ItemList[i].BasePrice < (inv.ItemList[i].BasePrice * ModifierManager.GetModifier(zoneName, inv.ItemList[i].PrimaryCategory)))
+                {
+                    number = 1;
+                }
+                else if (inv.ItemList[i].BasePrice > (inv.ItemList[i].BasePrice * ModifierManager.GetModifier(zoneName, inv.ItemList[i].PrimaryCategory)))
+                {
+                    number = -1;
+                }
+                else
+                {
+                    number = 0;
+                }
 
 
                 double temp = inv.ItemList[i].BasePrice * SkillManager.ReturnSkillModifier(Player.location, number) * inv.ItemList[i].Amount;
