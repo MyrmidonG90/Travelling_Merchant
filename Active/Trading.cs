@@ -91,8 +91,8 @@ namespace Active
 
         static void CreateButtons() // Initialiserar knapparna
         {
-            accept = new Button(1020, 200, 260, 120, "accept", "Accept Trade", TextureManager.texButton);
-            reset = new Button(720, 200, 260, 120, "reset", "Reset Trade", TextureManager.texButton);
+            accept = new Button(915, 302, 80, 80, TextureManager.texButtonAccept);
+            reset = new Button(915, 402, 80, 80, TextureManager.texButtonReset);
             back = new Button(20, 20, 80, 80, TextureManager.texBackArrow);
         }
 
@@ -560,12 +560,6 @@ namespace Active
                 }
             }
         }
-
-
-        
-
-
-
         static int CheckValue(Inventory inv)
         {
             double sum = 0;

@@ -183,6 +183,7 @@ namespace Active
 
         static public void Draw (SpriteBatch spriteBatch)
         {
+            spriteBatch.Draw(TextureManager.texBGTravelScreen, Vector2.Zero, Color.White);
             Vector2 temp = TextureManager.font48.MeasureString(turnDisplay);
             spriteBatch.DrawString(TextureManager.font48, turnDisplay, new Vector2((1920 - temp.X)/2, 200), Color.White);
             //for debugging i guess
