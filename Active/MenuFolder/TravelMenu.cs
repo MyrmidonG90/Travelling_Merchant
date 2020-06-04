@@ -42,7 +42,7 @@ namespace Active
 
             turnDisplay = turnsLeft.ToString() + "/" + turnsToTravel.ToString();
 
-            pauseButton = new Button(830, 900, 260, 120, "paused", "Pause/Unpause", TextureManager.texButton);
+            pauseButton = new Button(830, 900, 260, 120, TextureManager.texButton);
             invButton = new Button(330, 900, 260, 120, "inv", "Inventory", TextureManager.texButton);
             mapButton = new Button(1330, 900, 260, 120, "map", "Map", TextureManager.texButton);
             test = false;
@@ -192,6 +192,15 @@ namespace Active
                 spriteBatch.DrawString(TextureManager.font13, " " + turnTimer, new Vector2(50, 150), Color.White);
             }
             pauseButton.Draw(spriteBatch);
+            if (paused)
+            {
+                spriteBatch.Draw(TextureManager.texButtonUnpause, new Vector2(pauseButton.HitBox.X + 90, pauseButton.HitBox.Y + 20), Color.White);
+            }
+            else
+            {
+                spriteBatch.Draw(TextureManager.texButtonPause, new Vector2(pauseButton.HitBox.X + 90, pauseButton.HitBox.Y + 20), Color.White);
+            }
+
             if (paused)
             {
                 invButton.Draw(spriteBatch);
