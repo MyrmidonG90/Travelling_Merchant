@@ -430,14 +430,8 @@ namespace Active
                 }
             }
 
-            foreach (City city in WorldMapMenu.Cities)
-            {
-                if(city.Name == Player.location)
-                {
-                    //ska ändras
-                }
-            }
 
+            AddXp(tradeLeft, tradeRight);
             ChangeInv();
             participantLeft = invLeft;
             participantRight = invRight;
@@ -446,6 +440,8 @@ namespace Active
             ResetTrade();
             return true;
         }
+
+        
 
         static bool CheckInvFull()
         {
@@ -508,6 +504,63 @@ namespace Active
 
 
         }
+
+
+        static void AddXp(Inventory invL, Inventory invR)
+        {
+            int xp = 0;
+            foreach (Item item in invL.ItemList)
+            {
+                if(item.Rarity == 0)
+                {
+                    xp += item.Amount;
+                }
+                else if(item.Rarity == 1)
+                {
+                    xp += item.Amount*3;
+                }
+                else if (item.Rarity == 2)
+                {
+                    xp += item.Amount * 10;
+                }
+
+            }
+            foreach (Item item in invR.ItemList)
+            {
+                if (item.Rarity == 0)
+                {
+                    xp += item.Amount;
+                }
+                else if (item.Rarity == 1)
+                {
+                    xp += item.Amount * 3;
+                }
+                else if (item.Rarity == 2)
+                {
+                    xp += item.Amount * 10;
+                }
+            }
+
+            foreach (City city in WorldMapMenu.Cities)
+            {
+                if (city.Name == Player.location)
+                {
+                    if (city.Race == 0 || city.Race == 1)
+                    {
+                        Player.AddXP("Persuasion", xp);
+                    }
+                    else if (city.Race == 2 || city.Race == 3)
+                    {
+                        Player.AddXP("Wisdom", xp);
+                    }
+                    else if (city.Race == 4 || city.Race == 5)
+                    {
+                        Player.AddXP("Intimidation", xp);
+                    }
+                }
+            }
+        }
+
 
         static int CheckValue(Inventory inv)
         {
