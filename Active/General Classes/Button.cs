@@ -15,6 +15,7 @@ namespace Active
         Texture2D tex;
 
         List<string> rader;
+        List<Vector2> textPos;
 
         string name;
         string text;
@@ -27,6 +28,7 @@ namespace Active
             this.name = name;
             this.text = text;
             rader = Radbrytte(text);
+            AdjustTextPos();
         }
 
         public Button(int x, int y, int xLength, int yLength, string name, Texture2D tex)
@@ -87,6 +89,19 @@ namespace Active
             return strings;
         }
 
+        void AdjustTextPos()
+        {
+            textPos = new List<Vector2>();
+            for (int i = 0; i < rader.Count; i++)
+            {
+                Vector2 stringMeasures = TextureManager.font24.MeasureString(rader[i]);                
+                int middleX = hitBox.X + hitBox.Width / 2 - (int)stringMeasures.X/2;
+                int middleY = hitBox.Y + (hitBox.Height / rader.Count) * i + (hitBox.Height / (rader.Count*2))-(int)stringMeasures.Y/2;
+                textPos.Add(new Vector2(middleX, middleY));
+            }
+        }
+
+
 
         public void Draw(SpriteBatch spriteBatch)
         {
@@ -98,8 +113,15 @@ namespace Active
 
                 for (int i = 0; i < rader.Count; i++)
                 {
+<<<<<<< HEAD
                     Vector2 temp2 = new Vector2(hitBox.X + ((HitBox.Width - (int)temp.X) / 2), hitBox.Y + ((HitBox.Height - (int)temp.Y) / 2)+40*i);
                     spriteBatch.DrawString(TextureManager.font24,rader[i], temp2, Color.Black);
+=======
+                    spriteBatch.DrawString(TextureManager.font24, rader[i], textPos[i], Color.Black);
+                    /*Vector2 temp2 = new Vector2(hitBox.X + ((HitBox.Width - (int)temp.X) / 2), hitBox.Y + ((HitBox.Height - (int)temp.Y) / 2)+20*i);
+                    spriteBatch.DrawString(TextureManager.font24,rader[i], temp2, Color.Black);*/
+
+>>>>>>> Kevin2
                 }
                 //spriteBatch.DrawString(TextureManager.font24, text, temp2, Color.Black);
             }
