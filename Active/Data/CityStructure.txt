@@ -8,7 +8,7 @@ Carrot Town is the great city;of carrots. Its agricultural;roots can be traced;t
 0:0,7;1:1,2;2:1;3:0,8;4:1;5:1,2;6:1;7:1,1
 1
 Emberfell
-Lorem ipsum Lorem ipsum Lorem;ipsum Lorem ipsum Lorem ipsum;Lorem ipsum Lorem ipsum;Lorem ipsum Lorem ipsum Lorem ;ipsum Lorem ipsum
+Dwarves have always been well ;known for their stubbornness ;so when a volcano erupted ;right underneath their ;village, nobody was surprised ;when they didn't move.
 700,660
 1,4
 5,0
@@ -17,7 +17,7 @@ Lorem ipsum Lorem ipsum Lorem;ipsum Lorem ipsum Lorem ipsum;Lorem ipsum Lorem ip
 0:1,1;1:0,7;2:1;3:1,1;4:0,9;5:1,2;6:1,2;7:0,8
 4
 Cloudspire
-Lorem ipsum Lorem ipsum Lorem;ipsum Lorem ipsum Lorem ipsum;Lorem ipsum Lorem ipsum;Lorem ipsum Lorem ipsum Lorem ;ipsum Lorem ipsum
+If you don't like heights then ;Cloudspire might not be the ;place for you. The city ;has towers and tall building ;everywhere and of course they ;had to place every shop at ;the top. ;Sigh...
 1500,600
 5,3
 7,1
