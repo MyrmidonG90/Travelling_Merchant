@@ -513,15 +513,15 @@ namespace Active
             {
                 if(item.Rarity == 0)
                 {
-                    xp += item.Amount;
+                    xp += item.Amount*3;
                 }
                 else if(item.Rarity == 1)
                 {
-                    xp += item.Amount*3;
+                    xp += item.Amount*7;
                 }
                 else if (item.Rarity == 2)
                 {
-                    xp += item.Amount * 10;
+                    xp += item.Amount * 15;
                 }
 
             }
