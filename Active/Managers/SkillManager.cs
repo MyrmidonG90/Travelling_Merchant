@@ -52,7 +52,8 @@ namespace Active
                     temp = CityManager.Cities[i].Race;
                 }
             }
-            if (catMod == 0)
+
+            if (catMod <0)
             {
                 if (temp == 2 || temp == 3)
                 {
@@ -66,23 +67,27 @@ namespace Active
                 {
                     return 0.05f * Player.ReturnSkillLevel("Persuasion");
                 }
-                return 0;
+                return 1;
             }
-            else
+            else if (catMod >0)
             {
                 if (temp == 2 || temp == 3)
                 {
-                    return 0.05f * Player.ReturnSkillLevel("Wisdom") + 1;
+                    return 0.05f * Player.ReturnSkillLevel("Wisdom") + 1f;
                 }
                 if (temp == 4 || temp == 5)
                 {
-                    return 0.05f * Player.ReturnSkillLevel("Intimidation") + 1;
+                    return 0.05f * Player.ReturnSkillLevel("Intimidation") + 1f;
                 }
                 if (temp == 0 || temp == 1)
                 {
-                    return 0.05f * Player.ReturnSkillLevel("Persuasion") + 1;
+                    return 0.05f * Player.ReturnSkillLevel("Persuasion") + 1f;
                 }
-                return 0;
+                return 1;
+            }
+            else
+            {
+                return 1;
             }
         }
     }

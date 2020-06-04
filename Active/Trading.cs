@@ -572,23 +572,35 @@ namespace Active
                 {
                     if(city.Name == Player.location)
                     {
+                        number = 0;
                         for (int j = 0; j < city.GoodTrade.Count; j++)
                         {
                             if (inv.ItemList[i].PrimaryCategory == city.GoodTrade[j])
                             {
-                                number = 1;
+                                number +=1;
                             }
-                            else if (inv.ItemList[i].SecondaryCategory == city.GoodTrade[j])
+                            if (inv.ItemList[i].SecondaryCategory == city.GoodTrade[j])
                             {
-                                number = 1;
+                                number += 1;
                             }
-                            else if (inv.ItemList[i].TertiaryCategory == city.GoodTrade[j])
+                            if (inv.ItemList[i].TertiaryCategory == city.GoodTrade[j])
                             {
-                                number = 1;
+                                number += 1;
                             }
-                            else
+                        }
+                        for (int j = 0; j < city.BadTrade.Count; j++)
+                        {
+                            if (inv.ItemList[i].PrimaryCategory == city.BadTrade[j])
                             {
-                                number = 0;
+                                number -= 1;
+                            }
+                            if (inv.ItemList[i].SecondaryCategory == city.BadTrade[j])
+                            {
+                                number -= 1;
+                            }
+                            if (inv.ItemList[i].TertiaryCategory == city.BadTrade[j])
+                            {
+                                number -= 1;
                             }
                         }
                     }
