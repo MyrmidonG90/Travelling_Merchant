@@ -59,7 +59,7 @@ namespace Active
 
             btnClose = new Button(830, 660, 260, 80, "close", "Close", TextureManager.texButtonOptions);
 
-            btnMenu = new Button(1820, 20, 80, 80, TextureManager.texOptions);
+            btnMenu = new Button(1812, 28, 80, 80, TextureManager.texOptions);
 
             box = new Rectangle(810, 140, 300, 620);
 
