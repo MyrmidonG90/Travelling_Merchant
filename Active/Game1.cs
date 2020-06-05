@@ -104,7 +104,7 @@ namespace Active
 
             CityControlList = new List<string>();
             CityControlList.Add("Carrot Town");
-            CityControlList.Add("Tower Town");
+            CityControlList.Add("Cloudspire");
         }
 
         //========================================================================
