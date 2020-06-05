@@ -1,8 +1,8 @@
 Carrot Town
 Food
-0,7
+0,8
 Metal
-1,2
+1,1
 Raw Materials
 1
 Textiles
@@ -17,11 +17,11 @@ Manufactured
 1,1
 Emberfell
 Food
-1,1
-Metal
-0,7
-Raw Materials
 1
+Metal
+0,9
+Raw Materials
+1,2
 Textiles
 1,1
 Gear
@@ -29,7 +29,7 @@ Gear
 Magic
 1,2
 Valuables
-1,2
+1,1
 Manufactured
 0,8
 Cloudspire
@@ -70,7 +70,7 @@ Dryad's Grove
 Food
 1
 Metal
-1,3
+1
 Raw Materials
 0,8
 Textiles
@@ -78,7 +78,7 @@ Textiles
 Gear
 1,1
 Magic
-0,8
+0,9
 Valuables
 1,3
 Manufactured

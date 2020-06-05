@@ -8,6 +8,9 @@ namespace Active
 {
     static class SkillManager
     {
+
+
+        static float mod = 0.03f;
         //Carrot Town - Halflings
         //Emberfell - Dwaves
         //Cloudspire - Humans
@@ -57,15 +60,15 @@ namespace Active
             {
                 if (temp == 2 || temp == 3)
                 {
-                    return -0.05f * Player.ReturnSkillLevel("Wisdom");
+                    return -mod * Player.ReturnSkillLevel("Wisdom");
                 }
                 if (temp == 4 || temp == 5)
                 {
-                    return -0.05f * Player.ReturnSkillLevel("Intimidation");
+                    return -mod * Player.ReturnSkillLevel("Intimidation");
                 }
                 if (temp == 0 || temp == 1)
                 {
-                    return -0.05f * Player.ReturnSkillLevel("Persuasion");
+                    return -mod * Player.ReturnSkillLevel("Persuasion");
                 }
                 return 1;
             }
@@ -73,31 +76,15 @@ namespace Active
             {
                 if (temp == 2 || temp == 3)
                 {
-                    return 0.05f * Player.ReturnSkillLevel("Wisdom");
+                    return mod * Player.ReturnSkillLevel("Wisdom");
                 }
                 if (temp == 4 || temp == 5)
                 {
-                    return 0.05f * Player.ReturnSkillLevel("Intimidation");
+                    return mod * Player.ReturnSkillLevel("Intimidation");
                 }
                 if (temp == 0 || temp == 1)
                 {
-                    return 0.05f * Player.ReturnSkillLevel("Persuasion");
-                }
-                return 0;
-            }
-            else if (catMod > 0)
-            {
-                if (temp == 2 || temp == 3)
-                {
-                    return -0.05f * Player.ReturnSkillLevel("Wisdom");
-                }
-                if (temp == 4 || temp == 5)
-                {
-                    return -0.05f * Player.ReturnSkillLevel("Intimidation");
-                }
-                if (temp == 0 || temp == 1)
-                {
-                    return -0.05f * Player.ReturnSkillLevel("Persuasion");
+                    return mod * Player.ReturnSkillLevel("Persuasion");
                 }
                 return 0;
             }
