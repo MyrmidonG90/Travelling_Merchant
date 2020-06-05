@@ -21,6 +21,7 @@ namespace Active
         static public Texture2D texBGDefaultTown;
         static public Texture2D texBGMap;
         static public Texture2D texBGMapRoads;
+        static public Texture2D texMainMenuScreen;
 
 
         // Category
@@ -241,6 +242,7 @@ namespace Active
             texBGDefaultTown = content.Load<Texture2D>("Default");
             texBGMap = content.Load<Texture2D>("merchant_map");
             texBGMapRoads = content.Load<Texture2D>("merchant_map_roads");
+            texMainMenuScreen = content.Load<Texture2D>("main_menu_screen");
         }
         static void LoadFonts(ContentManager content)
         {

@@ -66,11 +66,13 @@ namespace Active
 
         static public void Draw(SpriteBatch spritebatch)
         {
+            spritebatch.Draw(TextureManager.texMainMenuScreen, new Vector2(0, 0), Color.White);
+
             newGame.Draw(spritebatch);
             loadGame.Draw(spritebatch);
             exitGame.Draw(spritebatch);
 
-            spritebatch.Draw(TextureManager.texWhite, logo, Color.Red);
+            
         }
     }
 }
