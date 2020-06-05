@@ -265,12 +265,12 @@ namespace Active
             LevelUp.Draw(spriteBatch);/////////////////////////////////
             spriteBatch.End();
 
-            Window.Title = "Press F6 for debug menu          " + Player.SkillLevels[0].ToString() + Player.SkillLevels[1].ToString() + Player.SkillLevels[2].ToString() + "    " + OptionsMenu.selectedSkill;
-
-            if (test)
-            {
-                Window.Title = "WAAAAR";
-            }
+            //Window.Title = "Press F6 for debug menu          " + Player.SkillLevels[0].ToString() + Player.SkillLevels[1].ToString() + Player.SkillLevels[2].ToString() + "    " + OptionsMenu.selectedSkill;
+            Window.Title = "Project Travelling Merchant";
+            //if (test)
+            //{
+            //    Window.Title = "WAAAAR";
+            //}
             
 
             base.Draw(gameTime);
