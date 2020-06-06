@@ -176,59 +176,12 @@ namespace Active
                     }
                 }
                 spriteBatch.DrawString(TextureManager.font32, cityName, new Vector2(cityCords.X + 80, cityCords.Y - 5), Color.White);
-                //spriteBatch.DrawString(TextureManager.font13, cityInfo, new Vector2(cityCords.X + 80, cityCords.Y + 40), Color.Black);
             }
         }
 
         static public void LoadCities()
         {
             ItemList();
-
-            //StreamReader sr = new StreamReader("./Data/cityInfo.txt");
-            ////posArrowDown = new Vector2(cities[0].Coordinates.X, cities[0].Coordinates.Y);
-
-            //while (!sr.EndOfStream)
-            //{
-
-            //    string tempName = sr.ReadLine();
-            //    string tempInfo = sr.ReadLine();
-            //    string tempCord = sr.ReadLine();
-            //    string tempNeigh = sr.ReadLine();
-            //    string tempbad = sr.ReadLine();
-
-            //    string[] tempCord2 = tempCord.Split(',');
-            //    //string[] tempNeigh2 = tempNeigh.Split(',');
-            //    //string[] tempbad2 = tempbad.Split(',');
-
-            //    Vector2 cord = new Vector2(int.Parse(tempCord2[0]), int.Parse(tempCord2[1]));
-            //    //List<int> good = new List<int>();
-            //    //List<int> bad = new List<int>();
-
-            //    //for (int i = 0; i < tempNeigh2.Length; i++)
-            //    //{
-            //    //    good.Add(int.Parse(tempNeigh2[i]));
-            //    //}
-
-            //    //for (int i = 0; i < tempbad2.Length; i++)
-            //    //{
-            //    //    bad.Add(int.Parse(tempbad2[i]));
-            //    //}
-
-            //    //cities[counter] = new City(tempName, tempInfo, cord, good, bad);
-
-            //    //CityManager.CreateCity(tempName, tempInfo, cord, neighData);
-            //}
-            //sr.Close();
-
-            //CityManager.SaveCities();
-            //CityManager.LoadCities();
-            /*CityManager.SaveCities();
-            CityManager.LoadCities();*/
-
-            //for (int i = 0; i < cities.Length; i++)
-            //{
-            //    cities[i].Information = cities[i].Information.Replace(";", "\n");
-            //}
 
             cities = CityManager.Cities.ToArray();
 
